@@ -389,14 +389,14 @@
         <!-- Encabezado superior persistente -->
         <div class="header-welcome">
             <h2 id="section-title">Perfil del Dirigente</h2>
-            <p id="section-subtitle">Información personal y de registro institucional (C.I.M.A.)</p>
+            <p id="section-subtitle">Información personal del adulto voluntario (C.I.M.A.)</p>
         </div>
 
-        <!-- SECCIÓN: PERFIL -->
+        <!-- SECCIÓN: PERFIL (SIN GRUPO NI REGIÓN) -->
         <div id="perfil" class="content-section active">
             <div class="card" id="profile-card">
-                <h3><i class="fa-solid fa-id-card"></i> Datos Personales y de Afiliación</h3>
-                <p>Información oficial registrada del adulto voluntario conforme a la política nacional de la Asociación Scouts de Colombia.</p>
+                <h3><i class="fa-solid fa-id-card"></i> Datos Personales y de Identificación</h3>
+                <p>Información oficial registrada del adulto voluntario en la plataforma C.I.M.A.</p>
                 
                 <form id="profile-form" onsubmit="saveProfile(event)">
                     <div class="profile-grid">
@@ -429,20 +429,10 @@
                             <span class="value-view" id="v-email">mauricio.quiroga@scout.org.co</span>
                             <input type="email" id="i-email" value="mauricio.quiroga@scout.org.co" required>
                         </div>
-                        <div class="profile-field">
+                        <div class="profile-field full-width">
                             <label>Móvil / Celular</label>
                             <span class="value-view" id="v-movil">310 456 7890</span>
                             <input type="text" id="i-movil" value="310 456 7890" required>
-                        </div>
-                        <div class="profile-field">
-                            <label>Grupo Scout</label>
-                            <span class="value-view" id="v-grupo">Grupo #279 (Clan Porthos 24)</span>
-                            <input type="text" id="i-grupo" value="Grupo #279 (Clan Porthos 24)" required>
-                        </div>
-                        <div class="profile-field">
-                            <label>Región Scout</label>
-                            <span class="value-view" id="v-region">Bogotá / Cundinamarca</span>
-                            <input type="text" id="i-region" value="Bogotá / Cundinamarca" required>
                         </div>
                     </div>
 
@@ -455,7 +445,7 @@
             </div>
         </div>
 
-        <!-- SECCIÓN: ATRACCIÓN -->
+        <!-- SECCIÓN: ATRACCIÓN (SIN NOMBRAMIENTOS) -->
         <div id="atraccion" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('atraccion', 'vacantes', this)"><i class="fa-solid fa-briefcase"></i> Vacante y Requisiciones</button>
@@ -463,7 +453,6 @@
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'competencias', this)"><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'manual', this)"><i class="fa-solid fa-address-book"></i> Manual de Cargos</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'nombramientos', this)"><i class="fa-solid fa-certificate"></i> Nombramientos</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
             <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias y selección objetiva.</p></div></div>
@@ -471,7 +460,6 @@
             <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas.</p></div></div>
             <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por nivel.</p></div></div>
             <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco.</p></div></div>
-            <div id="atraccion-nombramientos" class="subcontent-panel"><div class="card"><h3>Nombramientos</h3><p>Designación oficial al cargo.</p></div></div>
             <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado.</p></div></div>
         </div>
 
@@ -499,74 +487,16 @@
             <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y Safe From Harm.</p></div></div>
         </div>
 
-        <!-- SECCIÓN NUEVA: FORMADORES -->
+        <!-- SECCIÓN: FORMADORES -->
         <div id="formadores" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('formadores', 'ayudante', this)"><i class="fa-solid fa-user-gear"></i> Ayudante de Formación Scout</button>
                 <button class="subnav-btn" onclick="switchSubTab('formadores', 'formador', this)"><i class="fa-solid fa-chalkboard"></i> Formador Scout</button>
                 <button class="subnav-btn" onclick="switchSubTab('formadores', 'director', this)"><i class="fa-solid fa-award"></i> Director de Formación Scout</button>
             </div>
-
-            <!-- 1. Ayudante de Formación Scout -->
-            <div id="formadores-ayudante" class="subcontent-panel active">
-                <div class="card">
-                    <h3><i class="fa-solid fa-hands-bound"></i> Programa de Mentoría y Ayudantía en Formación</h3>
-                    <p>Espacio para el registro y seguimiento de adultos en proceso de habilitación como facilitadores, colaborando en la logística y desarrollo de talleres bajo la tutela de formadores titulares.</p>
-                    
-                    <table class="table-custom">
-                        <thead>
-                            <tr>
-                                <th>Escuela / Taller de Apoyo</th>
-                                <th>Rol Asignado</th>
-                                <th>Formador Titular a Cargo</th>
-                                <th>Estado de Habilitación</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Taller Regional Inducción Grupos Nuevos</td>
-                                <td>Logística y Apoyo Módulo 1</td>
-                                <td>Carlos Alberto Mendoza (Director Escuela)</td>
-                                <td><span class="badge progress">En Proceso de Práctica</span></td>
-                            </tr>
-                            <tr>
-                                <td>Curso Básico Rama Tropa</td>
-                                <td>Facilitador en Mesa de Trabajo</td>
-                                <td>Ana María Restrepo</td>
-                                <td><span class="badge done">Completado</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 2. Formador Scout -->
-            <div id="formadores-formador" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-chalkboard-user"></i> Acreditación y Gestión de Formadores Titulares</h3>
-                    <p>Consulta el estado de tu aval oficial como Formador Scout, módulos a cargo, registro de capacitaciones impartidas y vigencia de certificación pedagógica ante la Dirección Nacional de Adultos.</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;">
-                        <div style="background: white; border: 1px solid var(--border-color); padding: 16px; border-radius: 8px;">
-                            <h4 style="font-size: 0.95rem; margin-bottom: 6px; color: var(--primary-red);">Estado de Acreditación</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Formador Titular Regional Activo (Certificado No. FORM-2023-045).</p>
-                        </div>
-                        <div style="background: white; border: 1px solid var(--border-color); padding: 16px; border-radius: 8px;">
-                            <h4 style="font-size: 0.95rem; margin-bottom: 6px; color: var(--primary-red);">Módulos Autorizados</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Política de Adultos, Método Scout, Asesoría Personal y Ciclo de Vida.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Director de Formación Scout -->
-            <div id="formadores-director" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-medal"></i> Coordinación y Dirección de Escuelas de Formación</h3>
-                    <p>Panel de supervisión para Directores de Formación encargado de la programación anual de cursos, avales de formadores, revisión de mallas curriculares y emisión de conceptos técnicos para certificación de Insignia de Madera.</p>
-                    <button class="btn-action">Gestionar Programación de Cursos</button>
-                </div>
-            </div>
+            <div id="formadores-ayudante" class="subcontent-panel active"><div class="card"><h3>Ayudante de Formación Scout</h3><p>Programa de mentoría y ayudantía en talleres.</p></div></div>
+            <div id="formadores-formador" class="subcontent-panel"><div class="card"><h3>Formador Scout</h3><p>Acreditación y gestión de formadores titulares.</p></div></div>
+            <div id="formadores-director" class="subcontent-panel"><div class="card"><h3>Director de Formación Scout</h3><p>Coordinación y dirección de escuelas de formación.</p></div></div>
         </div>
 
         <!-- SECCIÓN: DECISIONES -->
@@ -605,7 +535,7 @@
     <!-- SCRIPT DE NAVEGACIÓN Y CONTROL MODULAR -->
     <script>
         const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y de registro institucional (C.I.M.A.)' },
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal del adulto voluntario (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
@@ -655,8 +585,6 @@
             const fnac = document.getElementById('i-fnac').value;
             const email = document.getElementById('i-email').value;
             const movil = document.getElementById('i-movil').value;
-            const grupo = document.getElementById('i-grupo').value;
-            const region = document.getElementById('i-region').value;
 
             document.getElementById('v-nombre').innerText = nombre;
             document.getElementById('v-tipo-id').innerText = tipoId;
@@ -664,8 +592,6 @@
             document.getElementById('v-fnac').innerText = fnac;
             document.getElementById('v-email').innerText = email;
             document.getElementById('v-movil').innerText = movil;
-            document.getElementById('v-grupo').innerText = grupo;
-            document.getElementById('v-region').innerText = region;
 
             document.getElementById('sidebar-name').innerText = nombre.split(' ')[0] + ' ' + (nombre.split(' ')[2] || '');
             toggleEditMode(false);
