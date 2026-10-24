@@ -226,11 +226,13 @@
 
         .card h3 {
             font-size: 1.1rem;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
         }
 
         .card h3 i {
@@ -262,6 +264,87 @@
             background-color: var(--primary-red);
             color: white;
         }
+
+        /* --- ESTILOS ESPECÍFICOS PARA EL PERFIL --- */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .profile-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .profile-field.full-width {
+            grid-column: span 2;
+        }
+
+        .profile-field label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-field .value-view {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .profile-field input, .profile-field select {
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #FAFAFA;
+            color: var(--text-main);
+            display: none;
+        }
+
+        .profile-field input:focus, .profile-field select:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            background-color: white;
+        }
+
+        .editing .value-view {
+            display: none;
+        }
+
+        .editing input, .editing select {
+            display: block;
+        }
+
+        .profile-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-save {
+            background-color: var(--primary-red);
+            color: white;
+            display: none;
+        }
+
+        .btn-save:hover {
+            background-color: var(--primary-red-dark);
+        }
+
+        .editing .btn-edit {
+            display: none;
+        }
+
+        .editing .btn-save {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -292,8 +375,8 @@
             <div class="user-mini">
                 <div class="user-avatar">MQ</div>
                 <div class="user-details">
-                    <h4>MAURICIO QUIROGA</h4>
-                    <p>Sub-Jefe de Clan</p>
+                    <h4 id="sidebar-name">MAURICIO QUIROGA</h4>
+                    <p id="sidebar-role">Sub-Jefe de Clan</p>
                 </div>
             </div>
             <i class="fa-solid fa-arrow-right-arrow-left" style="font-size: 0.85rem; color: var(--text-muted); cursor: pointer;" title="Cambiar rol"></i>
@@ -308,19 +391,91 @@
             <p id="section-subtitle">Sub-Jefe de Clan · Clan Porthos 24 · Grupo #279</p>
         </div>
 
-        <!-- SECCIÓN: PERFIL -->
+        <!-- SECCIÓN: PERFIL (ACTUALIZADA Y EDITABLE) -->
         <div id="perfil" class="content-section active">
-            <div class="grid-cards">
-                <div class="card">
-                    <h3><i class="fa-solid fa-id-card"></i> Información Personal</h3>
-                    <p>Gestiona tus datos de contacto, documentos legales, EPS y antecedentes institucionales requeridos por la Asociación.</p>
-                    <button class="btn-action">Actualizar Datos</button>
-                </div>
-                <div class="card">
-                    <h3><i class="fa-solid fa-shield-halved"></i> Mi Cargo Actual</h3>
-                    <p>Consulta los detalles, requisitos objetivos y funciones de tu rol activo dentro de la estructura Scout.</p>
-                    <button class="btn-action">Ver Manual de Cargos</button>
-                </div>
+            <div class="card" id="profile-card">
+                <h3><i class="fa-solid fa-id-card"></i> Datos Personales y de Afiliación (SISCOUT)</h3>
+                <p>Información oficial registrada del adulto voluntario conforme a la política nacional de la Asociación Scouts de Colombia.</p>
+                
+                <form id="profile-form" onsubmit="saveProfile(event)">
+                    <div class="profile-grid">
+                        <div class="profile-field full-width">
+                            <label>Nombre Completo</label>
+                            <span class="value-view" id="v-nombre">MAURICIO QUIROGA POSADA</span>
+                            <input type="text" id="i-nombre" value="MAURICIO QUIROGA POSADA" required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Tipo de Identificación</label>
+                            <span class="value-view" id="v-tipo-id">Cédula de Ciudadanía (C.C.)</span>
+                            <select id="i-tipo-id">
+                                <option value="Cédula de Ciudadanía (C.C.)" selected>Cédula de Ciudadanía (C.C.)</option>
+                                <option value="Cédula de Extranjería (C.E.)">Cédula de Extranjería (C.E.)</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                            </select>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>No. de Identificación</label>
+                            <span class="value-view" id="v-num-id">79.123.456</span>
+                            <input type="text" id="i-num-id" value="79.123.456" required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Fecha de Nacimiento</label>
+                            <span class="value-view" id="v-fnac">15 / 08 / 1985</span>
+                            <input type="date" id="i-fnac" value="1985-08-15" required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Correo Electrónico</label>
+                            <span class="value-view" id="v-email">mauricio.quiroga@scout.org.co</span>
+                            <input type="email" id="i-email" value="mauricio.quiroga@scout.org.co" required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Móvil / Celular</label>
+                            <span class="value-view" id="v-movil">310 456 7890</span>
+                            <input type="text" id="i-movil" value="310 456 7890" required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Dirección de Residencia</label>
+                            <span class="value-view" id="v-dir">Calle 50 # 40-20, Bogotá D.C.</span>
+                            <input type="text" id="i-dir" value="Calle 50 # 40-20, Bogotá D.C." required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Entidad Promotora de Salud (EPS)</label>
+                            <span class="value-view" id="v-eps">Sura EPS</span>
+                            <input type="text" id="i-eps" value="Sura EPS" required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Región Scout</label>
+                            <span class="value-view" id="v-region">Bogotá / Cundinamarca</span>
+                            <input type="text" id="i-region" value="Bogotá / Cundinamarca" required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Grupo Scout</label>
+                            <span class="value-view" id="v-grupo">Grupo #279 (Clan Porthos 24)</span>
+                            <input type="text" id="i-grupo" value="Grupo #279 (Clan Porthos 24)" required>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Estamento / Cargo Actual</label>
+                            <span class="value-view" id="v-cargo">Sub-Jefe de Clan</span>
+                            <input type="text" id="i-cargo" value="Sub-Jefe de Clan" required>
+                        </div>
+                    </div>
+
+                    <div class="profile-actions">
+                        <button type="button" class="btn-action btn-edit" onclick="toggleEditMode(true)"><i class="fa-solid fa-pen-to-square"></i> Editar Información</button>
+                        <button type="submit" class="btn-action btn-save"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
+                        <button type="button" class="btn-action" style="background-color: #EEE; color: #555;" id="btn-cancel" onclick="toggleEditMode(false)" style="display:none;">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -406,10 +561,10 @@
         </div>
     </main>
 
-    <!-- SCRIPT DE NAVEGACIÓN DINÁMICA (Estructura segura) -->
+    <!-- SCRIPT DE NAVEGACIÓN Y EDICIÓN DE PERFIL -->
     <script>
         const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Sub-Jefe de Clan · Clan Porthos 24 · Grupo #279' },
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y de registro institucional (SISCOUT)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Procesos de requisición, convocatorias y selección objetiva' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Evaluación por competencias y seguimiento al rol' },
             'formacion': { title: 'Formación y Desarrollo', subtitle: 'Plan Personal de Desarrollo (PPD) y certificación' },
@@ -419,19 +574,65 @@
         };
 
         function switchSection(sectionId, element) {
-            // Remover clase active de todas las opciones del menú
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            // Agregar active al seleccionado
             element.classList.add('active');
 
-            // Ocultar todas las secciones de contenido
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-            // Mostrar la sección seleccionada
             document.getElementById(sectionId).classList.add('active');
 
-            // Actualizar encabezados
             document.getElementById('section-title').innerText = titles[sectionId].title;
             document.getElementById('section-subtitle').innerText = titles[sectionId].subtitle;
+        }
+
+        function toggleEditMode(enable) {
+            const card = document.getElementById('profile-card');
+            const cancelBtn = document.getElementById('btn-cancel');
+            if (enable) {
+                card.classList.add('editing');
+                cancelBtn.style.display = 'inline-block';
+            } else {
+                card.classList.remove('editing');
+                cancelBtn.style.display = 'none';
+            }
+        }
+
+        function saveProfile(event) {
+            event.preventDefault();
+            
+            // Recoger valores del formulario
+            const nombre = document.getElementById('i-nombre').value;
+            const tipoId = document.getElementById('i-tipo-id').value;
+            const numId = document.getElementById('i-num-id').value;
+            const fnac = document.getElementById('i-fnac').value;
+            const email = document.getElementById('i-email').value;
+            const movil = document.getElementById('i-movil').value;
+            const dir = document.getElementById('i-dir').value;
+            const eps = document.getElementById('i-eps').value;
+            const region = document.getElementById('i-region').value;
+            const grupo = document.getElementById('i-grupo').value;
+            const cargo = document.getElementById('i-cargo').value;
+
+            // Actualizar vista de texto
+            document.getElementById('v-nombre').innerText = nombre;
+            document.getElementById('v-tipo-id').innerText = tipoId;
+            document.getElementById('v-num-id').innerText = numId;
+            document.getElementById('v-fnac').innerText = fnac;
+            document.getElementById('v-email').innerText = email;
+            document.getElementById('v-movil').innerText = movil;
+            document.getElementById('v-dir').innerText = dir;
+            document.getElementById('v-eps').innerText = eps;
+            document.getElementById('v-region').innerText = region;
+            document.getElementById('v-grupo').innerText = grupo;
+            document.getElementById('v-cargo').innerText = cargo;
+
+            // Actualizar barra lateral izquierda
+            document.getElementById('sidebar-name').innerText = nombre.split(' ')[0] + ' ' + (nombre.split(' ')[2] || '');
+            document.getElementById('sidebar-role').innerText = cargo;
+            document.getElementById('section-subtitle').innerText = `${cargo} · ${grupo}`;
+
+            // Salir del modo edición
+            toggleEditMode(false);
+            alert('¡Información de perfil actualizada con éxito en la plataforma C.I.M.A.!');
         }
     </script>
 </body>
