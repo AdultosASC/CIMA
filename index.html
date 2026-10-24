@@ -251,12 +251,6 @@
         }
 
         /* Tarjetas de contenido general */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -321,59 +315,7 @@
         .editing .btn-edit { display: none; }
         .editing .btn-save { display: inline-block; }
 
-        /* Estilos para el PPD y Ruta */
-        .timeline-container {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin: 20px 0 30px 0;
-            padding: 0 10px;
-        }
-        .timeline-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            flex: 1;
-        }
-        .timeline-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: white;
-            border: 2px solid var(--border-color);
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            margin-bottom: 8px;
-            transition: all 0.3s;
-        }
-        .timeline-step.completed .timeline-icon {
-            background-color: #2e7d32;
-            border-color: #2e7d32;
-            color: white;
-        }
-        .timeline-step.active .timeline-icon {
-            background-color: var(--primary-red);
-            border-color: var(--primary-red);
-            color: white;
-            box-shadow: 0 0 0 4px var(--primary-red-light);
-        }
-        .timeline-step h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-        .timeline-step p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
+        /* Tablas y elementos personalizados */
         .table-custom {
             width: 100%;
             border-collapse: collapse;
@@ -403,6 +345,34 @@
         .badge.pending { background-color: #fff8e1; color: #f57f17; }
         .badge.progress { background-color: #e3f2fd; color: #1565c0; }
         .badge.done { background-color: #e8f5e9; color: #2e7d32; }
+
+        /* Tarjetas de cursos virtuales */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .course-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .progress-bar-container {
+            background: #eee;
+            border-radius: 4px;
+            height: 8px;
+            width: 100%;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            background: var(--primary-red);
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -523,152 +493,169 @@
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'nombramientos', this)"><i class="fa-solid fa-certificate"></i> Nombramientos</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
-
-            <div id="atraccion-vacantes" class="subcontent-panel active">
-                <div class="card">
-                    <h3><i class="fa-solid fa-bullhorn"></i> Vacantes y Convocatorias Abiertas</h3>
-                    <p>Explora las convocatorias vigentes bajo los principios de selección objetiva de la Asociación.</p>
-                    <button class="btn-action">Ver Convocatorias</button>
-                </div>
-            </div>
-            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Seguimiento a registro y validación legal.</p></div></div>
-            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas de la ASC.</p></div></div>
-            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles, funciones y requisitos por nivel.</p></div></div>
-            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromisos recíprocos entre el voluntario y la organización.</p></div></div>
-            <div id="atraccion-nombramientos" class="subcontent-panel"><div class="card"><h3>Nombramientos</h3><p>Designación oficial para el ejercicio del cargo.</p></div></div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Módulos iniciales y Safe From Harm (SfH1).</p></div></div>
+            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias y selección objetiva.</p></div></div>
+            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Registro y validación institucional.</p></div></div>
+            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas.</p></div></div>
+            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por nivel.</p></div></div>
+            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco.</p></div></div>
+            <div id="atraccion-nombramientos" class="subcontent-panel"><div class="card"><h3>Nombramientos</h3><p>Designación oficial al cargo.</p></div></div>
+            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado.</p></div></div>
         </div>
 
-        <!-- SECCIÓN: DESEMPEÑO (ACTUALIZADA CON RUTA DE EVALUACIÓN, EVALUACIÓN Y PPD) -->
+        <!-- SECCIÓN: DESEMPEÑO -->
         <div id="desempeno" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('desempeno', 'ruta', this)"><i class="fa-solid fa-route"></i> Ruta de Evaluación</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
             </div>
+            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de acompañamiento.</p></div></div>
+            <div id="desempeno-evaluacion" class="subcontent-panel"><div class="card"><h3>Evaluación 360°</h3><p>Autoevaluación, pares y asesor personal.</p></div></div>
+            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal</h3><p>Estrategias y cierre de brechas.</p></div></div>
+        </div>
 
-            <!-- 1. Ruta de Evaluación -->
-            <div id="desempeno-ruta" class="subcontent-panel active">
-                <div class="card">
-                    <h3><i class="fa-solid fa-timeline"></i> Flujo del Proceso de Acompañamiento y Evaluación</h3>
-                    <p>Sigue los momentos clave del ciclo de vida del adulto voluntario en su cargo o función actual[cite: 3, 4].</p>
-                    
-                    <div class="timeline-container">
-                        <div class="timeline-step completed">
-                            <div class="timeline-icon"><i class="fa-solid fa-check"></i></div>
-                            <h4>Momento 1</h4>
-                            <p>Valoración Inicial (Diagnóstico)</p>
-                        </div>
-                        <div class="timeline-step active">
-                            <div class="timeline-icon"><i class="fa-solid fa-spinner"></i></div>
-                            <h4>Momento 2</h4>
-                            <p>Seguimiento Mitad de Periodo (PPD)</p>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="timeline-icon"><i class="fa-solid fa-flag-checkered"></i></div>
-                            <h4>Momento 3</h4>
-                            <p>Evaluación 360° Final y Decisiones</p>
-                        </div>
-                    </div>
-                    <button class="btn-action">Descargar Guía de Acompañamiento (PDF)</button>
-                </div>
+        <!-- SECCIÓN: FORMACIÓN (ACTUALIZADA CON LAS TRES SUBSECCIONES SOLICITADAS) -->
+        <div id="formacion" class="content-section">
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchSubTab('formacion', 'historial', this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial de Formaciones</button>
+                <button class="subnav-btn" onclick="switchSubTab('formacion', 'certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
+                <button class="subnav-btn" onclick="switchSubTab('formacion', 'cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
             </div>
 
-            <!-- 2. Evaluación -->
-            <div id="desempeno-evaluacion" class="subcontent-panel">
+            <!-- 1. Historial de Formaciones -->
+            <div id="formacion-historial" class="subcontent-panel active">
                 <div class="card">
-                    <h3><i class="fa-solid fa-star-half-stroke"></i> Evaluación por Competencias 360°</h3>
-                    <p>Realiza tu autoevaluación, consulta los reportes de tu asesor personal, jefe inmediato y encuestas de percepción de beneficiarios[cite: 3, 9].</p>
+                    <h3><i class="fa-solid fa-graduation-cap"></i> Registro Histórico de Cursos y Módulos</h3>
+                    <p>Consulta el detalle de los espacios formativos, talleres y formaciones básicas o de perfeccionamiento continuo cursadas en la Asociación[cite: 2, 4].</p>
                     
                     <table class="table-custom">
                         <thead>
                             <tr>
-                                <th>Tipo de Evaluación</th>
-                                <th>Evaluador / Instancia</th>
+                                <th>Nombre del Curso / Módulo</th>
+                                <th>Tipo</th>
+                                <th>Fecha de Realización</th>
+                                <th>Intensidad Horaria</th>
                                 <th>Estado</th>
-                                <th>Puntaje / Calificación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Curso Insignia de Madera (IM) - Nivel Rama Clan</td>
+                                <td>Formación Básica</td>
+                                <td>15 / Nov / 2024</td>
+                                <td>24 Horas</td>
+                                <td><span class="badge done">Aprobado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Módulo "Safe From Harm - SfH1"</td>
+                                <td>Obligatorio / Virtual</td>
+                                <td>10 / Feb / 2025</td>
+                                <td>4 Horas</td>
+                                <td><span class="badge done">Aprobado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Taller Regional de Planificación de Proyectos</td>
+                                <td>Perfeccionamiento Continuo</td>
+                                <td>22 / Ago / 2025</td>
+                                <td>8 Horas</td>
+                                <td><span class="badge done">Aprobado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 2. Certificados de Oferta Formativa -->
+            <div id="formacion-certificados" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-certificate"></i> Repositorio de Certificados Oficiales</h3>
+                    <p>Descarga y verifica tus diplomas, insignias de madera, refrendaciones y reconocimientos de formación expedidos por la Dirección Nacional de Adultos en el Movimiento (DNAM)[cite: 2, 4, 13].</p>
+                    
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>Denominación del Certificado</th>
+                                <th>Nivel / Instancia</th>
+                                <th>Fecha de Emisión</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Autoevaluación</td>
-                                <td>Mauricio Quiroga (Dirigente)</td>
-                                <td><span class="badge done">Completado</span></td>
-                                <td>85%</td>
-                                <td><button class="btn-action" style="padding: 4px 8px; font-size: 0.75rem;">Ver Informe</button></td>
+                                <td>Certificado Insignia de Madera (IM)</td>
+                                <td>Nacional (Grupo / Rama Clan)</td>
+                                <td>20 / Dic / 2024</td>
+                                <td><button class="btn-action" style="padding: 4px 10px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i> Descargar PDF</button></td>
                             </tr>
                             <tr>
-                                <td>Evaluación por Competencias</td>
-                                <td>Asesor Personal / Jefe Inmediato</td>
-                                <td><span class="badge progress">En Proceso</span></td>
-                                <td>Pendiente Cierre</td>
-                                <td><button class="btn-action" style="padding: 4px 8px; font-size: 0.75rem;">Evaluar</button></td>
+                                <td>Certificado Módulo Safe From Harm (SfH1)</td>
+                                <td>Nacional (Entornos Seguros)</td>
+                                <td>12 / Feb / 2025</td>
+                                <td><button class="btn-action" style="padding: 4px 10px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i> Descargar PDF</button></td>
                             </tr>
                             <tr>
-                                <td>Encuesta de Percepción</td>
-                                <td>Jóvenes, Beneficiarios y Padres</td>
-                                <td><span class="badge pending">Programada</span></td>
-                                <td>-</td>
-                                <td><button class="btn-action" style="padding: 4px 8px; font-size: 0.75rem;">Aplicar Encuesta</button></td>
+                                <td>Refrendación Competencias Dirigente Adulto</td>
+                                <td>Regional (Bogotá / Cundinamarca)</td>
+                                <td>10 / Ene / 2026</td>
+                                <td><button class="btn-action" style="padding: 4px 10px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i> Descargar PDF</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 3. Plan de Desarrollo Personal (PPD) -->
-            <div id="desempeno-ppd" class="subcontent-panel">
+            <!-- 3. Cursos Virtuales -->
+            <div id="formacion-cursos" class="subcontent-panel">
                 <div class="card">
-                    <h3><i class="fa-solid fa-list-check"></i> Plan Personal de Desarrollo (PPD)</h3>
-                    <p>Estrategias y actividades acordadas junto a tu Asesor Personal para el cierre de brechas y fortalecimiento de competencias[cite: 3].</p>
+                    <h3><i class="fa-solid fa-display"></i> Campus Virtual C.I.M.A. - Cursos y Módulos</h3>
+                    <p>Accede a la oferta de capacitación virtual autogestionada para fortalecer tus competencias y cumplir los requisitos del ciclo de vida[cite: 2, 4].</p>
                     
-                    <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600; font-size: 0.9rem;">Cumplimiento Actual del PPD: <span style="color: #2e7d32;">75%</span></span>
-                        <button class="btn-action" onclick="alert('Abriendo formulario para nueva estrategia PPD...')"><i class="fa-solid fa-plus"></i> Nueva Estrategia PPD</button>
+                    <div class="course-grid">
+                        <div class="course-card">
+                            <div>
+                                <h4 style="font-size: 1rem; margin-bottom: 8px; color: var(--text-main);">Módulo de Inducción General ASC</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Conoce la historia, estructura organizacional y generalidades del Movimiento Scout en Colombia.</p>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600;">
+                                    <span>Progreso</span>
+                                    <span style="color: #2e7d32;">100% (Completado)</span>
+                                </div>
+                                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 100%; background: #2e7d32;"></div></div>
+                                <button class="btn-action" style="width: 100%; text-align: center; margin-top: 8px; background: #e8f5e9; color: #2e7d32;">Ver Constancia</button>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <div>
+                                <h4 style="font-size: 1rem; margin-bottom: 8px; color: var(--text-main);">Curso Safe From Harm (SfH1)</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Aprendizajes fundamentales para la protección de niños, niñas, adolescentes y jóvenes.</p>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600;">
+                                    <span>Progreso</span>
+                                    <span>100% (Certificado)</span>
+                                </div>
+                                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 100%; background: #2e7d32;"></div></div>
+                                <button class="btn-action" style="width: 100%; text-align: center; margin-top: 8px; background: #e8f5e9; color: #2e7d32;">Descargar Certificado</button>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <div>
+                                <h4 style="font-size: 1rem; margin-bottom: 8px; color: var(--text-main);">Módulo Diversidad e Inclusión</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Herramientas para garantizar un entorno scout abierto, respetuoso y accesible para todos.</p>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600;">
+                                    <span>Progreso</span>
+                                    <span style="color: var(--primary-red);">45% en curso</span>
+                                </div>
+                                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 45%;"></div></div>
+                                <button class="btn-action" style="width: 100%; text-align: center; margin-top: 8px;">Continuar Curso</button>
+                            </div>
+                        </div>
                     </div>
-
-                    <table class="table-custom">
-                        <thead>
-                            <tr>
-                                <th>Estrategia / Acción Formativa</th>
-                                <th>Competencia Impactada</th>
-                                <th>Evidencias / Soportes</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Completar Módulo "Safe From Harm - SfH1"</td>
-                                <td>Conciencia Organizacional y Normativa</td>
-                                <td>Certificado Digital Adjunto</td>
-                                <td><span class="badge done">Terminado</span></td>
-                            </tr>
-                            <tr>
-                                <td>Aplicación de Malla de Objetivos en Clan</td>
-                                <td>Administración del Proyecto Educativo</td>
-                                <td>Bitácoras de Asesoría #1 y #2</td>
-                                <td><span class="badge progress">En Desarrollo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Participación en Curso de Perfeccionamiento</td>
-                                <td>Aprendizaje y Desarrollo Personal</td>
-                                <td>Pendiente cargue de soporte</td>
-                                <td><span class="badge pending">Planeado</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN: FORMACIÓN -->
-        <div id="formacion" class="content-section">
-            <div class="grid-cards">
-                <div class="card">
-                    <h3><i class="fa-solid fa-book-open"></i> Formación Básica y Perfeccionamiento</h3>
-                    <p>Estado de tus cursos de Insignia de Madera (IM), Gestor Regional (3M) y Gestor Nacional (4M)[cite: 3, 4].</p>
-                    <button class="btn-action">Ver Ruta de Formación</button>
                 </div>
             </div>
         </div>
@@ -713,7 +700,7 @@
             'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y de registro institucional (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
-            'formacion': { title: 'Formación y Desarrollo', subtitle: 'Plan Personal de Desarrollo (PPD) y certificación' },
+            'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
             'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Reubicación, continuidad y proyección del adulto' },
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
