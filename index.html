@@ -301,47 +301,23 @@
             color: white;
         }
 
-        /* Estilos específicos de Perfil y Dashboard BSC */
-        .profile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        .profile-field { display: flex; flex-direction: column; gap: 4px; }
-        .profile-field.full-width { grid-column: span 2; }
-        .profile-field label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-        .profile-field .value-view { font-size: 0.95rem; font-weight: 500; color: var(--text-main); padding: 8px 0; border-bottom: 1px dashed var(--border-color); }
-        .profile-field input, .profile-field select { font-size: 0.95rem; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; background-color: #FAFAFA; display: none; }
-        .editing .value-view { display: none; }
-        .editing input, .editing select { display: block; }
-        .profile-actions { margin-top: 20px; display: flex; gap: 10px; }
-        .btn-save { background-color: var(--primary-red); color: white; display: none; }
-        .editing .btn-edit { display: none; }
-        .editing .btn-save { display: inline-block; }
-
-        /* Selector de Cargo Activo */
-        .role-selector-container {
+        /* Estilos específicos para la sección Perfil minimalista */
+        .profile-name-container {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--primary-red-light);
-            border: 1px solid rgba(139, 0, 0, 0.2);
-            padding: 14px 18px;
-            border-radius: 10px;
+            flex-direction: column;
+            gap: 4px;
             margin-bottom: 20px;
         }
-        .role-selector-container label {
+        .profile-name-container label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .profile-name-container .name-display {
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary-red);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .role-selector-container select {
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background: white;
-            font-weight: 600;
-            color: var(--text-main);
-            cursor: pointer;
         }
 
         /* BSC (Balanced Scorecard) Grid */
@@ -467,7 +443,7 @@
                 <div class="user-avatar" id="sidebar-avatar">MQ</div>
                 <div class="user-details">
                     <h4 id="sidebar-name">MAURICIO QUIROGA</h4>
-                    <p id="sidebar-role">Subjefe de Clan</p>
+                    <p id="sidebar-role">Dirigente Voluntario</p>
                 </div>
             </div>
             <i class="fa-solid fa-arrow-right-arrow-left" style="font-size: 0.85rem; color: var(--text-muted); cursor: pointer;" title="Cambiar rol"></i>
@@ -479,78 +455,48 @@
         <!-- Encabezado superior persistente -->
         <div class="header-welcome">
             <h2 id="section-title">Perfil del Dirigente</h2>
-            <p id="section-subtitle">Información personal y Balanced Scorecard (BSC) por cargo (C.I.M.A.)</p>
+            <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión C.I.M.A.</p>
         </div>
 
         <!-- SECCIÓN: PERFIL -->
         <div id="perfil" class="content-section active">
-            <!-- 1. Datos Personales -->
-            <div class="card" id="profile-card">
-                <h3><i class="fa-solid fa-id-card"></i> Datos Personales y de Identificación</h3>
-                <p>Información oficial registrada del adulto voluntario en la plataforma C.I.M.A.</p>
-                
-                <form id="profile-form" onsubmit="saveProfile(event)">
-                    <div class="profile-grid">
-                        <div class="profile-field full-width">
-                            <label>Nombre Completo</label>
-                            <span class="value-view" id="v-nombre">MAURICIO QUIROGA POSADA</span>
-                            <input type="text" id="i-nombre" value="MAURICIO QUIROGA POSADA" required>
-                        </div>
-                        <div class="profile-field">
-                            <label>Tipo de Identificación</label>
-                            <span class="value-view" id="v-tipo-id">Cédula de Ciudadanía (C.C.)</span>
-                            <select id="i-tipo-id">
-                                <option value="Cédula de Ciudadanía (C.C.)" selected>Cédula de Ciudadanía (C.C.)</option>
-                                <option value="Cédula de Extranjería (C.E.)">Cédula de Extranjería (C.E.)</option>
-                                <option value="Pasaporte">Pasaporte</option>
-                            </select>
-                        </div>
-                        <div class="profile-field">
-                            <label>No. de Identificación</label>
-                            <span class="value-view" id="v-num-id">79.123.456</span>
-                            <input type="text" id="i-num-id" value="79.123.456" required>
-                        </div>
-                        <div class="profile-field">
-                            <label>Fecha de Nacimiento</label>
-                            <span class="value-view" id="v-fnac">1985-08-15</span>
-                            <input type="date" id="i-fnac" value="1985-08-15" required>
-                        </div>
-                        <div class="profile-field">
-                            <label>Correo Electrónico</label>
-                            <span class="value-view" id="v-email">mauricio.quiroga@scout.org.co</span>
-                            <input type="email" id="i-email" value="mauricio.quiroga@scout.org.co" required>
-                        </div>
-                        <div class="profile-field full-width">
-                            <label>Móvil / Celular</label>
-                            <span class="value-view" id="v-movil">310 456 7890</span>
-                            <input type="text" id="i-movil" value="310 456 7890" required>
-                        </div>
-                    </div>
-
-                    <div class="profile-actions">
-                        <button type="button" class="btn-action btn-edit" onclick="toggleEditMode(true)"><i class="fa-solid fa-pen-to-square"></i> Editar Información</button>
-                        <button type="submit" class="btn-action btn-save"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
-                        <button type="button" class="btn-action" id="btn-cancel" onclick="toggleEditMode(false)" style="display:none; background-color: #EEE; color: #555;">Cancelar</button>
-                    </div>
-                </form>
+            <div class="card">
+                <h3><i class="fa-solid fa-id-badge"></i> Identificación del Dirigente</h3>
+                <div class="profile-name-container">
+                    <label>Nombre Completo</label>
+                    <div class="name-display" id="v-nombre">MAURICIO QUIROGA POSADA</div>
+                </div>
             </div>
 
-            <!-- 2. Selector Dinámico de Cargos y BSC -->
             <div class="card">
-                <h3><i class="fa-solid fa-bullseye"></i> Panel de Gestión y BSC por Cargo Activo</h3>
-                <p>Selecciona uno de los cargos asignados para visualizar el Balanced Scorecard (BSC) específico y su estatus formativo.</p>
+                <h3><i class="fa-solid fa-chart-pie"></i> Balanced Scorecard (BSC) - Resumen C.I.M.A.</h3>
+                <p>Indicadores clave de desarrollo de competencias, avance formativo y estatus en la Asociación.</p>
                 
-                <div class="role-selector-container">
-                    <label><i class="fa-solid fa-user-tag"></i> Cargo Activo en Visualización:</label>
-                    <select id="cargo-select" onchange="updateBSC()">
-                        <option value="clan">Subjefe de Clan (Nivel Grupo)</option>
-                        <option value="nacion">Director de Adultos en el Movimiento (Nivel Nación)</option>
-                        <option value="formador">Formador Scout (Nivel Región)</option>
-                    </select>
-                </div>
-
-                <div class="bsc-grid" id="bsc-content">
-                    <!-- Contenido inyectado dinámicamente por JavaScript -->
+                <div class="bsc-grid">
+                    <div class="bsc-card">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <h4>Cursos Realizados</h4>
+                        <div class="bsc-value">8 Módulos</div>
+                        <div class="bsc-subtext">Aprobados en plataforma</div>
+                    </div>
+                    <div class="bsc-card">
+                        <i class="fa-solid fa-award"></i>
+                        <h4>Nivel de Formación</h4>
+                        <div class="bsc-value" style="font-size: 1.1rem; color: var(--primary-red);">Insignia de Madera</div>
+                        <div class="bsc-subtext">Acreditado / Vigente</div>
+                    </div>
+                    <div class="bsc-card">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <h4>Horas de Facilitación</h4>
+                        <div class="bsc-value">120 hrs</div>
+                        <div class="bsc-subtext">Experiencia acumulada</div>
+                    </div>
+                    <div class="bsc-card">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                        <h4>Cumplimiento PPD</h4>
+                        <div class="bsc-value">92%</div>
+                        <div class="bsc-subtext">Plan de Desarrollo Personal</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -889,7 +835,7 @@
     <!-- SCRIPT DE NAVEGACIÓN Y CONTROL MODULAR -->
     <script>
         const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y Balanced Scorecard (BSC) por cargo (C.I.M.A.)' },
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y resumen de gestión C.I.M.A.' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
@@ -897,67 +843,6 @@
             'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos y entrevista de salida institucional' },
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
-        };
-
-        // Datos del BSC adaptados para cada cargo
-        const bscData = {
-            'clan': {
-                roleName: 'Subjefe de Clan',
-                level: 'Nivel Grupo',
-                cards: [
-                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '5 Módulos', subtext: 'Rama Rovers y Básica' },
-                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Ins. de Madera', subtext: 'Acreditado / Vigente' },
-                    { icon: 'fa-clock-rotate-left', title: 'Horas de Servicio', value: '95 hrs', subtext: 'Actividades de Grupo' },
-                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '94%', subtext: 'Plan Personal de Desarrollo' }
-                ]
-            },
-            'nacion': {
-                roleName: 'Director de Adultos en el Movimiento',
-                level: 'Nivel Nación',
-                cards: [
-                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '12 Cursos', subtext: 'Gestión y Liderazgo Avanzado' },
-                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Gestor Nacional', subtext: '4 Maderos (GN)' },
-                    { icon: 'fa-clock-rotate-left', title: 'Horas Gestión', value: '350 hrs', subtext: 'Equipo Nacional' },
-                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '98%', subtext: 'Plan de Desarrollo Personal' }
-                ]
-            },
-            'formador': {
-                roleName: 'Formador Scout',
-                level: 'Nivel Región',
-                cards: [
-                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: 'TTT 1', subtext: 'Entrenamiento de Formadores' },
-                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador Scout', subtext: 'Certificado Regional' },
-                    { icon: 'fa-clock-rotate-left', title: 'Horas Facilitación', value: '120 hrs', subtext: 'Cursos de Formación' },
-                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '90%', subtext: 'Plan de Desarrollo Personal' }
-                ]
-            }
-        };
-
-        function updateBSC() {
-            const selectVal = document.getElementById('cargo-select').value;
-            const data = bscData[selectVal];
-            
-            // Actualizar barra lateral con el rol activo
-            document.getElementById('sidebar-role').innerText = data.roleName;
-
-            const container = document.getElementById('bsc-content');
-            container.innerHTML = '';
-
-            data.cards.forEach(card => {
-                container.innerHTML += `
-                    <div class="bsc-card">
-                        <i class="fa-solid ${card.icon}"></i>
-                        <h4>${card.title}</h4>
-                        <div class="bsc-value">${card.value}</div>
-                        <div class="bsc-subtext">${card.subtext}</div>
-                    </div>
-                `;
-            });
-        }
-
-        // Inicializar BSC al cargar la página
-        window.onload = function() {
-            updateBSC();
         };
 
         function switchSection(sectionId, element) {
@@ -978,43 +863,6 @@
 
             parent.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
             document.getElementById(sectionPrefix + '-' + tabId).classList.add('active');
-        }
-
-        function toggleEditMode(enable) {
-            const card = document.getElementById('profile-card');
-            const cancelBtn = document.getElementById('btn-cancel');
-            if (enable) {
-                card.classList.add('editing');
-                cancelBtn.style.display = 'inline-block';
-            } else {
-                card.classList.remove('editing');
-                cancelBtn.style.display = 'none';
-            }
-        }
-
-        function saveProfile(event) {
-            event.preventDefault();
-            const nombre = document.getElementById('i-nombre').value;
-            const tipoId = document.getElementById('i-tipo-id').value;
-            const numId = document.getElementById('i-num-id').value;
-            const fnac = document.getElementById('i-fnac').value;
-            const email = document.getElementById('i-email').value;
-            const movil = document.getElementById('i-movil').value;
-
-            document.getElementById('v-nombre').innerText = nombre;
-            document.getElementById('v-tipo-id').innerText = tipoId;
-            document.getElementById('v-num-id').innerText = numId;
-            document.getElementById('v-fnac').innerText = fnac;
-            document.getElementById('v-email').innerText = email;
-            document.getElementById('v-movil').innerText = movil;
-
-            const nameParts = nombre.split(' ');
-            const initials = (nameParts[0] ? nameParts[0][0] : '') + (nameParts[2] ? nameParts[2][0] : (nameParts[1] ? nameParts[1][0] : ''));
-            document.getElementById('sidebar-avatar').innerText = initials.toUpperCase();
-            document.getElementById('sidebar-name').innerText = nameParts[0] + ' ' + (nameParts[2] || '');
-            
-            toggleEditMode(false);
-            alert('¡Perfil actualizado con éxito en la plataforma C.I.M.A.!');
         }
     </script>
 </body>
