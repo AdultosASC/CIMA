@@ -315,7 +315,7 @@
         .editing .btn-edit { display: none; }
         .editing .btn-save { display: inline-block; }
 
-        /* Tabla de Checklist inspirada en la imagen */
+        /* Tabla de Checklist institucional */
         .checklist-table {
             width: 100%;
             border-collapse: collapse;
@@ -346,7 +346,7 @@
             font-size: 0.8rem;
             letter-spacing: 0.5px;
         }
-        /* Colores institucionales de celdas de criterio según imagen */
+        /* Colores institucionales de celdas de criterio */
         .bg-formacion { background-color: #A93226; }
         .bg-experiencia { background-color: #D35400; }
         .bg-produccion { background-color: #27AE60; }
@@ -506,7 +506,7 @@
             <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y Safe From Harm.</p></div></div>
         </div>
 
-        <!-- SECCIÓN: FORMADORES (CON LISTA DE CHEQUEO EN AYUDANTE DE FORMACIÓN) -->
+        <!-- SECCIÓN: FORMADORES (CON LAS 3 LISTAS DE CHEQUEO INTERactivas) -->
         <div id="formadores" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('formadores', 'ayudante', this)"><i class="fa-solid fa-user-gear"></i> Ayudante de Formación Scout</button>
@@ -514,11 +514,11 @@
                 <button class="subnav-btn" onclick="switchSubTab('formadores', 'director', this)"><i class="fa-solid fa-award"></i> Director de Formación Scout</button>
             </div>
 
-            <!-- 1. Ayudante de Formación Scout (Con Lista de Chequeo Interactiva) -->
+            <!-- 1. Ayudante de Formación Scout -->
             <div id="formadores-ayudante" class="subcontent-panel active">
                 <div class="card">
-                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Ayudante de Formación</h3>
-                    <p>Verificación de requisitos e indicadores exigidos para la habilitación como Ayudante de Formación Scout[cite: 2].</p>
+                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Ayudante de Formación Scout</h3>
+                    <p>Verificación de requisitos e indicadores exigidos para la habilitación como Ayudante de Formación Scout.</p>
                     
                     <table class="checklist-table">
                         <thead>
@@ -529,90 +529,235 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Formación -->
                             <tr>
                                 <td rowspan="3" class="criteria-cell bg-formacion">Formación</td>
-                                <td>Tener reconocimiento en la Formación básica[cite: 2].</td>
+                                <td>Tener reconocimiento en la Formación básica.</td>
                                 <td class="checkbox-container"><input type="checkbox" checked></td>
                             </tr>
                             <tr>
-                                <td>Curso de Facilitación / Habilidades para Adultos[cite: 2].</td>
+                                <td>Curso de Facilitación / Habilidades para Adultos.</td>
                                 <td class="checkbox-container"><input type="checkbox" checked></td>
                             </tr>
                             <tr>
-                                <td>Curso de Herramientas Digitales para la Formación[cite: 2].</td>
+                                <td>Curso de Herramientas Digitales para la Formación.</td>
                                 <td class="checkbox-container"><input type="checkbox"></td>
                             </tr>
-
-                            <!-- Experiencia en la Formación -->
                             <tr>
                                 <td rowspan="3" class="criteria-cell bg-experiencia">Experiencia en la Formación</td>
-                                <td>Participar como observador en al menos 3 eventos formativos[cite: 2].</td>
+                                <td>Participar como observador en al menos 3 eventos formativos.</td>
                                 <td class="checkbox-container"><input type="checkbox" checked></td>
                             </tr>
                             <tr>
-                                <td>Cumplir un mínimo de 30 horas de práctica acompañada[cite: 2].</td>
+                                <td>Cumplir un mínimo de 30 horas de práctica acompañada.</td>
                                 <td class="checkbox-container"><input type="checkbox"></td>
                             </tr>
                             <tr>
-                                <td>Contar con un mentor elegido o asignado[cite: 2].</td>
+                                <td>Contar con un mentor elegido o asignado.</td>
                                 <td class="checkbox-container"><input type="checkbox" checked></td>
                             </tr>
-
-                            <!-- Producción de conocimiento -->
                             <tr>
                                 <td rowspan="2" class="criteria-cell bg-produccion">Producción de conocimiento</td>
-                                <td>Elaborar al menos un recurso didáctico o actividad de apoyo para un proceso formativo de la Región[cite: 2].</td>
+                                <td>Elaborar al menos un recurso didáctico o actividad de apoyo para un proceso formativo de la Región.</td>
                                 <td class="checkbox-container"><input type="checkbox"></td>
                             </tr>
                             <tr>
-                                <td>Participar en ejercicios de sistematización de experiencias[cite: 2].</td>
+                                <td>Participar en ejercicios de sistematización de experiencias.</td>
                                 <td class="checkbox-container"><input type="checkbox"></td>
                             </tr>
-
-                            <!-- Actualización permanente -->
                             <tr>
                                 <td rowspan="2" class="criteria-cell bg-actualizacion">Actualización permanente</td>
-                                <td>Afiliación vigente[cite: 2].</td>
+                                <td>Afiliación vigente.</td>
                                 <td class="checkbox-container"><input type="checkbox" checked></td>
                             </tr>
                             <tr>
-                                <td>Participar en las jornadas de actualización definidas por la Región / Nación[cite: 2].</td>
+                                <td>Participar en las jornadas de actualización definidas por la Región / Nación.</td>
                                 <td class="checkbox-container"><input type="checkbox"></td>
                             </tr>
-
-                            <!-- Aval institucional -->
                             <tr>
                                 <td rowspan="2" class="criteria-cell bg-aval">Aval institucional</td>
-                                <td>Aval del Comisionado Regional de Adultos en el Movimiento[cite: 2].</td>
+                                <td>Aval del Comisionado Regional de Adultos en el Movimiento.</td>
                                 <td class="checkbox-container"><input type="checkbox"></td>
                             </tr>
                             <tr>
-                                <td>Certificación por la Región[cite: 2].</td>
+                                <td>Certificación por la Región.</td>
                                 <td class="checkbox-container"><input type="checkbox"></td>
                             </tr>
                         </tbody>
                     </table>
 
                     <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-                        <button class="btn-action" onclick="alert('¡Progreso de la lista de chequeo guardado exitosamente!')"><i class="fa-solid fa-floppy-disk"></i> Guardar Avance de Checklist</button>
+                        <button class="btn-action" onclick="alert('¡Progreso de Ayudante de Formación guardado exitosamente!')"><i class="fa-solid fa-floppy-disk"></i> Guardar Avance</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. Formador Scout -->
+            <!-- 2. Formador Scout (Nueva Lista de Chequeo según imagen) -->
             <div id="formadores-formador" class="subcontent-panel">
                 <div class="card">
-                    <h3><i class="fa-solid fa-chalkboard-user"></i> Formador Scout</h3>
-                    <p>Acreditación y gestión de formadores titulares.</p>
+                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Formador Scout</h3>
+                    <p>Verificación de requisitos e indicadores exigidos para la habilitación y certificación como Formador Scout[cite: 3].</p>
+                    
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th>Criterio</th>
+                                <th>Indicador / Requisito</th>
+                                <th style="text-align: center; width: 100px;">Cumple</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="criteria-cell bg-formacion">Formación</td>
+                                <td>Curso TTT 1 (Regional / Nacional)[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="criteria-cell bg-experiencia">Experiencia en la Formación</td>
+                                <td>Haber sido AFS por al menos un año[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <td>Participar como facilitador en al menos 5 cursos de la región[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Acumular mínimo 80 horas de facilitación[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="criteria-cell bg-produccion">Producción de conocimiento</td>
+                                <td>Diseñar al menos 5 sesiones de formación[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Elaborar al menos 3 guías metodológicas, recursos didácticos o materiales de apoyo[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Sistematizar al menos tres experiencias de formación[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="criteria-cell bg-actualizacion">Actualización permanente</td>
+                                <td>Mantener la condición de FS Actualizado[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <td>Participar anualmente en jornadas de actualización para formadores[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Mantener la condición AAA[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" class="criteria-cell bg-aval">Aval institucional</td>
+                                <td>Aval del Comisionado Regional de Adultos en el Movimiento[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Certificación por la Región o la Nación, según corresponda[cite: 3].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+                        <button class="btn-action" onclick="alert('¡Progreso de Formador Scout guardado exitosamente!')"><i class="fa-solid fa-floppy-disk"></i> Guardar Avance</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- 3. Director de Formación Scout -->
+            <!-- 3. Director de Formación Scout (Nueva Lista de Chequeo según imagen) -->
             <div id="formadores-director" class="subcontent-panel">
                 <div class="card">
-                    <h3><i class="fa-solid fa-award"></i> Director de Formación Scout</h3>
-                    <p>Coordinación y dirección de escuelas de formación.</p>
+                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Director de Formación Scout</h3>
+                    <p>Verificación de requisitos e indicadores exigidos para la habilitación y certificación como Director de Formación Scout[cite: 4].</p>
+                    
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th>Criterio</th>
+                                <th>Indicador / Requisito</th>
+                                <th style="text-align: center; width: 100px;">Cumple</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2" class="criteria-cell bg-formacion">Formación</td>
+                                <td>Curso TTT 2 (Regional / Nacional)[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Oferta formativa avanzada definida por la Dirección Nacional de Adultos[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5" class="criteria-cell bg-experiencia">Experiencia en la Formación</td>
+                                <td>Mínimo 3 años como Formador Scout certificado[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <td>Haber dirigido al menos 10 ofertas formativas regionales o nacionales[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Acumular mínimo 400 horas de facilitación[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Haber acompañado el desarrollo de al menos cinco nuevos formadores (AFS ó FS)[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Participar activamente en el Equipo Regional de Formación y la Red Nacional de Formación[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="criteria-cell bg-produccion">Producción de conocimiento</td>
+                                <td>Liderar la actualización o creación de ofertas formativas institucionales[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Elaborar al menos 3 documentos técnicos, metodológicos o pedagógicos[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Liderar procesos de gestión del conocimiento o comunidades de práctica en la Región[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" class="criteria-cell bg-actualizacion">Actualización permanente</td>
+                                <td>Mantener la condición de DFS Actualizado[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <td>Participar periódicamente en procesos nacionales de actualización[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Contribuir como facilitador o diseñador en espacios de actualización para otros formadores[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Mantener evidencia de desarrollo profesional continuo[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox" checked></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" class="criteria-cell bg-aval">Aval institucional</td>
+                                <td>Concepto favorable de la Comisión Nacional de Formación[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Certificación otorgada por la Dirección Nacional de Adultos en el Movimiento[cite: 4].</td>
+                                <td class="checkbox-container"><input type="checkbox"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+                        <button class="btn-action" onclick="alert('¡Progreso de Director de Formación Scout guardado exitosamente!')"><i class="fa-solid fa-floppy-disk"></i> Guardar Avance</button>
+                    </div>
                 </div>
             </div>
         </div>
