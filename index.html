@@ -130,13 +130,14 @@
             color: white;
         }
 
-        /* Perfil de Usuario en la barra lateral inferior */
+        /* Perfil de Usuario en la barra lateral inferior con selector desplegable */
         .sidebar-footer {
             padding-top: 15px;
             border-top: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative;
         }
 
         .user-mini {
@@ -166,6 +167,63 @@
         .user-details p {
             font-size: 0.72rem;
             color: var(--text-muted);
+        }
+
+        .role-switch-btn {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .role-switch-btn:hover {
+            background-color: rgba(139, 0, 0, 0.08);
+            color: var(--primary-red);
+        }
+
+        /* Menú desplegable para cambiar de cargo en el footer */
+        .role-dropdown-menu {
+            display: none;
+            position: absolute;
+            bottom: 65px;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .role-dropdown-menu.show {
+            display: block;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .role-option {
+            padding: 10px 14px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-bottom: 1px solid #F5F3EC;
+            transition: background 0.2s;
+        }
+
+        .role-option:last-child {
+            border-bottom: none;
+        }
+
+        .role-option:hover {
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+        }
+
+        .role-option.active-role {
+            font-weight: 600;
+            color: var(--primary-red);
+            background-color: rgba(139, 0, 0, 0.04);
         }
 
         /* --- CONTENEDOR DERECHO: VISUALIZACIÓN --- */
@@ -301,7 +359,7 @@
             color: white;
         }
 
-        /* Estilos específicos para la sección Perfil minimalista */
+        /* Estilos específicos para Perfil minimalista */
         .profile-name-container {
             display: flex;
             flex-direction: column;
@@ -438,15 +496,23 @@
             </ul>
         </div>
 
+        <!-- FOOTER LATERAL CON CAMBIO DE PERFIL / CARGO -->
         <div class="sidebar-footer">
+            <!-- Menú desplegable flotante de cargos -->
+            <div class="role-dropdown-menu" id="role-menu">
+                <div class="role-option active-role" onclick="selectRole('clan', 'Subjefe de Clan')">Subjefe de Clan <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Grupo</span></div>
+                <div class="role-option" onclick="selectRole('nacion', 'Director de Adultos')">Director de Adultos <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Nación</span></div>
+                <div class="role-option" onclick="selectRole('formador', 'Formador Scout')">Formador Scout <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Región</span></div>
+            </div>
+
             <div class="user-mini">
                 <div class="user-avatar" id="sidebar-avatar">MQ</div>
                 <div class="user-details">
                     <h4 id="sidebar-name">MAURICIO QUIROGA</h4>
-                    <p id="sidebar-role">Dirigente Voluntario</p>
+                    <p id="sidebar-role">Subjefe de Clan</p>
                 </div>
             </div>
-            <i class="fa-solid fa-arrow-right-arrow-left" style="font-size: 0.85rem; color: var(--text-muted); cursor: pointer;" title="Cambiar rol"></i>
+            <i class="fa-solid fa-arrow-right-arrow-left role-switch-btn" onclick="toggleRoleMenu()" title="Cambiar cargo / perfil"></i>
         </div>
     </aside>
 
@@ -455,7 +521,7 @@
         <!-- Encabezado superior persistente -->
         <div class="header-welcome">
             <h2 id="section-title">Perfil del Dirigente</h2>
-            <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión C.I.M.A.</p>
+            <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)</p>
         </div>
 
         <!-- SECCIÓN: PERFIL -->
@@ -469,34 +535,11 @@
             </div>
 
             <div class="card">
-                <h3><i class="fa-solid fa-chart-pie"></i> Balanced Scorecard (BSC) - Resumen C.I.M.A.</h3>
-                <p>Indicadores clave de desarrollo de competencias, avance formativo y estatus en la Asociación.</p>
+                <h3><i class="fa-solid fa-chart-pie"></i> Balanced Scorecard (BSC) - <span id="bsc-title-cargo">Subjefe de Clan</span></h3>
+                <p>Indicadores clave de desarrollo de competencias, avance formativo y estatus asociados al cargo activo.</p>
                 
-                <div class="bsc-grid">
-                    <div class="bsc-card">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <h4>Cursos Realizados</h4>
-                        <div class="bsc-value">8 Módulos</div>
-                        <div class="bsc-subtext">Aprobados en plataforma</div>
-                    </div>
-                    <div class="bsc-card">
-                        <i class="fa-solid fa-award"></i>
-                        <h4>Nivel de Formación</h4>
-                        <div class="bsc-value" style="font-size: 1.1rem; color: var(--primary-red);">Insignia de Madera</div>
-                        <div class="bsc-subtext">Acreditado / Vigente</div>
-                    </div>
-                    <div class="bsc-card">
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <h4>Horas de Facilitación</h4>
-                        <div class="bsc-value">120 hrs</div>
-                        <div class="bsc-subtext">Experiencia acumulada</div>
-                    </div>
-                    <div class="bsc-card">
-                        <i class="fa-solid fa-clipboard-check"></i>
-                        <h4>Cumplimiento PPD</h4>
-                        <div class="bsc-value">92%</div>
-                        <div class="bsc-subtext">Plan de Desarrollo Personal</div>
-                    </div>
+                <div class="bsc-grid" id="bsc-content">
+                    <!-- Contenido dinámico inyectado por JS -->
                 </div>
             </div>
         </div>
@@ -835,7 +878,7 @@
     <!-- SCRIPT DE NAVEGACIÓN Y CONTROL MODULAR -->
     <script>
         const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y resumen de gestión C.I.M.A.' },
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
@@ -844,6 +887,99 @@
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
         };
+
+        // Datos del BSC adaptados para cada cargo en paralelo
+        const bscData = {
+            'clan': {
+                roleName: 'Subjefe de Clan',
+                level: 'Nivel Grupo',
+                cards: [
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '5 Módulos', subtext: 'Rama Rovers y Básica' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Ins. de Madera', subtext: 'Acreditado / Vigente' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas de Servicio', value: '95 hrs', subtext: 'Actividades de Grupo' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '94%', subtext: 'Plan Personal de Desarrollo' }
+                ]
+            },
+            'nacion': {
+                roleName: 'Director de Adultos',
+                level: 'Nivel Nación',
+                cards: [
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '12 Cursos', subtext: 'Gestión y Liderazgo Avanzado' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Gestor Nacional', subtext: '4 Maderos (GN)' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas Gestión', value: '350 hrs', subtext: 'Equipo Nacional' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '98%', subtext: 'Plan Personal de Desarrollo' }
+                ]
+            },
+            'formador': {
+                roleName: 'Formador Scout',
+                level: 'Nivel Región',
+                cards: [
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: 'TTT 1', subtext: 'Entrenamiento de Formadores' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador Scout', subtext: 'Certificado Regional' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas Facilitación', value: '120 hrs', subtext: 'Cursos de Formación' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '90%', subtext: 'Plan Personal de Desarrollo' }
+                ]
+            }
+        };
+
+        function toggleRoleMenu() {
+            const menu = document.getElementById('role-menu');
+            menu.classList.toggle('show');
+        }
+
+        function selectRole(roleKey, roleDisplayName) {
+            // Ocultar menú desplegable
+            document.getElementById('role-menu').classList.remove('show');
+
+            // Actualizar texto en la barra lateral inferior
+            document.getElementById('sidebar-role').innerText = roleDisplayName;
+
+            // Actualizar opción activa visualmente en el menú
+            const options = document.querySelectorAll('.role-option');
+            options.forEach(opt => opt.classList.remove('active-role'));
+            event.currentTarget.classList.add('active-role');
+
+            // Actualizar título y tarjetas del BSC en la sección Perfil
+            document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
+            const data = bscData[roleKey];
+            const container = document.getElementById('bsc-content');
+            container.innerHTML = '';
+
+            data.cards.forEach(card => {
+                container.innerHTML += `
+                    <div class="bsc-card">
+                        <i class="fa-solid ${card.icon}"></i>
+                        <h4>${card.title}</h4>
+                        <div class="bsc-value">${card.value}</div>
+                        <div class="bsc-subtext">${card.subtext}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // Inicializar BSC por defecto al cargar la página (Subjefe de Clan)
+        window.onload = function() {
+            selectRoleInit('clan', 'Subjefe de Clan');
+        };
+
+        function selectRoleInit(roleKey, roleDisplayName) {
+            document.getElementById('sidebar-role').innerText = roleDisplayName;
+            document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
+            const data = bscData[roleKey];
+            const container = document.getElementById('bsc-content');
+            container.innerHTML = '';
+
+            data.cards.forEach(card => {
+                container.innerHTML += `
+                    <div class="bsc-card">
+                        <i class="fa-solid ${card.icon}"></i>
+                        <h4>${card.title}</h4>
+                        <div class="bsc-value">${card.value}</div>
+                        <div class="bsc-subtext">${card.subtext}</div>
+                    </div>
+                `;
+            });
+        }
 
         function switchSection(sectionId, element) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
@@ -864,6 +1000,16 @@
             parent.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
             document.getElementById(sectionPrefix + '-' + tabId).classList.add('active');
         }
+
+        // Cerrar menú flotante si se hace clic fuera
+        window.onclick = function(event) {
+            if (!event.target.matches('.role-switch-btn') && !event.target.closest('.role-dropdown-menu')) {
+                const menu = document.getElementById('role-menu');
+                if (menu && menu.classList.contains('show')) {
+                    menu.classList.remove('show');
+                }
+            }
+        };
     </script>
 </body>
 </html>
