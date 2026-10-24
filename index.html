@@ -315,7 +315,7 @@
         .editing .btn-edit { display: none; }
         .editing .btn-save { display: inline-block; }
 
-        /* Tablas y elementos personalizados */
+        /* Tablas personalizadas */
         .table-custom {
             width: 100%;
             border-collapse: collapse;
@@ -345,34 +345,6 @@
         .badge.pending { background-color: #fff8e1; color: #f57f17; }
         .badge.progress { background-color: #e3f2fd; color: #1565c0; }
         .badge.done { background-color: #e8f5e9; color: #2e7d32; }
-
-        /* Tarjetas de cursos virtuales */
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .course-card {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .progress-bar-container {
-            background: #eee;
-            border-radius: 4px;
-            height: 8px;
-            width: 100%;
-            margin: 12px 0;
-            overflow: hidden;
-        }
-        .progress-bar-fill {
-            background: var(--primary-red);
-            height: 100%;
-        }
     </style>
 </head>
 <body>
@@ -393,6 +365,7 @@
                 <li><a class="nav-item" onclick="switchSection('atraccion', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
                 <li><a class="nav-item" onclick="switchSection('desempeno', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
                 <li><a class="nav-item" onclick="switchSection('formacion', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
+                <li><a class="nav-item" onclick="switchSection('formadores', this)"><i class="fa-solid fa-chalkboard-user"></i> Formadores</a></li>
                 <li><a class="nav-item" onclick="switchSection('decisiones', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
                 <li><a class="nav-item" onclick="switchSection('bienestar', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
                 <li><a class="nav-item" onclick="switchSection('reconocimiento', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
@@ -514,161 +487,96 @@
             <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal</h3><p>Estrategias y cierre de brechas.</p></div></div>
         </div>
 
-        <!-- SECCIÓN: FORMACIÓN (ACTUALIZADA CON LAS TRES SUBSECCIONES SOLICITADAS) -->
+        <!-- SECCIÓN: FORMACIÓN -->
         <div id="formacion" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('formacion', 'historial', this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial de Formaciones</button>
                 <button class="subnav-btn" onclick="switchSubTab('formacion', 'certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
                 <button class="subnav-btn" onclick="switchSubTab('formacion', 'cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
             </div>
+            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de cursos y módulos aprobados.</p></div></div>
+            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados Oficiales</h3><p>Diplomas e insignias de madera expedidas.</p></div></div>
+            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y Safe From Harm.</p></div></div>
+        </div>
 
-            <!-- 1. Historial de Formaciones -->
-            <div id="formacion-historial" class="subcontent-panel active">
+        <!-- SECCIÓN NUEVA: FORMADORES -->
+        <div id="formadores" class="content-section">
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchSubTab('formadores', 'ayudante', this)"><i class="fa-solid fa-user-gear"></i> Ayudante de Formación Scout</button>
+                <button class="subnav-btn" onclick="switchSubTab('formadores', 'formador', this)"><i class="fa-solid fa-chalkboard"></i> Formador Scout</button>
+                <button class="subnav-btn" onclick="switchSubTab('formadores', 'director', this)"><i class="fa-solid fa-award"></i> Director de Formación Scout</button>
+            </div>
+
+            <!-- 1. Ayudante de Formación Scout -->
+            <div id="formadores-ayudante" class="subcontent-panel active">
                 <div class="card">
-                    <h3><i class="fa-solid fa-graduation-cap"></i> Registro Histórico de Cursos y Módulos</h3>
-                    <p>Consulta el detalle de los espacios formativos, talleres y formaciones básicas o de perfeccionamiento continuo cursadas en la Asociación[cite: 2, 4].</p>
+                    <h3><i class="fa-solid fa-hands-bound"></i> Programa de Mentoría y Ayudantía en Formación</h3>
+                    <p>Espacio para el registro y seguimiento de adultos en proceso de habilitación como facilitadores, colaborando en la logística y desarrollo de talleres bajo la tutela de formadores titulares.</p>
                     
                     <table class="table-custom">
                         <thead>
                             <tr>
-                                <th>Nombre del Curso / Módulo</th>
-                                <th>Tipo</th>
-                                <th>Fecha de Realización</th>
-                                <th>Intensidad Horaria</th>
-                                <th>Estado</th>
+                                <th>Escuela / Taller de Apoyo</th>
+                                <th>Rol Asignado</th>
+                                <th>Formador Titular a Cargo</th>
+                                <th>Estado de Habilitación</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Curso Insignia de Madera (IM) - Nivel Rama Clan</td>
-                                <td>Formación Básica</td>
-                                <td>15 / Nov / 2024</td>
-                                <td>24 Horas</td>
-                                <td><span class="badge done">Aprobado</span></td>
+                                <td>Taller Regional Inducción Grupos Nuevos</td>
+                                <td>Logística y Apoyo Módulo 1</td>
+                                <td>Carlos Alberto Mendoza (Director Escuela)</td>
+                                <td><span class="badge progress">En Proceso de Práctica</span></td>
                             </tr>
                             <tr>
-                                <td>Módulo "Safe From Harm - SfH1"</td>
-                                <td>Obligatorio / Virtual</td>
-                                <td>10 / Feb / 2025</td>
-                                <td>4 Horas</td>
-                                <td><span class="badge done">Aprobado</span></td>
-                            </tr>
-                            <tr>
-                                <td>Taller Regional de Planificación de Proyectos</td>
-                                <td>Perfeccionamiento Continuo</td>
-                                <td>22 / Ago / 2025</td>
-                                <td>8 Horas</td>
-                                <td><span class="badge done">Aprobado</span></td>
+                                <td>Curso Básico Rama Tropa</td>
+                                <td>Facilitador en Mesa de Trabajo</td>
+                                <td>Ana María Restrepo</td>
+                                <td><span class="badge done">Completado</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 2. Certificados de Oferta Formativa -->
-            <div id="formacion-certificados" class="subcontent-panel">
+            <!-- 2. Formador Scout -->
+            <div id="formadores-formador" class="subcontent-panel">
                 <div class="card">
-                    <h3><i class="fa-solid fa-certificate"></i> Repositorio de Certificados Oficiales</h3>
-                    <p>Descarga y verifica tus diplomas, insignias de madera, refrendaciones y reconocimientos de formación expedidos por la Dirección Nacional de Adultos en el Movimiento (DNAM)[cite: 2, 4, 13].</p>
+                    <h3><i class="fa-solid fa-chalkboard-user"></i> Acreditación y Gestión de Formadores Titulares</h3>
+                    <p>Consulta el estado de tu aval oficial como Formador Scout, módulos a cargo, registro de capacitaciones impartidas y vigencia de certificación pedagógica ante la Dirección Nacional de Adultos.</p>
                     
-                    <table class="table-custom">
-                        <thead>
-                            <tr>
-                                <th>Denominación del Certificado</th>
-                                <th>Nivel / Instancia</th>
-                                <th>Fecha de Emisión</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Certificado Insignia de Madera (IM)</td>
-                                <td>Nacional (Grupo / Rama Clan)</td>
-                                <td>20 / Dic / 2024</td>
-                                <td><button class="btn-action" style="padding: 4px 10px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i> Descargar PDF</button></td>
-                            </tr>
-                            <tr>
-                                <td>Certificado Módulo Safe From Harm (SfH1)</td>
-                                <td>Nacional (Entornos Seguros)</td>
-                                <td>12 / Feb / 2025</td>
-                                <td><button class="btn-action" style="padding: 4px 10px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i> Descargar PDF</button></td>
-                            </tr>
-                            <tr>
-                                <td>Refrendación Competencias Dirigente Adulto</td>
-                                <td>Regional (Bogotá / Cundinamarca)</td>
-                                <td>10 / Ene / 2026</td>
-                                <td><button class="btn-action" style="padding: 4px 10px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i> Descargar PDF</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 3. Cursos Virtuales -->
-            <div id="formacion-cursos" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-display"></i> Campus Virtual C.I.M.A. - Cursos y Módulos</h3>
-                    <p>Accede a la oferta de capacitación virtual autogestionada para fortalecer tus competencias y cumplir los requisitos del ciclo de vida[cite: 2, 4].</p>
-                    
-                    <div class="course-grid">
-                        <div class="course-card">
-                            <div>
-                                <h4 style="font-size: 1rem; margin-bottom: 8px; color: var(--text-main);">Módulo de Inducción General ASC</h4>
-                                <p style="font-size: 0.85rem; color: var(--text-muted);">Conoce la historia, estructura organizacional y generalidades del Movimiento Scout en Colombia.</p>
-                            </div>
-                            <div>
-                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600;">
-                                    <span>Progreso</span>
-                                    <span style="color: #2e7d32;">100% (Completado)</span>
-                                </div>
-                                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 100%; background: #2e7d32;"></div></div>
-                                <button class="btn-action" style="width: 100%; text-align: center; margin-top: 8px; background: #e8f5e9; color: #2e7d32;">Ver Constancia</button>
-                            </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: white; border: 1px solid var(--border-color); padding: 16px; border-radius: 8px;">
+                            <h4 style="font-size: 0.95rem; margin-bottom: 6px; color: var(--primary-red);">Estado de Acreditación</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Formador Titular Regional Activo (Certificado No. FORM-2023-045).</p>
                         </div>
-
-                        <div class="course-card">
-                            <div>
-                                <h4 style="font-size: 1rem; margin-bottom: 8px; color: var(--text-main);">Curso Safe From Harm (SfH1)</h4>
-                                <p style="font-size: 0.85rem; color: var(--text-muted);">Aprendizajes fundamentales para la protección de niños, niñas, adolescentes y jóvenes.</p>
-                            </div>
-                            <div>
-                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600;">
-                                    <span>Progreso</span>
-                                    <span>100% (Certificado)</span>
-                                </div>
-                                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 100%; background: #2e7d32;"></div></div>
-                                <button class="btn-action" style="width: 100%; text-align: center; margin-top: 8px; background: #e8f5e9; color: #2e7d32;">Descargar Certificado</button>
-                            </div>
-                        </div>
-
-                        <div class="course-card">
-                            <div>
-                                <h4 style="font-size: 1rem; margin-bottom: 8px; color: var(--text-main);">Módulo Diversidad e Inclusión</h4>
-                                <p style="font-size: 0.85rem; color: var(--text-muted);">Herramientas para garantizar un entorno scout abierto, respetuoso y accesible para todos.</p>
-                            </div>
-                            <div>
-                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600;">
-                                    <span>Progreso</span>
-                                    <span style="color: var(--primary-red);">45% en curso</span>
-                                </div>
-                                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 45%;"></div></div>
-                                <button class="btn-action" style="width: 100%; text-align: center; margin-top: 8px;">Continuar Curso</button>
-                            </div>
+                        <div style="background: white; border: 1px solid var(--border-color); padding: 16px; border-radius: 8px;">
+                            <h4 style="font-size: 0.95rem; margin-bottom: 6px; color: var(--primary-red);">Módulos Autorizados</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Política de Adultos, Método Scout, Asesoría Personal y Ciclo de Vida.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- 3. Director de Formación Scout -->
+            <div id="formadores-director" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-medal"></i> Coordinación y Dirección de Escuelas de Formación</h3>
+                    <p>Panel de supervisión para Directores de Formación encargado de la programación anual de cursos, avales de formadores, revisión de mallas curriculares y emisión de conceptos técnicos para certificación de Insignia de Madera.</p>
+                    <button class="btn-action">Gestionar Programación de Cursos</button>
                 </div>
             </div>
         </div>
 
         <!-- SECCIÓN: DECISIONES -->
         <div id="decisiones" class="content-section">
-            <div class="grid-cards">
-                <div class="card">
-                    <h3><i class="fa-solid fa-arrows-split-up-and-left"></i> Decisiones para el Futuro</h3>
-                    <p>Opciones de retiro, renovación en el cargo o reubicación al término de tu ciclo de vida[cite: 3, 4, 8].</p>
-                    <button class="btn-action">Gestionar Decisión</button>
-                </div>
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchSubTab('decisiones', 'historial', this)"><i class="fa-solid fa-timeline"></i> Historial de Cargos</button>
+                <button class="subnav-btn" onclick="switchSubTab('decisiones', 'entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
             </div>
+            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la ASC.</p></div></div>
+            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida</h3><p>Proceso de cierre de ciclo y decisiones de continuidad.</p></div></div>
         </div>
 
         <!-- SECCIÓN: BIENESTAR -->
@@ -676,7 +584,7 @@
             <div class="grid-cards">
                 <div class="card">
                     <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
-                    <p>Estrategias de bienestar y apoyo al voluntariado adulto en la Asociación[cite: 3].</p>
+                    <p>Estrategias de bienestar y apoyo al voluntariado adulto en la Asociación.</p>
                     <button class="btn-action">Explorar Bienestar</button>
                 </div>
             </div>
@@ -687,7 +595,7 @@
             <div class="grid-cards">
                 <div class="card">
                     <h3><i class="fa-solid fa-trophy"></i> Condecoraciones e Insignias de Actualización</h3>
-                    <p>Consulta tus galardones institucionales y solicitudes de certificación avaladas por tu asesor personal[cite: 3, 4].</p>
+                    <p>Consulta tus galardones institucionales y solicitudes de certificación.</p>
                     <button class="btn-action">Ver Condecoraciones</button>
                 </div>
             </div>
@@ -701,7 +609,8 @@
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
-            'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Reubicación, continuidad y proyección del adulto' },
+            'formadores': { title: 'Formadores', subtitle: 'Ayudante de Formación Scout, Formador Scout y Director de Formación Scout' },
+            'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos y entrevista de salida institucional' },
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
         };
