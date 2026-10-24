@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C.I.M.A. - Plataforma HRM Scouts de Colombia</title>
+    <!-- Google Fonts & FontAwesome para iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #8B0000; /* Rojo base institucional */
+            --primary-red-dark: #600000;
+            --primary-red-light: #FDF2F2;
+            --bg-cream: #FDFBF7; /* Fondo similar a la referencia */
+            --card-bg: #FFFFFF;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --border-color: #E6E2D8;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- CONTENEDOR IZQUIERDO: MENÚ Y NAVEGACIÓN --- */
+        aside {
+            width: var(--sidebar-width);
+            background-color: var(--bg-cream);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-red);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .brand-info h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .nav-item i {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(139, 0, 0, 0.05);
+            color: var(--primary-red);
+        }
+
+        .nav-item:hover i {
+            color: var(--primary-red);
+        }
+
+        .nav-item.active {
+            background-color: var(--primary-red);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
+        }
+
+        .nav-item.active i {
+            color: white;
+        }
+
+        /* Perfil de Usuario en la barra lateral inferior */
+        .sidebar-footer {
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .user-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .user-details h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .user-details p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CONTENEDOR DERECHO: VISUALIZACIÓN --- */
+        main {
+            flex-grow: 1;
+            background-color: var(--bg-cream);
+            padding: 40px;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .header-welcome {
+            margin-bottom: 30px;
+        }
+
+        .header-welcome h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .header-welcome p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Área de contenido dinámico de las secciones */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tarjetas de ejemplo visual */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h3 i {
+            color: var(--primary-red);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .btn-action {
+            display: inline-block;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary-red);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENÚ LATERAL IZQUIERDO -->
+    <aside>
+        <div>
+            <div class="brand-container">
+                <div class="brand-logo">C</div>
+                <div class="brand-info">
+                    <h1>C.I.M.A.</h1>
+                    <p>Scouts de Colombia</p>
+                </div>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a class="nav-item active" onclick="switchSection('perfil', this)"><i class="fa-solid fa-user"></i> Perfil</a></li>
+                <li><a class="nav-item" onclick="switchSection('atraccion', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
+                <li><a class="nav-item" onclick="switchSection('desempeno', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
+                <li><a class="nav-item" onclick="switchSection('formacion', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
+                <li><a class="nav-item" onclick="switchSection('decisiones', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
+                <li><a class="nav-item" onclick="switchSection('bienestar', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
+                <li><a class="nav-item" onclick="switchSection('reconocimiento', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-mini">
+                <div class="user-avatar">MQ</div>
+                <div class="user-details">
+                    <h4>MAURICIO QUIROGA</h4>
+                    <p>Sub-Jefe de Clan</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-arrow-right-arrow-left" style="font-size: 0.85rem; color: var(--text-muted); cursor: pointer;" title="Cambiar rol"></i>
+        </div>
+    </aside>
+
+    <!-- PANEL DE VISUALIZACIÓN DERECHO -->
+    <main>
+        <!-- Encabezado superior persistente -->
+        <div class="header-welcome">
+            <h2 id="section-title">Perfil del Dirigente</h2>
+            <p id="section-subtitle">Sub-Jefe de Clan · Clan Porthos 24 · Grupo #279</p>
+        </div>
+
+        <!-- SECCIÓN: PERFIL -->
+        <div id="perfil" class="content-section active">
+            <div class="grid-cards">
+                <div class="card">
+                    <h3><i class="fa-solid fa-id-card"></i> Información Personal</h3>
+                    <p>Gestiona tus datos de contacto, documentos legales, EPS y antecedentes institucionales requeridos por la Asociación.</p>
+                    <button class="btn-action">Actualizar Datos</button>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Mi Cargo Actual</h3>
+                    <p>Consulta los detalles, requisitos objetivos y funciones de tu rol activo dentro de la estructura Scout.</p>
+                    <button class="btn-action">Ver Manual de Cargos</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: ATRACCIÓN -->
+        <div id="atraccion" class="content-section">
+            <div class="grid-cards">
+                <div class="card">
+                    <h3><i class="fa-solid fa-briefcase"></i> Vacantes y Requisiciones</h3>
+                    <p>Explora las convocatorias abiertas para cargos a nivel Grupo, Región o Nación mediante el proceso de selección objetiva.</p>
+                    <button class="btn-action">Ver Convocatorias</button>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso</h3>
+                    <p>Seguimiento al registro de nuevos voluntarios, acuerdo mutuo y aceptación de normativas institucionales.</p>
+                    <button class="btn-action">Consultar Estado</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: DESEMPEÑO -->
+        <div id="desempeno" class="content-section">
+            <div class="grid-cards">
+                <div class="card">
+                    <h3><i class="fa-solid fa-chart-pie"></i> Evaluación por Competencias</h3>
+                    <p>Revisa tus competencias esenciales y específicas según el Diccionario de Competencias de la Asociación Scouts de Colombia.</p>
+                    <button class="btn-action">Ver Evaluaciones</button>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-clipboard-user"></i> Acompañamiento y Bitácoras</h3>
+                    <p>Seguimiento continuo junto a tu Asesor Personal de Desarrollo y registros de retroalimentación periódica.</p>
+                    <button class="btn-action">Abrir Bitácora</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: FORMACIÓN -->
+        <div id="formacion" class="content-section">
+            <div class="grid-cards">
+                <div class="card">
+                    <h3><i class="fa-solid fa-book-open"></i> Plan Personal de Desarrollo (PPD)</h3>
+                    <p>Construye y actualiza tus estrategias de aprendizaje, cursos de formación básica y perfeccionamiento continuo.</p>
+                    <button class="btn-action">Gestionar PPD</button>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-medal"></i> Insignia de Madera e Hitos</h3>
+                    <p>Estado de tus certificaciones (IM, Gestor Regional 3M, Gestor Nacional 4M) y rutas formativas completadas.</p>
+                    <button class="btn-action">Ver Certificados</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: DECISIONES -->
+        <div id="decisiones" class="content-section">
+            <div class="grid-cards">
+                <div class="card">
+                    <h3><i class="fa-solid fa-arrows-split-up-and-left"></i> Decisiones para el Futuro</h3>
+                    <p>Opciones de reubicación, continuidad en el cargo, promoción a nuevas instancias o proyección del liderazgo adulto.</p>
+                    <button class="btn-action">Ver Opciones</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: BIENESTAR -->
+        <div id="bienestar" class="content-section">
+            <div class="grid-cards">
+                <div class="card">
+                    <h3><i class="fa-solid fa-heart-pulse"></i> Clima y Motivación</h3>
+                    <p>Estrategias de motivación, reconocimiento de la labor voluntaria y herramientas de bienestar para los equipos de dirigentes.</p>
+                    <button class="btn-action">Explorar Bienestar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: RECONOCIMIENTO -->
+        <div id="reconocimiento" class="content-section">
+            <div class="grid-cards">
+                <div class="card">
+                    <h3><i class="fa-solid fa-trophy"></i> Condecoraciones y Estímulos</h3>
+                    <p>Consulta las órdenes, condecoraciones nacionales y regionales, y reconocimientos públicos a las acciones destacadas.</p>
+                    <button class="btn-action">Ver Condecoraciones</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCRIPT DE NAVEGACIÓN DINÁMICA (Estructura segura) -->
+    <script>
+        const titles = {
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Sub-Jefe de Clan · Clan Porthos 24 · Grupo #279' },
+            'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Procesos de requisición, convocatorias y selección objetiva' },
+            'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Evaluación por competencias y seguimiento al rol' },
+            'formacion': { title: 'Formación y Desarrollo', subtitle: 'Plan Personal de Desarrollo (PPD) y certificación' },
+            'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Reubicación, continuidad y proyección del adulto' },
+            'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
+            'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
+        };
+
+        function switchSection(sectionId, element) {
+            // Remover clase active de todas las opciones del menú
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            // Agregar active al seleccionado
+            element.classList.add('active');
+
+            // Ocultar todas las secciones de contenido
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Actualizar encabezados
+            document.getElementById('section-title').innerText = titles[sectionId].title;
+            document.getElementById('section-subtitle').innerText = titles[sectionId].subtitle;
+        }
+    </script>
+</body>
+</html>
