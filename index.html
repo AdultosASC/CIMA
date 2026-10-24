@@ -315,41 +315,33 @@
         .editing .btn-edit { display: none; }
         .editing .btn-save { display: inline-block; }
 
-        /* Estilos dinámicos para Cargos y BSC en Perfil */
-        .roles-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 10px;
-        }
-        .role-badge-card {
+        /* Selector de Cargo Activo */
+        .role-selector-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-red);
-            padding: 12px 16px;
-            border-radius: 8px;
+            background: var(--primary-red-light);
+            border: 1px solid rgba(139, 0, 0, 0.2);
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
-        .role-info h4 {
-            font-size: 0.95rem;
-            color: var(--text-main);
-            font-weight: 600;
-        }
-        .role-info p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-        .level-pill {
-            background-color: var(--primary-red-light);
-            color: var(--primary-red);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+        .role-selector-container label {
             font-weight: 700;
-            text-transform: uppercase;
+            color: var(--primary-red);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .role-selector-container select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: white;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
         }
 
         /* BSC (Balanced Scorecard) Grid */
@@ -366,6 +358,11 @@
             padding: 16px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+        .bsc-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-red);
         }
         .bsc-card i {
             font-size: 1.5rem;
@@ -373,19 +370,19 @@
             margin-bottom: 8px;
         }
         .bsc-card h4 {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             text-transform: uppercase;
             font-weight: 600;
             margin-bottom: 4px;
         }
         .bsc-card .bsc-value {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-main);
         }
         .bsc-card .bsc-subtext {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
             margin-top: 2px;
         }
@@ -467,10 +464,10 @@
 
         <div class="sidebar-footer">
             <div class="user-mini">
-                <div class="user-avatar">MQ</div>
+                <div class="user-avatar" id="sidebar-avatar">MQ</div>
                 <div class="user-details">
                     <h4 id="sidebar-name">MAURICIO QUIROGA</h4>
-                    <p id="sidebar-role">Sub-Jefe de Clan</p>
+                    <p id="sidebar-role">Subjefe de Clan</p>
                 </div>
             </div>
             <i class="fa-solid fa-arrow-right-arrow-left" style="font-size: 0.85rem; color: var(--text-muted); cursor: pointer;" title="Cambiar rol"></i>
@@ -482,10 +479,10 @@
         <!-- Encabezado superior persistente -->
         <div class="header-welcome">
             <h2 id="section-title">Perfil del Dirigente</h2>
-            <p id="section-subtitle">Información personal y resumen directivo (C.I.M.A.)</p>
+            <p id="section-subtitle">Información personal y Balanced Scorecard (BSC) por cargo (C.I.M.A.)</p>
         </div>
 
-        <!-- SECCIÓN: PERFIL (ACTUALIZADA CON CARGOS, NIVELES Y BSC) -->
+        <!-- SECCIÓN: PERFIL -->
         <div id="perfil" class="content-section active">
             <!-- 1. Datos Personales -->
             <div class="card" id="profile-card">
@@ -538,58 +535,22 @@
                 </form>
             </div>
 
-            <!-- 2. Cargos y Niveles Asignados -->
+            <!-- 2. Selector Dinámico de Cargos y BSC -->
             <div class="card">
-                <h3><i class="fa-solid fa-sitemap"></i> Cargos y Niveles Activos en el Movimiento</h3>
-                <p>Estructura de roles oficiales desempeñados actualmente según el Manual de Cargos.</p>
-                <div class="roles-container">
-                    <div class="role-badge-card">
-                        <div class="role-info">
-                            <h4>Subjefe de Clan</h4>
-                            <p>Unidad Clan de Rovers</p>
-                        </div>
-                        <span class="level-pill">Nivel Grupo</span>
-                    </div>
-                    <div class="role-badge-card">
-                        <div class="role-info">
-                            <h4>Director de Adultos en el Movimiento</h4>
-                            <p>Equipo Nacional de Gestión</p>
-                        </div>
-                        <span class="level-pill" style="background-color: #E8F4F8; color: #1D6FA5;">Nivel Nación</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Balanced Scorecard (BSC) de Formación y Desempeño -->
-            <div class="card">
-                <h3><i class="fa-solid fa-chart-pie"></i> Resumen de Gestión y Formación (BSC C.I.M.A.)</h3>
-                <p>Indicadores clave de desarrollo de competencias, avance formativo y estatus en la Asociación.</p>
+                <h3><i class="fa-solid fa-bullseye"></i> Panel de Gestión y BSC por Cargo Activo</h3>
+                <p>Selecciona uno de los cargos asignados para visualizar el Balanced Scorecard (BSC) específico y su estatus formativo.</p>
                 
-                <div class="bsc-grid">
-                    <div class="bsc-card">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <h4>Cursos Realizados</h4>
-                        <div class="bsc-value">8</div>
-                        <div class="bsc-subtext">Módulos y talleres aprobados</div>
-                    </div>
-                    <div class="bsc-card">
-                        <i class="fa-solid fa-award"></i>
-                        <h4>Nivel de Formación</h4>
-                        <div class="bsc-value" style="font-size: 1.1rem; color: var(--primary-red);">Insignia de Madera</div>
-                        <div class="bsc-subtext">Acreditado / Vigente</div>
-                    </div>
-                    <div class="bsc-card">
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <h4>Horas de Facilitación</h4>
-                        <div class="bsc-value">120 hrs</div>
-                        <div class="bsc-subtext">Experiencia acumulada</div>
-                    </div>
-                    <div class="bsc-card">
-                        <i class="fa-solid fa-clipboard-check"></i>
-                        <h4>Cumplimiento PPD</h4>
-                        <div class="bsc-value">92%</div>
-                        <div class="bsc-subtext">Plan de Desarrollo Personal</div>
-                    </div>
+                <div class="role-selector-container">
+                    <label><i class="fa-solid fa-user-tag"></i> Cargo Activo en Visualización:</label>
+                    <select id="cargo-select" onchange="updateBSC()">
+                        <option value="clan">Subjefe de Clan (Nivel Grupo)</option>
+                        <option value="nacion">Director de Adultos en el Movimiento (Nivel Nación)</option>
+                        <option value="formador">Formador Scout (Nivel Región)</option>
+                    </select>
+                </div>
+
+                <div class="bsc-grid" id="bsc-content">
+                    <!-- Contenido inyectado dinámicamente por JavaScript -->
                 </div>
             </div>
         </div>
@@ -928,7 +889,7 @@
     <!-- SCRIPT DE NAVEGACIÓN Y CONTROL MODULAR -->
     <script>
         const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y resumen directivo (C.I.M.A.)' },
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y Balanced Scorecard (BSC) por cargo (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
@@ -936,6 +897,67 @@
             'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos y entrevista de salida institucional' },
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
+        };
+
+        // Datos del BSC adaptados para cada cargo
+        const bscData = {
+            'clan': {
+                roleName: 'Subjefe de Clan',
+                level: 'Nivel Grupo',
+                cards: [
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '5 Módulos', subtext: 'Rama Rovers y Básica' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Ins. de Madera', subtext: 'Acreditado / Vigente' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas de Servicio', value: '95 hrs', subtext: 'Actividades de Grupo' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '94%', subtext: 'Plan Personal de Desarrollo' }
+                ]
+            },
+            'nacion': {
+                roleName: 'Director de Adultos en el Movimiento',
+                level: 'Nivel Nación',
+                cards: [
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '12 Cursos', subtext: 'Gestión y Liderazgo Avanzado' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Gestor Nacional', subtext: '4 Maderos (GN)' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas Gestión', value: '350 hrs', subtext: 'Equipo Nacional' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '98%', subtext: 'Plan de Desarrollo Personal' }
+                ]
+            },
+            'formador': {
+                roleName: 'Formador Scout',
+                level: 'Nivel Región',
+                cards: [
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: 'TTT 1', subtext: 'Entrenamiento de Formadores' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador Scout', subtext: 'Certificado Regional' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas Facilitación', value: '120 hrs', subtext: 'Cursos de Formación' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '90%', subtext: 'Plan de Desarrollo Personal' }
+                ]
+            }
+        };
+
+        function updateBSC() {
+            const selectVal = document.getElementById('cargo-select').value;
+            const data = bscData[selectVal];
+            
+            // Actualizar barra lateral con el rol activo
+            document.getElementById('sidebar-role').innerText = data.roleName;
+
+            const container = document.getElementById('bsc-content');
+            container.innerHTML = '';
+
+            data.cards.forEach(card => {
+                container.innerHTML += `
+                    <div class="bsc-card">
+                        <i class="fa-solid ${card.icon}"></i>
+                        <h4>${card.title}</h4>
+                        <div class="bsc-value">${card.value}</div>
+                        <div class="bsc-subtext">${card.subtext}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // Inicializar BSC al cargar la página
+        window.onload = function() {
+            updateBSC();
         };
 
         function switchSection(sectionId, element) {
@@ -986,7 +1008,11 @@
             document.getElementById('v-email').innerText = email;
             document.getElementById('v-movil').innerText = movil;
 
-            document.getElementById('sidebar-name').innerText = nombre.split(' ')[0] + ' ' + (nombre.split(' ')[2] || '');
+            const nameParts = nombre.split(' ');
+            const initials = (nameParts[0] ? nameParts[0][0] : '') + (nameParts[2] ? nameParts[2][0] : (nameParts[1] ? nameParts[1][0] : ''));
+            document.getElementById('sidebar-avatar').innerText = initials.toUpperCase();
+            document.getElementById('sidebar-name').innerText = nameParts[0] + ' ' + (nameParts[2] || '');
+            
             toggleEditMode(false);
             alert('¡Perfil actualizado con éxito en la plataforma C.I.M.A.!');
         }
