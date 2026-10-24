@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-red: #8B0000; /* Rojo base institucional */
+            --primary-red: #8B0000;
             --primary-red-dark: #600000;
             --primary-red-light: #FDF2F2;
-            --bg-cream: #FDFBF7; /* Fondo institucional */
+            --bg-cream: #FDFBF7;
             --card-bg: #FFFFFF;
             --text-main: #2C2C2C;
             --text-muted: #666666;
@@ -130,7 +130,12 @@
             color: white;
         }
 
-        /* Perfil de Usuario en la barra lateral inferior con selector desplegable */
+        /* Botón de Formador condicional (inicialmente oculto) */
+        #nav-formador-btn {
+            display: none;
+        }
+
+        /* Footer de Usuario con selector desplegable */
         .sidebar-footer {
             padding-top: 15px;
             border-top: 1px solid var(--border-color);
@@ -183,7 +188,7 @@
             color: var(--primary-red);
         }
 
-        /* Menú desplegable para cambiar de cargo en el footer (Actualizado con Formador Scout y Red Nal. Formación) */
+        /* Menú desplegable del Footer */
         .role-dropdown-menu {
             display: none;
             position: absolute;
@@ -252,7 +257,6 @@
             margin-top: 4px;
         }
 
-        /* Área de contenido dinámico principal */
         .content-section {
             display: none;
             animation: fadeIn 0.3s ease-in-out;
@@ -267,7 +271,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- SUBMENÚ INTERNO --- */
         .subnav-tabs {
             display: flex;
             gap: 10px;
@@ -308,7 +311,6 @@
             display: block;
         }
 
-        /* Tarjetas de contenido general */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -340,26 +342,39 @@
             margin-bottom: 16px;
         }
 
-        .btn-action {
-            display: inline-block;
-            background-color: var(--primary-red-light);
-            color: var(--primary-red);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-decoration: none;
-            border: none;
+        /* Checklists y Estilos de Listas */
+        .checklist-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #FAFAFA;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .check-item input[type="checkbox"] {
+            margin-top: 3px;
+            accent-color: var(--primary-red);
+            width: 18px;
+            height: 18px;
             cursor: pointer;
-            transition: background 0.2s;
         }
 
-        .btn-action:hover {
-            background-color: var(--primary-red);
-            color: white;
+        .check-item label {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            cursor: pointer;
+            font-weight: 500;
         }
 
-        /* Estilos específicos para Perfil minimalista */
         .profile-name-container {
             display: flex;
             flex-direction: column;
@@ -378,7 +393,6 @@
             color: var(--primary-red);
         }
 
-        /* BSC (Balanced Scorecard) Grid */
         .bsc-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -424,7 +438,7 @@
 </head>
 <body>
 
-    <!-- MENÚ LATERAL IZQUIERDO (SIN BOTÓN DE FORMADORES) -->
+    <!-- MENÚ LATERAL IZQUIERDO -->
     <aside>
         <div>
             <div class="brand-container">
@@ -440,19 +454,20 @@
                 <li><a class="nav-item" onclick="switchSection('atraccion', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
                 <li><a class="nav-item" onclick="switchSection('desempeno', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
                 <li><a class="nav-item" onclick="switchSection('formacion', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
+                <!-- Botón de Formador que aparece solo al seleccionar Formador Scout -->
+                <li id="nav-formador-btn"><a class="nav-item" onclick="switchSection('modulo-formador', this)"><i class="fa-solid fa-chalkboard-user"></i> Formador</a></li>
                 <li><a class="nav-item" onclick="switchSection('decisiones', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
                 <li><a class="nav-item" onclick="switchSection('bienestar', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
                 <li><a class="nav-item" onclick="switchSection('reconocimiento', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
             </ul>
         </div>
 
-        <!-- FOOTER LATERAL CON CAMBIO DE PERFIL / CARGO (INCLUYE FORMADOR SCOUT - RED NAL. FORMACIÓN) -->
+        <!-- FOOTER LATERAL CON SELECTOR DE CARGOS -->
         <div class="sidebar-footer">
-            <!-- Menú desplegable flotante de cargos -->
             <div class="role-dropdown-menu" id="role-menu">
-                <div class="role-option active-role" onclick="selectRole('clan', 'Subjefe de Clan')">Subjefe de Clan <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Grupo</span></div>
-                <div class="role-option" onclick="selectRole('nacion', 'Director de Adultos')">Director de Adultos <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Nación</span></div>
-                <div class="role-option" onclick="selectRole('formador', 'Formador Scout')">Formador Scout <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Red Nal. Formación</span></div>
+                <div class="role-option active-role" onclick="selectRole('clan', 'Subjefe de Clan', 'Nivel Grupo')">Subjefe de Clan <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Grupo</span></div>
+                <div class="role-option" onclick="selectRole('nacion', 'Director de Adultos', 'Nivel Nación')">Director de Adultos <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Nación</span></div>
+                <div class="role-option" onclick="selectRole('formador', 'Formador Scout', 'Red Nal. Formación')">Formador Scout <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Red Nal. Formación</span></div>
             </div>
 
             <div class="user-mini">
@@ -468,7 +483,6 @@
 
     <!-- PANEL DE VISUALIZACIÓN DERECHO -->
     <main>
-        <!-- Encabezado superior persistente -->
         <div class="header-welcome">
             <h2 id="section-title">Perfil del Dirigente</h2>
             <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)</p>
@@ -487,10 +501,7 @@
             <div class="card">
                 <h3><i class="fa-solid fa-chart-pie"></i> Balanced Scorecard (BSC) - <span id="bsc-title-cargo">Subjefe de Clan</span></h3>
                 <p>Indicadores clave de desarrollo de competencias, avance formativo y estatus asociados al cargo activo.</p>
-                
-                <div class="bsc-grid" id="bsc-content">
-                    <!-- Contenido dinámico inyectado por JS -->
-                </div>
+                <div class="bsc-grid" id="bsc-content"></div>
             </div>
         </div>
 
@@ -499,93 +510,103 @@
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('atraccion', 'vacantes', this)"><i class="fa-solid fa-briefcase"></i> Vacante y Requisiciones</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'ingreso', this)"><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'competencias', this)"><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'manual', this)"><i class="fa-solid fa-address-book"></i> Manual de Cargos</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
             <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias y selección objetiva.</p></div></div>
             <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Registro y validación institucional.</p></div></div>
-            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas.</p></div></div>
-            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por nivel.</p></div></div>
-            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco.</p></div></div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado.</p></div></div>
         </div>
 
         <!-- SECCIÓN: DESEMPEÑO -->
         <div id="desempeno" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('desempeno', 'ruta', this)"><i class="fa-solid fa-route"></i> Ruta de Evaluación</button>
-                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación</button>
-                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
-            </div>
-            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de acompañamiento.</p></div></div>
-            <div id="desempeno-evaluacion" class="subcontent-panel"><div class="card"><h3>Evaluación 360°</h3><p>Autoevaluación, pares y asesor personal.</p></div></div>
-            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal</h3><p>Estrategias y cierre de brechas.</p></div></div>
+            <div class="card"><h3>Gestión del Desempeño</h3><p>Ruta de evaluación y Plan de Desarrollo Personal (PPD).</p></div>
         </div>
 
         <!-- SECCIÓN: FORMACIÓN -->
         <div id="formacion" class="content-section">
+            <div class="card"><h3>Formación General</h3><p>Historial de formaciones y certificados oficiales.</p></div>
+        </div>
+
+        <!-- SECCIÓN FORMADOR (DISPONIBLE SÓLO CUANDO SE SELECCIONA FORMADOR SCOUT) -->
+        <div id="modulo-formador" class="content-section">
             <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('formacion', 'historial', this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial de Formaciones</button>
-                <button class="subnav-btn" onclick="switchSubTab('formacion', 'certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
-                <button class="subnav-btn" onclick="switchSubTab('formacion', 'cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
+                <button class="subnav-btn active" onclick="switchSubTab('modulo-formador', 'ayudante', this)"><i class="fa-solid fa-chalkboard"></i> Ayudante de Formación</button>
+                <button class="subnav-btn" onclick="switchSubTab('modulo-formador', 'formador-scout', this)"><i class="fa-solid fa-user-graduate"></i> Formador Scout</button>
+                <button class="subnav-btn" onclick="switchSubTab('modulo-formador', 'director-formacion', this)"><i class="fa-solid fa-award"></i> Director de Formación Scout</button>
             </div>
-            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de cursos y módulos aprobados.</p></div></div>
-            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados Oficiales</h3><p>Diplomas e insignias de madera expedidas.</p></div></div>
-            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y Safe From Harm.</p></div></div>
+
+            <!-- Panel: Ayudante de Formación -->
+            <div id="modulo-formador-ayudante" class="subcontent-panel active">
+                <div class="card">
+                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Ayudante de Formación</h3>
+                    <p>Requisitos previos y verificación de competencias para el rol de apoyo en la Red Nacional de Formación.</p>
+                    <div class="checklist-container">
+                        <div class="check-item"><input type="checkbox" id="ay1"><label for="ay1">Completar el Módulo de Inducción General a la Formación.</label></div>
+                        <div class="check-item"><input type="checkbox" id="ay2"><label for="ay2">Demostrar vivencia activa de los principios y la Ley Scout.</label></div>
+                        <div class="check-item"><input type="checkbox" id="ay3"><label for="ay3">Participar como asistente de logística en al menos un curso básico regional.</label></div>
+                        <div class="check-item"><input type="checkbox" id="ay4"><label for="ay4">Suscripción del Compromiso y Acuerdo Mutuo para el servicio voluntario.</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel: Formador Scout -->
+            <div id="modulo-formador-formador-scout" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Formador Scout</h3>
+                    <p>Criterios de acreditación, dominios pedagógicos y competencias específicas de facilitación.</p>
+                    <div class="checklist-container">
+                        <div class="check-item"><input type="checkbox" id="fs1"><label for="fs1">Certificación vigente en Insignia de Madera en su respectiva línea estratégica.</label></div>
+                        <div class="check-item"><input type="checkbox" id="fs2"><label for="fs2">Aprobación del Taller de Entrenamiento de Formadores (TTT / Flor de Lis de Formación).</label></div>
+                        <div class="check-item"><input type="checkbox" id="fs3"><label for="fs3">Diseño y presentación de una Ficha de Sesión con enfoque en competencias.</label></div>
+                        <div class="check-item"><input type="checkbox" id="fs4"><label for="fs4">Práctica supervisada de facilitación de un módulo formativo evaluada por pares.</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel: Director de Formación Scout -->
+            <div id="modulo-formador-director-formacion" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Director de Formación Scout</h3>
+                    <p>Estándares avanzados de liderazgo pedagógico, diseño curricular y coordinación de equipos nacionales y regionales.</p>
+                    <div class="checklist-container">
+                        <div class="check-item"><input type="checkbox" id="df1"><label for="df1">Experiencia mínima comprobada como Formador Scout activo en la Red Nacional.</label></div>
+                        <div class="check-item"><input type="checkbox" id="df2"><label for="df2">Dirección exitosa o co-dirección de al menos dos cursos de formación avanzada o Insignia de Madera.</label></div>
+                        <div class="check-item"><input type="checkbox" id="df3"><label for="df3">Dominio de la Política Nacional de Adultos en el Movimiento (PNAM) y sus herramientas de gestión.</label></div>
+                        <div class="check-item"><input type="checkbox" id="df4"><label for="df4">Aval de la Dirección Nacional de Adultos en el Movimiento y el Consejo Scout correspondiente.</label></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- SECCIÓN: DECISIONES -->
         <div id="decisiones" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('decisiones', 'historial', this)"><i class="fa-solid fa-timeline"></i> Historial de Cargos</button>
-                <button class="subnav-btn" onclick="switchSubTab('decisiones', 'entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
-            </div>
-            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la ASC.</p></div></div>
-            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida</h3><p>Proceso de cierre de ciclo y decisiones de continuidad.</p></div></div>
+            <div class="card"><h3>Decisiones para el Futuro</h3><p>Historial de cargos y entrevista de salida institucional.</p></div>
         </div>
 
         <!-- SECCIÓN: BIENESTAR -->
         <div id="bienestar" class="content-section">
-            <div class="grid-cards">
-                <div class="card">
-                    <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
-                    <p>Estrategias de bienestar y apoyo al voluntariado adulto en la Asociación.</p>
-                    <button class="btn-action">Explorar Bienestar</button>
-                </div>
-            </div>
+            <div class="card"><h3>Bienestar y Motivación</h3><p>Clima organizacional y apoyo al voluntariado adulto.</p></div>
         </div>
 
         <!-- SECCIÓN: RECONOCIMIENTO -->
         <div id="reconocimiento" class="content-section">
-            <div class="grid-cards">
-                <div class="card">
-                    <h3><i class="fa-solid fa-trophy"></i> Condecoraciones e Insignias de Actualización</h3>
-                    <p>Consulta tus galardones institucionales y solicitudes de certificación.</p>
-                    <button class="btn-action">Ver Condecoraciones</button>
-                </div>
-            </div>
+            <div class="card"><h3>Reconocimiento</h3><p>Condecoraciones y galardones institucionales.</p></div>
         </div>
     </main>
 
-    <!-- SCRIPT DE NAVEGACIÓN Y CONTROL MODULAR -->
+    <!-- SCRIPT DE NAVEGACIÓN Y CONTROL -->
     <script>
         const titles = {
             'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
-            'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
+            'formacion': { title: 'Formación General', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
+            'modulo-formador': { title: 'Red Nacional de Formación', subtitle: 'Gestión de formadores, ayudantes y directores de formación scout' },
             'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos y entrevista de salida institucional' },
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
         };
 
-        // Datos del BSC adaptados para cada cargo
         const bscData = {
             'clan': {
-                roleName: 'Subjefe de Clan',
-                level: 'Nivel Grupo',
                 cards: [
                     { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '5 Módulos', subtext: 'Rama Rovers y Básica' },
                     { icon: 'fa-award', title: 'Nivel Formación', value: 'Ins. de Madera', subtext: 'Acreditado / Vigente' },
@@ -594,8 +615,6 @@
                 ]
             },
             'nacion': {
-                roleName: 'Director de Adultos',
-                level: 'Nivel Nación',
                 cards: [
                     { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '12 Cursos', subtext: 'Gestión y Liderazgo Avanzado' },
                     { icon: 'fa-award', title: 'Nivel Formación', value: 'Gestor Nacional', subtext: '4 Maderos (GN)' },
@@ -604,13 +623,11 @@
                 ]
             },
             'formador': {
-                roleName: 'Formador Scout',
-                level: 'Red Nal. Formación',
                 cards: [
-                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: 'TTT 1', subtext: 'Entrenamiento de Formadores' },
-                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador Scout', subtext: 'Certificado Nacional' },
-                    { icon: 'fa-clock-rotate-left', title: 'Horas Facilitación', value: '120 hrs', subtext: 'Red Nal. Formación' },
-                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '90%', subtext: 'Plan Personal de Desarrollo' }
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: 'TTT Formador', subtext: 'Entrenamiento de Formadores' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador Scout', subtext: 'Red Nal. Formación' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas Facilitación', value: '120 hrs', subtext: 'Cursos Básicos y Medios' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '95%', subtext: 'Plan Personal de Desarrollo' }
                 ]
             }
         };
@@ -620,7 +637,7 @@
             menu.classList.toggle('show');
         }
 
-        function selectRole(roleKey, roleDisplayName) {
+        function selectRole(roleKey, roleDisplayName, roleLevelText) {
             document.getElementById('role-menu').classList.remove('show');
             document.getElementById('sidebar-role').innerText = roleDisplayName;
 
@@ -643,6 +660,18 @@
                     </div>
                 `;
             });
+
+            // Lógica condicional: mostrar u ocultar el botón "Formador" en el menú lateral
+            const formadorNavBtn = document.getElementById('nav-formador-btn');
+            if (roleKey === 'formador') {
+                formadorNavBtn.style.display = 'block';
+            } else {
+                formadorNavBtn.style.display = 'none';
+                // Si el usuario estaba viendo la sección formador y cambia de cargo, regresa al perfil
+                if (document.getElementById('modulo-formador').classList.contains('active')) {
+                    document.querySelector('.nav-item').click();
+                }
+            }
         }
 
         window.onload = function() {
