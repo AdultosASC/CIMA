@@ -183,7 +183,7 @@
             color: var(--primary-red);
         }
 
-        /* Menú desplegable para cambiar de cargo en el footer */
+        /* Menú desplegable para cambiar de cargo en el footer (Actualizado con Formador Scout y Red Nal. Formación) */
         .role-dropdown-menu {
             display: none;
             position: absolute;
@@ -420,60 +420,11 @@
             color: var(--text-muted);
             margin-top: 2px;
         }
-
-        /* Tabla de Checklist institucional */
-        .checklist-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-        .checklist-table th, .checklist-table td {
-            padding: 12px 16px;
-            text-align: left;
-            font-size: 0.85rem;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-        .checklist-table th {
-            background-color: #333;
-            color: white;
-            font-weight: 600;
-        }
-        .criteria-cell {
-            font-weight: 700;
-            color: white;
-            text-align: center;
-            width: 200px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-        }
-        .bg-formacion { background-color: #A93226; }
-        .bg-experiencia { background-color: #D35400; }
-        .bg-produccion { background-color: #27AE60; }
-        .bg-actualizacion { background-color: #D4AC0D; color: #2C2C2C !important; }
-        .bg-aval { background-color: #8E44AD; }
-
-        .checkbox-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .checkbox-container input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary-red);
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
 
-    <!-- MENÚ LATERAL IZQUIERDO -->
+    <!-- MENÚ LATERAL IZQUIERDO (SIN BOTÓN DE FORMADORES) -->
     <aside>
         <div>
             <div class="brand-container">
@@ -489,20 +440,19 @@
                 <li><a class="nav-item" onclick="switchSection('atraccion', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
                 <li><a class="nav-item" onclick="switchSection('desempeno', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
                 <li><a class="nav-item" onclick="switchSection('formacion', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
-                <li><a class="nav-item" onclick="switchSection('formadores', this)"><i class="fa-solid fa-chalkboard-user"></i> Formadores</a></li>
                 <li><a class="nav-item" onclick="switchSection('decisiones', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
                 <li><a class="nav-item" onclick="switchSection('bienestar', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
                 <li><a class="nav-item" onclick="switchSection('reconocimiento', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
             </ul>
         </div>
 
-        <!-- FOOTER LATERAL CON CAMBIO DE PERFIL / CARGO -->
+        <!-- FOOTER LATERAL CON CAMBIO DE PERFIL / CARGO (INCLUYE FORMADOR SCOUT - RED NAL. FORMACIÓN) -->
         <div class="sidebar-footer">
             <!-- Menú desplegable flotante de cargos -->
             <div class="role-dropdown-menu" id="role-menu">
                 <div class="role-option active-role" onclick="selectRole('clan', 'Subjefe de Clan')">Subjefe de Clan <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Grupo</span></div>
                 <div class="role-option" onclick="selectRole('nacion', 'Director de Adultos')">Director de Adultos <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Nación</span></div>
-                <div class="role-option" onclick="selectRole('formador', 'Formador Scout')">Formador Scout <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Región</span></div>
+                <div class="role-option" onclick="selectRole('formador', 'Formador Scout')">Formador Scout <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Red Nal. Formación</span></div>
             </div>
 
             <div class="user-mini">
@@ -586,262 +536,6 @@
             <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y Safe From Harm.</p></div></div>
         </div>
 
-        <!-- SECCIÓN: FORMADORES -->
-        <div id="formadores" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('formadores', 'ayudante', this)"><i class="fa-solid fa-user-gear"></i> Ayudante de Formación Scout</button>
-                <button class="subnav-btn" onclick="switchSubTab('formadores', 'formador', this)"><i class="fa-solid fa-chalkboard"></i> Formador Scout</button>
-                <button class="subnav-btn" onclick="switchSubTab('formadores', 'director', this)"><i class="fa-solid fa-award"></i> Director de Formación Scout</button>
-            </div>
-
-            <!-- Ayudante de Formación Scout -->
-            <div id="formadores-ayudante" class="subcontent-panel active">
-                <div class="card">
-                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Ayudante de Formación Scout</h3>
-                    <p>Verificación de requisitos e indicadores exigidos para la habilitación como Ayudante de Formación Scout.</p>
-                    
-                    <table class="checklist-table">
-                        <thead>
-                            <tr>
-                                <th>Criterio</th>
-                                <th>Indicador / Requisito</th>
-                                <th style="text-align: center; width: 100px;">Cumple</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td rowspan="3" class="criteria-cell bg-formacion">Formación</td>
-                                <td>Tener reconocimiento en la Formación básica.</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td>Curso de Facilitación / Habilidades para Adultos.</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td>Curso de Herramientas Digitales para la Formación.</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="3" class="criteria-cell bg-experiencia">Experiencia en la Formación</td>
-                                <td>Participar como observador en al menos 3 eventos formativos.</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td>Cumplir un mínimo de 30 horas de práctica acompañada.</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Contar con un mentor elegido o asignado.</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2" class="criteria-cell bg-produccion">Producción de conocimiento</td>
-                                <td>Elaborar al menos un recurso didáctico o actividad de apoyo para un proceso formativo de la Región.</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Participar en ejercicios de sistematización de experiencias.</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2" class="criteria-cell bg-actualizacion">Actualización permanente</td>
-                                <td>Afiliación vigente.</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td>Participar en las jornadas de actualización definidas por la Región / Nación.</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2" class="criteria-cell bg-aval">Aval institucional</td>
-                                <td>Aval del Comisionado Regional de Adultos en el Movimiento.</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Certificación por la Región.</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-                        <button class="btn-action" onclick="alert('¡Progreso de Ayudante de Formación guardado exitosamente!')"><i class="fa-solid fa-floppy-disk"></i> Guardar Avance</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Formador Scout -->
-            <div id="formadores-formador" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Formador Scout</h3>
-                    <p>Verificación de requisitos e indicadores exigidos para la habilitación y certificación como Formador Scout[cite: 3].</p>
-                    
-                    <table class="checklist-table">
-                        <thead>
-                            <tr>
-                                <th>Criterio</th>
-                                <th>Indicador / Requisito</th>
-                                <th style="text-align: center; width: 100px;">Cumple</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="criteria-cell bg-formacion">Formación</td>
-                                <td>Curso TTT 1 (Regional / Nacional)[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="3" class="criteria-cell bg-experiencia">Experiencia en la Formación</td>
-                                <td>Haber sido AFS por al menos un año[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td>Participar como facilitador en al menos 5 cursos de la región[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Acumular mínimo 80 horas de facilitación[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="3" class="criteria-cell bg-produccion">Producción de conocimiento</td>
-                                <td>Diseñar al menos 5 sesiones de formación[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Elaborar al menos 3 guías metodológicas, recursos didácticos o materiales de apoyo[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Sistematizar al menos tres experiencias de formación[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="3" class="criteria-cell bg-actualizacion">Actualización permanente</td>
-                                <td>Mantener la condición de FS Actualizado[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td>Participar anualmente en jornadas de actualización para formadores[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Mantener la condición AAA[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2" class="criteria-cell bg-aval">Aval institucional</td>
-                                <td>Aval del Comisionado Regional de Adultos en el Movimiento[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Certificación por la Región o la Nación, según corresponda[cite: 3].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-                        <button class="btn-action" onclick="alert('¡Progreso de Formador Scout guardado exitosamente!')"><i class="fa-solid fa-floppy-disk"></i> Guardar Avance</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Director de Formación Scout -->
-            <div id="formadores-director" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Director de Formación Scout</h3>
-                    <p>Verificación de requisitos e indicadores exigidos para la habilitación y certificación como Director de Formación Scout[cite: 4].</p>
-                    
-                    <table class="checklist-table">
-                        <thead>
-                            <tr>
-                                <th>Criterio</th>
-                                <th>Indicador / Requisito</th>
-                                <th style="text-align: center; width: 100px;">Cumple</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td rowspan="2" class="criteria-cell bg-formacion">Formación</td>
-                                <td>Curso TTT 2 (Regional / Nacional)[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Oferta formativa avanzada definida por la Dirección Nacional de Adultos[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="5" class="criteria-cell bg-experiencia">Experiencia en la Formación</td>
-                                <td>Mínimo 3 años como Formador Scout certificado[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td>Haber dirigido al menos 10 ofertas formativas regionales o nacionales[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Acumular mínimo 400 horas de facilitación[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Haber acompañado el desarrollo de al menos cinco nuevos formadores (AFS ó FS)[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Participar activamente en el Equipo Regional de Formación y la Red Nacional de Formación[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="3" class="criteria-cell bg-produccion">Producción de conocimiento</td>
-                                <td>Liderar la actualización o creación de ofertas formativas institucionales[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Elaborar al menos 3 documentos técnicos, metodológicos o pedagógicos[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Liderar procesos de gestión del conocimiento o comunidades de práctica en la Región[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="4" class="criteria-cell bg-actualizacion">Actualización permanente</td>
-                                <td>Mantener la condición de DFS Actualizado[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td>Participar periódicamente en procesos nacionales de actualización[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Contribuir como facilitador o diseñador en espacios de actualización para otros formadores[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Mantener evidencia de desarrollo profesional continuo[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox" checked></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2" class="criteria-cell bg-aval">Aval institucional</td>
-                                <td>Concepto favorable de la Comisión Nacional de Formación[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>Certificación otorgada por la Dirección Nacional de Adultos en el Movimiento[cite: 4].</td>
-                                <td class="checkbox-container"><input type="checkbox"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-                        <button class="btn-action" onclick="alert('¡Progreso de Director de Formación Scout guardado exitosamente!')"><i class="fa-solid fa-floppy-disk"></i> Guardar Avance</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- SECCIÓN: DECISIONES -->
         <div id="decisiones" class="content-section">
             <div class="subnav-tabs">
@@ -882,13 +576,12 @@
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
-            'formadores': { title: 'Formadores', subtitle: 'Ayudante de Formación Scout, Formador Scout y Director de Formación Scout' },
             'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos y entrevista de salida institucional' },
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
         };
 
-        // Datos del BSC adaptados para cada cargo en paralelo
+        // Datos del BSC adaptados para cada cargo
         const bscData = {
             'clan': {
                 roleName: 'Subjefe de Clan',
@@ -912,11 +605,11 @@
             },
             'formador': {
                 roleName: 'Formador Scout',
-                level: 'Nivel Región',
+                level: 'Red Nal. Formación',
                 cards: [
                     { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: 'TTT 1', subtext: 'Entrenamiento de Formadores' },
-                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador Scout', subtext: 'Certificado Regional' },
-                    { icon: 'fa-clock-rotate-left', title: 'Horas Facilitación', value: '120 hrs', subtext: 'Cursos de Formación' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador Scout', subtext: 'Certificado Nacional' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas Facilitación', value: '120 hrs', subtext: 'Red Nal. Formación' },
                     { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '90%', subtext: 'Plan Personal de Desarrollo' }
                 ]
             }
@@ -928,18 +621,13 @@
         }
 
         function selectRole(roleKey, roleDisplayName) {
-            // Ocultar menú desplegable
             document.getElementById('role-menu').classList.remove('show');
-
-            // Actualizar texto en la barra lateral inferior
             document.getElementById('sidebar-role').innerText = roleDisplayName;
 
-            // Actualizar opción activa visualmente en el menú
             const options = document.querySelectorAll('.role-option');
             options.forEach(opt => opt.classList.remove('active-role'));
             event.currentTarget.classList.add('active-role');
 
-            // Actualizar título y tarjetas del BSC en la sección Perfil
             document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
             const data = bscData[roleKey];
             const container = document.getElementById('bsc-content');
@@ -957,7 +645,6 @@
             });
         }
 
-        // Inicializar BSC por defecto al cargar la página (Subjefe de Clan)
         window.onload = function() {
             selectRoleInit('clan', 'Subjefe de Clan');
         };
@@ -1001,7 +688,6 @@
             document.getElementById(sectionPrefix + '-' + tabId).classList.add('active');
         }
 
-        // Cerrar menú flotante si se hace clic fuera
         window.onclick = function(event) {
             if (!event.target.matches('.role-switch-btn') && !event.target.closest('.role-dropdown-menu')) {
                 const menu = document.getElementById('role-menu');
