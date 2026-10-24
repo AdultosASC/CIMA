@@ -12,7 +12,7 @@
             --primary-red: #8B0000; /* Rojo base institucional */
             --primary-red-dark: #600000;
             --primary-red-light: #FDF2F2;
-            --bg-cream: #FDFBF7; /* Fondo similar a la referencia */
+            --bg-cream: #FDFBF7; /* Fondo institucional */
             --card-bg: #FFFFFF;
             --text-main: #2C2C2C;
             --text-muted: #666666;
@@ -209,7 +209,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- SUBMENÚ INTERNO PARA ATRACCIÓN --- */
+        /* --- SUBMENÚ INTERNO (GENERAL PARA MÓDULOS) --- */
         .subnav-tabs {
             display: flex;
             gap: 10px;
@@ -263,6 +263,7 @@
             border-radius: 12px;
             padding: 24px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
         }
 
         .card h3 {
@@ -306,7 +307,7 @@
             color: white;
         }
 
-        /* Estilos específicos de Perfil ya creados previamente */
+        /* Estilos específicos de Perfil */
         .profile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
         .profile-field { display: flex; flex-direction: column; gap: 4px; }
         .profile-field.full-width { grid-column: span 2; }
@@ -319,6 +320,89 @@
         .btn-save { background-color: var(--primary-red); color: white; display: none; }
         .editing .btn-edit { display: none; }
         .editing .btn-save { display: inline-block; }
+
+        /* Estilos para el PPD y Ruta */
+        .timeline-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 20px 0 30px 0;
+            padding: 0 10px;
+        }
+        .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        .timeline-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: white;
+            border: 2px solid var(--border-color);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+        .timeline-step.completed .timeline-icon {
+            background-color: #2e7d32;
+            border-color: #2e7d32;
+            color: white;
+        }
+        .timeline-step.active .timeline-icon {
+            background-color: var(--primary-red);
+            border-color: var(--primary-red);
+            color: white;
+            box-shadow: 0 0 0 4px var(--primary-red-light);
+        }
+        .timeline-step h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .timeline-step p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .table-custom th, .table-custom td {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .table-custom th {
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        .badge.pending { background-color: #fff8e1; color: #f57f17; }
+        .badge.progress { background-color: #e3f2fd; color: #1565c0; }
+        .badge.done { background-color: #e8f5e9; color: #2e7d32; }
     </style>
 </head>
 <body>
@@ -428,114 +512,152 @@
             </div>
         </div>
 
-        <!-- SECCIÓN: ATRACCIÓN (ACTUALIZADA CON LAS 7 OPCIONES SOLICITADAS) -->
+        <!-- SECCIÓN: ATRACCIÓN -->
         <div id="atraccion" class="content-section">
-            <!-- Submenú interno de Atracción -->
             <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchAtraccionTab('vacantes', this)"><i class="fa-solid fa-briefcase"></i> Vacante y Requisiciones</button>
-                <button class="subnav-btn" onclick="switchAtraccionTab('ingreso', this)"><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso</button>
-                <button class="subnav-btn" onclick="switchAtraccionTab('competencias', this)"><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</button>
-                <button class="subnav-btn" onclick="switchAtraccionTab('manual', this)"><i class="fa-solid fa-address-book"></i> Manual de Cargos</button>
-                <button class="subnav-btn" onclick="switchAtraccionTab('acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
-                <button class="subnav-btn" onclick="switchAtraccionTab('nombramientos', this)"><i class="fa-solid fa-certificate"></i> Nombramientos</button>
-                <button class="subnav-btn" onclick="switchAtraccionTab('induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
+                <button class="subnav-btn active" onclick="switchSubTab('atraccion', 'vacantes', this)"><i class="fa-solid fa-briefcase"></i> Vacante y Requisiciones</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'ingreso', this)"><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'competencias', this)"><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'manual', this)"><i class="fa-solid fa-address-book"></i> Manual de Cargos</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'nombramientos', this)"><i class="fa-solid fa-certificate"></i> Nombramientos</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
 
-            <!-- 1. Vacante y Requisiciones -->
-            <div id="sub-vacantes" class="subcontent-panel active">
-                <div class="grid-cards">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-plus-circle"></i> Nueva Requisición de Personal</h3>
-                        <p>Solicitud formal generada por el jefe de área para cubrir una vacante o crear un nuevo cargo en Grupo, Región o Nación.</p>
-                        <button class="btn-action">Crear Requisición</button>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fa-solid fa-bullhorn"></i> Convocatorias Abiertas</h3>
-                        <p>Visualiza y postúlate a las ofertas vigentes bajo los principios de selección objetiva y transparencia de la ASC.</p>
-                        <button class="btn-action">Ver Convocatorias</button>
-                    </div>
+            <div id="atraccion-vacantes" class="subcontent-panel active">
+                <div class="card">
+                    <h3><i class="fa-solid fa-bullhorn"></i> Vacantes y Convocatorias Abiertas</h3>
+                    <p>Explora las convocatorias vigentes bajo los principios de selección objetiva de la Asociación.</p>
+                    <button class="btn-action">Ver Convocatorias</button>
                 </div>
             </div>
-
-            <!-- 2. Proceso de Ingreso -->
-            <div id="sub-ingreso" class="subcontent-panel">
-                <div class="grid-cards">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-user-check"></i> Registro e Inscripción</h3>
-                        <p>Seguimiento al registro inicial del voluntario, validación de documentos legales y aceptación de la acción voluntaria.</p>
-                        <button class="btn-action">Consultar Estado de Ingreso</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Diccionario de Competencias -->
-            <div id="sub-competencias" class="subcontent-panel">
-                <div class="grid-cards">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-star"></i> Competencias Esenciales</h3>
-                        <p>Adaptabilidad al cambio, Aprendizaje y desarrollo personal, Compromiso, Conciencia organizacional, Planeamiento estratégico, Relaciones interpersonales y Trabajo en equipo[cite: 5, 7].</p>
-                        <button class="btn-action">Ver Detalle y Grados</button>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fa-solid fa-gears"></i> Competencias Específicas</h3>
-                        <p>Competencias requeridas puntualmente para el desarrollo de funciones técnicas, operativas, de programa o administrativas de cada cargo[cite: 2].</p>
-                        <button class="btn-action">Explorar Específicas</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Manual de Cargos -->
-            <div id="sub-manual" class="subcontent-panel">
-                <div class="grid-cards">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-folder-open"></i> Perfiles y Funciones</h3>
-                        <p>Instrumento oficial de consulta para conocer la descripción, responsable, funciones, tareas y requisitos de cada cargo en los niveles Grupo, Región y Nación[cite: 2].</p>
-                        <button class="btn-action">Consultar Manual de Cargos</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. Acuerdo Mutuo -->
-            <div id="sub-acuerdo" class="subcontent-panel">
-                <div class="grid-cards">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-handshake-angle"></i> Compromiso y Servicio Voluntario</h3>
-                        <p>Establece los compromisos recíprocos entre el adulto voluntario y la organización, garantizando apoyo moral, técnico y personal[cite: 2].</p>
-                        <button class="btn-action">Ver Formato de Acuerdo Mutuo</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. Nombramientos -->
-            <div id="sub-nombramientos" class="subcontent-panel">
-                <div class="grid-cards">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-award"></i> Designación Oficial</h3>
-                        <p>Documento mediante el cual el estamento competente designa formalmente al adulto para desempeñar un cargo o función en la Asociación[cite: 2].</p>
-                        <button class="btn-action">Ver Resolución / Nombramiento</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7. Inducción -->
-            <div id="sub-induccion" class="subcontent-panel">
-                <div class="grid-cards">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-laptop-code"></i> Módulos de Inducción General</h3>
-                        <p>Recursos virtuales y cartillas introductorias sobre la historia, valores, políticas institucionales y el módulo certificado "Safe From Harm" (A salvo del peligro)[cite: 2, 12].</p>
-                        <button class="btn-action">Iniciar Inducción</button>
-                    </div>
-                </div>
-            </div>
+            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Seguimiento a registro y validación legal.</p></div></div>
+            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas de la ASC.</p></div></div>
+            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles, funciones y requisitos por nivel.</p></div></div>
+            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromisos recíprocos entre el voluntario y la organización.</p></div></div>
+            <div id="atraccion-nombramientos" class="subcontent-panel"><div class="card"><h3>Nombramientos</h3><p>Designación oficial para el ejercicio del cargo.</p></div></div>
+            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Módulos iniciales y Safe From Harm (SfH1).</p></div></div>
         </div>
 
-        <!-- SECCIÓN: DESEMPEÑO -->
+        <!-- SECCIÓN: DESEMPEÑO (ACTUALIZADA CON RUTA DE EVALUACIÓN, EVALUACIÓN Y PPD) -->
         <div id="desempeno" class="content-section">
-            <div class="grid-cards">
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchSubTab('desempeno', 'ruta', this)"><i class="fa-solid fa-route"></i> Ruta de Evaluación</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
+            </div>
+
+            <!-- 1. Ruta de Evaluación -->
+            <div id="desempeno-ruta" class="subcontent-panel active">
                 <div class="card">
-                    <h3><i class="fa-solid fa-chart-pie"></i> Evaluación por Competencias</h3>
-                    <p>Revisa tus competencias esenciales y específicas según el Diccionario de Competencias de la Asociación.</p>
-                    <button class="btn-action">Ver Evaluaciones</button>
+                    <h3><i class="fa-solid fa-timeline"></i> Flujo del Proceso de Acompañamiento y Evaluación</h3>
+                    <p>Sigue los momentos clave del ciclo de vida del adulto voluntario en su cargo o función actual[cite: 3, 4].</p>
+                    
+                    <div class="timeline-container">
+                        <div class="timeline-step completed">
+                            <div class="timeline-icon"><i class="fa-solid fa-check"></i></div>
+                            <h4>Momento 1</h4>
+                            <p>Valoración Inicial (Diagnóstico)</p>
+                        </div>
+                        <div class="timeline-step active">
+                            <div class="timeline-icon"><i class="fa-solid fa-spinner"></i></div>
+                            <h4>Momento 2</h4>
+                            <p>Seguimiento Mitad de Periodo (PPD)</p>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+                            <h4>Momento 3</h4>
+                            <p>Evaluación 360° Final y Decisiones</p>
+                        </div>
+                    </div>
+                    <button class="btn-action">Descargar Guía de Acompañamiento (PDF)</button>
+                </div>
+            </div>
+
+            <!-- 2. Evaluación -->
+            <div id="desempeno-evaluacion" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-star-half-stroke"></i> Evaluación por Competencias 360°</h3>
+                    <p>Realiza tu autoevaluación, consulta los reportes de tu asesor personal, jefe inmediato y encuestas de percepción de beneficiarios[cite: 3, 9].</p>
+                    
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Evaluación</th>
+                                <th>Evaluador / Instancia</th>
+                                <th>Estado</th>
+                                <th>Puntaje / Calificación</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Autoevaluación</td>
+                                <td>Mauricio Quiroga (Dirigente)</td>
+                                <td><span class="badge done">Completado</span></td>
+                                <td>85%</td>
+                                <td><button class="btn-action" style="padding: 4px 8px; font-size: 0.75rem;">Ver Informe</button></td>
+                            </tr>
+                            <tr>
+                                <td>Evaluación por Competencias</td>
+                                <td>Asesor Personal / Jefe Inmediato</td>
+                                <td><span class="badge progress">En Proceso</span></td>
+                                <td>Pendiente Cierre</td>
+                                <td><button class="btn-action" style="padding: 4px 8px; font-size: 0.75rem;">Evaluar</button></td>
+                            </tr>
+                            <tr>
+                                <td>Encuesta de Percepción</td>
+                                <td>Jóvenes, Beneficiarios y Padres</td>
+                                <td><span class="badge pending">Programada</span></td>
+                                <td>-</td>
+                                <td><button class="btn-action" style="padding: 4px 8px; font-size: 0.75rem;">Aplicar Encuesta</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. Plan de Desarrollo Personal (PPD) -->
+            <div id="desempeno-ppd" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-list-check"></i> Plan Personal de Desarrollo (PPD)</h3>
+                    <p>Estrategias y actividades acordadas junto a tu Asesor Personal para el cierre de brechas y fortalecimiento de competencias[cite: 3].</p>
+                    
+                    <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; font-size: 0.9rem;">Cumplimiento Actual del PPD: <span style="color: #2e7d32;">75%</span></span>
+                        <button class="btn-action" onclick="alert('Abriendo formulario para nueva estrategia PPD...')"><i class="fa-solid fa-plus"></i> Nueva Estrategia PPD</button>
+                    </div>
+
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>Estrategia / Acción Formativa</th>
+                                <th>Competencia Impactada</th>
+                                <th>Evidencias / Soportes</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Completar Módulo "Safe From Harm - SfH1"</td>
+                                <td>Conciencia Organizacional y Normativa</td>
+                                <td>Certificado Digital Adjunto</td>
+                                <td><span class="badge done">Terminado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Aplicación de Malla de Objetivos en Clan</td>
+                                <td>Administración del Proyecto Educativo</td>
+                                <td>Bitácoras de Asesoría #1 y #2</td>
+                                <td><span class="badge progress">En Desarrollo</span></td>
+                            </tr>
+                            <tr>
+                                <td>Participación en Curso de Perfeccionamiento</td>
+                                <td>Aprendizaje y Desarrollo Personal</td>
+                                <td>Pendiente cargue de soporte</td>
+                                <td><span class="badge pending">Planeado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -544,9 +666,9 @@
         <div id="formacion" class="content-section">
             <div class="grid-cards">
                 <div class="card">
-                    <h3><i class="fa-solid fa-book-open"></i> Plan Personal de Desarrollo (PPD)</h3>
-                    <p>Construye y actualiza tus estrategias de aprendizaje, cursos de formación básica y perfeccionamiento continuo.</p>
-                    <button class="btn-action">Gestionar PPD</button>
+                    <h3><i class="fa-solid fa-book-open"></i> Formación Básica y Perfeccionamiento</h3>
+                    <p>Estado de tus cursos de Insignia de Madera (IM), Gestor Regional (3M) y Gestor Nacional (4M)[cite: 3, 4].</p>
+                    <button class="btn-action">Ver Ruta de Formación</button>
                 </div>
             </div>
         </div>
@@ -556,8 +678,8 @@
             <div class="grid-cards">
                 <div class="card">
                     <h3><i class="fa-solid fa-arrows-split-up-and-left"></i> Decisiones para el Futuro</h3>
-                    <p>Opciones de reubicación, continuidad en el cargo, promoción a nuevas instancias o proyección del liderazgo adulto.</p>
-                    <button class="btn-action">Ver Opciones</button>
+                    <p>Opciones de retiro, renovación en el cargo o reubicación al término de tu ciclo de vida[cite: 3, 4, 8].</p>
+                    <button class="btn-action">Gestionar Decisión</button>
                 </div>
             </div>
         </div>
@@ -566,8 +688,8 @@
         <div id="bienestar" class="content-section">
             <div class="grid-cards">
                 <div class="card">
-                    <h3><i class="fa-solid fa-heart-pulse"></i> Clima y Motivación</h3>
-                    <p>Estrategias de motivación, reconocimiento de la labor voluntaria y herramientas de bienestar para los equipos de dirigentes.</p>
+                    <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
+                    <p>Estrategias de bienestar y apoyo al voluntariado adulto en la Asociación[cite: 3].</p>
                     <button class="btn-action">Explorar Bienestar</button>
                 </div>
             </div>
@@ -577,20 +699,20 @@
         <div id="reconocimiento" class="content-section">
             <div class="grid-cards">
                 <div class="card">
-                    <h3><i class="fa-solid fa-trophy"></i> Condecoraciones y Estímulos</h3>
-                    <p>Consulta las órdenes, condecoraciones nacionales y regionales, y reconocimientos públicos a las acciones destacadas.</p>
+                    <h3><i class="fa-solid fa-trophy"></i> Condecoraciones e Insignias de Actualización</h3>
+                    <p>Consulta tus galardones institucionales y solicitudes de certificación avaladas por tu asesor personal[cite: 3, 4].</p>
                     <button class="btn-action">Ver Condecoraciones</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- SCRIPT DE NAVEGACIÓN Y CONTROL -->
+    <!-- SCRIPT DE NAVEGACIÓN Y CONTROL MODULAR -->
     <script>
         const titles = {
             'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y de registro institucional (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
-            'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Evaluación por competencias y seguimiento al rol' },
+            'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación y Desarrollo', subtitle: 'Plan Personal de Desarrollo (PPD) y certificación' },
             'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Reubicación, continuidad y proyección del adulto' },
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
@@ -608,12 +730,13 @@
             document.getElementById('section-subtitle').innerText = titles[sectionId].subtitle;
         }
 
-        function switchAtraccionTab(tabId, element) {
-            document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
+        function switchSubTab(sectionPrefix, tabId, element) {
+            const parent = document.getElementById(sectionPrefix);
+            parent.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
 
-            document.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
-            document.getElementById('sub-' + tabId).classList.add('active');
+            parent.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById(sectionPrefix + '-' + tabId).classList.add('active');
         }
 
         function toggleEditMode(enable) {
