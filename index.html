@@ -130,7 +130,6 @@
             color: white;
         }
 
-        /* Botón de Formador condicional (inicialmente oculto) */
         #nav-formador-btn {
             display: none;
         }
@@ -342,7 +341,6 @@
             margin-bottom: 16px;
         }
 
-        /* Checklists y Estilos de Listas */
         .checklist-container {
             display: flex;
             flex-direction: column;
@@ -508,21 +506,43 @@
         <!-- SECCIÓN: ATRACCIÓN -->
         <div id="atraccion" class="content-section">
             <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('atraccion', 'vacantes', this)"><i class="fa-solid fa-briefcase"></i> Vacante y Requisiciones</button>
+                <button class="subnav-btn active" onclick="switchSubTab('atraccion', 'vacantes', this)"><i class="fa-solid fa-briefcase"></i> Vacantes y Requisiciones</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'ingreso', this)"><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'competencias', this)"><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'manual', this)"><i class="fa-solid fa-address-book"></i> Manual de Cargos</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
+                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
-            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias y selección objetiva.</p></div></div>
-            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Registro y validación institucional.</p></div></div>
+            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°[cite: 8, 30].</p></div></div>
+            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales[cite: 8, 22].</p></div></div>
+            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto[cite: 9, 25].</p></div></div>
+            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación[cite: 8, 21].</p></div></div>
+            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral[cite: 8, 24].</p></div></div>
+            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal[cite: 8, 24].</p></div></div>
         </div>
 
         <!-- SECCIÓN: DESEMPEÑO -->
         <div id="desempeno" class="content-section">
-            <div class="card"><h3>Gestión del Desempeño</h3><p>Ruta de evaluación y Plan de Desarrollo Personal (PPD).</p></div>
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchSubTab('desempeno', 'ruta', this)"><i class="fa-solid fa-route"></i> Ruta de Evaluación</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación 360°</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
+            </div>
+            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño[cite: 8, 12, 19].</p></div></div>
+            <div id="desempeno-evaluacion" class="subcontent-panel"><div class="card"><h3>Evaluación 360°</h3><p>Encuestas de percepción de beneficiarios (lobatos, scouts, caminantes, rovers) y retroalimentación de pares[cite: 12, 20].</p></div></div>
+            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo[cite: 8, 12].</p></div></div>
         </div>
 
         <!-- SECCIÓN: FORMACIÓN -->
         <div id="formacion" class="content-section">
-            <div class="card"><h3>Formación General</h3><p>Historial de formaciones y certificados oficiales.</p></div>
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchSubTab('formacion', 'historial', this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial de Formaciones</button>
+                <button class="subnav-btn" onclick="switchSubTab('formacion', 'certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
+                <button class="subnav-btn" onclick="switchSubTab('formacion', 'cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
+            </div>
+            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados[cite: 8, 19].</p></div></div>
+            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM)[cite: 8, 12].</p></div></div>
+            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro)[cite: 8, 24].</p></div></div>
         </div>
 
         <!-- SECCIÓN FORMADOR (DISPONIBLE SÓLO CUANDO SE SELECCIONA FORMADOR SCOUT) -->
@@ -578,17 +598,28 @@
 
         <!-- SECCIÓN: DECISIONES -->
         <div id="decisiones" class="content-section">
-            <div class="card"><h3>Decisiones para el Futuro</h3><p>Historial de cargos y entrevista de salida institucional.</p></div>
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchSubTab('decisiones', 'historial', this)"><i class="fa-solid fa-timeline"></i> Historial de Cargos</button>
+                <button class="subnav-btn" onclick="switchSubTab('decisiones', 'entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
+            </div>
+            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia[cite: 8].</p></div></div>
+            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional[cite: 8, 12, 16].</p></div></div>
         </div>
 
         <!-- SECCIÓN: BIENESTAR -->
         <div id="bienestar" class="content-section">
-            <div class="card"><h3>Bienestar y Motivación</h3><p>Clima organizacional y apoyo al voluntariado adulto.</p></div>
+            <div class="card">
+                <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
+                <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo[cite: 8, 18, 22].</p>
+            </div>
         </div>
 
         <!-- SECCIÓN: RECONOCIMIENTO -->
         <div id="reconocimiento" class="content-section">
-            <div class="card"><h3>Reconocimiento</h3><p>Condecoraciones y galardones institucionales.</p></div>
+            <div class="card">
+                <h3><i class="fa-solid fa-award"></i> Condecoraciones e Insignias de Actualización</h3>
+                <p>Gestión de estímulos, galardones, distinciones institucionales y condecoraciones del adulto scout[cite: 8, 21].</p>
+            </div>
         </div>
     </main>
 
@@ -667,7 +698,6 @@
                 formadorNavBtn.style.display = 'block';
             } else {
                 formadorNavBtn.style.display = 'none';
-                // Si el usuario estaba viendo la sección formador y cambia de cargo, regresa al perfil
                 if (document.getElementById('modulo-formador').classList.contains('active')) {
                     document.querySelector('.nav-item').click();
                 }
