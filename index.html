@@ -178,7 +178,7 @@
         }
 
         .header-welcome {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .header-welcome h2 {
@@ -194,7 +194,7 @@
             margin-top: 4px;
         }
 
-        /* Área de contenido dinámico de las secciones */
+        /* Área de contenido dinámico principal */
         .content-section {
             display: none;
             animation: fadeIn 0.3s ease-in-out;
@@ -209,7 +209,48 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Tarjetas de ejemplo visual */
+        /* --- SUBMENÚ INTERNO PARA ATRACCIÓN --- */
+        .subnav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .subnav-btn {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .subnav-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .subnav-btn.active {
+            background-color: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+
+        .subcontent-panel {
+            display: none;
+        }
+
+        .subcontent-panel.active {
+            display: block;
+        }
+
+        /* Tarjetas de contenido general */
         .grid-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -226,7 +267,7 @@
 
         .card h3 {
             font-size: 1.1rem;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -265,86 +306,19 @@
             color: white;
         }
 
-        /* --- ESTILOS ESPECÍFICOS PARA EL PERFIL --- */
-        .profile-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .profile-field {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .profile-field.full-width {
-            grid-column: span 2;
-        }
-
-        .profile-field label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .profile-field .value-view {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-main);
-            padding: 8px 0;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .profile-field input, .profile-field select {
-            font-size: 0.95rem;
-            padding: 8px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background-color: #FAFAFA;
-            color: var(--text-main);
-            display: none;
-        }
-
-        .profile-field input:focus, .profile-field select:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            background-color: white;
-        }
-
-        .editing .value-view {
-            display: none;
-        }
-
-        .editing input, .editing select {
-            display: block;
-        }
-
-        .profile-actions {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-save {
-            background-color: var(--primary-red);
-            color: white;
-            display: none;
-        }
-
-        .btn-save:hover {
-            background-color: var(--primary-red-dark);
-        }
-
-        .editing .btn-edit {
-            display: none;
-        }
-
-        .editing .btn-save {
-            display: inline-block;
-        }
+        /* Estilos específicos de Perfil ya creados previamente */
+        .profile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .profile-field { display: flex; flex-direction: column; gap: 4px; }
+        .profile-field.full-width { grid-column: span 2; }
+        .profile-field label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+        .profile-field .value-view { font-size: 0.95rem; font-weight: 500; color: var(--text-main); padding: 8px 0; border-bottom: 1px dashed var(--border-color); }
+        .profile-field input, .profile-field select { font-size: 0.95rem; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; background-color: #FAFAFA; display: none; }
+        .editing .value-view { display: none; }
+        .editing input, .editing select { display: block; }
+        .profile-actions { margin-top: 20px; display: flex; gap: 10px; }
+        .btn-save { background-color: var(--primary-red); color: white; display: none; }
+        .editing .btn-edit { display: none; }
+        .editing .btn-save { display: inline-block; }
     </style>
 </head>
 <body>
@@ -388,13 +362,13 @@
         <!-- Encabezado superior persistente -->
         <div class="header-welcome">
             <h2 id="section-title">Perfil del Dirigente</h2>
-            <p id="section-subtitle">Sub-Jefe de Clan · Clan Porthos 24 · Grupo #279</p>
+            <p id="section-subtitle">Información personal y de registro institucional (C.I.M.A.)</p>
         </div>
 
-        <!-- SECCIÓN: PERFIL (ACTUALIZADA Y EDITABLE) -->
+        <!-- SECCIÓN: PERFIL -->
         <div id="perfil" class="content-section active">
             <div class="card" id="profile-card">
-                <h3><i class="fa-solid fa-id-card"></i> Datos Personales y de Afiliación (SISCOUT)</h3>
+                <h3><i class="fa-solid fa-id-card"></i> Datos Personales y de Afiliación</h3>
                 <p>Información oficial registrada del adulto voluntario conforme a la política nacional de la Asociación Scouts de Colombia.</p>
                 
                 <form id="profile-form" onsubmit="saveProfile(event)">
@@ -404,7 +378,6 @@
                             <span class="value-view" id="v-nombre">MAURICIO QUIROGA POSADA</span>
                             <input type="text" id="i-nombre" value="MAURICIO QUIROGA POSADA" required>
                         </div>
-
                         <div class="profile-field">
                             <label>Tipo de Identificación</label>
                             <span class="value-view" id="v-tipo-id">Cédula de Ciudadanía (C.C.)</span>
@@ -414,83 +387,144 @@
                                 <option value="Pasaporte">Pasaporte</option>
                             </select>
                         </div>
-
                         <div class="profile-field">
                             <label>No. de Identificación</label>
                             <span class="value-view" id="v-num-id">79.123.456</span>
                             <input type="text" id="i-num-id" value="79.123.456" required>
                         </div>
-
                         <div class="profile-field">
                             <label>Fecha de Nacimiento</label>
-                            <span class="value-view" id="v-fnac">15 / 08 / 1985</span>
+                            <span class="value-view" id="v-fnac">1985-08-15</span>
                             <input type="date" id="i-fnac" value="1985-08-15" required>
                         </div>
-
                         <div class="profile-field">
                             <label>Correo Electrónico</label>
                             <span class="value-view" id="v-email">mauricio.quiroga@scout.org.co</span>
                             <input type="email" id="i-email" value="mauricio.quiroga@scout.org.co" required>
                         </div>
-
                         <div class="profile-field">
                             <label>Móvil / Celular</label>
                             <span class="value-view" id="v-movil">310 456 7890</span>
                             <input type="text" id="i-movil" value="310 456 7890" required>
                         </div>
-
-                        <div class="profile-field">
-                            <label>Dirección de Residencia</label>
-                            <span class="value-view" id="v-dir">Calle 50 # 40-20, Bogotá D.C.</span>
-                            <input type="text" id="i-dir" value="Calle 50 # 40-20, Bogotá D.C." required>
-                        </div>
-
-                        <div class="profile-field">
-                            <label>Entidad Promotora de Salud (EPS)</label>
-                            <span class="value-view" id="v-eps">Sura EPS</span>
-                            <input type="text" id="i-eps" value="Sura EPS" required>
-                        </div>
-
-                        <div class="profile-field">
-                            <label>Región Scout</label>
-                            <span class="value-view" id="v-region">Bogotá / Cundinamarca</span>
-                            <input type="text" id="i-region" value="Bogotá / Cundinamarca" required>
-                        </div>
-
                         <div class="profile-field">
                             <label>Grupo Scout</label>
                             <span class="value-view" id="v-grupo">Grupo #279 (Clan Porthos 24)</span>
                             <input type="text" id="i-grupo" value="Grupo #279 (Clan Porthos 24)" required>
                         </div>
-
                         <div class="profile-field">
-                            <label>Estamento / Cargo Actual</label>
-                            <span class="value-view" id="v-cargo">Sub-Jefe de Clan</span>
-                            <input type="text" id="i-cargo" value="Sub-Jefe de Clan" required>
+                            <label>Región Scout</label>
+                            <span class="value-view" id="v-region">Bogotá / Cundinamarca</span>
+                            <input type="text" id="i-region" value="Bogotá / Cundinamarca" required>
                         </div>
                     </div>
 
                     <div class="profile-actions">
                         <button type="button" class="btn-action btn-edit" onclick="toggleEditMode(true)"><i class="fa-solid fa-pen-to-square"></i> Editar Información</button>
                         <button type="submit" class="btn-action btn-save"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
-                        <button type="button" class="btn-action" style="background-color: #EEE; color: #555;" id="btn-cancel" onclick="toggleEditMode(false)" style="display:none;">Cancelar</button>
+                        <button type="button" class="btn-action" id="btn-cancel" onclick="toggleEditMode(false)" style="display:none; background-color: #EEE; color: #555;">Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- SECCIÓN: ATRACCIÓN -->
+        <!-- SECCIÓN: ATRACCIÓN (ACTUALIZADA CON LAS 7 OPCIONES SOLICITADAS) -->
         <div id="atraccion" class="content-section">
-            <div class="grid-cards">
-                <div class="card">
-                    <h3><i class="fa-solid fa-briefcase"></i> Vacantes y Requisiciones</h3>
-                    <p>Explora las convocatorias abiertas para cargos a nivel Grupo, Región o Nación mediante el proceso de selección objetiva.</p>
-                    <button class="btn-action">Ver Convocatorias</button>
+            <!-- Submenú interno de Atracción -->
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchAtraccionTab('vacantes', this)"><i class="fa-solid fa-briefcase"></i> Vacante y Requisiciones</button>
+                <button class="subnav-btn" onclick="switchAtraccionTab('ingreso', this)"><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso</button>
+                <button class="subnav-btn" onclick="switchAtraccionTab('competencias', this)"><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</button>
+                <button class="subnav-btn" onclick="switchAtraccionTab('manual', this)"><i class="fa-solid fa-address-book"></i> Manual de Cargos</button>
+                <button class="subnav-btn" onclick="switchAtraccionTab('acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
+                <button class="subnav-btn" onclick="switchAtraccionTab('nombramientos', this)"><i class="fa-solid fa-certificate"></i> Nombramientos</button>
+                <button class="subnav-btn" onclick="switchAtraccionTab('induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
+            </div>
+
+            <!-- 1. Vacante y Requisiciones -->
+            <div id="sub-vacantes" class="subcontent-panel active">
+                <div class="grid-cards">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-plus-circle"></i> Nueva Requisición de Personal</h3>
+                        <p>Solicitud formal generada por el jefe de área para cubrir una vacante o crear un nuevo cargo en Grupo, Región o Nación.</p>
+                        <button class="btn-action">Crear Requisición</button>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa-solid fa-bullhorn"></i> Convocatorias Abiertas</h3>
+                        <p>Visualiza y postúlate a las ofertas vigentes bajo los principios de selección objetiva y transparencia de la ASC.</p>
+                        <button class="btn-action">Ver Convocatorias</button>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso</h3>
-                    <p>Seguimiento al registro de nuevos voluntarios, acuerdo mutuo y aceptación de normativas institucionales.</p>
-                    <button class="btn-action">Consultar Estado</button>
+            </div>
+
+            <!-- 2. Proceso de Ingreso -->
+            <div id="sub-ingreso" class="subcontent-panel">
+                <div class="grid-cards">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-user-check"></i> Registro e Inscripción</h3>
+                        <p>Seguimiento al registro inicial del voluntario, validación de documentos legales y aceptación de la acción voluntaria.</p>
+                        <button class="btn-action">Consultar Estado de Ingreso</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Diccionario de Competencias -->
+            <div id="sub-competencias" class="subcontent-panel">
+                <div class="grid-cards">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-star"></i> Competencias Esenciales</h3>
+                        <p>Adaptabilidad al cambio, Aprendizaje y desarrollo personal, Compromiso, Conciencia organizacional, Planeamiento estratégico, Relaciones interpersonales y Trabajo en equipo[cite: 5, 7].</p>
+                        <button class="btn-action">Ver Detalle y Grados</button>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa-solid fa-gears"></i> Competencias Específicas</h3>
+                        <p>Competencias requeridas puntualmente para el desarrollo de funciones técnicas, operativas, de programa o administrativas de cada cargo[cite: 2].</p>
+                        <button class="btn-action">Explorar Específicas</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Manual de Cargos -->
+            <div id="sub-manual" class="subcontent-panel">
+                <div class="grid-cards">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-folder-open"></i> Perfiles y Funciones</h3>
+                        <p>Instrumento oficial de consulta para conocer la descripción, responsable, funciones, tareas y requisitos de cada cargo en los niveles Grupo, Región y Nación[cite: 2].</p>
+                        <button class="btn-action">Consultar Manual de Cargos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Acuerdo Mutuo -->
+            <div id="sub-acuerdo" class="subcontent-panel">
+                <div class="grid-cards">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-handshake-angle"></i> Compromiso y Servicio Voluntario</h3>
+                        <p>Establece los compromisos recíprocos entre el adulto voluntario y la organización, garantizando apoyo moral, técnico y personal[cite: 2].</p>
+                        <button class="btn-action">Ver Formato de Acuerdo Mutuo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Nombramientos -->
+            <div id="sub-nombramientos" class="subcontent-panel">
+                <div class="grid-cards">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-award"></i> Designación Oficial</h3>
+                        <p>Documento mediante el cual el estamento competente designa formalmente al adulto para desempeñar un cargo o función en la Asociación[cite: 2].</p>
+                        <button class="btn-action">Ver Resolución / Nombramiento</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Inducción -->
+            <div id="sub-induccion" class="subcontent-panel">
+                <div class="grid-cards">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-laptop-code"></i> Módulos de Inducción General</h3>
+                        <p>Recursos virtuales y cartillas introductorias sobre la historia, valores, políticas institucionales y el módulo certificado "Safe From Harm" (A salvo del peligro)[cite: 2, 12].</p>
+                        <button class="btn-action">Iniciar Inducción</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -500,13 +534,8 @@
             <div class="grid-cards">
                 <div class="card">
                     <h3><i class="fa-solid fa-chart-pie"></i> Evaluación por Competencias</h3>
-                    <p>Revisa tus competencias esenciales y específicas según el Diccionario de Competencias de la Asociación Scouts de Colombia.</p>
+                    <p>Revisa tus competencias esenciales y específicas según el Diccionario de Competencias de la Asociación.</p>
                     <button class="btn-action">Ver Evaluaciones</button>
-                </div>
-                <div class="card">
-                    <h3><i class="fa-solid fa-clipboard-user"></i> Acompañamiento y Bitácoras</h3>
-                    <p>Seguimiento continuo junto a tu Asesor Personal de Desarrollo y registros de retroalimentación periódica.</p>
-                    <button class="btn-action">Abrir Bitácora</button>
                 </div>
             </div>
         </div>
@@ -518,11 +547,6 @@
                     <h3><i class="fa-solid fa-book-open"></i> Plan Personal de Desarrollo (PPD)</h3>
                     <p>Construye y actualiza tus estrategias de aprendizaje, cursos de formación básica y perfeccionamiento continuo.</p>
                     <button class="btn-action">Gestionar PPD</button>
-                </div>
-                <div class="card">
-                    <h3><i class="fa-solid fa-medal"></i> Insignia de Madera e Hitos</h3>
-                    <p>Estado de tus certificaciones (IM, Gestor Regional 3M, Gestor Nacional 4M) y rutas formativas completadas.</p>
-                    <button class="btn-action">Ver Certificados</button>
                 </div>
             </div>
         </div>
@@ -561,11 +585,11 @@
         </div>
     </main>
 
-    <!-- SCRIPT DE NAVEGACIÓN Y EDICIÓN DE PERFIL -->
+    <!-- SCRIPT DE NAVEGACIÓN Y CONTROL -->
     <script>
         const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y de registro institucional (SISCOUT)' },
-            'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Procesos de requisición, convocatorias y selección objetiva' },
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y de registro institucional (C.I.M.A.)' },
+            'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Evaluación por competencias y seguimiento al rol' },
             'formacion': { title: 'Formación y Desarrollo', subtitle: 'Plan Personal de Desarrollo (PPD) y certificación' },
             'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Reubicación, continuidad y proyección del adulto' },
@@ -584,6 +608,14 @@
             document.getElementById('section-subtitle').innerText = titles[sectionId].subtitle;
         }
 
+        function switchAtraccionTab(tabId, element) {
+            document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            document.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById('sub-' + tabId).classList.add('active');
+        }
+
         function toggleEditMode(enable) {
             const card = document.getElementById('profile-card');
             const cancelBtn = document.getElementById('btn-cancel');
@@ -598,41 +630,27 @@
 
         function saveProfile(event) {
             event.preventDefault();
-            
-            // Recoger valores del formulario
             const nombre = document.getElementById('i-nombre').value;
             const tipoId = document.getElementById('i-tipo-id').value;
             const numId = document.getElementById('i-num-id').value;
             const fnac = document.getElementById('i-fnac').value;
             const email = document.getElementById('i-email').value;
             const movil = document.getElementById('i-movil').value;
-            const dir = document.getElementById('i-dir').value;
-            const eps = document.getElementById('i-eps').value;
-            const region = document.getElementById('i-region').value;
             const grupo = document.getElementById('i-grupo').value;
-            const cargo = document.getElementById('i-cargo').value;
+            const region = document.getElementById('i-region').value;
 
-            // Actualizar vista de texto
             document.getElementById('v-nombre').innerText = nombre;
             document.getElementById('v-tipo-id').innerText = tipoId;
             document.getElementById('v-num-id').innerText = numId;
             document.getElementById('v-fnac').innerText = fnac;
             document.getElementById('v-email').innerText = email;
             document.getElementById('v-movil').innerText = movil;
-            document.getElementById('v-dir').innerText = dir;
-            document.getElementById('v-eps').innerText = eps;
-            document.getElementById('v-region').innerText = region;
             document.getElementById('v-grupo').innerText = grupo;
-            document.getElementById('v-cargo').innerText = cargo;
+            document.getElementById('v-region').innerText = region;
 
-            // Actualizar barra lateral izquierda
             document.getElementById('sidebar-name').innerText = nombre.split(' ')[0] + ' ' + (nombre.split(' ')[2] || '');
-            document.getElementById('sidebar-role').innerText = cargo;
-            document.getElementById('section-subtitle').innerText = `${cargo} · ${grupo}`;
-
-            // Salir del modo edición
             toggleEditMode(false);
-            alert('¡Información de perfil actualizada con éxito en la plataforma C.I.M.A.!');
+            alert('¡Perfil actualizado con éxito en la plataforma C.I.M.A.!');
         }
     </script>
 </body>
