@@ -301,7 +301,7 @@
             color: white;
         }
 
-        /* Estilos específicos de Perfil */
+        /* Estilos específicos de Perfil y Dashboard BSC */
         .profile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
         .profile-field { display: flex; flex-direction: column; gap: 4px; }
         .profile-field.full-width { grid-column: span 2; }
@@ -314,6 +314,81 @@
         .btn-save { background-color: var(--primary-red); color: white; display: none; }
         .editing .btn-edit { display: none; }
         .editing .btn-save { display: inline-block; }
+
+        /* Estilos dinámicos para Cargos y BSC en Perfil */
+        .roles-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .role-badge-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+        .role-info h4 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        .role-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        .level-pill {
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* BSC (Balanced Scorecard) Grid */
+        .bsc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .bsc-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .bsc-card i {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            margin-bottom: 8px;
+        }
+        .bsc-card h4 {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .bsc-card .bsc-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .bsc-card .bsc-subtext {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
 
         /* Tabla de Checklist institucional */
         .checklist-table {
@@ -346,7 +421,6 @@
             font-size: 0.8rem;
             letter-spacing: 0.5px;
         }
-        /* Colores institucionales de celdas de criterio */
         .bg-formacion { background-color: #A93226; }
         .bg-experiencia { background-color: #D35400; }
         .bg-produccion { background-color: #27AE60; }
@@ -408,11 +482,12 @@
         <!-- Encabezado superior persistente -->
         <div class="header-welcome">
             <h2 id="section-title">Perfil del Dirigente</h2>
-            <p id="section-subtitle">Información personal del adulto voluntario (C.I.M.A.)</p>
+            <p id="section-subtitle">Información personal y resumen directivo (C.I.M.A.)</p>
         </div>
 
-        <!-- SECCIÓN: PERFIL -->
+        <!-- SECCIÓN: PERFIL (ACTUALIZADA CON CARGOS, NIVELES Y BSC) -->
         <div id="perfil" class="content-section active">
+            <!-- 1. Datos Personales -->
             <div class="card" id="profile-card">
                 <h3><i class="fa-solid fa-id-card"></i> Datos Personales y de Identificación</h3>
                 <p>Información oficial registrada del adulto voluntario en la plataforma C.I.M.A.</p>
@@ -462,6 +537,61 @@
                     </div>
                 </form>
             </div>
+
+            <!-- 2. Cargos y Niveles Asignados -->
+            <div class="card">
+                <h3><i class="fa-solid fa-sitemap"></i> Cargos y Niveles Activos en el Movimiento</h3>
+                <p>Estructura de roles oficiales desempeñados actualmente según el Manual de Cargos.</p>
+                <div class="roles-container">
+                    <div class="role-badge-card">
+                        <div class="role-info">
+                            <h4>Subjefe de Clan</h4>
+                            <p>Unidad Clan de Rovers</p>
+                        </div>
+                        <span class="level-pill">Nivel Grupo</span>
+                    </div>
+                    <div class="role-badge-card">
+                        <div class="role-info">
+                            <h4>Director de Adultos en el Movimiento</h4>
+                            <p>Equipo Nacional de Gestión</p>
+                        </div>
+                        <span class="level-pill" style="background-color: #E8F4F8; color: #1D6FA5;">Nivel Nación</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Balanced Scorecard (BSC) de Formación y Desempeño -->
+            <div class="card">
+                <h3><i class="fa-solid fa-chart-pie"></i> Resumen de Gestión y Formación (BSC C.I.M.A.)</h3>
+                <p>Indicadores clave de desarrollo de competencias, avance formativo y estatus en la Asociación.</p>
+                
+                <div class="bsc-grid">
+                    <div class="bsc-card">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <h4>Cursos Realizados</h4>
+                        <div class="bsc-value">8</div>
+                        <div class="bsc-subtext">Módulos y talleres aprobados</div>
+                    </div>
+                    <div class="bsc-card">
+                        <i class="fa-solid fa-award"></i>
+                        <h4>Nivel de Formación</h4>
+                        <div class="bsc-value" style="font-size: 1.1rem; color: var(--primary-red);">Insignia de Madera</div>
+                        <div class="bsc-subtext">Acreditado / Vigente</div>
+                    </div>
+                    <div class="bsc-card">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <h4>Horas de Facilitación</h4>
+                        <div class="bsc-value">120 hrs</div>
+                        <div class="bsc-subtext">Experiencia acumulada</div>
+                    </div>
+                    <div class="bsc-card">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                        <h4>Cumplimiento PPD</h4>
+                        <div class="bsc-value">92%</div>
+                        <div class="bsc-subtext">Plan de Desarrollo Personal</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- SECCIÓN: ATRACCIÓN -->
@@ -506,7 +636,7 @@
             <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y Safe From Harm.</p></div></div>
         </div>
 
-        <!-- SECCIÓN: FORMADORES (CON LAS 3 LISTAS DE CHEQUEO INTERactivas) -->
+        <!-- SECCIÓN: FORMADORES -->
         <div id="formadores" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('formadores', 'ayudante', this)"><i class="fa-solid fa-user-gear"></i> Ayudante de Formación Scout</button>
@@ -514,7 +644,7 @@
                 <button class="subnav-btn" onclick="switchSubTab('formadores', 'director', this)"><i class="fa-solid fa-award"></i> Director de Formación Scout</button>
             </div>
 
-            <!-- 1. Ayudante de Formación Scout -->
+            <!-- Ayudante de Formación Scout -->
             <div id="formadores-ayudante" class="subcontent-panel active">
                 <div class="card">
                     <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Ayudante de Formación Scout</h3>
@@ -591,7 +721,7 @@
                 </div>
             </div>
 
-            <!-- 2. Formador Scout (Nueva Lista de Chequeo según imagen) -->
+            <!-- Formador Scout -->
             <div id="formadores-formador" class="subcontent-panel">
                 <div class="card">
                     <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Formador Scout</h3>
@@ -668,7 +798,7 @@
                 </div>
             </div>
 
-            <!-- 3. Director de Formación Scout (Nueva Lista de Chequeo según imagen) -->
+            <!-- Director de Formación Scout -->
             <div id="formadores-director" class="subcontent-panel">
                 <div class="card">
                     <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo de Cumplimiento - Director de Formación Scout</h3>
@@ -798,7 +928,7 @@
     <!-- SCRIPT DE NAVEGACIÓN Y CONTROL MODULAR -->
     <script>
         const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal del adulto voluntario (C.I.M.A.)' },
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Información personal y resumen directivo (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
