@@ -373,22 +373,12 @@
             font-weight: 500;
         }
 
-        .profile-name-container {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-bottom: 20px;
-        }
-        .profile-name-container label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-        .profile-name-container .name-display {
-            font-size: 1.4rem;
+        /* Estilo limpio para el Perfil solicitado */
+        .profile-name-clean {
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--primary-red);
+            margin-bottom: 4px;
         }
 
         .bsc-grid {
@@ -486,14 +476,11 @@
             <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)</p>
         </div>
 
-        <!-- SECCIÓN: PERFIL -->
+        <!-- SECCIÓN: PERFIL (ACTUALIZADA: SÓLO NOMBRE Y ABAJO EL BSC) -->
         <div id="perfil" class="content-section active">
             <div class="card">
-                <h3><i class="fa-solid fa-id-badge"></i> Identificación del Dirigente</h3>
-                <div class="profile-name-container">
-                    <label>Nombre Completo</label>
-                    <div class="name-display" id="v-nombre">MAURICIO QUIROGA POSADA</div>
-                </div>
+                <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
+                <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia[cite: 8]</p>
             </div>
 
             <div class="card">
