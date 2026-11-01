@@ -380,6 +380,67 @@
             margin-bottom: 4px;
         }
 
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary-red);
+            color: white;
+        }
+
+        /* Estilos de Círculos de Bienestar y Tarjetas */
+        .circles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .circle-card {
+            background: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .circle-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-red);
+        }
+
+        .circle-card i {
+            font-size: 2rem;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+        }
+
+        .circle-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .circle-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
         .bsc-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -441,7 +502,7 @@
                 <li><a class="nav-item" onclick="switchSection('atraccion', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
                 <li><a class="nav-item" onclick="switchSection('desempeno', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
                 <li><a class="nav-item" onclick="switchSection('formacion', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
-                <!-- Botón de Formador que aparece solo al seleccionar Formador Scout -->
+                <!-- Botón de Formador condicional -->
                 <li id="nav-formador-btn"><a class="nav-item" onclick="switchSection('modulo-formador', this)"><i class="fa-solid fa-chalkboard-user"></i> Formador</a></li>
                 <li><a class="nav-item" onclick="switchSection('decisiones', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
                 <li><a class="nav-item" onclick="switchSection('bienestar', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
@@ -475,11 +536,16 @@
             <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)</p>
         </div>
 
-        <!-- SECCIÓN: PERFIL -->
+        <!-- SECCIÓN: PERFIL (CON OPCIÓN DE DESCARGAR HV SCOUT) -->
         <div id="perfil" class="content-section active">
-            <div class="card">
-                <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
-                <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia[cite: 8]</p>
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
+                    <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia[cite: 8]</p>
+                </div>
+                <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
+                    <i class="fa-solid fa-download"></i> Descargar HV Scout
+                </button>
             </div>
 
             <div class="card">
@@ -499,15 +565,15 @@
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
-            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°[cite: 8].</p></div></div>
+            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°[cite: 8, 30].</p></div></div>
             <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales[cite: 8, 22].</p></div></div>
-            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto[cite: 9].</p></div></div>
+            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto[cite: 9, 25].</p></div></div>
             <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación[cite: 8, 21].</p></div></div>
-            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral[cite: 8].</p></div></div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal[cite: 8].</p></div></div>
+            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral[cite: 8, 24].</p></div></div>
+            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal[cite: 8, 24].</p></div></div>
         </div>
 
-        <!-- SECCIÓN: DESEMPEÑO (ACTUALIZADA CON ASESOR PERSONAL, REVISIÓN DEL JEFE INMEDIATO Y EVALUACIÓN 360° CON FORMACIÓN BÁSICA Y PERFECCIONAMIENTO CONTINUO) -->
+        <!-- SECCIÓN: DESEMPEÑO -->
         <div id="desempeno" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('desempeno', 'ruta', this)"><i class="fa-solid fa-route"></i> Ruta de Evaluación</button>
@@ -547,7 +613,7 @@
             </div>
             <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados[cite: 8, 19].</p></div></div>
             <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM)[cite: 8, 12].</p></div></div>
-            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro)[cite: 8].</p></div></div>
+            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro)[cite: 8, 24].</p></div></div>
         </div>
 
         <!-- SECCIÓN FORMADOR (DISPONIBLE SÓLO CUANDO SE SELECCIONA FORMADOR SCOUT) -->
@@ -601,7 +667,7 @@
             </div>
         </div>
 
-        <!-- SECCIÓN: DECISIONES (ACTUALIZADA CON CIERRE DEL CARGO Y PLAN DE SUCESIÓN) -->
+        <!-- SECCIÓN: DECISIONES -->
         <div id="decisiones" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('decisiones', 'historial', this)"><i class="fa-solid fa-timeline"></i> Historial de Cargos</button>
@@ -615,11 +681,67 @@
             <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional[cite: 8, 12, 16].</p></div></div>
         </div>
 
-        <!-- SECCIÓN: BIENESTAR -->
+        <!-- SECCIÓN: BIENESTAR (ACTUALIZADA CON TARJETAS DE FELICITACIÓN Y CÍRCULOS DE BIENESTAR) -->
         <div id="bienestar" class="content-section">
-            <div class="card">
-                <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
-                <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo[cite: 8, 18, 22].</p>
+            <div class="subnav-tabs">
+                <button class="subnav-btn active" onclick="switchSubTab('bienestar', 'clima', this)"><i class="fa-solid fa-heart-pulse"></i> Clima y Motivación</button>
+                <button class="subnav-btn" onclick="switchSubTab('bienestar', 'tarjetas', this)"><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación</button>
+                <button class="subnav-btn" onclick="switchSubTab('bienestar', 'circulos', this)"><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar</button>
+            </div>
+
+            <div id="bienestar-clima" class="subcontent-panel active">
+                <div class="card">
+                    <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
+                    <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo[cite: 8, 18, 22].</p>
+                </div>
+            </div>
+
+            <div id="bienestar-tarjetas" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación y Mensajes Positivos</h3>
+                    <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación[cite: 9, 16].</p>
+                    <div style="background: #FAFAFA; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 15px;">
+                        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Seleccionar Dirigente Destinatario</label>
+                        <select style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px; background: white;">
+                            <option>Mauricio Quiroga Posada (Subjefe de Clan)</option>
+                            <option>Equipo de Dirigentes de Grupo</option>
+                            <option>Comisión Regional de Adultos</option>
+                        </select>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Mensaje Positivo / Felicitación</label>
+                        <textarea rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout![cite: 16]" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;"></textarea>
+                        <button class="btn-action" onclick="alert('¡Tarjeta de felicitación enviada con éxito!')"><i class="fa-solid fa-paper-plane"></i> Enviar Tarjeta</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bienestar-circulos" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar y Apoyo</h3>
+                    <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad[cite: 9].</p>
+                    
+                    <div class="circles-grid">
+                        <div class="circle-card">
+                            <i class="fa-solid fa-campground"></i>
+                            <h4>Convivencia Íntima</h4>
+                            <p>Espacios de integración del equipo de sección y fogatas de reflexión[cite: 9].</p>
+                        </div>
+                        <div class="circle-card">
+                            <i class="fa-solid fa-hands-holding-child"></i>
+                            <h4>Apoyo Personal</h4>
+                            <p>Acompañamiento cercano y escucha activa ante situaciones particulares[cite: 9].</p>
+                        </div>
+                        <div class="circle-card">
+                            <i class="fa-solid fa-mug-hot"></i>
+                            <h4>Café y Conversación</h4>
+                            <p>Encuentros periódicos de camaradería y distensión para dirigentes[cite: 9].</p>
+                        </div>
+                        <div class="circle-card">
+                            <i class="fa-solid fa-people-group"></i>
+                            <h4>Comunidad Scout</h4>
+                            <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia[cite: 9].</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -635,13 +757,13 @@
     <!-- SCRIPT DE NAVEGACIÓN Y CONTROL -->
     <script>
         const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)' },
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y descarga de Hoja de Vida Scout (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, asesoría, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación General', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
             'modulo-formador': { title: 'Red Nacional de Formación', subtitle: 'Gestión de formadores, ayudantes y directores de formación scout' },
             'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos, cierre, sucesión y entrevista de salida institucional' },
-            'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
+            'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Clima organizacional, tarjetas de felicitación y círculos de bienestar' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
         };
 
