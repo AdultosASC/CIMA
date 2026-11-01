@@ -373,7 +373,6 @@
             font-weight: 500;
         }
 
-        /* Estilo limpio para el Perfil solicitado */
         .profile-name-clean {
             font-size: 1.6rem;
             font-weight: 700;
@@ -476,10 +475,11 @@
             <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)</p>
         </div>
 
-        <!-- SECCIÓN: PERFIL (ACTUALIZADA: SÓLO NOMBRE Y ABAJO EL BSC) -->
+        <!-- SECCIÓN: PERFIL -->
         <div id="perfil" class="content-section active">
             <div class="card">
                 <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
+                <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia[cite: 8]</p>
             </div>
 
             <div class="card">
@@ -499,23 +499,42 @@
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
-            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°[cite: 8, 30].</p></div></div>
+            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°[cite: 8].</p></div></div>
             <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales[cite: 8, 22].</p></div></div>
-            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto[cite: 9, 25].</p></div></div>
+            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto[cite: 9].</p></div></div>
             <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación[cite: 8, 21].</p></div></div>
-            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral[cite: 8, 24].</p></div></div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal[cite: 8, 24].</p></div></div>
+            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral[cite: 8].</p></div></div>
+            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal[cite: 8].</p></div></div>
         </div>
 
-        <!-- SECCIÓN: DESEMPEÑO -->
+        <!-- SECCIÓN: DESEMPEÑO (ACTUALIZADA CON ASESOR PERSONAL, REVISIÓN DEL JEFE INMEDIATO Y EVALUACIÓN 360° CON FORMACIÓN BÁSICA Y PERFECCIONAMIENTO CONTINUO) -->
         <div id="desempeno" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('desempeno', 'ruta', this)"><i class="fa-solid fa-route"></i> Ruta de Evaluación</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'asesor', this)"><i class="fa-solid fa-user-tie"></i> Asesor Personal</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'jefe', this)"><i class="fa-solid fa-user-shield"></i> Revisión del Jefe Inmediato</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación 360°</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
             </div>
             <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño[cite: 8, 12, 19].</p></div></div>
-            <div id="desempeno-evaluacion" class="subcontent-panel"><div class="card"><h3>Evaluación 360°</h3><p>Encuestas de percepción de beneficiarios (lobatos, scouts, caminantes, rovers) y retroalimentación de pares[cite: 12, 20].</p></div></div>
+            <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD[cite: 10].</p></div></div>
+            <div id="desempeno-jefe" class="subcontent-panel"><div class="card"><h3>Revisión del Jefe Inmediato</h3><p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo[cite: 10].</p></div></div>
+            <div id="desempeno-evaluacion" class="subcontent-panel">
+                <div class="card">
+                    <h3>Evaluación 360° y Componentes de Crecimiento</h3>
+                    <p>Herramientas transversales de medición de conductas observables[cite: 10, 12].</p>
+                    <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-graduation-cap"></i> Formación Básica</h4>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo[cite: 9, 10].</p>
+                        </div>
+                        <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-arrows-rotate"></i> Perfeccionamiento Continuo</h4>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades[cite: 9, 10].</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo[cite: 8, 12].</p></div></div>
         </div>
 
@@ -528,7 +547,7 @@
             </div>
             <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados[cite: 8, 19].</p></div></div>
             <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM)[cite: 8, 12].</p></div></div>
-            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro)[cite: 8, 24].</p></div></div>
+            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro)[cite: 8].</p></div></div>
         </div>
 
         <!-- SECCIÓN FORMADOR (DISPONIBLE SÓLO CUANDO SE SELECCIONA FORMADOR SCOUT) -->
@@ -582,13 +601,17 @@
             </div>
         </div>
 
-        <!-- SECCIÓN: DECISIONES -->
+        <!-- SECCIÓN: DECISIONES (ACTUALIZADA CON CIERRE DEL CARGO Y PLAN DE SUCESIÓN) -->
         <div id="decisiones" class="content-section">
             <div class="subnav-tabs">
                 <button class="subnav-btn active" onclick="switchSubTab('decisiones', 'historial', this)"><i class="fa-solid fa-timeline"></i> Historial de Cargos</button>
+                <button class="subnav-btn" onclick="switchSubTab('decisiones', 'cierre', this)"><i class="fa-solid fa-door-closed"></i> Cierre del Cargo</button>
+                <button class="subnav-btn" onclick="switchSubTab('decisiones', 'sucesion', this)"><i class="fa-solid fa-sitemap"></i> Plan de Sucesión</button>
                 <button class="subnav-btn" onclick="switchSubTab('decisiones', 'entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
             </div>
             <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia[cite: 8].</p></div></div>
+            <div id="decisiones-cierre" class="subcontent-panel"><div class="card"><h3>Cierre del Cargo</h3><p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento[cite: 10, 11].</p></div></div>
+            <div id="decisiones-sucesion" class="subcontent-panel"><div class="card"><h3>Plan de Sucesión</h3><p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional[cite: 11, 18].</p></div></div>
             <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional[cite: 8, 12, 16].</p></div></div>
         </div>
 
@@ -614,10 +637,10 @@
         const titles = {
             'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
-            'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, competencias y Plan Personal de Desarrollo (PPD)' },
+            'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, asesoría, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación General', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
             'modulo-formador': { title: 'Red Nacional de Formación', subtitle: 'Gestión de formadores, ayudantes y directores de formación scout' },
-            'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos y entrevista de salida institucional' },
+            'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos, cierre, sucesión y entrevista de salida institucional' },
             'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Gestión del clima organizacional y apoyo al voluntariado' },
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
         };
