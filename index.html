@@ -341,6 +341,89 @@
             margin-bottom: 16px;
         }
 
+        /* Estilos exclusivos de Vacantes y Requisiciones */
+        .vacantes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .vacante-item {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .vacante-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+
+        .vacante-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .vacante-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .vacante-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            text-decoration: none;
+            padding: 7px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            transition: all 0.2s;
+        }
+
+        .vacante-link:hover {
+            border-color: var(--primary-red);
+            background-color: var(--primary-red-light);
+        }
+
+        .postulacion-status-box {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            background-color: var(--primary-red-light);
+            border: 1px solid #E5B8B8;
+            border-left: 4px solid var(--primary-red);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .postulacion-status-box.visible {
+            display: block;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
         .checklist-container {
             display: flex;
             flex-direction: column;
@@ -796,7 +879,48 @@
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
-            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°.</p></div></div>
+            <div id="atraccion-vacantes" class="subcontent-panel active">
+                <div class="card">
+                    <h3><i class="fa-solid fa-briefcase"></i> Vacantes y Requisiciones Disponibles</h3>
+                    <p>Consulta las convocatorias abiertas a las que puedes postularte y revisa los detalles de cada cargo.</p>
+
+                    <div class="vacantes-grid">
+                        <div class="vacante-item">
+                            <div>
+                                <span class="vacante-badge">Nivel Nacional</span>
+                                <div class="vacante-title">Director Nacional de Adultos en el Movimiento</div>
+                                <p style="margin-bottom: 0; font-size: 0.84rem;">Liderazgo y gestión estratégica de la Política Nacional de Adultos en el Movimiento a nivel nacional.</p>
+                            </div>
+                            <div class="vacante-actions">
+                                <a class="vacante-link" href="#convocatoria-director-nacional-adultos" onclick="alert('Abriendo convocatoria: Director Nacional de Adultos en el Movimiento (Nivel Nacional)'); return false;">
+                                    <i class="fa-solid fa-up-right-from-square"></i> Ver convocatoria
+                                </a>
+                                <button type="button" class="btn-action" onclick="postularVacante('Director Nacional de Adultos en el Movimiento')">
+                                    <i class="fa-solid fa-check"></i> Aceptar postularse
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="vacante-item">
+                            <div>
+                                <span class="vacante-badge">Nivel Regional</span>
+                                <div class="vacante-title">Miembro del Equipo Regional de Comunicaciones</div>
+                                <p style="margin-bottom: 0; font-size: 0.84rem;">Apoyo a la estrategia de comunicación institucional, difusión y contenidos regionales.</p>
+                            </div>
+                            <div class="vacante-actions">
+                                <a class="vacante-link" href="#convocatoria-equipo-regional-comunicaciones" onclick="alert('Abriendo convocatoria: Miembro del Equipo Regional de Comunicaciones'); return false;">
+                                    <i class="fa-solid fa-up-right-from-square"></i> Ver convocatoria
+                                </a>
+                                <button type="button" class="btn-action" onclick="postularVacante('Miembro del Equipo Regional de Comunicaciones')">
+                                    <i class="fa-solid fa-check"></i> Aceptar postularse
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mensaje-postulacion" class="postulacion-status-box" role="status" aria-live="polite"></div>
+                </div>
+            </div>
             <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales.</p></div></div>
             <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto.</p></div></div>
             <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación.</p></div></div>
@@ -1084,6 +1208,13 @@
                 .replace(/</g, '<')
                 .replace(/>/g, '>')
                 .replace(/"/g, '"');
+        }
+
+        function postularVacante(cargo) {
+            const box = document.getElementById('mensaje-postulacion');
+            if (!box) return;
+            box.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--primary-red); margin-right: 6px;"></i> Postulado correctamente al cargo: <strong>${escapeHtml(cargo)}</strong>.`;
+            box.classList.add('visible');
         }
 
         function getActasAsesoria() {
