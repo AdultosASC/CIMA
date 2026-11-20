@@ -393,72 +393,12 @@
             text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s;
         }
 
         .btn-action:hover {
             background-color: var(--primary-red);
             color: white;
-        }
-
-        .profile-right-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .chn-panel {
-            display: none;
-            margin-top: 16px;
-            padding: 18px 20px;
-            border-radius: 10px;
-            background-color: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-red);
-            animation: fadeIn 0.25s ease-in-out;
-        }
-
-        .chn-panel.open {
-            display: block;
-        }
-
-        .chn-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .chn-title {
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: var(--primary-red);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .chn-status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 999px;
-            background-color: #ECFDF3;
-            color: #15803D;
-            border: 1px solid #BBF7D0;
-        }
-
-        .chn-body {
-            font-size: 0.86rem;
-            color: var(--text-main);
-            line-height: 1.5;
-            margin-bottom: 0;
         }
 
         /* Estilos de Círculos de Bienestar y Tarjetas */
@@ -542,6 +482,143 @@
             color: var(--text-muted);
             margin-top: 2px;
         }
+
+        /* Estilos del Acta de Encuentros de Asesoría */
+        .acta-form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .form-field label {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .form-field input,
+        .form-field textarea,
+        .form-field select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.88rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus,
+        .form-field select:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
+        }
+
+        .acta-actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .acta-feedback {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .actas-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .acta-entry {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 16px 18px;
+        }
+
+        .acta-entry-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .acta-date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .acta-entry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .acta-block-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .acta-block-text {
+            font-size: 0.86rem;
+            color: var(--text-main);
+            line-height: 1.45;
+            white-space: pre-line;
+            margin-bottom: 0;
+        }
+
+        .btn-delete-acta {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-delete-acta:hover {
+            background-color: var(--primary-red-light);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
     </style>
 </head>
 <body>
@@ -598,36 +675,14 @@
 
         <!-- SECCIÓN: PERFIL (CON OPCIÓN DE DESCARGAR HV SCOUT) -->
         <div id="perfil" class="content-section active">
-            <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
-                    <div>
-                        <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
-                        <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia</p>
-                    </div>
-                    <div class="profile-right-actions">
-                        <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
-                            <i class="fa-solid fa-download"></i> Descargar HV Scout
-                        </button>
-                        <button class="btn-action" id="btn-chn-observations" onclick="toggleChnPanel()" aria-expanded="false">
-                            <i class="fa-solid fa-shield-halved"></i> Observaciones Hoja de Vida CHN
-                        </button>
-                    </div>
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
+                    <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia</p>
                 </div>
-
-                <div id="chn-observations-panel" class="chn-panel">
-                    <div class="chn-header">
-                        <div class="chn-title">
-                            <i class="fa-solid fa-file-shield"></i>
-                            <span>Observaciones Hoja de Vida CHN · Registro de Conducta</span>
-                        </div>
-                        <span class="chn-status-badge">
-                            <i class="fa-solid fa-circle-check"></i> Sin observaciones por conducta
-                        </span>
-                    </div>
-                    <p class="chn-body">
-                        No se registran anotaciones, llamados de atención ni observaciones disciplinarias o por conducta en la Hoja de Vida CHN.
-                    </p>
-                </div>
+                <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
+                    <i class="fa-solid fa-download"></i> Descargar HV Scout
+                </button>
             </div>
 
             <div class="card">
@@ -663,6 +718,7 @@
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'jefe', this)"><i class="fa-solid fa-user-shield"></i> Revisión del Jefe Inmediato</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación 360°</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'encuentros-asesoria', this)"><i class="fa-solid fa-file-pen"></i> Encuentros de Asesoría</button>
             </div>
             <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño.</p></div></div>
             <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD.</p></div></div>
@@ -684,6 +740,54 @@
                 </div>
             </div>
             <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo.</p></div></div>
+            <div id="desempeno-encuentros-asesoria" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-file-pen"></i> Acta de Encuentros de Asesoría</h3>
+                    <p>Registra el acta de cada encuentro de asesoría con su fecha, descripción de lo dialogado, compromisos acordados y seguimiento a los compromisos previos.</p>
+
+                    <form id="acta-asesoria-form" onsubmit="saveActaEncuentro(event)">
+                        <div class="acta-form-grid">
+                            <div class="form-field">
+                                <label for="acta-fecha"><i class="fa-regular fa-calendar"></i> Fecha del Encuentro</label>
+                                <input type="date" id="acta-fecha" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="acta-participantes"><i class="fa-solid fa-users"></i> Dirigente y Asesor / Acompañante</label>
+                                <input type="text" id="acta-participantes" placeholder="Ej. Mauricio Quiroga - Asesor asignado">
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="acta-descripcion"><i class="fa-solid fa-align-left"></i> Descripción del Encuentro</label>
+                            <textarea id="acta-descripcion" rows="3" placeholder="Resume los temas tratados, avances del Plan de Desarrollo Personal (PPD) y retroalimentación del encuentro..." required></textarea>
+                        </div>
+
+                        <div class="acta-form-grid">
+                            <div class="form-field">
+                                <label for="acta-compromisos"><i class="fa-solid fa-list-check"></i> Compromisos Acordados</label>
+                                <textarea id="acta-compromisos" rows="3" placeholder="Detalla las acciones, responsables y fechas objetivo acordadas..." required></textarea>
+                            </div>
+                            <div class="form-field">
+                                <label for="acta-seguimiento"><i class="fa-solid fa-rotate"></i> Seguimiento a los Compromisos</label>
+                                <textarea id="acta-seguimiento" rows="3" placeholder="Registra el estado de cumplimiento de compromisos anteriores, evidencias o ajustes..." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="acta-actions-row">
+                            <button type="submit" class="btn-action">
+                                <i class="fa-solid fa-floppy-disk"></i> Guardar Acta de Encuentro
+                            </button>
+                            <span id="acta-status-msg" class="acta-feedback"></span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fa-solid fa-folder-open"></i> Actas Registradas de Encuentros de Asesoría</h3>
+                    <p>Historial de actas diligenciadas para consulta y seguimiento continuo del proceso de asesoría.</p>
+                    <div id="actas-list-container" class="actas-list"></div>
+                </div>
+            </div>
         </div>
 
         <!-- SECCIÓN: FORMACIÓN -->
@@ -876,11 +980,105 @@
             }
         };
 
-        function toggleChnPanel() {
-            const panel = document.getElementById('chn-observations-panel');
-            const btn = document.getElementById('btn-chn-observations');
-            const isOpen = panel.classList.toggle('open');
-            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        const ACTAS_STORAGE_KEY = 'cima_actas_encuentros_asesoria';
+
+        function escapeHtml(text) {
+            return String(text)
+                .replace(/&/g, '&')
+                .replace(/</g, '<')
+                .replace(/>/g, '>')
+                .replace(/"/g, '"')
+                .replace(/'/g, ''');
+        }
+
+        function getActasAsesoria() {
+            try {
+                const raw = localStorage.getItem(ACTAS_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function setActasAsesoria(list) {
+            localStorage.setItem(ACTAS_STORAGE_KEY, JSON.stringify(list));
+        }
+
+        function renderActasAsesoria() {
+            const container = document.getElementById('actas-list-container');
+            if (!container) return;
+
+            const actas = getActasAsesoria();
+            if (!actas.length) {
+                container.innerHTML = `<p style="margin-bottom:0; font-size:0.86rem; color:var(--text-muted);">Aún no hay actas de encuentros de asesoría registradas. Diligencia el formulario superior para crear la primera acta.</p>`;
+                return;
+            }
+
+            container.innerHTML = actas.map((acta) => `
+                <div class="acta-entry">
+                    <div class="acta-entry-top">
+                        <span class="acta-date-badge"><i class="fa-regular fa-calendar-check"></i> Fecha: ${escapeHtml(acta.fecha)}</span>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:0.8rem; color:var(--text-muted); font-weight:500;">${escapeHtml(acta.participantes || 'Dirigente y Asesor')}</span>
+                            <button type="button" class="btn-delete-acta" onclick="deleteActaEncuentro('${escapeHtml(acta.id)}')" title="Eliminar acta">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <span class="acta-block-label">Descripción del Encuentro</span>
+                        <p class="acta-block-text">${escapeHtml(acta.descripcion)}</p>
+                    </div>
+                    <div class="acta-entry-grid">
+                        <div>
+                            <span class="acta-block-label">Compromisos Acordados</span>
+                            <p class="acta-block-text">${escapeHtml(acta.compromisos)}</p>
+                        </div>
+                        <div>
+                            <span class="acta-block-label">Seguimiento a los Compromisos</span>
+                            <p class="acta-block-text">${escapeHtml(acta.seguimiento)}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveActaEncuentro(event) {
+            event.preventDefault();
+
+            const fecha = document.getElementById('acta-fecha').value;
+            const participantes = document.getElementById('acta-participantes').value.trim();
+            const descripcion = document.getElementById('acta-descripcion').value.trim();
+            const compromisos = document.getElementById('acta-compromisos').value.trim();
+            const seguimiento = document.getElementById('acta-seguimiento').value.trim();
+
+            if (!fecha || !descripcion || !compromisos || !seguimiento) return;
+
+            const nuevaActa = {
+                id: String(Date.now()),
+                fecha,
+                participantes,
+                descripcion,
+                compromisos,
+                seguimiento
+            };
+
+            const actas = getActasAsesoria();
+            actas.unshift(nuevaActa);
+            setActasAsesoria(actas);
+
+            document.getElementById('acta-asesoria-form').reset();
+            const statusMsg = document.getElementById('acta-status-msg');
+            statusMsg.textContent = 'Acta de encuentro guardada correctamente.';
+            setTimeout(() => { statusMsg.textContent = ''; }, 3500);
+
+            renderActasAsesoria();
+        }
+
+        function deleteActaEncuentro(id) {
+            const actas = getActasAsesoria().filter(a => a.id !== id);
+            setActasAsesoria(actas);
+            renderActasAsesoria();
         }
 
         function toggleRoleMenu() {
@@ -926,6 +1124,7 @@
 
         window.onload = function() {
             selectRoleInit('clan', 'Subjefe de Clan');
+            renderActasAsesoria();
         };
 
         function selectRoleInit(roleKey, roleDisplayName) {
