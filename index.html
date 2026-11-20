@@ -341,6 +341,100 @@
             margin-bottom: 16px;
         }
 
+        /* Estilos exclusivos de Diccionario de Competencias */
+        .comp-switch-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .comp-option-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FAFAFA;
+            color: var(--text-main);
+            font-size: 0.86rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .comp-option-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+        }
+
+        .comp-option-btn.active {
+            background-color: var(--primary-red);
+            color: #FFFFFF;
+            border-color: var(--primary-red);
+        }
+
+        .comp-detail-panel {
+            display: none;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 18px;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .comp-detail-panel.active {
+            display: block;
+        }
+
+        .comp-label-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary-red);
+            letter-spacing: 0.4px;
+            margin-bottom: 4px;
+        }
+
+        .comp-example-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .comp-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .comp-list li {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.86rem;
+            color: var(--text-main);
+            line-height: 1.45;
+        }
+
+        .comp-grade-badge {
+            display: inline-block;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-weight: 700;
+            font-size: 0.78rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-right: 6px;
+        }
+
         /* Estilos exclusivos de Vacantes y Requisiciones */
         .vacantes-grid {
             display: grid;
@@ -1028,7 +1122,52 @@
                 </div>
             </div>
             <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales.</p></div></div>
-            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto.</p></div></div>
+            <div id="atraccion-competencias" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</h3>
+                    <p>Selecciona una categoría para consultar los ejemplos de competencias, grados de dominio y conductas.</p>
+
+                    <div class="comp-switch-row" role="tablist" aria-label="Categorías del Diccionario de Competencias">
+                        <button type="button" id="btn-comp-esenciales" class="comp-option-btn active" onclick="switchCompetenciaOption('esenciales', this)">
+                            <i class="fa-solid fa-layer-group"></i> Competencias Esenciales
+                        </button>
+                        <button type="button" id="btn-comp-especificas" class="comp-option-btn" onclick="switchCompetenciaOption('especificas', this)">
+                            <i class="fa-solid fa-list-check"></i> Competencias Específicas
+                        </button>
+                    </div>
+
+                    <div id="comp-panel-esenciales" class="comp-detail-panel active">
+                        <div class="comp-label-title">Competencias Esenciales · Ejemplo</div>
+                        <div class="comp-example-name">Adaptabilidad al cambio</div>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: var(--text-main);">Descripción:</strong> Capacidad para modificar puntos de vista, prácticas y actitudes en respuesta a cambios en contextos, condiciones y situaciones.
+                        </p>
+                        <div class="comp-label-title">Grados de dominio (1 a 4)</div>
+                        <ul class="comp-list">
+                            <li><span class="comp-grade-badge">1</span> Identifica los elementos cambiantes y los acepta como parte del proceso.</li>
+                            <li><span class="comp-grade-badge">2</span> Reconoce y comprende el cambio como oportunidad de mejora.</li>
+                            <li><span class="comp-grade-badge">3</span> Analiza e implementa el cambio.</li>
+                            <li><span class="comp-grade-badge">4</span> Evalúa y proyecta el cambio.</li>
+                        </ul>
+                    </div>
+
+                    <div id="comp-panel-especificas" class="comp-detail-panel">
+                        <div class="comp-label-title">Competencias Específicas · Ejemplo</div>
+                        <div class="comp-example-name">Administración de Actividades</div>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: var(--text-main);">Descripción:</strong> Es la capacidad de planear, coordinar ejecutar y evaluar actividades educativas, buscando alcanzar el objetivo para la cual fue planteada, donde todos los participantes puedan expresar sus ideas y ser escuchados.
+                        </p>
+                        <div class="comp-label-title">Conductas</div>
+                        <ul class="comp-list">
+                            <li><span class="comp-grade-badge">1</span> Utiliza la malla de objetivos educativos para el diseño de actividades.</li>
+                            <li><span class="comp-grade-badge">2</span> Entrega la progresión personal basándose en la malla de objetivos educativos.</li>
+                            <li><span class="comp-grade-badge">3</span> Aplica correctamente las fases y etapas de progresión personal según la política.</li>
+                            <li><span class="comp-grade-badge">4</span> Realiza seguimiento y mantiene el registro actualizado de progresión personal de forma física o digital.</li>
+                            <li><span class="comp-grade-badge">5</span> Promueve las políticas de participación juvenil e inclusión y los programas mundiales de la organización.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación.</p></div></div>
             <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral.</p></div></div>
             <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal.</p></div></div>
@@ -1314,6 +1453,17 @@
                 .replace(/</g, '<')
                 .replace(/>/g, '>')
                 .replace(/"/g, '"');
+        }
+
+        function switchCompetenciaOption(optionKey, btnEl) {
+            const panel = document.getElementById('atraccion-competencias');
+            if (!panel) return;
+            panel.querySelectorAll('.comp-option-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+
+            panel.querySelectorAll('.comp-detail-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('comp-panel-' + optionKey);
+            if (targetPanel) targetPanel.classList.add('active');
         }
 
         function postularVacante(cargo) {
