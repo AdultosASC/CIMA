@@ -393,12 +393,207 @@
             text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.2s;
         }
 
         .btn-action:hover {
             background-color: var(--primary-red);
             color: white;
+        }
+
+        /* Botón y panel desplegable de Observaciones Hoja de Vida CHN */
+        .profile-actions-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .chn-dropdown-panel {
+            display: none;
+            width: 100%;
+            margin-top: 16px;
+            padding: 16px 18px;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .chn-dropdown-panel.show {
+            display: block;
+        }
+
+        .chn-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .chn-panel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chn-badge-clean {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #ECFDF3;
+            color: #15803D;
+            border: 1px solid #BBF7D0;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .chn-panel-text {
+            font-size: 0.86rem;
+            color: var(--text-main);
+            margin-bottom: 0 !important;
+        }
+
+        /* Estilos del Acta de Encuentros de Asesoría */
+        .acta-form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .acta-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .acta-field label {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .acta-field input,
+        .acta-field textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.88rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .acta-field input:focus,
+        .acta-field textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
+        }
+
+        .acta-footer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .acta-saved-msg {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .actas-history {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .acta-item-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .acta-item-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .acta-date-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .acta-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .acta-label-small {
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .acta-text-small {
+            font-size: 0.86rem;
+            color: var(--text-main);
+            line-height: 1.45;
+            white-space: pre-line;
+            margin-bottom: 0 !important;
+        }
+
+        .btn-remove-acta {
+            background: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-remove-acta:hover {
+            background-color: var(--primary-red-light);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
         }
 
         /* Estilos de Círculos de Bienestar y Tarjetas */
@@ -538,14 +733,36 @@
 
         <!-- SECCIÓN: PERFIL (CON OPCIÓN DE DESCARGAR HV SCOUT) -->
         <div id="perfil" class="content-section active">
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                <div>
-                    <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
-                    <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia[cite: 8]</p>
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
+                        <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia</p>
+                    </div>
+                    <div class="profile-actions-col">
+                        <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
+                            <i class="fa-solid fa-download"></i> Descargar HV Scout
+                        </button>
+                        <button class="btn-action" id="btn-chn-obs" onclick="toggleChnObservations()" aria-expanded="false">
+                            <i class="fa-solid fa-shield-halved"></i> Observaciones Hoja de Vida CHN
+                        </button>
+                    </div>
                 </div>
-                <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
-                    <i class="fa-solid fa-download"></i> Descargar HV Scout
-                </button>
+
+                <div id="chn-observations-box" class="chn-dropdown-panel">
+                    <div class="chn-panel-header">
+                        <div class="chn-panel-title">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <span>Observaciones Hoja de Vida CHN · Conducta</span>
+                        </div>
+                        <span class="chn-badge-clean">
+                            <i class="fa-solid fa-circle-check"></i> Sin observaciones por conducta
+                        </span>
+                    </div>
+                    <p class="chn-panel-text">
+                        No se reportan observaciones, llamados de atención ni registros por conducta en la Hoja de Vida CHN.
+                    </p>
+                </div>
             </div>
 
             <div class="card">
@@ -565,12 +782,12 @@
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
-            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°[cite: 8, 30].</p></div></div>
-            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales[cite: 8, 22].</p></div></div>
-            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto[cite: 9, 25].</p></div></div>
-            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación[cite: 8, 21].</p></div></div>
-            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral[cite: 8, 24].</p></div></div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal[cite: 8, 24].</p></div></div>
+            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°.</p></div></div>
+            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales.</p></div></div>
+            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto.</p></div></div>
+            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación.</p></div></div>
+            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral.</p></div></div>
+            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal.</p></div></div>
         </div>
 
         <!-- SECCIÓN: DESEMPEÑO -->
@@ -581,27 +798,76 @@
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'jefe', this)"><i class="fa-solid fa-user-shield"></i> Revisión del Jefe Inmediato</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación 360°</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'encuentros-asesoria', this)"><i class="fa-solid fa-file-signature"></i> Encuentros de Asesoría</button>
             </div>
-            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño[cite: 8, 12, 19].</p></div></div>
-            <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD[cite: 10].</p></div></div>
-            <div id="desempeno-jefe" class="subcontent-panel"><div class="card"><h3>Revisión del Jefe Inmediato</h3><p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo[cite: 10].</p></div></div>
+            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño.</p></div></div>
+            <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD.</p></div></div>
+            <div id="desempeno-jefe" class="subcontent-panel"><div class="card"><h3>Revisión del Jefe Inmediato</h3><p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo.</p></div></div>
             <div id="desempeno-evaluacion" class="subcontent-panel">
                 <div class="card">
                     <h3>Evaluación 360° y Componentes de Crecimiento</h3>
-                    <p>Herramientas transversales de medición de conductas observables[cite: 10, 12].</p>
+                    <p>Herramientas transversales de medición de conductas observables.</p>
                     <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                         <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
                             <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-graduation-cap"></i> Formación Básica</h4>
-                            <p style="font-size: 0.85rem; margin-bottom: 0;">Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo[cite: 9, 10].</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo.</p>
                         </div>
                         <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
                             <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-arrows-rotate"></i> Perfeccionamiento Continuo</h4>
-                            <p style="font-size: 0.85rem; margin-bottom: 0;">Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades[cite: 9, 10].</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo[cite: 8, 12].</p></div></div>
+            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo.</p></div></div>
+            <div id="desempeno-encuentros-asesoria" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-file-signature"></i> Acta de Encuentros de Asesoría</h3>
+                    <p>Diligencia el acta de cada encuentro de asesoría registrando fecha, descripción, compromisos y seguimiento a los compromisos.</p>
+
+                    <form id="form-acta-asesoria" onsubmit="handleSaveActa(event)">
+                        <div class="acta-form-grid">
+                            <div class="acta-field">
+                                <label for="acta-fecha"><i class="fa-regular fa-calendar"></i> Fecha del Encuentro</label>
+                                <input type="date" id="acta-fecha" required>
+                            </div>
+                            <div class="acta-field">
+                                <label for="acta-asesor"><i class="fa-solid fa-user-tie"></i> Asesor / Participantes</label>
+                                <input type="text" id="acta-asesor" placeholder="Ej. Mauricio Quiroga - Asesor asignado">
+                            </div>
+                        </div>
+
+                        <div class="acta-field">
+                            <label for="acta-descripcion"><i class="fa-solid fa-align-left"></i> Descripción del Encuentro</label>
+                            <textarea id="acta-descripcion" rows="3" placeholder="Describe los temas tratados, avances del proceso y observaciones del encuentro..." required></textarea>
+                        </div>
+
+                        <div class="acta-form-grid">
+                            <div class="acta-field">
+                                <label for="acta-compromisos"><i class="fa-solid fa-list-check"></i> Compromisos</label>
+                                <textarea id="acta-compromisos" rows="3" placeholder="Registra los compromisos acordados en el encuentro..." required></textarea>
+                            </div>
+                            <div class="acta-field">
+                                <label for="acta-seguimiento"><i class="fa-solid fa-rotate"></i> Seguimiento a los Compromisos</label>
+                                <textarea id="acta-seguimiento" rows="3" placeholder="Indica el avance o estado de los compromisos anteriores..." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="acta-footer-row">
+                            <button type="submit" class="btn-action">
+                                <i class="fa-solid fa-floppy-disk"></i> Guardar Acta
+                            </button>
+                            <span id="acta-feedback-text" class="acta-saved-msg"></span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fa-solid fa-folder-open"></i> Actas Registradas</h3>
+                    <p>Consulta el registro de actas de encuentros de asesoría diligenciadas.</p>
+                    <div id="actas-list-view" class="actas-history"></div>
+                </div>
+            </div>
         </div>
 
         <!-- SECCIÓN: FORMACIÓN -->
@@ -611,9 +877,9 @@
                 <button class="subnav-btn" onclick="switchSubTab('formacion', 'certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
                 <button class="subnav-btn" onclick="switchSubTab('formacion', 'cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
             </div>
-            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados[cite: 8, 19].</p></div></div>
-            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM)[cite: 8, 12].</p></div></div>
-            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro)[cite: 8, 24].</p></div></div>
+            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados.</p></div></div>
+            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM).</p></div></div>
+            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro).</p></div></div>
         </div>
 
         <!-- SECCIÓN FORMADOR (DISPONIBLE SÓLO CUANDO SE SELECCIONA FORMADOR SCOUT) -->
@@ -675,10 +941,10 @@
                 <button class="subnav-btn" onclick="switchSubTab('decisiones', 'sucesion', this)"><i class="fa-solid fa-sitemap"></i> Plan de Sucesión</button>
                 <button class="subnav-btn" onclick="switchSubTab('decisiones', 'entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
             </div>
-            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia[cite: 8].</p></div></div>
-            <div id="decisiones-cierre" class="subcontent-panel"><div class="card"><h3>Cierre del Cargo</h3><p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento[cite: 10, 11].</p></div></div>
-            <div id="decisiones-sucesion" class="subcontent-panel"><div class="card"><h3>Plan de Sucesión</h3><p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional[cite: 11, 18].</p></div></div>
-            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional[cite: 8, 12, 16].</p></div></div>
+            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia.</p></div></div>
+            <div id="decisiones-cierre" class="subcontent-panel"><div class="card"><h3>Cierre del Cargo</h3><p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento.</p></div></div>
+            <div id="decisiones-sucesion" class="subcontent-panel"><div class="card"><h3>Plan de Sucesión</h3><p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional.</p></div></div>
+            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional.</p></div></div>
         </div>
 
         <!-- SECCIÓN: BIENESTAR (ACTUALIZADA CON TARJETAS DE FELICITACIÓN Y CÍRCULOS DE BIENESTAR) -->
@@ -692,14 +958,14 @@
             <div id="bienestar-clima" class="subcontent-panel active">
                 <div class="card">
                     <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
-                    <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo[cite: 8, 18, 22].</p>
+                    <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo.</p>
                 </div>
             </div>
 
             <div id="bienestar-tarjetas" class="subcontent-panel">
                 <div class="card">
                     <h3><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación y Mensajes Positivos</h3>
-                    <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación[cite: 9, 16].</p>
+                    <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación.</p>
                     <div style="background: #FAFAFA; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 15px;">
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Seleccionar Dirigente Destinatario</label>
                         <select style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px; background: white;">
@@ -708,7 +974,7 @@
                             <option>Comisión Regional de Adultos</option>
                         </select>
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Mensaje Positivo / Felicitación</label>
-                        <textarea rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout![cite: 16]" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;"></textarea>
+                        <textarea rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout!" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;"></textarea>
                         <button class="btn-action" onclick="alert('¡Tarjeta de felicitación enviada con éxito!')"><i class="fa-solid fa-paper-plane"></i> Enviar Tarjeta</button>
                     </div>
                 </div>
@@ -717,28 +983,28 @@
             <div id="bienestar-circulos" class="subcontent-panel">
                 <div class="card">
                     <h3><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar y Apoyo</h3>
-                    <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad[cite: 9].</p>
+                    <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad.</p>
                     
                     <div class="circles-grid">
                         <div class="circle-card">
                             <i class="fa-solid fa-campground"></i>
                             <h4>Convivencia Íntima</h4>
-                            <p>Espacios de integración del equipo de sección y fogatas de reflexión[cite: 9].</p>
+                            <p>Espacios de integración del equipo de sección y fogatas de reflexión.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-hands-holding-child"></i>
                             <h4>Apoyo Personal</h4>
-                            <p>Acompañamiento cercano y escucha activa ante situaciones particulares[cite: 9].</p>
+                            <p>Acompañamiento cercano y escucha activa ante situaciones particulares.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-mug-hot"></i>
                             <h4>Café y Conversación</h4>
-                            <p>Encuentros periódicos de camaradería y distensión para dirigentes[cite: 9].</p>
+                            <p>Encuentros periódicos de camaradería y distensión para dirigentes.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-people-group"></i>
                             <h4>Comunidad Scout</h4>
-                            <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia[cite: 9].</p>
+                            <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia.</p>
                         </div>
                     </div>
                 </div>
@@ -749,7 +1015,7 @@
         <div id="reconocimiento" class="content-section">
             <div class="card">
                 <h3><i class="fa-solid fa-award"></i> Condecoraciones e Insignias de Actualización</h3>
-                <p>Gestión de estímulos, galardones, distinciones institucionales y condecoraciones del adulto scout[cite: 8, 21].</p>
+                <p>Gestión de estímulos, galardones, distinciones institucionales y condecoraciones del adulto scout.</p>
             </div>
         </div>
     </main>
@@ -794,6 +1060,112 @@
             }
         };
 
+        const ACTAS_KEY = 'cima_actas_asesoria_v1';
+
+        function escapeText(str) {
+            return String(str)
+                .replace(/&/g, '&')
+                .replace(/</g, '<')
+                .replace(/>/g, '>')
+                .replace(/"/g, '"')
+                .replace(/'/g, ''');
+        }
+
+        function toggleChnObservations() {
+            const box = document.getElementById('chn-observations-box');
+            const btn = document.getElementById('btn-chn-obs');
+            const opened = box.classList.toggle('show');
+            btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        }
+
+        function loadActas() {
+            try {
+                const raw = localStorage.getItem(ACTAS_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveActas(list) {
+            localStorage.setItem(ACTAS_KEY, JSON.stringify(list));
+        }
+
+        function renderActas() {
+            const container = document.getElementById('actas-list-view');
+            if (!container) return;
+
+            const actas = loadActas();
+            if (!actas.length) {
+                container.innerHTML = `<p style="margin-bottom:0; font-size:0.86rem; color:var(--text-muted);">No hay actas de encuentros de asesoría registradas aún.</p>`;
+                return;
+            }
+
+            container.innerHTML = actas.map(a => `
+                <div class="acta-item-card">
+                    <div class="acta-item-top">
+                        <span class="acta-date-pill"><i class="fa-regular fa-calendar-check"></i> ${escapeText(a.fecha)}</span>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:0.8rem; color:var(--text-muted); font-weight:500;">${escapeText(a.asesor || 'Encuentro de Asesoría')}</span>
+                            <button type="button" class="btn-remove-acta" onclick="removeActa('${escapeText(a.id)}')" title="Eliminar acta">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:8px;">
+                        <span class="acta-label-small">Descripción</span>
+                        <p class="acta-text-small">${escapeText(a.descripcion)}</p>
+                    </div>
+                    <div class="acta-columns">
+                        <div>
+                            <span class="acta-label-small">Compromisos</span>
+                            <p class="acta-text-small">${escapeText(a.compromisos)}</p>
+                        </div>
+                        <div>
+                            <span class="acta-label-small">Seguimiento a los Compromisos</span>
+                            <p class="acta-text-small">${escapeText(a.seguimiento)}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function handleSaveActa(event) {
+            event.preventDefault();
+
+            const fecha = document.getElementById('acta-fecha').value;
+            const asesor = document.getElementById('acta-asesor').value.trim();
+            const descripcion = document.getElementById('acta-descripcion').value.trim();
+            const compromisos = document.getElementById('acta-compromisos').value.trim();
+            const seguimiento = document.getElementById('acta-seguimiento').value.trim();
+
+            if (!fecha || !descripcion || !compromisos || !seguimiento) return;
+
+            const actas = loadActas();
+            actas.unshift({
+                id: String(Date.now()),
+                fecha,
+                asesor,
+                descripcion,
+                compromisos,
+                seguimiento
+            });
+            saveActas(actas);
+
+            document.getElementById('form-acta-asesoria').reset();
+            const msg = document.getElementById('acta-feedback-text');
+            msg.textContent = 'Acta guardada correctamente.';
+            setTimeout(() => { msg.textContent = ''; }, 3000);
+
+            renderActas();
+        }
+
+        function removeActa(id) {
+            const updated = loadActas().filter(item => item.id !== id);
+            saveActas(updated);
+            renderActas();
+        }
+
         function toggleRoleMenu() {
             const menu = document.getElementById('role-menu');
             menu.classList.toggle('show');
@@ -837,6 +1209,7 @@
 
         window.onload = function() {
             selectRoleInit('clan', 'Subjefe de Clan');
+            renderActas();
         };
 
         function selectRoleInit(roleKey, roleDisplayName) {
