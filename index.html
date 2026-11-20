@@ -424,6 +424,81 @@
             animation: fadeIn 0.25s ease-in-out;
         }
 
+        /* Estilos exclusivos de Requisición de Vacantes (Perfil Director de Adultos) */
+        .requisicion-box {
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .requisicion-box.visible {
+            display: block;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .requisicion-form-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 12px;
+        }
+
+        .requisicion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .requisicion-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .requisicion-field label {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .requisicion-field select,
+        .requisicion-field input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.88rem;
+        }
+
+        .requisicion-field select:focus,
+        .requisicion-field input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
+        }
+
+        .requisicion-list {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .requisicion-item {
+            background-color: var(--primary-red-light);
+            border: 1px solid #E5B8B8;
+            border-left: 4px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.86rem;
+            color: var(--text-main);
+        }
+
         .checklist-container {
             display: flex;
             flex-direction: column;
@@ -919,6 +994,37 @@
                     </div>
 
                     <div id="mensaje-postulacion" class="postulacion-status-box" role="status" aria-live="polite"></div>
+
+                    <!-- Requisición de Vacantes (visible solo en perfil Director de Adultos) -->
+                    <div id="requisicion-vacantes-box" class="requisicion-box">
+                        <h3><i class="fa-solid fa-file-circle-plus"></i> Requisición de Vacantes</h3>
+                        <p>Solicita la apertura de una convocatoria seleccionando el cargo del listado e indicando la fecha en que se requiere.</p>
+
+                        <form id="requisicionVacanteForm" class="requisicion-form-card" onsubmit="solicitarRequisicion(event)">
+                            <div class="requisicion-grid">
+                                <div class="requisicion-field">
+                                    <label for="reqCargoSelect">Listado de Cargos</label>
+                                    <select id="reqCargoSelect" required>
+                                        <option value="">Selecciona un cargo...</option>
+                                        <option value="Director Nacional de Adultos en el Movimiento">Director Nacional de Adultos en el Movimiento</option>
+                                        <option value="Miembro del Equipo Regional de Comunicaciones">Miembro del Equipo Regional de Comunicaciones</option>
+                                        <option value="Comisionado Regional de Adultos en el Movimiento">Comisionado Regional de Adultos en el Movimiento</option>
+                                        <option value="Coordinador Nacional de Formación">Coordinador Nacional de Formación</option>
+                                        <option value="Asesor de Grupo Scout">Asesor de Grupo Scout</option>
+                                    </select>
+                                </div>
+                                <div class="requisicion-field">
+                                    <label for="reqFechaInput">Fecha en que se requiere el cargo</label>
+                                    <input type="date" id="reqFechaInput" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-action">
+                                <i class="fa-solid fa-paper-plane"></i> Solicitar apertura de convocatoria
+                            </button>
+                        </form>
+
+                        <div id="lista-requisiciones" class="requisicion-list" aria-live="polite"></div>
+                    </div>
                 </div>
             </div>
             <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales.</p></div></div>
@@ -1217,6 +1323,35 @@
             box.classList.add('visible');
         }
 
+        function updateRequisicionVisibility(roleKey) {
+            const reqBox = document.getElementById('requisicion-vacantes-box');
+            if (!reqBox) return;
+            if (roleKey === 'nacion') {
+                reqBox.classList.add('visible');
+            } else {
+                reqBox.classList.remove('visible');
+            }
+        }
+
+        function solicitarRequisicion(event) {
+            event.preventDefault();
+            const cargoSelect = document.getElementById('reqCargoSelect');
+            const fechaInput = document.getElementById('reqFechaInput');
+            const lista = document.getElementById('lista-requisiciones');
+            if (!cargoSelect || !fechaInput || !lista) return;
+
+            const cargo = cargoSelect.value;
+            const fechaRequerida = fechaInput.value;
+            if (!cargo || !fechaRequerida) return;
+
+            const item = document.createElement('div');
+            item.className = 'requisicion-item';
+            item.innerHTML = `<i class="fa-solid fa-bullhorn" style="color: var(--primary-red); margin-right: 6px;"></i> Requisición solicitada para abrir convocatoria del cargo: <strong>${escapeHtml(cargo)}</strong> · Fecha requerida: <strong>${escapeHtml(fechaRequerida)}</strong>.`;
+            lista.prepend(item);
+
+            document.getElementById('requisicionVacanteForm').reset();
+        }
+
         function getActasAsesoria() {
             try {
                 const raw = localStorage.getItem(ACTAS_STORAGE_KEY);
@@ -1325,6 +1460,8 @@
             options.forEach(opt => opt.classList.remove('active-role'));
             event.currentTarget.classList.add('active-role');
 
+            updateRequisicionVisibility(roleKey);
+
             document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
             const data = bscData[roleKey];
             const container = document.getElementById('bsc-content');
@@ -1361,6 +1498,7 @@
         function selectRoleInit(roleKey, roleDisplayName) {
             document.getElementById('sidebar-role').innerText = roleDisplayName;
             document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
+            updateRequisicionVisibility(roleKey);
             const data = bscData[roleKey];
             const container = document.getElementById('bsc-content');
             container.innerHTML = '';
