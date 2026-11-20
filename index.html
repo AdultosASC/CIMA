@@ -401,6 +401,80 @@
             color: white;
         }
 
+        /* Estilos exclusivos del bloque desplegable CHN en Perfil */
+        .profile-right-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            max-width: 420px;
+            margin-left: auto;
+        }
+
+        .chn-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #FAFAFA;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chn-toggle-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+        }
+
+        .chn-toggle-btn .chn-chevron {
+            transition: transform 0.2s ease;
+            font-size: 0.78rem;
+        }
+
+        .chn-toggle-btn[aria-expanded="true"] .chn-chevron {
+            transform: rotate(180deg);
+        }
+
+        .chn-collapse-content {
+            display: none;
+            width: 100%;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 12px 14px;
+            text-align: left;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .chn-collapse-content.open {
+            display: block;
+        }
+
+        .chn-collapse-header {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .chn-collapse-body {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin-bottom: 0 !important;
+        }
+
         /* Estilos de Círculos de Bienestar y Tarjetas */
         .circles-grid {
             display: grid;
@@ -538,14 +612,30 @@
 
         <!-- SECCIÓN: PERFIL (CON OPCIÓN DE DESCARGAR HV SCOUT) -->
         <div id="perfil" class="content-section active">
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div class="card" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
                 <div>
                     <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
-                    <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia[cite: 8]</p>
+                    <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia</p>
                 </div>
-                <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
-                    <i class="fa-solid fa-download"></i> Descargar HV Scout
-                </button>
+                <div class="profile-right-column">
+                    <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
+                        <i class="fa-solid fa-download"></i> Descargar HV Scout
+                    </button>
+                    <button type="button" id="chn-toggle-btn" class="chn-toggle-btn" onclick="toggleChnPanel()" aria-expanded="false" aria-controls="chn-collapse-panel">
+                        <i class="fa-solid fa-shield-halved" style="color: var(--primary-red);"></i>
+                        <span>Anotaciones Hoja de Vida (CHN)</span>
+                        <i class="fa-solid fa-chevron-down chn-chevron"></i>
+                    </button>
+                    <div id="chn-collapse-panel" class="chn-collapse-content">
+                        <div class="chn-collapse-header">
+                            <span>CHN · Hoja de Vida</span>
+                            <span>Sin anotaciones</span>
+                        </div>
+                        <p id="chn-notes-text" class="chn-collapse-body">
+                            No se registran anotaciones vigentes en la Hoja de Vida CHN.
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <div class="card">
@@ -565,12 +655,12 @@
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
-            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°[cite: 8, 30].</p></div></div>
-            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales[cite: 8, 22].</p></div></div>
-            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto[cite: 9, 25].</p></div></div>
-            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación[cite: 8, 21].</p></div></div>
-            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral[cite: 8, 24].</p></div></div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal[cite: 8, 24].</p></div></div>
+            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°.</p></div></div>
+            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales.</p></div></div>
+            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto.</p></div></div>
+            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación.</p></div></div>
+            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral.</p></div></div>
+            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal.</p></div></div>
         </div>
 
         <!-- SECCIÓN: DESEMPEÑO -->
@@ -582,26 +672,26 @@
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación 360°</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
             </div>
-            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño[cite: 8, 12, 19].</p></div></div>
-            <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD[cite: 10].</p></div></div>
-            <div id="desempeno-jefe" class="subcontent-panel"><div class="card"><h3>Revisión del Jefe Inmediato</h3><p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo[cite: 10].</p></div></div>
+            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño.</p></div></div>
+            <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD.</p></div></div>
+            <div id="desempeno-jefe" class="subcontent-panel"><div class="card"><h3>Revisión del Jefe Inmediato</h3><p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo.</p></div></div>
             <div id="desempeno-evaluacion" class="subcontent-panel">
                 <div class="card">
                     <h3>Evaluación 360° y Componentes de Crecimiento</h3>
-                    <p>Herramientas transversales de medición de conductas observables[cite: 10, 12].</p>
+                    <p>Herramientas transversales de medición de conductas observables.</p>
                     <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                         <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
                             <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-graduation-cap"></i> Formación Básica</h4>
-                            <p style="font-size: 0.85rem; margin-bottom: 0;">Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo[cite: 9, 10].</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo.</p>
                         </div>
                         <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
                             <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-arrows-rotate"></i> Perfeccionamiento Continuo</h4>
-                            <p style="font-size: 0.85rem; margin-bottom: 0;">Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades[cite: 9, 10].</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo[cite: 8, 12].</p></div></div>
+            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo.</p></div></div>
         </div>
 
         <!-- SECCIÓN: FORMACIÓN -->
@@ -611,9 +701,9 @@
                 <button class="subnav-btn" onclick="switchSubTab('formacion', 'certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
                 <button class="subnav-btn" onclick="switchSubTab('formacion', 'cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
             </div>
-            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados[cite: 8, 19].</p></div></div>
-            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM)[cite: 8, 12].</p></div></div>
-            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro)[cite: 8, 24].</p></div></div>
+            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados.</p></div></div>
+            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM).</p></div></div>
+            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro).</p></div></div>
         </div>
 
         <!-- SECCIÓN FORMADOR (DISPONIBLE SÓLO CUANDO SE SELECCIONA FORMADOR SCOUT) -->
@@ -675,10 +765,10 @@
                 <button class="subnav-btn" onclick="switchSubTab('decisiones', 'sucesion', this)"><i class="fa-solid fa-sitemap"></i> Plan de Sucesión</button>
                 <button class="subnav-btn" onclick="switchSubTab('decisiones', 'entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
             </div>
-            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia[cite: 8].</p></div></div>
-            <div id="decisiones-cierre" class="subcontent-panel"><div class="card"><h3>Cierre del Cargo</h3><p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento[cite: 10, 11].</p></div></div>
-            <div id="decisiones-sucesion" class="subcontent-panel"><div class="card"><h3>Plan de Sucesión</h3><p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional[cite: 11, 18].</p></div></div>
-            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional[cite: 8, 12, 16].</p></div></div>
+            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia.</p></div></div>
+            <div id="decisiones-cierre" class="subcontent-panel"><div class="card"><h3>Cierre del Cargo</h3><p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento.</p></div></div>
+            <div id="decisiones-sucesion" class="subcontent-panel"><div class="card"><h3>Plan de Sucesión</h3><p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional.</p></div></div>
+            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional.</p></div></div>
         </div>
 
         <!-- SECCIÓN: BIENESTAR (ACTUALIZADA CON TARJETAS DE FELICITACIÓN Y CÍRCULOS DE BIENESTAR) -->
@@ -692,14 +782,14 @@
             <div id="bienestar-clima" class="subcontent-panel active">
                 <div class="card">
                     <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
-                    <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo[cite: 8, 18, 22].</p>
+                    <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo.</p>
                 </div>
             </div>
 
             <div id="bienestar-tarjetas" class="subcontent-panel">
                 <div class="card">
                     <h3><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación y Mensajes Positivos</h3>
-                    <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación[cite: 9, 16].</p>
+                    <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación.</p>
                     <div style="background: #FAFAFA; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 15px;">
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Seleccionar Dirigente Destinatario</label>
                         <select style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px; background: white;">
@@ -708,7 +798,7 @@
                             <option>Comisión Regional de Adultos</option>
                         </select>
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Mensaje Positivo / Felicitación</label>
-                        <textarea rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout![cite: 16]" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;"></textarea>
+                        <textarea rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout!" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;"></textarea>
                         <button class="btn-action" onclick="alert('¡Tarjeta de felicitación enviada con éxito!')"><i class="fa-solid fa-paper-plane"></i> Enviar Tarjeta</button>
                     </div>
                 </div>
@@ -717,28 +807,28 @@
             <div id="bienestar-circulos" class="subcontent-panel">
                 <div class="card">
                     <h3><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar y Apoyo</h3>
-                    <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad[cite: 9].</p>
+                    <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad.</p>
                     
                     <div class="circles-grid">
                         <div class="circle-card">
                             <i class="fa-solid fa-campground"></i>
                             <h4>Convivencia Íntima</h4>
-                            <p>Espacios de integración del equipo de sección y fogatas de reflexión[cite: 9].</p>
+                            <p>Espacios de integración del equipo de sección y fogatas de reflexión.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-hands-holding-child"></i>
                             <h4>Apoyo Personal</h4>
-                            <p>Acompañamiento cercano y escucha activa ante situaciones particulares[cite: 9].</p>
+                            <p>Acompañamiento cercano y escucha activa ante situaciones particulares.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-mug-hot"></i>
                             <h4>Café y Conversación</h4>
-                            <p>Encuentros periódicos de camaradería y distensión para dirigentes[cite: 9].</p>
+                            <p>Encuentros periódicos de camaradería y distensión para dirigentes.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-people-group"></i>
                             <h4>Comunidad Scout</h4>
-                            <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia[cite: 9].</p>
+                            <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia.</p>
                         </div>
                     </div>
                 </div>
@@ -749,7 +839,7 @@
         <div id="reconocimiento" class="content-section">
             <div class="card">
                 <h3><i class="fa-solid fa-award"></i> Condecoraciones e Insignias de Actualización</h3>
-                <p>Gestión de estímulos, galardones, distinciones institucionales y condecoraciones del adulto scout[cite: 8, 21].</p>
+                <p>Gestión de estímulos, galardones, distinciones institucionales y condecoraciones del adulto scout.</p>
             </div>
         </div>
     </main>
@@ -793,6 +883,14 @@
                 ]
             }
         };
+
+        function toggleChnPanel() {
+            const panel = document.getElementById('chn-collapse-panel');
+            const btn = document.getElementById('chn-toggle-btn');
+            if (!panel || !btn) return;
+            const isOpen = panel.classList.toggle('open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
 
         function toggleRoleMenu() {
             const menu = document.getElementById('role-menu');
