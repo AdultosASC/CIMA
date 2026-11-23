@@ -1,1 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formador - C.I.M.A.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #8B0000;
+            --primary-red-dark: #600000;
+            --primary-red-light: #FDF2F2;
+            --bg-cream: #FDFBF7;
+            --card-bg: #FFFFFF;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --border-color: #E6E2D8;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            padding: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subnav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 14px;
+        }
+
+        .subnav-btn {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .subnav-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .subnav-btn.active {
+            background-color: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+
+        .subcontent-panel {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .subcontent-panel.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.08rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .card h3 i {
+            color: var(--primary-red);
+        }
+
+        .card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .formador-top-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .formador-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .formador-field label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .formador-field input,
+        .formador-field select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FAFAFA;
+            color: var(--text-main);
+            font-size: 0.86rem;
+        }
+
+        .formador-field input:focus,
+        .formador-field select:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            background-color: #FFFFFF;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary-red);
+            color: white;
+        }
+
+        .formador-status-msg {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-left: 10px;
+        }
+
+        .historial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 18px;
+            margin-top: 12px;
+        }
+
+        .historial-form-box {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .historial-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .historial-item {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .historial-item-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .historial-item-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .historial-cert-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .btn-remove-sm {
+            background: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 5px 9px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-remove-sm:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+        }
+
+        .checklist-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #FAFAFA;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .check-item input[type="checkbox"] {
+            margin-top: 3px;
+            accent-color: var(--primary-red);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .check-item label {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            cursor: pointer;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Subpestañas de Formador -->
+    <div class="subnav-tabs">
+        <button class="subnav-btn active" onclick="switchFormadorTab('perfil-formador', this)">
+            <i class="fa-solid fa-id-card"></i> Perfil e Historial de Formación
+        </button>
+        <button class="subnav-btn" onclick="switchFormadorTab('ayudante', this)">
+            <i class="fa-solid fa-chalkboard"></i> Ayudante de Formación
+        </button>
+        <button class="subnav-btn" onclick="switchFormadorTab('formador-scout', this)">
+            <i class="fa-solid fa-user-graduate"></i> Formador Scout
+        </button>
+        <button class="subnav-btn" onclick="switchFormadorTab('director-formacion', this)">
+            <i class="fa-solid fa-award"></i> Director de Formación Scout
+        </button>
+    </div>
+
+    <!-- Panel 1: Perfil del Formador + Historial y Certificados -->
+    <div id="formador-perfil-formador" class="subcontent-panel active">
+        <div class="card">
+            <h3><i class="fa-solid fa-user-check"></i> Información General del Formador</h3>
+            <p>Gestiona tus datos de contacto, región y clasificación dentro de la Red Nacional de Formación.</p>
+
+            <div class="formador-top-grid">
+                <div class="formador-field">
+                    <label for="formadorNombre">Nombre Completo</label>
+                    <input type="text" id="formadorNombre" value="Mauricio Quiroga Posada">
+                </div>
+                <div class="formador-field">
+                    <label for="formadorDocumento">Documento de Identidad</label>
+                    <input type="text" id="formadorDocumento" value="1.017.245.890">
+                </div>
+                <div class="formador-field">
+                    <label for="formadorRegion">Región Scout</label>
+                    <input type="text" id="formadorRegion" value="Región Antioquia">
+                </div>
+                <div class="formador-field">
+                    <label for="formadorClasificacion">Clasificación (AFS / FS / DFS)</label>
+                    <select id="formadorClasificacion">
+                        <option value="AFS">AFS · Ayudante de Formación</option>
+                        <option value="FS" selected>FS · Formador Scout</option>
+                        <option value="DFS">DFS · Director de Formación Scout</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="display:flex; align-items:center; flex-wrap:wrap;">
+                <button type="button" class="btn-action" onclick="guardarDatosFormador()">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar información del formador
+                </button>
+                <span id="formadorSaveStatus" class="formador-status-msg" aria-live="polite"></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><i class="fa-solid fa-certificate"></i> Historial de Formación y Carga de Certificados</h3>
+            <p>Registra cursos, talleres o acreditaciones y adjunta su soporte o certificado para mantener el registro visual actualizado.</p>
+
+            <div class="historial-grid">
+                <form class="historial-form-box" onsubmit="agregarCertificadoFormador(event)">
+                    <div class="formador-field" style="margin-bottom:12px;">
+                        <label for="cursoNombre">Curso / Taller / Acreditación</label>
+                        <input type="text" id="cursoNombre" placeholder="Ej. Curso de Formadores (TTT)" required>
+                    </div>
+                    <div class="formador-field" style="margin-bottom:12px;">
+                        <label for="cursoFecha">Fecha de Realización</label>
+                        <input type="date" id="cursoFecha" required>
+                    </div>
+                    <div class="formador-field" style="margin-bottom:14px;">
+                        <label for="cursoArchivo">Certificado o Soporte (PDF / Imagen)</label>
+                        <input type="file" id="cursoArchivo" accept=".pdf,.png,.jpg,.jpeg" required>
+                    </div>
+                    <button type="submit" class="btn-action">
+                        <i class="fa-solid fa-upload"></i> Agregar al historial
+                    </button>
+                </form>
+
+                <div>
+                    <div id="listaHistorialFormador" class="historial-lista"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel 2: Ayudante de Formación -->
+    <div id="formador-ayudante" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Ayudante de Formación</h3>
+            <p>Requisitos previos y verificación de competencias para el rol de apoyo en la Red Nacional de Formación.</p>
+            <div class="checklist-container">
+                <div class="check-item"><input type="checkbox" id="ay1"><label for="ay1">Completar el Módulo de Inducción General a la Formación.</label></div>
+                <div class="check-item"><input type="checkbox" id="ay2"><label for="ay2">Demostrar vivencia activa de los principios y la Ley Scout.</label></div>
+                <div class="check-item"><input type="checkbox" id="ay3"><label for="ay3">Participar como asistente de logística en al menos un curso básico regional.</label></div>
+                <div class="check-item"><input type="checkbox" id="ay4"><label for="ay4">Suscripción del Compromiso y Acuerdo Mutuo para el servicio voluntario.</label></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel 3: Formador Scout -->
+    <div id="formador-formador-scout" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Formador Scout</h3>
+            <p>Criterios de acreditación, dominios pedagógicos y competencias específicas de facilitación.</p>
+            <div class="checklist-container">
+                <div class="check-item"><input type="checkbox" id="fs1"><label for="fs1">Certificación vigente en Insignia de Madera en su respectiva línea estratégica.</label></div>
+                <div class="check-item"><input type="checkbox" id="fs2"><label for="fs2">Aprobación del Taller de Entrenamiento de Formadores (TTT / Flor de Lis de Formación).</label></div>
+                <div class="check-item"><input type="checkbox" id="fs3"><label for="fs3">Diseño y presentación de una Ficha de Sesión con enfoque en competencias.</label></div>
+                <div class="check-item"><input type="checkbox" id="fs4"><label for="fs4">Práctica supervisada de facilitación de un módulo formativo evaluada por pares.</label></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel 4: Director de Formación Scout -->
+    <div id="formador-director-formacion" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Director de Formación Scout</h3>
+            <p>Estándares avanzados de liderazgo pedagógico, diseño curricular y coordinación de equipos nacionales y regionales.</p>
+            <div class="checklist-container">
+                <div class="check-item"><input type="checkbox" id="df1"><label for="df1">Experiencia mínima comprobada como Formador Scout activo en la Red Nacional.</label></div>
+                <div class="check-item"><input type="checkbox" id="df2"><label for="df2">Dirección exitosa o co-dirección de al menos dos cursos de formación avanzada o Insignia de Madera.</label></div>
+                <div class="check-item"><input type="checkbox" id="df3"><label for="df3">Dominio de la Política Nacional de Adultos en el Movimiento (PNAM) y sus herramientas de gestión.</label></div>
+                <div class="check-item"><input type="checkbox" id="df4"><label for="df4">Aval de la Dirección Nacional de Adultos en el Movimiento y el Consejo Scout correspondiente.</label></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const FORMADOR_PERFIL_KEY = 'cima_formador_perfil_v1';
+        const FORMADOR_HISTORIAL_KEY = 'cima_formador_historial_v1';
+
+        function escapeHtml(text) {
+            return String(text ?? '')
+                .replace(/&/g, '&')
+                .replace(/</g, '<')
+                .replace(/>/g, '>')
+                .replace(/"/g, '"');
+        }
+
+        function switchFormadorTab(tabId, btnEl) {
+            document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+
+            document.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
+            const target = document.getElementById('formador-' + tabId);
+            if (target) target.classList.add('active');
+        }
+
+        function cargarDatosFormador() {
+            try {
+                const raw = localStorage.getItem(FORMADOR_PERFIL_KEY);
+                if (!raw) return;
+                const data = JSON.parse(raw);
+                if (data.nombre) document.getElementById('formadorNombre').value = data.nombre;
+                if (data.documento) document.getElementById('formadorDocumento').value = data.documento;
+                if (data.region) document.getElementById('formadorRegion').value = data.region;
+                if (data.clasificacion) document.getElementById('formadorClasificacion').value = data.clasificacion;
+            } catch (e) {}
+        }
+
+        function guardarDatosFormador() {
+            const payload = {
+                nombre: document.getElementById('formadorNombre').value.trim(),
+                documento: document.getElementById('formadorDocumento').value.trim(),
+                region: document.getElementById('formadorRegion').value.trim(),
+                clasificacion: document.getElementById('formadorClasificacion').value
+            };
+            try {
+                localStorage.setItem(FORMADOR_PERFIL_KEY, JSON.stringify(payload));
+            } catch (e) {}
+
+            const statusEl = document.getElementById('formadorSaveStatus');
+            if (statusEl) {
+                statusEl.textContent = 'Información del formador guardada.';
+                setTimeout(() => { statusEl.textContent = ''; }, 3000);
+            }
+        }
+
+        function getHistorialFormador() {
+            try {
+                const raw = localStorage.getItem(FORMADOR_HISTORIAL_KEY);
+                if (raw) return JSON.parse(raw);
+            } catch (e) {}
+            return [
+                {
+                    id: 'hist-inicial-1',
+                    curso: 'Insignia de Madera · Línea de Formación',
+                    fecha: '2025-08-15',
+                    archivo: 'certificado_insignia_madera.pdf'
+                }
+            ];
+        }
+
+        function setHistorialFormador(items) {
+            try {
+                localStorage.setItem(FORMADOR_HISTORIAL_KEY, JSON.stringify(items));
+            } catch (e) {}
+        }
+
+        function renderHistorialFormador() {
+            const cont = document.getElementById('listaHistorialFormador');
+            if (!cont) return;
+            const items = getHistorialFormador();
+
+            if (!items.length) {
+                cont.innerHTML = '<p style="margin-bottom:0; font-size:0.84rem; color:var(--text-muted);">Aún no hay cursos o certificados registrados.</p>';
+                return;
+            }
+
+            cont.innerHTML = items.map(item => `
+                <div class="historial-item">
+                    <div>
+                        <div class="historial-item-title">${escapeHtml(item.curso)}</div>
+                        <div class="historial-item-meta"><i class="fa-regular fa-calendar"></i> ${escapeHtml(item.fecha)}</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                        <span class="historial-cert-tag"><i class="fa-solid fa-file-check"></i> ${escapeHtml(item.archivo)}</span>
+                        <button type="button" class="btn-remove-sm" onclick="eliminarCertificadoFormador('${escapeHtml(item.id)}')">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function agregarCertificadoFormador(event) {
+            event.preventDefault();
+            const curso = document.getElementById('cursoNombre').value.trim();
+            const fecha = document.getElementById('cursoFecha').value;
+            const fileInput = document.getElementById('cursoArchivo');
+            const archivo = (fileInput && fileInput.files && fileInput.files[0]) ? fileInput.files[0].name : 'certificado.pdf';
+
+            if (!curso || !fecha) return;
+
+            const items = getHistorialFormador();
+            items.unshift({
+                id: String(Date.now()),
+                curso,
+                fecha,
+                archivo
+            });
+            setHistorialFormador(items);
+            renderHistorialFormador();
+
+            document.getElementById('cursoNombre').value = '';
+            document.getElementById('cursoFecha').value = '';
+            if (fileInput) fileInput.value = '';
+        }
+
+        function eliminarCertificadoFormador(id) {
+            const items = getHistorialFormador().filter(item => item.id !== id);
+            setHistorialFormador(items);
+            renderHistorialFormador();
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            cargarDatosFormador();
+            renderHistorialFormador();
+
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ type: 'CIMA_REQUEST_STATE' }, '*');
+            }
+        });
+    </script>
+</body>
+</html>
