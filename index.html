@@ -1,1901 +1,536 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C.I.M.A. - Plataforma HRM Scouts de Colombia</title>
-    <!-- Google Fonts & FontAwesome para iconos -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-red: #8B0000;
-            --primary-red-dark: #600000;
-            --primary-red-light: #FDF2F2;
-            --bg-cream: #FDFBF7;
-            --card-bg: #FFFFFF;
-            --text-main: #2C2C2C;
-            --text-muted: #666666;
-            --border-color: #E6E2D8;
-            --sidebar-width: 280px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-cream);
-            color: var(--text-main);
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* --- CONTENEDOR IZQUIERDO: MENÚ Y NAVEGACIÓN --- */
-        aside {
-            width: var(--sidebar-width);
-            background-color: var(--bg-cream);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px;
-            height: 100%;
-        }
-
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
-        }
-
-        .brand-logo {
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-red);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .brand-info h1 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary-red);
-            letter-spacing: 0.5px;
-        }
-
-        .brand-info p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .nav-menu {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-main);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .nav-item i {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            transition: color 0.2s;
-        }
-
-        .nav-item:hover {
-            background-color: rgba(139, 0, 0, 0.05);
-            color: var(--primary-red);
-        }
-
-        .nav-item:hover i {
-            color: var(--primary-red);
-        }
-
-        .nav-item.active {
-            background-color: var(--primary-red);
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
-        }
-
-        .nav-item.active i {
-            color: white;
-        }
-
-        #nav-formador-btn {
-            display: none;
-        }
-
-        /* Footer de Usuario con selector desplegable */
-        .sidebar-footer {
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-        }
-
-        .user-mini {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-avatar {
-            width: 36px;
-            height: 36px;
-            background-color: var(--primary-red-light);
-            color: var(--primary-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .user-details h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .user-details p {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-        }
-
-        .role-switch-btn {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 6px;
-            border-radius: 6px;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .role-switch-btn:hover {
-            background-color: rgba(139, 0, 0, 0.08);
-            color: var(--primary-red);
-        }
-
-        /* Menú desplegable del Footer */
-        .role-dropdown-menu {
-            display: none;
-            position: absolute;
-            bottom: 65px;
-            left: 0;
-            width: 100%;
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            z-index: 100;
-            overflow: hidden;
-        }
-
-        .role-dropdown-menu.show {
-            display: block;
-            animation: fadeIn 0.2s ease-in-out;
-        }
-
-        .role-option {
-            padding: 10px 14px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            border-bottom: 1px solid #F5F3EC;
-            transition: background 0.2s;
-        }
-
-        .role-option:last-child {
-            border-bottom: none;
-        }
-
-        .role-option:hover {
-            background-color: var(--primary-red-light);
-            color: var(--primary-red);
-        }
-
-        .role-option.active-role {
-            font-weight: 600;
-            color: var(--primary-red);
-            background-color: rgba(139, 0, 0, 0.04);
-        }
-
-        /* --- CONTENEDOR DERECHO: VISUALIZACIÓN --- */
-        main {
-            flex-grow: 1;
-            background-color: var(--bg-cream);
-            padding: 40px;
-            overflow-y: auto;
-            height: 100%;
-        }
-
-        .header-welcome {
-            margin-bottom: 25px;
-        }
-
-        .header-welcome h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-
-        .header-welcome p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .content-section {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .subnav-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-        }
-
-        .subnav-btn {
-            background-color: white;
-            border: 1px solid var(--border-color);
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .subnav-btn:hover {
-            border-color: var(--primary-red);
-            color: var(--primary-red);
-        }
-
-        .subnav-btn.active {
-            background-color: var(--primary-red);
-            color: white;
-            border-color: var(--primary-red);
-        }
-
-        .subcontent-panel {
-            display: none;
-        }
-
-        .subcontent-panel.active {
-            display: block;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .card h3 i {
-            color: var(--primary-red);
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        /* Estilos exclusivos de Proceso de Ingreso (Aprobación Jefe Inmediato) */
-        .ingreso-group-card {
-            background-color: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 16px 18px;
-            margin-top: 12px;
-        }
-
-        .ingreso-group-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--primary-red);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .ingreso-sublist {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding-left: 14px;
-            border-left: 2px solid var(--border-color);
-        }
-
-        .ingreso-check-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            background-color: #FFFFFF;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px 14px;
-        }
-
-        .ingreso-check-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            font-size: 0.88rem;
-            font-weight: 500;
-            color: var(--text-main);
-            flex: 1;
-        }
-
-        .ingreso-check-left input[type="checkbox"] {
-            width: 17px;
-            height: 17px;
-            accent-color: var(--primary-red);
-            cursor: pointer;
-        }
-
-        .ingreso-estado-tag {
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 3px 9px;
-            border-radius: 999px;
-            background-color: #F3F1EC;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-
-        .ingreso-estado-tag.aprobado {
-            background-color: var(--primary-red-light);
-            color: var(--primary-red);
-        }
-
-        .ingreso-footer-bar {
-            margin-top: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .ingreso-resumen-msg {
-            font-size: 0.86rem;
-            font-weight: 600;
-            color: var(--primary-red);
-        }
-
-        /* Estilos exclusivos de Diccionario de Competencias */
-        .comp-switch-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 18px;
-        }
-
-        .comp-option-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 9px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background-color: #FAFAFA;
-            color: var(--text-main);
-            font-size: 0.86rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .comp-option-btn:hover {
-            border-color: var(--primary-red);
-            color: var(--primary-red);
-            background-color: var(--primary-red-light);
-        }
-
-        .comp-option-btn.active {
-            background-color: var(--primary-red);
-            color: #FFFFFF;
-            border-color: var(--primary-red);
-        }
-
-        .comp-detail-panel {
-            display: none;
-            background-color: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-red);
-            border-radius: 10px;
-            padding: 18px;
-            animation: fadeIn 0.25s ease-in-out;
-        }
-
-        .comp-detail-panel.active {
-            display: block;
-        }
-
-        .comp-label-title {
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--primary-red);
-            letter-spacing: 0.4px;
-            margin-bottom: 4px;
-        }
-
-        .comp-example-name {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 10px;
-        }
-
-        .comp-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .comp-list li {
-            background-color: #FFFFFF;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 0.86rem;
-            color: var(--text-main);
-            line-height: 1.45;
-        }
-
-        .comp-grade-badge {
-            display: inline-block;
-            background-color: var(--primary-red-light);
-            color: var(--primary-red);
-            font-weight: 700;
-            font-size: 0.78rem;
-            padding: 2px 8px;
-            border-radius: 6px;
-            margin-right: 6px;
-        }
-
-        /* Estilos exclusivos de Vacantes y Requisiciones */
-        .vacantes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-top: 12px;
-        }
-
-        .vacante-item {
-            background-color: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 14px;
-        }
-
-        .vacante-badge {
-            display: inline-block;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--primary-red);
-            background-color: var(--primary-red-light);
-            padding: 4px 10px;
-            border-radius: 999px;
-            margin-bottom: 8px;
-        }
-
-        .vacante-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 6px;
-        }
-
-        .vacante-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .vacante-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.84rem;
-            font-weight: 600;
-            color: var(--primary-red);
-            text-decoration: none;
-            padding: 7px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background-color: #FFFFFF;
-            transition: all 0.2s;
-        }
-
-        .vacante-link:hover {
-            border-color: var(--primary-red);
-            background-color: var(--primary-red-light);
-        }
-
-        .postulacion-status-box {
-            margin-top: 16px;
-            padding: 14px 16px;
-            border-radius: 10px;
-            background-color: var(--primary-red-light);
-            border: 1px solid #E5B8B8;
-            border-left: 4px solid var(--primary-red);
-            color: var(--text-main);
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: none;
-        }
-
-        .postulacion-status-box.visible {
-            display: block;
-            animation: fadeIn 0.25s ease-in-out;
-        }
-
-        /* Estilos exclusivos de Requisición de Vacantes (Perfil Director de Adultos) */
-        .requisicion-box {
-            margin-top: 22px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            display: none;
-        }
-
-        .requisicion-box.visible {
-            display: block;
-            animation: fadeIn 0.25s ease-in-out;
-        }
-
-        .requisicion-form-card {
-            background-color: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 18px;
-            margin-top: 12px;
-        }
-
-        .requisicion-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-
-        .requisicion-field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .requisicion-field label {
-            font-size: 0.84rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .requisicion-field select,
-        .requisicion-field input {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background-color: #FFFFFF;
-            color: var(--text-main);
-            font-size: 0.88rem;
-        }
-
-        .requisicion-field select:focus,
-        .requisicion-field input:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
-        }
-
-        .requisicion-list {
-            margin-top: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .requisicion-item {
-            background-color: var(--primary-red-light);
-            border: 1px solid #E5B8B8;
-            border-left: 4px solid var(--primary-red);
-            border-radius: 8px;
-            padding: 12px 14px;
-            font-size: 0.86rem;
-            color: var(--text-main);
-        }
-
-        .checklist-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .check-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            background: #FAFAFA;
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .check-item input[type="checkbox"] {
-            margin-top: 3px;
-            accent-color: var(--primary-red);
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .check-item label {
-            font-size: 0.9rem;
-            color: var(--text-main);
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .profile-name-clean {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary-red);
-            margin-bottom: 4px;
-        }
-
-        .btn-action {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: var(--primary-red-light);
-            color: var(--primary-red);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-action:hover {
-            background-color: var(--primary-red);
-            color: white;
-        }
-
-        /* Estilos exclusivos del bloque desplegable CHN en Perfil */
-        .profile-right-column {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-            max-width: 420px;
-            margin-left: auto;
-        }
-
-        .chn-toggle-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #FAFAFA;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 8px 14px;
-            border-radius: 6px;
-            font-size: 0.84rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .chn-toggle-btn:hover {
-            border-color: var(--primary-red);
-            color: var(--primary-red);
-            background-color: var(--primary-red-light);
-        }
-
-        .chn-toggle-btn .chn-chevron {
-            transition: transform 0.2s ease;
-            font-size: 0.78rem;
-        }
-
-        .chn-toggle-btn[aria-expanded="true"] .chn-chevron {
-            transform: rotate(180deg);
-        }
-
-        .chn-collapse-content {
-            display: none;
-            width: 100%;
-            background-color: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-left: 3px solid var(--primary-red);
-            border-radius: 8px;
-            padding: 12px 14px;
-            text-align: left;
-            animation: fadeIn 0.2s ease-in-out;
-        }
-
-        .chn-collapse-content.open {
-            display: block;
-        }
-
-        .chn-collapse-header {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--primary-red);
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .chn-collapse-body {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            line-height: 1.45;
-            margin-bottom: 0 !important;
-        }
-
-        /* Estilos del Acta de Encuentros de Asesoría */
-        .acta-box {
-            background-color: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 12px;
-        }
-
-        .acta-grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px;
-        }
-
-        .acta-field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-bottom: 14px;
-        }
-
-        .acta-field label {
-            font-size: 0.84rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .acta-field input,
-        .acta-field textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background-color: #FFFFFF;
-            color: var(--text-main);
-            font-size: 0.88rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .acta-field input:focus,
-        .acta-field textarea:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
-        }
-
-        .acta-actions {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .acta-feedback {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--primary-red);
-        }
-
-        .acta-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 14px;
-        }
-
-        .acta-item {
-            background-color: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-red);
-            border-radius: 10px;
-            padding: 16px;
-        }
-
-        .acta-item-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding-bottom: 8px;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .acta-date-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background-color: var(--primary-red-light);
-            color: var(--primary-red);
-            font-size: 0.78rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 999px;
-        }
-
-        .acta-item-cols {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-            margin-top: 8px;
-        }
-
-        .acta-label-sm {
-            display: block;
-            font-size: 0.74rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .acta-text-sm {
-            font-size: 0.86rem;
-            color: var(--text-main);
-            line-height: 1.45;
-            white-space: pre-line;
-            margin-bottom: 0 !important;
-        }
-
-        .acta-delete-btn {
-            background: white;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 0.76rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .acta-delete-btn:hover {
-            border-color: var(--primary-red);
-            color: var(--primary-red);
-            background-color: var(--primary-red-light);
-        }
-
-        /* Estilos de Círculos de Bienestar y Tarjetas */
-        .circles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .circle-card {
-            background: #FAFAFA;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .circle-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary-red);
-        }
-
-        .circle-card i {
-            font-size: 2rem;
-            color: var(--primary-red);
-            margin-bottom: 10px;
-        }
-
-        .circle-card h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .circle-card p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0;
-        }
-
-        .bsc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .bsc-card {
-            background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 16px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            transition: transform 0.2s;
-        }
-        .bsc-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary-red);
-        }
-        .bsc-card i {
-            font-size: 1.5rem;
-            color: var(--primary-red);
-            margin-bottom: 8px;
-        }
-        .bsc-card h4 {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        .bsc-card .bsc-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-        .bsc-card .bsc-subtext {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Módulo de Certificación · Dirección Nacional de Adultos en el Movimiento (DNAM)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{--purple:#4d006e;--blue:#003087;--red:#c40f2f;--yellow:#ffcd00;--lilac:#efe4f5;--ink:#222;--muted:#687082;--line:#e8e2ec;--bg:#f7f4fa;--ok:#219653;--warn:#f2c94c;--bad:#eb5757;--radius:18px;--shadow:0 10px 30px rgba(77,0,110,.12)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:14px;padding:.78rem 1rem;font-weight:800}.btn{background:var(--purple);color:white;box-shadow:var(--shadow)}.btn.secondary{background:white;color:var(--purple);border:1px solid var(--line);box-shadow:none}.btn.ghost{background:transparent;color:var(--purple);border:1px solid transparent}.btn.warn{background:#fff5cf;color:#6d5200}.btn.danger{background:#fee;color:#a40020}.btn.small{font-size:.82rem;padding:.45rem .65rem;border-radius:10px}.btn:disabled{opacity:.45;cursor:not-allowed}
+.screen{min-height:100vh}.welcome{display:grid;place-items:center;padding:32px 18px;position:relative;overflow:hidden}
+.welcome-card{position:relative;width:min(980px,100%);background:white;border-radius:34px;box-shadow:var(--shadow);padding:36px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.brand-plate{background:var(--purple);border-radius:28px;padding:26px;display:grid;place-items:center;color:white;font-weight:900;font-size:1.4rem;text-align:center;box-shadow:inset 0 0 20px rgba(0,0,0,0.2)}
+.welcome h1{color:var(--purple);font-size:clamp(26px,4vw,40px);line-height:1.02;margin:0 0 12px}.welcome p{font-size:1.02rem;color:#4c4c56;line-height:1.55}
+.app{display:none;min-height:100vh}.topbar{height:76px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:20}
+.top-brand{display:flex;align-items:center;gap:10px;color:var(--purple);font-weight:900;line-height:1.05}.top-unit{font-weight:800;color:#333}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:0}.sidebar{background:#fff;border-right:1px solid var(--line);min-height:calc(100vh - 76px);padding:18px 12px;position:sticky;top:76px;align-self:start}
+.side-btn{width:100%;text-align:left;background:transparent;color:#2b2330;border-radius:14px;display:flex;gap:10px;align-items:center;margin:4px 0;font-weight:800;padding:12px}.side-btn:hover,.side-btn.active{background:var(--lilac);color:var(--purple)}
+.content{padding:24px;max-width:1420px}.card{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:16px}
+.title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.title-row h2{margin:0;color:var(--purple)}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}.field label{font-size:.86rem;font-weight:900;color:#3b3440}
+.field input, .field select{border:1px solid #ddd1e5;border-radius:13px;padding:.75rem;background:#fff;width:100%}
+.table-container{width:100%;overflow-x:auto;margin-top:16px}
+table{width:100%;border-collapse:collapse;text-align:left}
+th,td{padding:12px;border-bottom:1px solid var(--line);font-size:0.9rem}
+th{background:var(--lilac);color:var(--purple);font-weight:800}
+.step-box{margin-top:16px;padding:16px;background:var(--lilac);border-radius:14px}
+.badge{background:var(--lilac);color:var(--purple);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-weight:800}
+
+/* Estilos compactos para sección Atracción / Manual de cargos */
+.atraccion-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:#fbf9fd;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+.atraccion-copy{font-size:.86rem;color:#3b3440;margin:0}
+.atraccion-link{color:var(--blue);font-weight:800;text-decoration:underline}
+.atraccion-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cargo-panel{border:1px solid #ddd1e5;background:#fcfaff;border-radius:14px;padding:14px 16px;margin-bottom:16px}
+.cargo-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.cargo-header h3{margin:0;color:var(--purple);font-size:1rem}
+.cargo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;font-size:.84rem;margin:10px 0}
+.cargo-box{background:white;border:1px solid var(--line);border-radius:10px;padding:10px}
+.cargo-list{margin:6px 0 0 18px;padding:0;font-size:.83rem;color:#333}
+.cargo-list li{margin-bottom:4px}
+
+@media(max-width:900px){.welcome-card{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.sidebar{position:static;min-height:0}}
+</style>
 </head>
 <body>
 
-    <!-- MENÚ LATERAL IZQUIERDO -->
-    <aside>
-        <div>
-            <div class="brand-container">
-                <div class="brand-logo">C</div>
-                <div class="brand-info">
-                    <h1>C.I.M.A.</h1>
-                    <p>Scouts de Colombia</p>
-                </div>
-            </div>
-
-            <ul class="nav-menu">
-                <li><a class="nav-item active" onclick="switchSection('perfil', this)"><i class="fa-solid fa-user"></i> Perfil</a></li>
-                <li><a class="nav-item" onclick="switchSection('atraccion', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
-                <li><a class="nav-item" onclick="switchSection('desempeno', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
-                <li><a class="nav-item" onclick="switchSection('formacion', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
-                <!-- Botón de Formador condicional -->
-                <li id="nav-formador-btn"><a class="nav-item" onclick="switchSection('modulo-formador', this)"><i class="fa-solid fa-chalkboard-user"></i> Formador</a></li>
-                <li><a class="nav-item" onclick="switchSection('decisiones', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
-                <li><a class="nav-item" onclick="switchSection('bienestar', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
-                <li><a class="nav-item" onclick="switchSection('reconocimiento', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
-            </ul>
+<!-- Pantalla de Bienvenida / Acceso Institucional -->
+<div id="welcome" class="screen welcome">
+  <div class="welcome-card">
+    <div class="brand-plate">
+      <div>
+        <span style="font-size:2rem; color:var(--yellow); display:block; margin-bottom:8px;">⚜</span>
+        DNAM<br><span style="font-size:0.85rem; font-weight:700; color:#ddd;">Dirección Nacional de Adultos en el Movimiento</span>
+      </div>
+    </div>
+    <div>
+      <h1>Portal de Certificación</h1>
+      
+      <!-- Inicio de sesión institucional -->
+      <div id="boxLogin" class="field">
+        <label style="color:var(--purple); font-size:1rem; margin-bottom:4px;">Acceso con Correo Institucional</label>
+        <p style="font-size:0.88rem; color:var(--muted); margin-top:0; margin-bottom:12px;">Ingrese su correo institucional de Scouts de Colombia (terminado en <b>@scout.org.co</b>) para acceder a su perfil y gestión.</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <input type="email" id="inputEmail" placeholder="usuario@scout.org.co" style="padding:10px; border-radius:10px; border:1px solid #ddd1e5;" />
+          <div style="display:flex; gap:10px;">
+            <button class="btn" style="flex:1;" onclick="handleLogin()">Ingresar al Sistema</button>
+            <button class="btn secondary" style="flex:1;" onclick="showRegisterForm()">Crear Usuario</button>
+          </div>
         </div>
+      </div>
 
-        <!-- FOOTER LATERAL CON SELECTOR DE CARGOS -->
-        <div class="sidebar-footer">
-            <div class="role-dropdown-menu" id="role-menu">
-                <div class="role-option active-role" onclick="selectRole('clan', 'Subjefe de Clan', 'Nivel Grupo')">Subjefe de Clan <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Grupo</span></div>
-                <div class="role-option" onclick="selectRole('nacion', 'Director de Adultos', 'Nivel Nación')">Director de Adultos <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Nación</span></div>
-                <div class="role-option" onclick="selectRole('formador', 'Formador Scout', 'Red Nal. Formación')">Formador Scout <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Red Nal. Formación</span></div>
-            </div>
-
-            <div class="user-mini">
-                <div class="user-avatar" id="sidebar-avatar">MQ</div>
-                <div class="user-details">
-                    <h4 id="sidebar-name">MAURICIO QUIROGA</h4>
-                    <p id="sidebar-role">Subjefe de Clan</p>
-                </div>
-            </div>
-            <i class="fa-solid fa-arrow-right-arrow-left role-switch-btn" onclick="toggleRoleMenu()" title="Cambiar cargo / perfil"></i>
+      <!-- Formulario de Creación de Usuario con los datos de Perfil de Formador -->
+      <div id="boxRegister" class="field" style="display:none;">
+        <label style="color:var(--purple); font-size:1.05rem; margin-bottom:4px;">Crear Usuario (Perfil de Formador)</label>
+        <p style="font-size:0.85rem; color:var(--muted); margin-top:0; margin-bottom:10px;">Complete los datos de su perfil. El acceso quedará activo una vez sea autorizado por el administrador.</p>
+        <div style="display:flex; flex-direction:column; gap:8px; max-height:280px; overflow-y:auto; padding-right:4px;">
+          <input type="text" id="regNombre" placeholder="Nombre completo" />
+          <input type="email" id="regEmail" placeholder="Correo institucional (@scout.org.co)" />
+          <input type="password" id="regPass" placeholder="Contraseña" />
+          <input type="text" id="regDoc" placeholder="Documento de identidad" />
+          <input type="date" id="regNac" />
+          <input type="text" id="regTel" placeholder="Teléfono" />
+          <input type="text" id="regDir" placeholder="Dirección" />
+          <select id="regRegion">
+            <option value="Región Bogotá">Región Bogotá</option>
+            <option value="Región Antioquia">Región Antioquia</option>
+            <option value="Región Valle">Región Valle</option>
+            <option value="Región Cundinamarca">Región Cundinamarca</option>
+          </select>
         </div>
-    </aside>
-
-    <!-- PANEL DE VISUALIZACIÓN DERECHO -->
-    <main>
-        <div class="header-welcome">
-            <h2 id="section-title">Perfil del Dirigente</h2>
-            <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)</p>
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <button class="btn" style="flex:1;" onclick="handleRegister()">Registrarme</button>
+          <button class="btn secondary" style="flex:1;" onclick="showLoginForm()">Volver</button>
         </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Aplicación Principal -->
+<div id="app" class="app">
+ <header class="topbar">
+   <div class="top-brand">
+     <span style="color:var(--purple); font-size:1.4rem;">⚜</span>
+     <span>DNAM · Certificación</span>
+   </div>
+   <div id="topUserEmail" class="top-unit">Usuario Institucional</div>
+   <div class="top-actions" style="display:flex; gap:10px;">
+     <button class="btn danger small" onclick="location.reload()">Cerrar Sesión</button>
+   </div>
+ </header>
+ <div class="layout">
+   <aside class="sidebar" id="sidebar">
+     <button class="side-btn active" onclick="switchTab('formador', this)">👤 Perfil Formador</button>
+     <button id="navAdminBtn" class="side-btn" style="display:none;" onclick="switchTab('admin', this)">⚙️ Panel Administrador DNAM</button>
+     <button class="side-btn" onclick="switchTab('sesiones', this)">📊 Control Asistencia Sesiones</button>
+   </aside>
+   <main class="content" id="content">
+     
+     <!-- Vista 1: Perfil Formador -->
+     <div id="viewFormador" class="card">
+       <div class="title-row">
+         <h2>Información General del Formador</h2>
+         <span id="formadorBadgeClass" class="badge">Clasificación: FS</span>
+       </div>
+
+       <!-- SECCIÓN ATRACCIÓN · MANUAL DE CARGOS (COMPACTA) -->
+       <div class="atraccion-strip">
+         <p class="atraccion-copy">
+           <strong>Atracción · Manual de cargos:</strong> Todos los cargos se pueden encontrar en
+           <a class="atraccion-link" href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio" target="_blank" rel="noopener noreferrer">Manual de cargos (sitio oficial) ↗</a>.
+         </p>
+         <div class="atraccion-actions">
+           <button type="button" class="btn small secondary" onclick="toggleCargoPerfil('subjefe')">Perfil Subjefe de Clan</button>
+           <button type="button" class="btn small secondary" onclick="toggleCargoPerfil('director')">Perfil Director de Adultos</button>
+         </div>
+       </div>
+
+       <!-- Contenedor dinámico: muestra SOLO el perfil seleccionado -->
+       <div id="panelCargoSeleccionado" class="cargo-panel" style="display:none;"></div>
+
+       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:20px;">
+         <div class="field"><label>Documento de Identidad</label><input type="text" id="pfDoc" /></div>
+         <div class="field"><label>Fecha de Nacimiento</label><input type="date" id="pfNac" /></div>
+         <div class="field"><label>Teléfono</label><input type="text" id="pfTel" /></div>
+         <div class="field" style="grid-column: span 2;"><label>Dirección</label><input type="text" id="pfDir" /></div>
+         <div class="field"><label>Región Scout</label>
+           <select id="pfReg">
+             <option value="Región Bogotá">Región Bogotá</option>
+             <option value="Región Antioquia">Región Antioquia</option>
+             <option value="Región Valle">Región Valle</option>
+             <option value="Región Cundinamarca">Región Cundinamarca</option>
+           </select>
+         </div>
+       </div>
+
+       <div class="title-row" style="margin-top:24px;">
+         <h3>Historial de Formación y Certificados</h3>
+         <span class="badge warn">Gestión de Archivos</span>
+       </div>
+       <p class="muted" style="margin-top:0;">Cargue sus certificados y constancias para llevar el registro visual de su evolución como formador.</p>
+       
+       <div class="step-box" style="margin-bottom:16px;">
+         <div style="display:grid; grid-template-columns: 1fr 1fr auto; gap:10px; align-items:end;">
+           <div class="field" style="margin:0;"><label>Nombre del Curso / Taller</label><input type="text" id="newCourseName" placeholder="Ej. Curso Avanzado de Dirigentes" /></div>
+           <div class="field" style="margin:0;"><label>Archivo de Certificado (.pdf, .jpg)</label><input type="file" id="newCourseFile" style="background:white; padding:6px;" /></div>
+           <button class="btn" onclick="addCourseRecord()">Agregar al Historial</button>
+         </div>
+       </div>
+
+       <div class="table-container">
+         <table>
+           <thead>
+             <tr><th>Curso / Actividad Realizada</th><th>Fecha de Registro</th><th>Soporte / Certificado</th><th>Estado</th></tr>
+           </thead>
+           <tbody id="historialTableBody">
+             <tr><td>Inducción Institucional DNAM</td><td>2022-03-10</td><td><span style="color:var(--blue); font-weight:700;">certificado_induc.pdf</span></td><td><span class="badge" style="background:#e7f6ed; color:#219653;">Aprobado</span></td></tr>
+             <tr><td>Curso Preliminar para Formadores</td><td>2023-05-18</td><td><span style="color:var(--blue); font-weight:700;">preliminar_dnam.pdf</span></td><td><span class="badge" style="background:#e7f6ed; color:#219653;">Aprobado</span></td></tr>
+           </tbody>
+         </table>
+       </div>
+     </div>
+
+     <!-- Vista 2: Panel Administrador DNAM -->
+     <div id="viewAdmin" class="card" style="display:none;">
+       <div class="title-row">
+         <h2>Panel de Administración y Clasificación DNAM</h2>
+         <span class="badge" style="background:#e3ecfc; color:var(--blue);">Exclusivo: adultos@scout.org.co</span>
+       </div>
+       <p class="muted">Gestión de perfiles, aprobaciones de nuevos registros y asignación de nivel (AFS, FS, DFS).</p>
+       
+       <div style="display:flex; gap:12px; margin:16px 0; align-items:center;">
+         <label style="font-weight:900; font-size:0.85rem;">Filtrar Clasificación:</label>
+         <select id="filterClass" onchange="filterAdminTable()" style="max-width:200px; padding:8px; border-radius:10px; border:1px solid #ddd1e5;">
+           <option value="TODOS">Todos</option>
+           <option value="AFS">AFS (Asistente)</option>
+           <option value="FS">FS (Formador)</option>
+           <option value="DFS">DFS (Director)</option>
+           <option value="PENDIENTE">Pendientes de Autorización</option>
+         </select>
+       </div>
+
+       <div class="table-container">
+         <table id="adminTable">
+           <thead>
+             <tr><th>Nombre Completo</th><th>Correo / Documento</th><th>Región</th><th>Nivel / Clasificación</th><th>Estado</th><th>Acciones</th></tr>
+           </thead>
+           <tbody id="adminTableBody">
+             <!-- Se llena dinámicamente -->
+           </tbody>
+         </table>
+       </div>
+     </div>
+
+     <!-- Vista 3: Módulo de Asistencia por Sesiones (SheetJS) -->
+     <div id="viewSesiones" class="card" style="display:none;">
+       <div class="title-row">
+         <h2>Control de Asistencia por Sesiones y Certificación</h2>
+         <span class="badge warn">Herramienta Excel</span>
+       </div>
+       <p class="muted">Procese archivos de asistencia frente a las inscripciones oficiales de la DNAM.</p>
+       
+       <div class="step-box">
+         <div class="field">
+           <label>1. Cargar Archivo Base de Inscripción (.xlsx)</label>
+           <input type="file" id="fileEnrollment" accept=".xlsx, .xls" style="background:white; padding:8px;" />
+         </div>
+         <div class="field" style="margin-top:12px;">
+           <label>2. Archivos de Asistencia de Sesiones</label>
+           <input type="file" id="fileSessions" multiple accept=".xlsx, .xls" style="background:white; padding:8px;" />
+         </div>
+         <button class="btn" style="margin-top:12px;" onclick="alert('Módulo de procesamiento de sesiones listo para cruzar datos.')">Procesar Cruce de Asistencia</button>
+       </div>
+     </div>
+
+   </main>
+ </div>
+</div>
+
+<script>
+// Base de datos simulada en memoria
+let appUsers = [
+  { email: "carlos.rodriguez@scout.org.co", pass: "1234", nombre: "Carlos Andrés Rodríguez", doc: "1020304050", nac: "1985-06-15", tel: "3101234567", dir: "Calle 50 # 10-20", region: "Región Bogotá", clasificacion: "FS", activo: true },
+  { email: "adultos@scout.org.co", pass: "admin123", nombre: "Administrador DNAM", doc: "1000000000", nac: "1980-01-01", tel: "3000000000", dir: "Sede Nacional", region: "Región Bogotá", clasificacion: "DFS", activo: true }
+];
+
+let currentUser = null;
+let cargoAbiertoActual = null;
+
+// Perfiles cargados desde los documentos de referencia (solo se muestra el perfil abierto)
+const PERFILES_CARGOS = {
+  subjefe: {
+    titulo: "Subjefe de Clan",
+    descripcion: "Como miembro del equipo de rama colabora en el funcionamiento, aplicación y ejecución del Programa de Jóvenes en la misma.",
+    nombramiento: "Jefe de grupo",
+    respondeA: "Consejo Scout de Grupo · Jefe de grupo",
+    leResponden: "Subjefe de Rama",
+    requisitos: [
+      "Ser mayor de 18 años.",
+      "Poseer nivel de formación profesional, tecnológica o técnica.",
+      "Conocer las características del entorno social y cultural en que actúan los jóvenes y adultos de la Asociación.",
+      "Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.",
+      "No formar parte del Consejo Scout de Grupo.",
+      "No haber sido expulsado de la Asociación, ni tener medida de aseguramiento vigente, ni aparecer en el registro nacional de agresores sexuales."
+    ],
+    funciones: [
+      "Función 1: Garantizar el cumplimiento de las políticas, reglamentos, normas y procedimientos vigentes de la OSN relacionados con el funcionamiento de la Rama.",
+      "Función 2: Colaborar en organización, diseño, preparación, ejecución y evaluación de las actividades.",
+      "Función 3: Participar activa y regularmente en las reuniones de la Rama, del Grupo y en otras en que le corresponda.",
+      "Función 4: Fomenta y apoya la gestión de los adultos de su Equipo de Rama.",
+      "Función 5: Colaborar en el seguimiento y evaluación de la progresión personal de los jóvenes."
+    ],
+    competencias: "Esenciales: Adaptabilidad al Cambio (3), Aprendizaje y desarrollo personal (3), Compromiso (3), Conciencia Organizacional (2), Planeamiento Estratégico (2), Relaciones Interpersonales (3), Trabajo en Equipo (4). Específicas: Administración del proyecto educativo, Desarrollo comunitario, Administración de actividades, Asesoría personal, Habilidades y conocimientos scout."
+  },
+  director: {
+    titulo: "Director Nacional de Adultos en el Movimiento",
+    descripcion: "Tiene a su cargo el desarrollo, promoción y aplicación de la Política Nacional de Adultos en el movimiento y su modelo de gestión.",
+    nombramiento: "Jefe Scout Nacional, previo aval del Consejo Scout Nacional",
+    respondeA: "Jefe Scout Nacional",
+    leResponden: "Miembros del equipo Nacional de Adultos en el Movimiento · Comisionados Regionales de Adultos en el Movimiento",
+    requisitos: [
+      "Ser mayor de 18 años.",
+      "Poseer nivel de formación profesional o tecnológica.",
+      "Conocer las características del entorno social y cultural en que actúan los jóvenes y adultos de la Asociación.",
+      "Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.",
+      "No formar parte del Consejo Scout Nacional.",
+      "Poseer experiencia de dos (2) años como mínimo, en el ejercicio exitoso de cargos como dirigente o consejero en los niveles de Grupo, Región, Nación o en su vida profesional.",
+      "No haber sido expulsado de la Asociación, ni tener medida de aseguramiento vigente, ni aparecer en el registro nacional de agresores sexuales.",
+      "Contar con las competencias esenciales para desempeñar el cargo o demostrar interés para desarrollarlas."
+    ],
+    funciones: [
+      "Función 1: Conocer y hacer cumplir los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.",
+      "Función 2: Participar de la elaboración y ejecución del plan operativo Nacional en lo Relacionado a Adultos en el Movimiento.",
+      "Función 3: Desarrollar, promover e impulsar la Política Nacional de Adultos en el Movimiento y su modelo de aplicación.",
+      "Función 4: Desarrollar, promover e impulsar el marco conceptual, pedagógico, estructural y administrativo del sistema de gestión de adultos.",
+      "Función 5: Orientar y acompañar la atracción, vinculación, y desarrollo de competencias de los adultos adscritos a su Dirección.",
+      "Función 6: Desarrolla, promueve e impulsa, documentos, manuales y procesos de formación y perfeccionamiento continuo...",
+      "Función 7: Desarrolla, promueve e impulsa en coordinación con la Dirección de Desarrollo institucional las políticas, estrategias, eventos y actividades."
+    ],
+    competencias: "Esenciales (Grado 3-4): Adaptabilidad al Cambio, Aprendizaje y desarrollo personal, Compromiso, Conciencia Organizacional, Planeamiento Estratégico, Relaciones Interpersonales, Trabajo en Equipo. Específicas: Gestión Estratégica del Talento Humano, Administración y gestión estratégica, Generación de contenido, Garante del debido proceso, Asesoría personal."
+  }
+};
+
+function toggleCargoPerfil(key) {
+  const panel = document.getElementById('panelCargoSeleccionado');
+  if (cargoAbiertoActual === key) {
+    cargoAbiertoActual = null;
+    panel.style.display = 'none';
+    panel.innerHTML = '';
+    return;
+  }
+
+  const cargo = PERFILES_CARGOS[key];
+  if (!cargo) return;
+  cargoAbiertoActual = key;
+
+  panel.innerHTML = `
+    <div class="cargo-header">
+      <div>
+        <span class="badge">Manual de cargos</span>
+        <h3>${cargo.titulo}</h3>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <a class="atraccion-link" style="font-size:.82rem;" href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio" target="_blank" rel="noopener noreferrer">Ver en Manual de cargos ↗</a>
+        <button type="button" class="btn small secondary" onclick="toggleCargoPerfil('${key}')">Ocultar</button>
+      </div>
+    </div>
+    <p style="margin:0 0 8px 0; font-size:.86rem; color:#222;"><strong>Descripción General:</strong> ${cargo.descripcion}</p>
+    <div class="cargo-grid">
+      <div class="cargo-box"><strong>Nombramiento:</strong><br>${cargo.nombramiento}</div>
+      <div class="cargo-box"><strong>Responde a:</strong><br>${cargo.respondeA}</div>
+      <div class="cargo-box"><strong>Le responden:</strong><br>${cargo.leResponden}</div>
+    </div>
+    <div class="cargo-grid">
+      <div class="cargo-box">
+        <strong>Requisitos objetivos:</strong>
+        <ul class="cargo-list">${cargo.requisitos.map(r => `<li>${r}</li>`).join('')}</ul>
+      </div>
+      <div class="cargo-box">
+        <strong>Funciones:</strong>
+        <ul class="cargo-list">${cargo.funciones.map(f => `<li>${f}</li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="cargo-box" style="font-size:.83rem;"><strong>Competencias:</strong> ${cargo.competencias}</div>
+  `;
+  panel.style.display = 'block';
+}
+
+function showRegisterForm() {
+  document.getElementById('boxLogin').style.display = 'none';
+  document.getElementById('boxRegister').style.display = 'block';
+}
+
+function showLoginForm() {
+  document.getElementById('boxRegister').style.display = 'none';
+  document.getElementById('boxLogin').style.display = 'block';
+}
+
+function handleRegister() {
+  const nombre = document.getElementById('regNombre').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('regPass').value.trim();
+  const doc = document.getElementById('regDoc').value.trim();
+  const nac = document.getElementById('regNac').value;
+  const tel = document.getElementById('regTel').value.trim();
+  const dir = document.getElementById('regDir').value.trim();
+  const region = document.getElementById('regRegion').value;
+
+  if(!nombre || !email || !pass || !doc) {
+    alert("Por favor complete los campos obligatorios del registro.");
+    return;
+  }
+  if(!email.endsWith("@scout.org.co")) {
+    alert("El correo debe ser institucional y terminar en @scout.org.co");
+    return;
+  }
+
+  if(appUsers.some(u => u.email === email)) {
+    alert("Ya existe un usuario registrado con este correo.");
+    return;
+  }
+
+  appUsers.push({
+    email, pass, nombre, doc, nac, tel, dir, region,
+    clasificacion: "AFS",
+    activo: false
+  });
+
+  alert("Registro enviado exitosamente. Su perfil quedará activo una vez sea autorizado por el administrador.");
+  showLoginForm();
+}
+
+function handleLogin() {
+  const email = document.getElementById('inputEmail').value.trim().toLowerCase();
+  if (!email.endsWith("@scout.org.co")) {
+    alert("Debe ingresar obligatoriamente con una cuenta institucional terminada en @scout.org.co");
+    return;
+  }
+
+  const found = appUsers.find(u => u.email === email);
+  if (!found) {
+    alert("No existe una cuenta registrada con este correo. Por favor haga clic en 'Crear Usuario'.");
+    return;
+  }
+
+  if (!found.activo) {
+    alert("Su cuenta se encuentra pendiente de autorización por parte del administrador.");
+    return;
+  }
+
+  currentUser = found;
+  document.getElementById('topUserEmail').textContent = currentUser.email;
+
+  document.getElementById('pfDoc').value = currentUser.doc;
+  document.getElementById('pfNac').value = currentUser.nac;
+  document.getElementById('pfTel').value = currentUser.tel;
+  document.getElementById('pfDir').value = currentUser.dir;
+  document.getElementById('pfReg').value = currentUser.region;
+  document.getElementById('formadorBadgeClass').textContent = `Clasificación: ${currentUser.clasificacion}`;
+
+  if (currentUser.email === "adultos@scout.org.co") {
+    document.getElementById('navAdminBtn').style.display = 'flex';
+    renderAdminTable();
+  } else {
+    document.getElementById('navAdminBtn').style.display = 'none';
+  }
+
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
+
+function switchTab(tabName, btnElement) {
+  document.querySelectorAll('.sidebar .side-btn').forEach(b => b.classList.remove('active'));
+  if(btnElement) btnElement.classList.add('active');
+
+  document.getElementById('viewFormador').style.display = 'none';
+  document.getElementById('viewAdmin').style.display = 'none';
+  document.getElementById('viewSesiones').style.display = 'none';
+
+  if(tabName === 'formador') document.getElementById('viewFormador').style.display = 'block';
+  if(tabName === 'admin') document.getElementById('viewAdmin').style.display = 'block';
+  if(tabName === 'sesiones') document.getElementById('viewSesiones').style.display = 'block';
+}
+
+function renderAdminTable() {
+  const tbody = document.getElementById('adminTableBody');
+  tbody.innerHTML = '';
+
+  appUsers.forEach(u => {
+    const tr = document.createElement('tr');
+    let estadoBadge = u.activo ? '<span class="badge" style="background:#e7f6ed; color:#219653;">Activo</span>' : '<span class="badge" style="background:#fff5cf; color:#715a00;">Pendiente</span>';
+    
+    let actionsHTML = `<button class="btn small" onclick="alert('Expediente de ${u.nombre}')">Ver Informe</button>`;
+    if (!u.activo) {
+      actionsHTML += ` <button class="btn small" style="background:#219653; color:white; margin-left:4px;" onclick="approveUser('${u.email}')">Autorizar</button>`;
+    }
+
+    tr.innerHTML = `
+      <td>${u.nombre}</td>
+      <td>${u.email}<br><small>${u.doc || 'Sin doc'}</small></td>
+      <td>${u.region || 'Sin región'}</td>
+      <td>
+        <select onchange="changeUserClass('${u.email}', this.value)" style="padding:4px; border-radius:8px; border:1px solid #ddd1e5; font-size:0.8rem;">
+          <option value="AFS" ${u.clasificacion === 'AFS' ? 'selected' : ''}>AFS</option>
+          <option value="FS" ${u.clasificacion === 'FS' ? 'selected' : ''}>FS</option>
+          <option value="DFS" ${u.clasificacion === 'DFS' ? 'selected' : ''}>DFS</option>
+        </select>
+      </td>
+      <td>${estadoBadge}</td>
+      <td>${actionsHTML}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function approveUser(email) {
+  const u = appUsers.find(item => item.email === email);
+  if(u) {
+    u.activo = true;
+    alert(`Usuario ${u.nombre} autorizado exitosamente.`);
+    renderAdminTable();
+  }
+}
+
+function changeUserClass(email, newClass) {
+  const u = appUsers.find(item => item.email === email);
+  if(u) {
+    u.clasificacion = newClass;
+    alert(`Nivel actualizado a ${newClass} para ${u.nombre}`);
+  }
+}
+
+function filterAdminTable() {
+  const val = document.getElementById('filterClass').value;
+  const rows = document.querySelectorAll('#adminTableBody tr');
+  rows.forEach(r => {
+    if (val === 'TODOS') {
+      r.style.display = '';
+    } else if (val === 'PENDIENTE') {
+      const isPend = r.innerHTML.includes('Pendiente');
+      r.style.display = isPend ? '' : 'none';
+    } else {
+      const selectEl = r.querySelector('select');
+      if (selectEl && selectEl.value === val) {
+        r.style.display = '';
+      } else {
+        r.style.display = 'none';
+      }
+    }
+  });
+}
+
+function addCourseRecord() {
+  const name = document.getElementById('newCourseName').value.trim();
+  const fileInput = document.getElementById('newCourseFile');
+  if(!name) {
+    alert("Por favor ingrese el nombre del curso.");
+    return;
+  }
+  const fileName = fileInput.files[0] ? fileInput.files[0].name : "constancia_curso.pdf";
+  const tbody = document.getElementById('historialTableBody');
+  
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td>${name}</td><td>${new Date().toISOString().slice(0,10)}</td><td><span style="color:var(--blue); font-weight:700;">${fileName}</span></td><td><span class="badge" style="background:#e7f6ed; color:#219653;">Completado</span></td>`;
+  tbody.appendChild(tr);
+  
+  document.getElementById('newCourseName').value = '';
+  fileInput.value = '';
+  alert("Curso registrado con éxito en su historial de formación.");
+}
+</script>
 
-        <!-- SECCIÓN: PERFIL (CON OPCIÓN DE DESCARGAR HV SCOUT) -->
-        <div id="perfil" class="content-section active">
-            <div class="card" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
-                <div>
-                    <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
-                    <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia</p>
-                </div>
-                <div class="profile-right-column">
-                    <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
-                        <i class="fa-solid fa-download"></i> Descargar HV Scout
-                    </button>
-                    <button type="button" id="chn-toggle-btn" class="chn-toggle-btn" onclick="toggleChnPanel()" aria-expanded="false" aria-controls="chn-collapse-panel">
-                        <i class="fa-solid fa-shield-halved" style="color: var(--primary-red);"></i>
-                        <span>Anotaciones Hoja de Vida (CHN)</span>
-                        <i class="fa-solid fa-chevron-down chn-chevron"></i>
-                    </button>
-                    <div id="chn-collapse-panel" class="chn-collapse-content">
-                        <div class="chn-collapse-header">
-                            <span>CHN · Hoja de Vida</span>
-                            <span>Sin anotaciones</span>
-                        </div>
-                        <p id="chn-notes-text" class="chn-collapse-body">
-                            No se registran anotaciones vigentes en la Hoja de Vida CHN.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3><i class="fa-solid fa-chart-pie"></i> Balanced Scorecard (BSC) - <span id="bsc-title-cargo">Subjefe de Clan</span></h3>
-                <p>Indicadores clave de desarrollo de competencias, avance formativo y estatus asociados al cargo activo.</p>
-                <div class="bsc-grid" id="bsc-content"></div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN: ATRACCIÓN -->
-        <div id="atraccion" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('atraccion', 'vacantes', this)"><i class="fa-solid fa-briefcase"></i> Vacantes y Requisiciones</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'ingreso', this)"><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'competencias', this)"><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'manual', this)"><i class="fa-solid fa-address-book"></i> Manual de Cargos</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
-                <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
-            </div>
-            <div id="atraccion-vacantes" class="subcontent-panel active">
-                <div class="card">
-                    <h3><i class="fa-solid fa-briefcase"></i> Vacantes y Requisiciones Disponibles</h3>
-                    <p>Consulta las convocatorias abiertas a las que puedes postularte y revisa los detalles de cada cargo.</p>
-
-                    <div class="vacantes-grid">
-                        <div class="vacante-item">
-                            <div>
-                                <span class="vacante-badge">Nivel Nacional</span>
-                                <div class="vacante-title">Director Nacional de Adultos en el Movimiento</div>
-                                <p style="margin-bottom: 0; font-size: 0.84rem;">Liderazgo y gestión estratégica de la Política Nacional de Adultos en el Movimiento a nivel nacional.</p>
-                            </div>
-                            <div class="vacante-actions">
-                                <a class="vacante-link" href="#convocatoria-director-nacional-adultos" onclick="alert('Abriendo convocatoria: Director Nacional de Adultos en el Movimiento (Nivel Nacional)'); return false;">
-                                    <i class="fa-solid fa-up-right-from-square"></i> Ver convocatoria
-                                </a>
-                                <button type="button" class="btn-action" onclick="postularVacante('Director Nacional de Adultos en el Movimiento')">
-                                    <i class="fa-solid fa-check"></i> Aceptar postularse
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="vacante-item">
-                            <div>
-                                <span class="vacante-badge">Nivel Regional</span>
-                                <div class="vacante-title">Miembro del Equipo Regional de Comunicaciones</div>
-                                <p style="margin-bottom: 0; font-size: 0.84rem;">Apoyo a la estrategia de comunicación institucional, difusión y contenidos regionales.</p>
-                            </div>
-                            <div class="vacante-actions">
-                                <a class="vacante-link" href="#convocatoria-equipo-regional-comunicaciones" onclick="alert('Abriendo convocatoria: Miembro del Equipo Regional de Comunicaciones'); return false;">
-                                    <i class="fa-solid fa-up-right-from-square"></i> Ver convocatoria
-                                </a>
-                                <button type="button" class="btn-action" onclick="postularVacante('Miembro del Equipo Regional de Comunicaciones')">
-                                    <i class="fa-solid fa-check"></i> Aceptar postularse
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="mensaje-postulacion" class="postulacion-status-box" role="status" aria-live="polite"></div>
-
-                    <!-- Requisición de Vacantes (visible solo en perfil Director de Adultos) -->
-                    <div id="requisicion-vacantes-box" class="requisicion-box">
-                        <h3><i class="fa-solid fa-file-circle-plus"></i> Requisición de Vacantes</h3>
-                        <p>Solicita la apertura de una convocatoria seleccionando el cargo del listado e indicando la fecha en que se requiere.</p>
-
-                        <form id="requisicionVacanteForm" class="requisicion-form-card" onsubmit="solicitarRequisicion(event)">
-                            <div class="requisicion-grid">
-                                <div class="requisicion-field">
-                                    <label for="reqCargoSelect">Listado de Cargos</label>
-                                    <select id="reqCargoSelect" required>
-                                        <option value="">Selecciona un cargo...</option>
-                                        <option value="Director Nacional de Adultos en el Movimiento">Director Nacional de Adultos en el Movimiento</option>
-                                        <option value="Miembro del Equipo Regional de Comunicaciones">Miembro del Equipo Regional de Comunicaciones</option>
-                                        <option value="Comisionado Regional de Adultos en el Movimiento">Comisionado Regional de Adultos en el Movimiento</option>
-                                        <option value="Coordinador Nacional de Formación">Coordinador Nacional de Formación</option>
-                                        <option value="Asesor de Grupo Scout">Asesor de Grupo Scout</option>
-                                    </select>
-                                </div>
-                                <div class="requisicion-field">
-                                    <label for="reqFechaInput">Fecha en que se requiere el cargo</label>
-                                    <input type="date" id="reqFechaInput" required>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn-action">
-                                <i class="fa-solid fa-paper-plane"></i> Solicitar apertura de convocatoria
-                            </button>
-                        </form>
-
-                        <div id="lista-requisiciones" class="requisicion-list" aria-live="polite"></div>
-                    </div>
-                </div>
-            </div>
-            <div id="atraccion-ingreso" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso · Revisión y Aprobación del Jefe Inmediato</h3>
-                    <p>Revisa y aprueba los requisitos obligatorios del proceso de ingreso.</p>
-
-                    <div class="ingreso-group-card">
-                        <div class="ingreso-group-title">
-                            <i class="fa-solid fa-shield-check"></i> Verificación de antecedentes
-                        </div>
-                        <div class="ingreso-sublist">
-                            <div class="ingreso-check-row">
-                                <label class="ingreso-check-left">
-                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Antecedentes Judiciales (Policía)" onchange="actualizarEstadoIngreso()">
-                                    <span>Antecedentes Judiciales (Policía)</span>
-                                </label>
-                                <span class="ingreso-estado-tag">Pendiente</span>
-                            </div>
-                            <div class="ingreso-check-row">
-                                <label class="ingreso-check-left">
-                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Antecedentes fiscales (Contraloría)" onchange="actualizarEstadoIngreso()">
-                                    <span>Antecedentes fiscales (Contraloría)</span>
-                                </label>
-                                <span class="ingreso-estado-tag">Pendiente</span>
-                            </div>
-                            <div class="ingreso-check-row">
-                                <label class="ingreso-check-left">
-                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Antecedentes disciplinarios (Procuraduría)" onchange="actualizarEstadoIngreso()">
-                                    <span>Antecedentes disciplinarios (Procuraduría)</span>
-                                </label>
-                                <span class="ingreso-estado-tag">Pendiente</span>
-                            </div>
-                            <div class="ingreso-check-row">
-                                <label class="ingreso-check-left">
-                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Inhabilidades por delitos sexuales (Policía)" onchange="actualizarEstadoIngreso()">
-                                    <span>Inhabilidades por delitos sexuales (Policía)</span>
-                                </label>
-                                <span class="ingreso-estado-tag">Pendiente</span>
-                            </div>
-                            <div class="ingreso-check-row">
-                                <label class="ingreso-check-left">
-                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Medidas Correctivas (Policía)" onchange="actualizarEstadoIngreso()">
-                                    <span>Medidas Correctivas (Policía)</span>
-                                </label>
-                                <span class="ingreso-estado-tag">Pendiente</span>
-                            </div>
-                            <div class="ingreso-check-row">
-                                <label class="ingreso-check-left">
-                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Antecedentes scout (CHN)" onchange="actualizarEstadoIngreso()">
-                                    <span>Antecedentes scout (CHN)</span>
-                                </label>
-                                <span class="ingreso-estado-tag">Pendiente</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="ingreso-group-card">
-                        <div class="ingreso-check-row" style="border: none; background: transparent; padding: 0;">
-                            <label class="ingreso-check-left" style="font-weight: 700;">
-                                <input type="checkbox" class="ingreso-aprob-check" data-label="Entrevista jefe inmediato" onchange="actualizarEstadoIngreso()">
-                                <span><i class="fa-solid fa-user-tie" style="color: var(--primary-red); margin-right: 6px;"></i> Entrevista jefe inmediato</span>
-                            </label>
-                            <span class="ingreso-estado-tag">Pendiente</span>
-                        </div>
-                    </div>
-
-                    <div class="ingreso-group-card">
-                        <div class="ingreso-check-row" style="border: none; background: transparent; padding: 0;">
-                            <label class="ingreso-check-left" style="font-weight: 700;">
-                                <input type="checkbox" class="ingreso-aprob-check" data-label="Curso A Salvo del Peligro" onchange="actualizarEstadoIngreso()">
-                                <span><i class="fa-solid fa-certificate" style="color: var(--primary-red); margin-right: 6px;"></i> Curso A Salvo del Peligro</span>
-                            </label>
-                            <span class="ingreso-estado-tag">Pendiente</span>
-                        </div>
-                    </div>
-
-                    <div class="ingreso-footer-bar">
-                        <button type="button" class="btn-action" onclick="guardarAprobacionIngreso()">
-                            <i class="fa-solid fa-check-double"></i> Aprobar revisión de ingreso
-                        </button>
-                        <div id="ingreso-resumen-aprobacion" class="ingreso-resumen-msg" aria-live="polite"></div>
-                    </div>
-                </div>
-            </div>
-            <div id="atraccion-competencias" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</h3>
-                    <p>Selecciona una categoría para consultar los ejemplos de competencias, grados de dominio y conductas.</p>
-
-                    <div class="comp-switch-row" role="tablist" aria-label="Categorías del Diccionario de Competencias">
-                        <button type="button" id="btn-comp-esenciales" class="comp-option-btn active" onclick="switchCompetenciaOption('esenciales', this)">
-                            <i class="fa-solid fa-layer-group"></i> Competencias Esenciales
-                        </button>
-                        <button type="button" id="btn-comp-especificas" class="comp-option-btn" onclick="switchCompetenciaOption('especificas', this)">
-                            <i class="fa-solid fa-list-check"></i> Competencias Específicas
-                        </button>
-                    </div>
-
-                    <div id="comp-panel-esenciales" class="comp-detail-panel active">
-                        <div class="comp-label-title">Competencias Esenciales · Ejemplo</div>
-                        <div class="comp-example-name">Adaptabilidad al cambio</div>
-                        <p style="margin-bottom: 12px;">
-                            <strong style="color: var(--text-main);">Descripción:</strong> Capacidad para modificar puntos de vista, prácticas y actitudes en respuesta a cambios en contextos, condiciones y situaciones.
-                        </p>
-                        <div class="comp-label-title">Grados de dominio (1 a 4)</div>
-                        <ul class="comp-list">
-                            <li><span class="comp-grade-badge">1</span> Identifica los elementos cambiantes y los acepta como parte del proceso.</li>
-                            <li><span class="comp-grade-badge">2</span> Reconoce y comprende el cambio como oportunidad de mejora.</li>
-                            <li><span class="comp-grade-badge">3</span> Analiza e implementa el cambio.</li>
-                            <li><span class="comp-grade-badge">4</span> Evalúa y proyecta el cambio.</li>
-                        </ul>
-                    </div>
-
-                    <div id="comp-panel-especificas" class="comp-detail-panel">
-                        <div class="comp-label-title">Competencias Específicas · Ejemplo</div>
-                        <div class="comp-example-name">Administración de Actividades</div>
-                        <p style="margin-bottom: 12px;">
-                            <strong style="color: var(--text-main);">Descripción:</strong> Es la capacidad de planear, coordinar ejecutar y evaluar actividades educativas, buscando alcanzar el objetivo para la cual fue planteada, donde todos los participantes puedan expresar sus ideas y ser escuchados.
-                        </p>
-                        <div class="comp-label-title">Conductas</div>
-                        <ul class="comp-list">
-                            <li><span class="comp-grade-badge">1</span> Utiliza la malla de objetivos educativos para el diseño de actividades.</li>
-                            <li><span class="comp-grade-badge">2</span> Entrega la progresión personal basándose en la malla de objetivos educativos.</li>
-                            <li><span class="comp-grade-badge">3</span> Aplica correctamente las fases y etapas de progresión personal según la política.</li>
-                            <li><span class="comp-grade-badge">4</span> Realiza seguimiento y mantiene el registro actualizado de progresión personal de forma física o digital.</li>
-                            <li><span class="comp-grade-badge">5</span> Promueve las políticas de participación juvenil e inclusión y los programas mundiales de la organización.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación.</p></div></div>
-            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral.</p></div></div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal.</p></div></div>
-        </div>
-
-        <!-- SECCIÓN: DESEMPEÑO -->
-        <div id="desempeno" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('desempeno', 'ruta', this)"><i class="fa-solid fa-route"></i> Ruta de Evaluación</button>
-                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'asesor', this)"><i class="fa-solid fa-user-tie"></i> Asesor Personal</button>
-                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'jefe', this)"><i class="fa-solid fa-user-shield"></i> Revisión del Jefe Inmediato</button>
-                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación 360°</button>
-                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
-                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'encuentros-asesoria', this)"><i class="fa-solid fa-file-signature"></i> Encuentros de Asesoría</button>
-            </div>
-            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño.</p></div></div>
-            <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD.</p></div></div>
-            <div id="desempeno-jefe" class="subcontent-panel"><div class="card"><h3>Revisión del Jefe Inmediato</h3><p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo.</p></div></div>
-            <div id="desempeno-evaluacion" class="subcontent-panel">
-                <div class="card">
-                    <h3>Evaluación 360° y Componentes de Crecimiento</h3>
-                    <p>Herramientas transversales de medición de conductas observables.</p>
-                    <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
-                            <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-graduation-cap"></i> Formación Básica</h4>
-                            <p style="font-size: 0.85rem; margin-bottom: 0;">Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo.</p>
-                        </div>
-                        <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
-                            <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-arrows-rotate"></i> Perfeccionamiento Continuo</h4>
-                            <p style="font-size: 0.85rem; margin-bottom: 0;">Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo.</p></div></div>
-            <div id="desempeno-encuentros-asesoria" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-file-signature"></i> Acta de Encuentros de Asesoría</h3>
-                    <p>Diligencia el acta de cada encuentro de asesoría registrando la fecha, descripción, compromisos y seguimiento a los compromisos.</p>
-
-                    <div class="acta-box">
-                        <form id="actaAsesoriaForm" onsubmit="saveActaAsesoria(event)">
-                            <div class="acta-grid-2">
-                                <div class="acta-field">
-                                    <label for="actaFecha"><i class="fa-regular fa-calendar"></i> Fecha del Encuentro</label>
-                                    <input type="date" id="actaFecha" required>
-                                </div>
-                                <div class="acta-field">
-                                    <label for="actaAsesor"><i class="fa-solid fa-user-tie"></i> Asesor / Acompañante (Opcional)</label>
-                                    <input type="text" id="actaAsesor" placeholder="Nombre del asesor o dirigente">
-                                </div>
-                            </div>
-
-                            <div class="acta-field">
-                                <label for="actaDescripcion"><i class="fa-solid fa-align-left"></i> Descripción del Encuentro</label>
-                                <textarea id="actaDescripcion" rows="3" placeholder="Resume los temas abordados, avances y observaciones del encuentro..." required></textarea>
-                            </div>
-
-                            <div class="acta-grid-2">
-                                <div class="acta-field">
-                                    <label for="actaCompromisos"><i class="fa-solid fa-list-check"></i> Compromisos</label>
-                                    <textarea id="actaCompromisos" rows="3" placeholder="Detalla los compromisos acordados para el siguiente periodo..." required></textarea>
-                                </div>
-                                <div class="acta-field">
-                                    <label for="actaSeguimiento"><i class="fa-solid fa-rotate"></i> Seguimiento a los Compromisos</label>
-                                    <textarea id="actaSeguimiento" rows="3" placeholder="Registra el estado, avance o verificación de compromisos previos..." required></textarea>
-                                </div>
-                            </div>
-
-                            <div class="acta-actions">
-                                <button type="submit" class="btn-action">
-                                    <i class="fa-solid fa-floppy-disk"></i> Registrar Acta de Encuentro
-                                </button>
-                                <span id="actaStatusMsg" class="acta-feedback"></span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fa-solid fa-folder-open"></i> Actas Diligenciadas</h3>
-                    <p>Consulta y administra el registro de encuentros de asesoría realizados.</p>
-                    <div id="actaRecordsContainer" class="acta-list"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN: FORMACIÓN -->
-        <div id="formacion" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('formacion', 'historial', this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial de Formaciones</button>
-                <button class="subnav-btn" onclick="switchSubTab('formacion', 'certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
-                <button class="subnav-btn" onclick="switchSubTab('formacion', 'cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
-            </div>
-            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados.</p></div></div>
-            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM).</p></div></div>
-            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro).</p></div></div>
-        </div>
-
-        <!-- SECCIÓN FORMADOR (DISPONIBLE SÓLO CUANDO SE SELECCIONA FORMADOR SCOUT) -->
-        <div id="modulo-formador" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('modulo-formador', 'ayudante', this)"><i class="fa-solid fa-chalkboard"></i> Ayudante de Formación</button>
-                <button class="subnav-btn" onclick="switchSubTab('modulo-formador', 'formador-scout', this)"><i class="fa-solid fa-user-graduate"></i> Formador Scout</button>
-                <button class="subnav-btn" onclick="switchSubTab('modulo-formador', 'director-formacion', this)"><i class="fa-solid fa-award"></i> Director de Formación Scout</button>
-            </div>
-
-            <!-- Panel: Ayudante de Formación -->
-            <div id="modulo-formador-ayudante" class="subcontent-panel active">
-                <div class="card">
-                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Ayudante de Formación</h3>
-                    <p>Requisitos previos y verificación de competencias para el rol de apoyo en la Red Nacional de Formación.</p>
-                    <div class="checklist-container">
-                        <div class="check-item"><input type="checkbox" id="ay1"><label for="ay1">Completar el Módulo de Inducción General a la Formación.</label></div>
-                        <div class="check-item"><input type="checkbox" id="ay2"><label for="ay2">Demostrar vivencia activa de los principios y la Ley Scout.</label></div>
-                        <div class="check-item"><input type="checkbox" id="ay3"><label for="ay3">Participar como asistente de logística en al menos un curso básico regional.</label></div>
-                        <div class="check-item"><input type="checkbox" id="ay4"><label for="ay4">Suscripción del Compromiso y Acuerdo Mutuo para el servicio voluntario.</label></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel: Formador Scout -->
-            <div id="modulo-formador-formador-scout" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Formador Scout</h3>
-                    <p>Criterios de acreditación, dominios pedagógicos y competencias específicas de facilitación.</p>
-                    <div class="checklist-container">
-                        <div class="check-item"><input type="checkbox" id="fs1"><label for="fs1">Certificación vigente en Insignia de Madera en su respectiva línea estratégica.</label></div>
-                        <div class="check-item"><input type="checkbox" id="fs2"><label for="fs2">Aprobación del Taller de Entrenamiento de Formadores (TTT / Flor de Lis de Formación).</label></div>
-                        <div class="check-item"><input type="checkbox" id="fs3"><label for="fs3">Diseño y presentación de una Ficha de Sesión con enfoque en competencias.</label></div>
-                        <div class="check-item"><input type="checkbox" id="fs4"><label for="fs4">Práctica supervisada de facilitación de un módulo formativo evaluada por pares.</label></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel: Director de Formación Scout -->
-            <div id="modulo-formador-director-formacion" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-list-check"></i> Lista de Chequeo - Director de Formación Scout</h3>
-                    <p>Estándares avanzados de liderazgo pedagógico, diseño curricular y coordinación de equipos nacionales y regionales.</p>
-                    <div class="checklist-container">
-                        <div class="check-item"><input type="checkbox" id="df1"><label for="df1">Experiencia mínima comprobada como Formador Scout activo en la Red Nacional.</label></div>
-                        <div class="check-item"><input type="checkbox" id="df2"><label for="df2">Dirección exitosa o co-dirección de al menos dos cursos de formación avanzada o Insignia de Madera.</label></div>
-                        <div class="check-item"><input type="checkbox" id="df3"><label for="df3">Dominio de la Política Nacional de Adultos en el Movimiento (PNAM) y sus herramientas de gestión.</label></div>
-                        <div class="check-item"><input type="checkbox" id="df4"><label for="df4">Aval de la Dirección Nacional de Adultos en el Movimiento y el Consejo Scout correspondiente.</label></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN: DECISIONES -->
-        <div id="decisiones" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('decisiones', 'historial', this)"><i class="fa-solid fa-timeline"></i> Historial de Cargos</button>
-                <button class="subnav-btn" onclick="switchSubTab('decisiones', 'cierre', this)"><i class="fa-solid fa-door-closed"></i> Cierre del Cargo</button>
-                <button class="subnav-btn" onclick="switchSubTab('decisiones', 'sucesion', this)"><i class="fa-solid fa-sitemap"></i> Plan de Sucesión</button>
-                <button class="subnav-btn" onclick="switchSubTab('decisiones', 'entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
-            </div>
-            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia.</p></div></div>
-            <div id="decisiones-cierre" class="subcontent-panel"><div class="card"><h3>Cierre del Cargo</h3><p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento.</p></div></div>
-            <div id="decisiones-sucesion" class="subcontent-panel"><div class="card"><h3>Plan de Sucesión</h3><p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional.</p></div></div>
-            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional.</p></div></div>
-        </div>
-
-        <!-- SECCIÓN: BIENESTAR (ACTUALIZADA CON TARJETAS DE FELICITACIÓN Y CÍRCULOS DE BIENESTAR) -->
-        <div id="bienestar" class="content-section">
-            <div class="subnav-tabs">
-                <button class="subnav-btn active" onclick="switchSubTab('bienestar', 'clima', this)"><i class="fa-solid fa-heart-pulse"></i> Clima y Motivación</button>
-                <button class="subnav-btn" onclick="switchSubTab('bienestar', 'tarjetas', this)"><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación</button>
-                <button class="subnav-btn" onclick="switchSubTab('bienestar', 'circulos', this)"><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar</button>
-            </div>
-
-            <div id="bienestar-clima" class="subcontent-panel active">
-                <div class="card">
-                    <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
-                    <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo.</p>
-                </div>
-            </div>
-
-            <div id="bienestar-tarjetas" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación y Mensajes Positivos</h3>
-                    <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación.</p>
-                    <div style="background: #FAFAFA; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 15px;">
-                        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Seleccionar Dirigente Destinatario</label>
-                        <select style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px; background: white;">
-                            <option>Mauricio Quiroga Posada (Subjefe de Clan)</option>
-                            <option>Equipo de Dirigentes de Grupo</option>
-                            <option>Comisión Regional de Adultos</option>
-                        </select>
-                        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Mensaje Positivo / Felicitación</label>
-                        <textarea rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout!" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;"></textarea>
-                        <button class="btn-action" onclick="alert('¡Tarjeta de felicitación enviada con éxito!')"><i class="fa-solid fa-paper-plane"></i> Enviar Tarjeta</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="bienestar-circulos" class="subcontent-panel">
-                <div class="card">
-                    <h3><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar y Apoyo</h3>
-                    <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad.</p>
-                    
-                    <div class="circles-grid">
-                        <div class="circle-card">
-                            <i class="fa-solid fa-campground"></i>
-                            <h4>Convivencia Íntima</h4>
-                            <p>Espacios de integración del equipo de sección y fogatas de reflexión.</p>
-                        </div>
-                        <div class="circle-card">
-                            <i class="fa-solid fa-hands-holding-child"></i>
-                            <h4>Apoyo Personal</h4>
-                            <p>Acompañamiento cercano y escucha activa ante situaciones particulares.</p>
-                        </div>
-                        <div class="circle-card">
-                            <i class="fa-solid fa-mug-hot"></i>
-                            <h4>Café y Conversación</h4>
-                            <p>Encuentros periódicos de camaradería y distensión para dirigentes.</p>
-                        </div>
-                        <div class="circle-card">
-                            <i class="fa-solid fa-people-group"></i>
-                            <h4>Comunidad Scout</h4>
-                            <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN: RECONOCIMIENTO -->
-        <div id="reconocimiento" class="content-section">
-            <div class="card">
-                <h3><i class="fa-solid fa-award"></i> Condecoraciones e Insignias de Actualización</h3>
-                <p>Gestión de estímulos, galardones, distinciones institucionales y condecoraciones del adulto scout.</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- SCRIPT DE NAVEGACIÓN Y CONTROL -->
-    <script>
-        const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y descarga de Hoja de Vida Scout (C.I.M.A.)' },
-            'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
-            'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, asesoría, competencias y Plan Personal de Desarrollo (PPD)' },
-            'formacion': { title: 'Formación General', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
-            'modulo-formador': { title: 'Red Nacional de Formación', subtitle: 'Gestión de formadores, ayudantes y directores de formación scout' },
-            'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos, cierre, sucesión y entrevista de salida institucional' },
-            'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Clima organizacional, tarjetas de felicitación y círculos de bienestar' },
-            'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
-        };
-
-        const bscData = {
-            'clan': {
-                cards: [
-                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '5 Módulos', subtext: 'Rama Rovers y Básica' },
-                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Ins. de Madera', subtext: 'Acreditado / Vigente' },
-                    { icon: 'fa-clock-rotate-left', title: 'Horas de Servicio', value: '95 hrs', subtext: 'Actividades de Grupo' },
-                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '94%', subtext: 'Plan Personal de Desarrollo' }
-                ]
-            },
-            'nacion': {
-                cards: [
-                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '12 Cursos', subtext: 'Gestión y Liderazgo Avanzado' },
-                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Gestor Nacional', subtext: '4 Maderos (GN)' },
-                    { icon: 'fa-clock-rotate-left', title: 'Horas Gestión', value: '350 hrs', subtext: 'Equipo Nacional' },
-                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '98%', subtext: 'Plan Personal de Desarrollo' }
-                ]
-            },
-            'formador': {
-                cards: [
-                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: 'TTT Formador', subtext: 'Entrenamiento de Formadores' },
-                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador Scout', subtext: 'Red Nal. Formación' },
-                    { icon: 'fa-clock-rotate-left', title: 'Horas Facilitación', value: '120 hrs', subtext: 'Cursos Básicos y Medios' },
-                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '95%', subtext: 'Plan Personal de Desarrollo' }
-                ]
-            }
-        };
-
-        const ACTAS_STORAGE_KEY = 'cima_encuentros_asesoria_actas';
-
-        function escapeHtml(text) {
-            return String(text ?? '')
-                .replace(/&/g, '&')
-                .replace(/</g, '<')
-                .replace(/>/g, '>')
-                .replace(/"/g, '"');
-        }
-
-        function actualizarEstadoIngreso() {
-            const panel = document.getElementById('atraccion-ingreso');
-            if (!panel) return;
-            const rows = panel.querySelectorAll('.ingreso-check-row');
-            rows.forEach(row => {
-                const cb = row.querySelector('.ingreso-aprob-check');
-                const tag = row.querySelector('.ingreso-estado-tag');
-                if (!cb || !tag) return;
-                if (cb.checked) {
-                    tag.textContent = 'Aprobado';
-                    tag.classList.add('aprobado');
-                } else {
-                    tag.textContent = 'Pendiente';
-                    tag.classList.remove('aprobado');
-                }
-            });
-        }
-
-        function guardarAprobacionIngreso() {
-            const panel = document.getElementById('atraccion-ingreso');
-            const resumen = document.getElementById('ingreso-resumen-aprobacion');
-            if (!panel || !resumen) return;
-
-            const checks = Array.from(panel.querySelectorAll('.ingreso-aprob-check'));
-            const aprobados = checks.filter(c => c.checked).map(c => c.dataset.label);
-
-            if (!aprobados.length) {
-                resumen.innerHTML = 'No hay ítems aprobados aún por el jefe inmediato.';
-                return;
-            }
-
-            resumen.innerHTML = `<i class="fa-solid fa-circle-check"></i> Aprobados (${aprobados.length}/${checks.length}): ${escapeHtml(aprobados.join(', '))}.`;
-        }
-
-        function switchCompetenciaOption(optionKey, btnEl) {
-            const panel = document.getElementById('atraccion-competencias');
-            if (!panel) return;
-            panel.querySelectorAll('.comp-option-btn').forEach(btn => btn.classList.remove('active'));
-            if (btnEl) btnEl.classList.add('active');
-
-            panel.querySelectorAll('.comp-detail-panel').forEach(p => p.classList.remove('active'));
-            const targetPanel = document.getElementById('comp-panel-' + optionKey);
-            if (targetPanel) targetPanel.classList.add('active');
-        }
-
-        function postularVacante(cargo) {
-            const box = document.getElementById('mensaje-postulacion');
-            if (!box) return;
-            box.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--primary-red); margin-right: 6px;"></i> Postulado correctamente al cargo: <strong>${escapeHtml(cargo)}</strong>.`;
-            box.classList.add('visible');
-        }
-
-        function updateRequisicionVisibility(roleKey) {
-            const reqBox = document.getElementById('requisicion-vacantes-box');
-            if (!reqBox) return;
-            if (roleKey === 'nacion') {
-                reqBox.classList.add('visible');
-            } else {
-                reqBox.classList.remove('visible');
-            }
-        }
-
-        function solicitarRequisicion(event) {
-            event.preventDefault();
-            const cargoSelect = document.getElementById('reqCargoSelect');
-            const fechaInput = document.getElementById('reqFechaInput');
-            const lista = document.getElementById('lista-requisiciones');
-            if (!cargoSelect || !fechaInput || !lista) return;
-
-            const cargo = cargoSelect.value;
-            const fechaRequerida = fechaInput.value;
-            if (!cargo || !fechaRequerida) return;
-
-            const item = document.createElement('div');
-            item.className = 'requisicion-item';
-            item.innerHTML = `<i class="fa-solid fa-bullhorn" style="color: var(--primary-red); margin-right: 6px;"></i> Requisición solicitada para abrir convocatoria del cargo: <strong>${escapeHtml(cargo)}</strong> · Fecha requerida: <strong>${escapeHtml(fechaRequerida)}</strong>.`;
-            lista.prepend(item);
-
-            document.getElementById('requisicionVacanteForm').reset();
-        }
-
-        function getActasAsesoria() {
-            try {
-                const raw = localStorage.getItem(ACTAS_STORAGE_KEY);
-                return raw ? JSON.parse(raw) : [];
-            } catch (e) {
-                return [];
-            }
-        }
-
-        function setActasAsesoria(list) {
-            localStorage.setItem(ACTAS_STORAGE_KEY, JSON.stringify(list));
-        }
-
-        function renderActasAsesoria() {
-            const container = document.getElementById('actaRecordsContainer');
-            if (!container) return;
-            const actas = getActasAsesoria();
-
-            if (!actas.length) {
-                container.innerHTML = '<p style="margin-bottom:0; font-size:0.86rem; color:var(--text-muted);">Aún no hay actas de encuentros de asesoría registradas.</p>';
-                return;
-            }
-
-            container.innerHTML = actas.map(item => `
-                <div class="acta-item">
-                    <div class="acta-item-top">
-                        <span class="acta-date-pill"><i class="fa-regular fa-calendar-check"></i> ${escapeHtml(item.fecha)}</span>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">${escapeHtml(item.asesor || 'Encuentro de Asesoría')}</span>
-                            <button type="button" class="acta-delete-btn" onclick="deleteActaAsesoria('${escapeHtml(item.id)}')">
-                                <i class="fa-solid fa-trash"></i> Eliminar
-                            </button>
-                        </div>
-                    </div>
-                    <div style="margin-bottom:8px;">
-                        <span class="acta-label-sm">Descripción</span>
-                        <p class="acta-text-sm">${escapeHtml(item.descripcion)}</p>
-                    </div>
-                    <div class="acta-item-cols">
-                        <div>
-                            <span class="acta-label-sm">Compromisos</span>
-                            <p class="acta-text-sm">${escapeHtml(item.compromisos)}</p>
-                        </div>
-                        <div>
-                            <span class="acta-label-sm">Seguimiento a los Compromisos</span>
-                            <p class="acta-text-sm">${escapeHtml(item.seguimiento)}</p>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function saveActaAsesoria(event) {
-            event.preventDefault();
-            const fecha = document.getElementById('actaFecha').value;
-            const asesor = document.getElementById('actaAsesor').value.trim();
-            const descripcion = document.getElementById('actaDescripcion').value.trim();
-            const compromisos = document.getElementById('actaCompromisos').value.trim();
-            const seguimiento = document.getElementById('actaSeguimiento').value.trim();
-
-            if (!fecha || !descripcion || !compromisos || !seguimiento) return;
-
-            const list = getActasAsesoria();
-            list.unshift({
-                id: String(Date.now()),
-                fecha,
-                asesor,
-                descripcion,
-                compromisos,
-                seguimiento
-            });
-            setActasAsesoria(list);
-
-            document.getElementById('actaAsesoriaForm').reset();
-            const msg = document.getElementById('actaStatusMsg');
-            msg.textContent = 'Acta guardada correctamente.';
-            setTimeout(() => { msg.textContent = ''; }, 3000);
-
-            renderActasAsesoria();
-        }
-
-        function deleteActaAsesoria(id) {
-            const list = getActasAsesoria().filter(item => item.id !== id);
-            setActasAsesoria(list);
-            renderActasAsesoria();
-        }
-
-        function toggleChnPanel() {
-            const panel = document.getElementById('chn-collapse-panel');
-            const btn = document.getElementById('chn-toggle-btn');
-            if (!panel || !btn) return;
-            const isOpen = panel.classList.toggle('open');
-            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        }
-
-        function toggleRoleMenu() {
-            const menu = document.getElementById('role-menu');
-            menu.classList.toggle('show');
-        }
-
-        function selectRole(roleKey, roleDisplayName, roleLevelText) {
-            document.getElementById('role-menu').classList.remove('show');
-            document.getElementById('sidebar-role').innerText = roleDisplayName;
-
-            const options = document.querySelectorAll('.role-option');
-            options.forEach(opt => opt.classList.remove('active-role'));
-            event.currentTarget.classList.add('active-role');
-
-            updateRequisicionVisibility(roleKey);
-
-            document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
-            const data = bscData[roleKey];
-            const container = document.getElementById('bsc-content');
-            container.innerHTML = '';
-
-            data.cards.forEach(card => {
-                container.innerHTML += `
-                    <div class="bsc-card">
-                        <i class="fa-solid ${card.icon}"></i>
-                        <h4>${card.title}</h4>
-                        <div class="bsc-value">${card.value}</div>
-                        <div class="bsc-subtext">${card.subtext}</div>
-                    </div>
-                `;
-            });
-
-            // Lógica condicional: mostrar u ocultar el botón "Formador" en el menú lateral
-            const formadorNavBtn = document.getElementById('nav-formador-btn');
-            if (roleKey === 'formador') {
-                formadorNavBtn.style.display = 'block';
-            } else {
-                formadorNavBtn.style.display = 'none';
-                if (document.getElementById('modulo-formador').classList.contains('active')) {
-                    document.querySelector('.nav-item').click();
-                }
-            }
-        }
-
-        window.onload = function() {
-            selectRoleInit('clan', 'Subjefe de Clan');
-            renderActasAsesoria();
-            actualizarEstadoIngreso();
-        };
-
-        function selectRoleInit(roleKey, roleDisplayName) {
-            document.getElementById('sidebar-role').innerText = roleDisplayName;
-            document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
-            updateRequisicionVisibility(roleKey);
-            const data = bscData[roleKey];
-            const container = document.getElementById('bsc-content');
-            container.innerHTML = '';
-
-            data.cards.forEach(card => {
-                container.innerHTML += `
-                    <div class="bsc-card">
-                        <i class="fa-solid ${card.icon}"></i>
-                        <h4>${card.title}</h4>
-                        <div class="bsc-value">${card.value}</div>
-                        <div class="bsc-subtext">${card.subtext}</div>
-                    </div>
-                `;
-            });
-        }
-
-        function switchSection(sectionId, element) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-
-            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-
-            document.getElementById('section-title').innerText = titles[sectionId].title;
-            document.getElementById('section-subtitle').innerText = titles[sectionId].subtitle;
-        }
-
-        function switchSubTab(sectionPrefix, tabId, element) {
-            const parent = document.getElementById(sectionPrefix);
-            parent.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-
-            parent.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
-            document.getElementById(sectionPrefix + '-' + tabId).classList.add('active');
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.matches('.role-switch-btn') && !event.target.closest('.role-dropdown-menu')) {
-                const menu = document.getElementById('role-menu');
-                if (menu && menu.classList.contains('show')) {
-                    menu.classList.remove('show');
-                }
-            }
-        };
-    </script>
 </body>
 </html>
