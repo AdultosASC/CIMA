@@ -540,6 +540,22 @@
             background-color: var(--primary-red-light);
         }
 
+        .ppd-actions-group {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ppd-edit-panel {
+            background-color: #FDFBF7;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 10px;
+            margin-bottom: 12px;
+        }
+
         .ppd-selected-chips {
             display: flex;
             flex-wrap: wrap;
@@ -811,9 +827,12 @@
 
     <script>
         const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
-        const PPD_STORAGE_PREFIX = 'cima_ppd_estrategias_v2_';
+        const PPD_STORAGE_PREFIX = 'cima_ppd_estrategias_v3_';
         let currentRoleKey = 'clan';
         let borradorCompetencias = [];
+        let editingEstrategiaId = null;
+        let editingEstrategiaDraft = null;
+        let editingActividadKey = null; // `${estrategiaId}::${actividadId}`
 
         /* Datos de valoración inicial 360° por perfil (escala 0.00 a 5.00; % Cumplimiento = (Promedio / 5) * 100) */
         const EVALUACIONES_360_DATA = {
@@ -1186,7 +1205,74 @@
             renderPPD();
         }
 
+        function iniciarEdicionEstrategiaPPD(estrategiaId) {
+            const est = getEstrategiasPPD(currentRoleKey).find(e => e.id === estrategiaId);
+            if (!est) return;
+            editingEstrategiaId = estrategiaId;
+            editingEstrategiaDraft = {
+                nombre: est.nombre || '',
+                objetivo: est.objetivo || '',
+                competencias: Array.isArray(est.competencias) ? est.competencias.map(c => ({ ...c })) : []
+            };
+            renderPPD();
+        }
+
+        function cancelarEdicionEstrategiaPPD() {
+            editingEstrategiaId = null;
+            editingEstrategiaDraft = null;
+            renderPPD();
+        }
+
+        function agregarCompetenciaEdicionEstrategia() {
+            if (!editingEstrategiaDraft) return;
+            const sel = document.getElementById('ppd-edit-comp-select');
+            if (!sel || !sel.value) return;
+            const nombre = sel.value;
+            if (editingEstrategiaDraft.competencias.some(c => c.nombre === nombre)) return;
+
+            const cfg = EVALUACIONES_360_DATA[currentRoleKey] || EVALUACIONES_360_DATA.clan;
+            const found = cfg.items.find(i => i.competencia === nombre);
+            editingEstrategiaDraft.competencias.push({
+                nombre,
+                cumplimiento: found ? Number(found.cumplimiento || 0) : 0
+            });
+            renderPPD();
+        }
+
+        function quitarCompetenciaEdicionEstrategia(idx) {
+            if (!editingEstrategiaDraft) return;
+            editingEstrategiaDraft.competencias.splice(idx, 1);
+            renderPPD();
+        }
+
+        function guardarEdicionEstrategiaPPD(estrategiaId) {
+            const nombreEl = document.getElementById('ppd-edit-nombre-' + estrategiaId);
+            const objEl = document.getElementById('ppd-edit-obj-' + estrategiaId);
+            const nombre = (nombreEl ? nombreEl.value : '').trim();
+            const objetivo = (objEl ? objEl.value : '').trim();
+            if (!nombre || !objetivo) return;
+
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+
+            est.nombre = nombre;
+            est.objetivo = objetivo;
+            if (editingEstrategiaDraft && Array.isArray(editingEstrategiaDraft.competencias)) {
+                est.competencias = [...editingEstrategiaDraft.competencias];
+            }
+
+            setEstrategiasPPD(lista, currentRoleKey);
+            editingEstrategiaId = null;
+            editingEstrategiaDraft = null;
+            renderPPD();
+        }
+
         function eliminarEstrategiaPPD(estrategiaId) {
+            if (editingEstrategiaId === estrategiaId) {
+                editingEstrategiaId = null;
+                editingEstrategiaDraft = null;
+            }
             const lista = getEstrategiasPPD(currentRoleKey).filter(e => e.id !== estrategiaId);
             setEstrategiasPPD(lista, currentRoleKey);
             renderPPD();
@@ -1221,6 +1307,41 @@
             est.nuevaActividadTexto = '';
 
             setEstrategiasPPD(lista, currentRoleKey);
+            renderPPD();
+        }
+
+        function iniciarEdicionActividadPPD(estrategiaId, actividadId) {
+            editingActividadKey = `${estrategiaId}::${actividadId}`;
+            renderPPD();
+        }
+
+        function cancelarEdicionActividadPPD() {
+            editingActividadKey = null;
+            renderPPD();
+        }
+
+        function guardarEdicionActividadPPD(estrategiaId, actividadId) {
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+            const act = (est.actividades || []).find(a => a.id === actividadId);
+            if (!act) return;
+
+            const descEl = document.getElementById('ppd-edit-act-desc-' + actividadId);
+            const fechaEl = document.getElementById('ppd-edit-act-fecha-' + actividadId);
+            const evTxtEl = document.getElementById('ppd-edit-act-evtxt-' + actividadId);
+            const cumplidaEl = document.getElementById('ppd-edit-act-cumplida-' + actividadId);
+
+            const nuevaDesc = (descEl ? descEl.value : act.descripcion).trim();
+            if (!nuevaDesc) return;
+
+            act.descripcion = nuevaDesc;
+            act.fechaCumplimiento = fechaEl ? fechaEl.value : act.fechaCumplimiento;
+            act.evidenciaTexto = evTxtEl ? evTxtEl.value.trim() : act.evidenciaTexto;
+            act.cumplida = cumplidaEl ? Boolean(cumplidaEl.checked) : act.cumplida;
+
+            setEstrategiasPPD(lista, currentRoleKey);
+            editingActividadKey = null;
             renderPPD();
         }
 
@@ -1281,6 +1402,9 @@
         }
 
         function eliminarActividadPPD(estrategiaId, actividadId) {
+            if (editingActividadKey === `${estrategiaId}::${actividadId}`) {
+                editingActividadKey = null;
+            }
             const lista = getEstrategiasPPD(currentRoleKey);
             const est = lista.find(e => e.id === estrategiaId);
             if (!est) return;
@@ -1329,12 +1453,46 @@
             }
 
             cont.innerHTML = estrategias.map(est => {
-                const compsHtml = (est.competencias || []).length
-                    ? (est.competencias || []).map(c => {
+                const isEditingEst = editingEstrategiaId === est.id && editingEstrategiaDraft;
+                const compsToShow = isEditingEst ? (editingEstrategiaDraft.competencias || []) : (est.competencias || []);
+
+                const compsHtml = compsToShow.length
+                    ? compsToShow.map((c, idx) => {
                         const cls = getColorClassByPercentage(c.cumplimiento);
-                        return `<span class="ppd-chip ${cls}">${escapeHtml(c.nombre)} · ${Number(c.cumplimiento).toFixed(2)}%</span>`;
+                        const removeBtn = isEditingEst
+                            ? `<button type="button" onclick="quitarCompetenciaEdicionEstrategia(${idx})" title="Quitar">×</button>`
+                            : '';
+                        return `<span class="ppd-chip ${cls}">${escapeHtml(c.nombre)} · ${Number(c.cumplimiento).toFixed(2)}%${removeBtn}</span>`;
                     }).join('')
                     : '<span style="font-size: 0.8rem; color: var(--text-muted);">Sin competencias asociadas</span>';
+
+                const editEstFormHtml = isEditingEst ? `
+                    <div class="ppd-edit-panel">
+                        <div class="ppd-grid-2">
+                            <div class="ppd-field">
+                                <label for="ppd-edit-nombre-${escapeHtml(est.id)}">Nombre de la estrategia</label>
+                                <input id="ppd-edit-nombre-${escapeHtml(est.id)}" type="text" value="${escapeHtml(editingEstrategiaDraft.nombre)}">
+                            </div>
+                            <div class="ppd-field">
+                                <label for="ppd-edit-obj-${escapeHtml(est.id)}">Objetivo de la estrategia</label>
+                                <input id="ppd-edit-obj-${escapeHtml(est.id)}" type="text" value="${escapeHtml(editingEstrategiaDraft.objetivo)}">
+                            </div>
+                        </div>
+                        <div class="ppd-field" style="margin-bottom: 12px;">
+                            <label for="ppd-edit-comp-select">Agregar competencia o función</label>
+                            <div class="ppd-comp-picker">
+                                <select id="ppd-edit-comp-select">
+                                    ${(cfg.items || []).map(item => `<option value="${escapeHtml(item.competencia)}">${item.no}. ${escapeHtml(item.competencia)} — Resultado: ${Number(item.cumplimiento || 0).toFixed(2)}%</option>`).join('')}
+                                </select>
+                                <button type="button" class="ppd-btn-plus" onclick="agregarCompetenciaEdicionEstrategia()"><i class="fa-solid fa-plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                        <div class="ppd-actions-group">
+                            <button type="button" class="ppd-btn-primary" onclick="guardarEdicionEstrategiaPPD('${escapeHtml(est.id)}')"><i class="fa-solid fa-check"></i> Guardar cambios</button>
+                            <button type="button" class="ppd-btn-secondary" onclick="cancelarEdicionEstrategiaPPD()">Cancelar</button>
+                        </div>
+                    </div>
+                ` : '';
 
                 const acts = est.actividades || [];
                 const estCumplidas = acts.filter(a => a.cumplida).length;
@@ -1343,6 +1501,37 @@
                 const actsHtml = acts.length
                     ? acts.map(act => {
                         const evidenciaResumen = [act.evidenciaArchivo, act.evidenciaTexto].filter(Boolean).join(' · ');
+                        const isEditingAct = editingActividadKey === `${est.id}::${act.id}`;
+
+                        const editActFormHtml = isEditingAct ? `
+                            <div class="ppd-edit-panel">
+                                <div class="ppd-field" style="margin-bottom: 10px;">
+                                    <label for="ppd-edit-act-desc-${escapeHtml(act.id)}">Descripción de la actividad</label>
+                                    <input id="ppd-edit-act-desc-${escapeHtml(act.id)}" type="text" value="${escapeHtml(act.descripcion)}">
+                                </div>
+                                <div class="ppd-act-controls">
+                                    <div class="ppd-field">
+                                        <label for="ppd-edit-act-fecha-${escapeHtml(act.id)}">Fecha de cumplimiento</label>
+                                        <input id="ppd-edit-act-fecha-${escapeHtml(act.id)}" type="date" value="${escapeHtml(act.fechaCumplimiento || '')}">
+                                    </div>
+                                    <div class="ppd-field">
+                                        <label for="ppd-edit-act-evtxt-${escapeHtml(act.id)}">Soporte o enlace de evidencia</label>
+                                        <input id="ppd-edit-act-evtxt-${escapeHtml(act.id)}" type="text" value="${escapeHtml(act.evidenciaTexto || '')}">
+                                    </div>
+                                    <div class="ppd-field" style="justify-content: flex-end;">
+                                        <label class="ppd-act-check-label" style="margin-top: 18px;">
+                                            <input id="ppd-edit-act-cumplida-${escapeHtml(act.id)}" type="checkbox" ${act.cumplida ? 'checked' : ''}>
+                                            <span>Marcar como cumplida</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="ppd-actions-group" style="margin-top: 12px;">
+                                    <button type="button" class="ppd-btn-primary" onclick="guardarEdicionActividadPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}')"><i class="fa-solid fa-check"></i> Guardar actividad</button>
+                                    <button type="button" class="ppd-btn-secondary" onclick="cancelarEdicionActividadPPD()">Cancelar</button>
+                                </div>
+                            </div>
+                        ` : '';
+
                         return `
                             <div class="ppd-act-item">
                                 <div class="ppd-act-top">
@@ -1354,10 +1543,17 @@
                                         >
                                         <span>${escapeHtml(act.descripcion)}</span>
                                     </label>
-                                    <button type="button" class="ppd-btn-secondary" onclick="eliminarActividadPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}')">
-                                        <i class="fa-solid fa-trash"></i> Quitar
-                                    </button>
+                                    <div class="ppd-actions-group">
+                                        <button type="button" class="ppd-btn-secondary" onclick="iniciarEdicionActividadPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}')">
+                                            <i class="fa-solid fa-pen"></i> Editar
+                                        </button>
+                                        <button type="button" class="ppd-btn-secondary" onclick="eliminarActividadPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}')">
+                                            <i class="fa-solid fa-trash"></i> Quitar
+                                        </button>
+                                    </div>
                                 </div>
+
+                                ${editActFormHtml}
 
                                 <div class="ppd-act-controls">
                                     <div class="ppd-field">
@@ -1404,10 +1600,17 @@
                                 <div class="ppd-estrategia-title"><i class="fa-solid fa-chess-knight"></i> ${escapeHtml(est.nombre)} <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-left: 6px;">(${estCumplidas}/${acts.length} · ${estPct}%)</span></div>
                                 <p class="ppd-estrategia-obj"><strong>Objetivo:</strong> ${escapeHtml(est.objetivo)}</p>
                             </div>
-                            <button type="button" class="ppd-btn-secondary" onclick="eliminarEstrategiaPPD('${escapeHtml(est.id)}')">
-                                <i class="fa-solid fa-trash"></i> Eliminar estrategia
-                            </button>
+                            <div class="ppd-actions-group">
+                                <button type="button" class="ppd-btn-secondary" onclick="iniciarEdicionEstrategiaPPD('${escapeHtml(est.id)}')">
+                                    <i class="fa-solid fa-pen"></i> Editar
+                                </button>
+                                <button type="button" class="ppd-btn-secondary" onclick="eliminarEstrategiaPPD('${escapeHtml(est.id)}')">
+                                    <i class="fa-solid fa-trash"></i> Eliminar estrategia
+                                </button>
+                            </div>
                         </div>
+
+                        ${editEstFormHtml}
 
                         <div>
                             <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;">Competencias y funciones vinculadas</div>
@@ -1441,6 +1644,9 @@
             const normalizedKey = EVALUACIONES_360_DATA[roleKey] ? roleKey : 'clan';
             currentRoleKey = normalizedKey;
             borradorCompetencias = [];
+            editingEstrategiaId = null;
+            editingEstrategiaDraft = null;
+            editingActividadKey = null;
             renderEvaluacion360PorPerfil(normalizedKey);
             poblarSelectCompetencias360(normalizedKey);
             renderBorradorCompetencias();
