@@ -245,7 +245,8 @@
         }
 
         .field-box select,
-        .field-box input {
+        .field-box input,
+        .field-box textarea {
             padding: 9px 12px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
@@ -255,7 +256,8 @@
         }
 
         .field-box select:focus,
-        .field-box input:focus {
+        .field-box input:focus,
+        .field-box textarea:focus {
             outline: none;
             border-color: var(--primary-red);
             background-color: #FFFFFF;
@@ -352,6 +354,41 @@
             color: #166534;
         }
 
+        /* Diccionario de Competencias */
+        .competencias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        .competencia-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .competencia-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 6px;
+        }
+
+        .competencia-card p {
+            font-size: 0.83rem;
+            margin-bottom: 8px;
+        }
+
+        .competencia-conductas {
+            padding-left: 16px;
+            font-size: 0.8rem;
+            color: var(--text-main);
+            line-height: 1.45;
+        }
+
         /* Manual de Cargos */
         .manual-enlaces-box {
             background-color: #FAFAFA;
@@ -424,6 +461,73 @@
             padding-left: 18px;
             color: var(--text-muted);
             line-height: 1.45;
+        }
+
+        /* Acuerdo Mutuo e Inducción */
+        .acuerdo-box {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 12px;
+        }
+
+        .acuerdo-pilares {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .pilar-item {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .pilar-item h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 5px;
+        }
+
+        .pilar-item p {
+            font-size: 0.82rem;
+            margin-bottom: 0;
+        }
+
+        .induccion-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .induccion-step {
+            background: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .induccion-step h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 3px;
+        }
+
+        .induccion-step p {
+            font-size: 0.82rem;
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -593,7 +697,45 @@
     <div id="atraccion-competencias" class="subcontent-panel">
         <div class="card">
             <h3><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</h3>
-            <p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto.</p>
+            <p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto en el Movimiento Scout.</p>
+
+            <div class="competencias-grid">
+                <div class="competencia-card">
+                    <h4>Orientación a la Misión y Valores Scout</h4>
+                    <p>Vivencia coherente de la Promesa y la Ley Scout en la acción educativa y el servicio voluntario.</p>
+                    <ul class="competencia-conductas">
+                        <li>Promueve el respeto, la integridad y la ética institucional.</li>
+                        <li>Alinea sus decisiones con los principios y políticas de la ASC.</li>
+                    </ul>
+                </div>
+
+                <div class="competencia-card">
+                    <h4>Liderazgo y Trabajo en Equipo</h4>
+                    <p>Capacidad para inspirar, coordinar y articular esfuerzos con dirigentes, jóvenes y familias.</p>
+                    <ul class="competencia-conductas">
+                        <li>Fomenta la participación activa y la corresponsabilidad.</li>
+                        <li>Facilita acuerdos constructivos y resolución pacífica de diferencias.</li>
+                    </ul>
+                </div>
+
+                <div class="competencia-card">
+                    <h4>Acompañamiento Educativo y Desarrollo</h4>
+                    <p>Habilidad para guiar el crecimiento personal de jóvenes y adultos mediante el Método Scout.</p>
+                    <ul class="competencia-conductas">
+                        <li>Aplica la progresión personal y la educación entre pares.</li>
+                        <li>Identifica necesidades formativas y apoya planes de mejora.</li>
+                    </ul>
+                </div>
+
+                <div class="competencia-card">
+                    <h4>Gestión, Planeación y Cuidado Seguro</h4>
+                    <p>Organización de actividades, seguimiento de metas y protección integral de niños, niñas y jóvenes.</p>
+                    <ul class="competencia-conductas">
+                        <li>Planifica, ejecuta y evalúa actividades con criterios de seguridad.</li>
+                        <li>Aplica protocolos de prevención y entorno seguro (Safe From Harm).</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -615,25 +757,25 @@
                     <h4>Subjefe de Clan</h4>
                     <span class="cargo-ficha-meta">Nombra: Jefe de grupo · Responde a: Consejo Scout de Grupo · Jefe de grupo</span>
                 </div>
-                <p style="font-size: 0.85rem; margin-bottom: 8px;">Como miembro del equipo de rama colabora en el funcionamiento, aplicación y ejecución del Programa de Jóvenes en la misma[cite: 2, 9].</p>
+                <p style="font-size: 0.85rem; margin-bottom: 8px;">Como miembro del equipo de rama colabora en el funcionamiento, aplicación y ejecución del Programa de Jóvenes en la misma.</p>
                 <div class="cargo-detalle-grid">
                     <div>
                         <h5>Requisitos objetivos</h5>
                         <ul>
-                            <li>Ser mayor de 18 años[cite: 2, 9].</li>
-                            <li>Poseer nivel de formación profesional, tecnológica o técnica[cite: 2, 9].</li>
-                            <li>Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia[cite: 2, 9].</li>
-                            <li>No formar parte del Consejo Scout de Grupo[cite: 2, 9].</li>
+                            <li>Ser mayor de 18 años.</li>
+                            <li>Poseer nivel de formación profesional, tecnológica o técnica.</li>
+                            <li>Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.</li>
+                            <li>No formar parte del Consejo Scout de Grupo.</li>
                         </ul>
                     </div>
                     <div>
                         <h5>Funciones principales</h5>
                         <ul>
-                            <li>Garantizar el cumplimiento de políticas, reglamentos, normas y procedimientos de la OSN en la Rama[cite: 2, 9].</li>
-                            <li>Colaborar en organización, diseño, preparación, ejecución y evaluación de actividades[cite: 2, 9].</li>
-                            <li>Participar activa y regularmente en reuniones de la Rama y del Grupo[cite: 2, 9].</li>
-                            <li>Fomentar y apoyar la gestión de los adultos de su Equipo de Rama[cite: 2, 9].</li>
-                            <li>Colaborar en el seguimiento y evaluación de la progresión personal de los jóvenes[cite: 2, 9].</li>
+                            <li>Garantizar el cumplimiento de políticas, reglamentos, normas y procedimientos de la OSN en la Rama.</li>
+                            <li>Colaborar en organización, diseño, preparación, ejecución y evaluación de actividades.</li>
+                            <li>Participar activa y regularmente en reuniones de la Rama y del Grupo.</li>
+                            <li>Fomentar y apoyar la gestión de los adultos de su Equipo de Rama.</li>
+                            <li>Colaborar en el seguimiento y evaluación de la progresión personal de los jóvenes.</li>
                         </ul>
                     </div>
                 </div>
@@ -645,26 +787,26 @@
                     <h4>Director Nacional de Adultos en el Movimiento</h4>
                     <span class="cargo-ficha-meta">Nombra: Jefe Scout Nacional (previo aval Consejo Scout Nacional) · Responde a: Jefe Scout Nacional</span>
                 </div>
-                <p style="font-size: 0.85rem; margin-bottom: 8px;">Tiene a su cargo el desarrollo, promoción y aplicación de la Política Nacional de Adultos en el movimiento y su modelo de gestión[cite: 1, 9].</p>
+                <p style="font-size: 0.85rem; margin-bottom: 8px;">Tiene a su cargo el desarrollo, promoción y aplicación de la Política Nacional de Adultos en el movimiento y su modelo de gestión.</p>
                 <div class="cargo-detalle-grid">
                     <div>
                         <h5>Requisitos objetivos</h5>
                         <ul>
-                            <li>Ser mayor de 18 años[cite: 1, 9].</li>
-                            <li>Poseer nivel de formación profesional o tecnológica[cite: 1, 9].</li>
-                            <li>Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia[cite: 1, 9].</li>
-                            <li>No formar parte del Consejo Scout Nacional[cite: 1, 9].</li>
-                            <li>Experiencia mínima de dos (2) años como dirigente, consejero o en su vida profesional[cite: 1, 9].</li>
+                            <li>Ser mayor de 18 años.</li>
+                            <li>Poseer nivel de formación profesional o tecnológica.</li>
+                            <li>Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.</li>
+                            <li>No formar parte del Consejo Scout Nacional.</li>
+                            <li>Experiencia mínima de dos (2) años como dirigente, consejero o en su vida profesional.</li>
                         </ul>
                     </div>
                     <div>
                         <h5>Funciones principales</h5>
                         <ul>
-                            <li>Conocer y hacer cumplir los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia[cite: 1, 9].</li>
-                            <li>Participar en la elaboración y ejecución del plan operativo Nacional en Adultos en el Movimiento[cite: 1, 9].</li>
-                            <li>Desarrollar, promover e impulsar la Política Nacional de Adultos en el Movimiento y su modelo de aplicación[cite: 1, 9].</li>
-                            <li>Impulsar el marco conceptual, pedagógico, estructural y administrativo del sistema de gestión de adultos[cite: 1, 9].</li>
-                            <li>Orientar y acompañar la atracción, vinculación y desarrollo de competencias de los adultos adscritos a su Dirección[cite: 1, 9].</li>
+                            <li>Conocer y hacer cumplir los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.</li>
+                            <li>Participar en la elaboración y ejecución del plan operativo Nacional en Adultos en el Movimiento.</li>
+                            <li>Desarrollar, promover e impulsar la Política Nacional de Adultos en el Movimiento y su modelo de aplicación.</li>
+                            <li>Impulsar el marco conceptual, pedagógico, estructural y administrativo del sistema de gestión de adultos.</li>
+                            <li>Orientar y acompañar la atracción, vinculación y desarrollo de competencias de los adultos adscritos a su Dirección.</li>
                         </ul>
                     </div>
                 </div>
@@ -684,7 +826,36 @@
     <div id="atraccion-acuerdo" class="subcontent-panel">
         <div class="card">
             <h3><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</h3>
-            <p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral.</p>
+            <p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral, claridad de funciones y acompañamiento continuo.</p>
+
+            <div class="acuerdo-box">
+                <div class="acuerdo-pilares">
+                    <div class="pilar-item">
+                        <h4>Compromiso del Adulto</h4>
+                        <p>Asumir las funciones del cargo, actuar conforme a la Ley y Promesa Scout y participar en su proceso formativo.</p>
+                    </div>
+                    <div class="pilar-item">
+                        <h4>Apoyo de la Organización</h4>
+                        <p>Brindar orientación, recursos, acompañamiento del asesor y espacios de formación y reconocimiento.</p>
+                    </div>
+                    <div class="pilar-item">
+                        <h4>Seguimiento y Revisión</h4>
+                        <p>Evaluar periódicamente el cumplimiento de acuerdos, metas y bienestar en el desempeño del rol.</p>
+                    </div>
+                </div>
+
+                <div class="field-box" style="margin-bottom: 12px;">
+                    <label for="notas-acuerdo-mutuo">Notas o compromisos específicos del acuerdo</label>
+                    <textarea id="notas-acuerdo-mutuo" rows="2" placeholder="Registra acuerdos particulares, tiempos de dedicación o compromisos de acompañamiento..."></textarea>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <button type="button" class="btn-primary" onclick="aceptarAcuerdoMutuo()">
+                        <i class="fa-solid fa-file-contract"></i> Confirmar Acuerdo Mutuo
+                    </button>
+                    <span id="estado-acuerdo-mutuo" style="font-size: 0.84rem; font-weight: 600; color: var(--primary-red);"></span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -692,7 +863,41 @@
     <div id="atraccion-induccion" class="subcontent-panel">
         <div class="card">
             <h3><i class="fa-solid fa-person-chalkboard"></i> Inducción</h3>
-            <p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal.</p>
+            <p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal para facilitar la integración al rol.</p>
+
+            <div class="induccion-steps">
+                <div class="induccion-step">
+                    <div>
+                        <h4>1. Bienvenida y Marco Institucional C.I.M.A.</h4>
+                        <p>Conocimiento de la estructura, políticas, misión y modelo de gestión de adultos en los Scouts de Colombia.</p>
+                    </div>
+                    <button type="button" class="btn-action" onclick="marcarEtapaInduccion('1. Bienvenida y Marco Institucional C.I.M.A.')">
+                        <i class="fa-solid fa-check"></i> Completar etapa
+                    </button>
+                </div>
+
+                <div class="induccion-step">
+                    <div>
+                        <h4>2. Módulo Virtual y Entorno Seguro</h4>
+                        <p>Apropiación de lineamientos formativos iniciales y protocolos de cuidado y protección.</p>
+                    </div>
+                    <button type="button" class="btn-action" onclick="marcarEtapaInduccion('2. Módulo Virtual y Entorno Seguro')">
+                        <i class="fa-solid fa-check"></i> Completar etapa
+                    </button>
+                </div>
+
+                <div class="induccion-step">
+                    <div>
+                        <h4>3. Encuentro con Asesor Personal y Equipo</h4>
+                        <p>Alineación inicial de expectativas, Plan Personal de Desarrollo (PPD) y dinámica del equipo.</p>
+                    </div>
+                    <button type="button" class="btn-action" onclick="marcarEtapaInduccion('3. Encuentro con Asesor Personal y Equipo')">
+                        <i class="fa-solid fa-check"></i> Completar etapa
+                    </button>
+                </div>
+            </div>
+
+            <div id="estado-induccion" style="margin-top: 12px; font-size: 0.84rem; font-weight: 600; color: var(--primary-red);"></div>
         </div>
     </div>
 
@@ -700,6 +905,8 @@
         const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
         const ATRACCION_REQ_KEY = 'cima_atraccion_requisiciones_v1';
         const ATRACCION_INGRESO_KEY = 'cima_atraccion_ingreso_v1';
+        const ATRACCION_ACUERDO_KEY = 'cima_atraccion_acuerdo_v1';
+        const ATRACCION_INDUCCION_KEY = 'cima_atraccion_induccion_v1';
 
         const INGRESO_CHECK_IDS = [
             'chk-ant-judiciales',
@@ -843,6 +1050,66 @@
             }
         }
 
+        function aceptarAcuerdoMutuo() {
+            const notas = document.getElementById('notas-acuerdo-mutuo').value.trim();
+            try {
+                localStorage.setItem(ATRACCION_ACUERDO_KEY, JSON.stringify({
+                    confirmado: true,
+                    notas: notas
+                }));
+            } catch (e) {}
+
+            const estado = document.getElementById('estado-acuerdo-mutuo');
+            if (estado) {
+                estado.textContent = 'Acuerdo Mutuo confirmado y registrado.';
+            }
+        }
+
+        function cargarAcuerdoMutuo() {
+            try {
+                const data = JSON.parse(localStorage.getItem(ATRACCION_ACUERDO_KEY) || '{}');
+                if (data && typeof data.notas === 'string') {
+                    const ta = document.getElementById('notas-acuerdo-mutuo');
+                    if (ta) ta.value = data.notas;
+                }
+                if (data && data.confirmado) {
+                    const estado = document.getElementById('estado-acuerdo-mutuo');
+                    if (estado) estado.textContent = 'Acuerdo Mutuo confirmado y registrado.';
+                }
+            } catch (e) {}
+        }
+
+        function marcarEtapaInduccion(etapa) {
+            let etapas = [];
+            try {
+                etapas = JSON.parse(localStorage.getItem(ATRACCION_INDUCCION_KEY) || '[]');
+            } catch (e) {}
+
+            if (!etapas.includes(etapa)) {
+                etapas.push(etapa);
+                try {
+                    localStorage.setItem(ATRACCION_INDUCCION_KEY, JSON.stringify(etapas));
+                } catch (e) {}
+            }
+
+            const estado = document.getElementById('estado-induccion');
+            if (estado) {
+                estado.textContent = `Etapas completadas (${etapas.length}/3): ${etapas.join(' · ')}`;
+            }
+        }
+
+        function cargarInduccion() {
+            try {
+                const etapas = JSON.parse(localStorage.getItem(ATRACCION_INDUCCION_KEY) || '[]');
+                if (Array.isArray(etapas) && etapas.length > 0) {
+                    const estado = document.getElementById('estado-induccion');
+                    if (estado) {
+                        estado.textContent = `Etapas completadas (${etapas.length}/3): ${etapas.join(' · ')}`;
+                    }
+                }
+            } catch (e) {}
+        }
+
         window.addEventListener('message', function(event) {
             if (event.data && event.data.type === 'CIMA_ROLE_CHANGE') {
                 aplicarPerfilAtraccion(event.data.roleKey, event.data.roleName);
@@ -862,6 +1129,8 @@
             aplicarPerfilAtraccion(rolInicial, nombreInicial);
             renderizarRequisiciones();
             cargarRevisionIngreso();
+            cargarAcuerdoMutuo();
+            cargarInduccion();
 
             if (window.parent && window.parent !== window) {
                 window.parent.postMessage({ type: 'CIMA_REQUEST_STATE' }, '*');
