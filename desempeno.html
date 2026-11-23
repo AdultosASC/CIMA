@@ -137,6 +137,236 @@
             font-size: 0.85rem;
             margin-bottom: 0;
         }
+
+        /* --- Estilos Evaluación 360° --- */
+        .eval360-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 14px 0 18px;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+        }
+
+        .role-active-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 999px;
+            border: 1px solid #E5B8B8;
+        }
+
+        .legend-semaforo {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .legend-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+        }
+
+        .eval360-list-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .eval360-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .eval360-item-btn {
+            text-align: left;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .eval360-item-btn:hover {
+            border-color: var(--primary-red);
+            background-color: #FFFFFF;
+            transform: translateY(-1px);
+        }
+
+        .eval360-item-btn.active {
+            background-color: var(--primary-red-light);
+            border-color: var(--primary-red);
+            box-shadow: 0 2px 8px rgba(139, 0, 0, 0.08);
+        }
+
+        .eval360-item-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .eval360-item-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .eval360-detail-card {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 18px;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .eval360-detail-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .eval360-detail-header h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 3px;
+        }
+
+        .eval360-detail-sub {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .eval360-avg-box {
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .eval360-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .eval360-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            min-width: 620px;
+        }
+
+        .eval360-table thead th {
+            background-color: #2B4C7E;
+            color: #FFFFFF;
+            font-weight: 700;
+            padding: 10px 12px;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.16);
+            white-space: nowrap;
+        }
+
+        .eval360-table thead th:last-child {
+            border-right: none;
+        }
+
+        .eval360-table tbody td {
+            padding: 9px 12px;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid #EFECE4;
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        .eval360-table tbody td:last-child {
+            border-right: none;
+        }
+
+        .eval360-table tbody td.col-competencia {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .eval360-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pct-pill {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            min-width: 66px;
+            text-align: center;
+        }
+
+        /* Colores de cumplimiento solicitados:
+           >= 80% verde | 50% a <80% amarillo | < 50% rojo */
+        .semaforo-verde {
+            background-color: #DCFCE7;
+            color: #166534;
+            border: 1px solid #86EFAC;
+        }
+
+        .semaforo-amarillo {
+            background-color: #FEF9C3;
+            color: #854D0E;
+            border: 1px solid #FDE047;
+        }
+
+        .semaforo-rojo {
+            background-color: #FEE2E2;
+            color: #991B1B;
+            border: 1px solid #FCA5A5;
+        }
     </style>
 </head>
 <body>
@@ -173,7 +403,29 @@
     <div id="desempeno-evaluacion" class="subcontent-panel">
         <div class="card">
             <h3><i class="fa-solid fa-clipboard-check"></i> Evaluación 360° y Componentes de Crecimiento</h3>
-            <p>Herramientas transversales de medición de conductas observables.</p>
+            <p>Consulta las evaluaciones desarrolladas según tu perfil activo y revisa los resultados de competencias con el semáforo de cumplimiento.</p>
+
+            <div class="eval360-toolbar">
+                <div class="role-active-pill">
+                    <i class="fa-solid fa-id-badge"></i>
+                    <span>Perfil activo: <strong id="eval360-rol-label">Subjefe de Clan</strong></span>
+                </div>
+
+                <div class="legend-semaforo" aria-label="Escala de colores por porcentaje de cumplimiento">
+                    <span class="legend-chip semaforo-verde">80% o más: Verde</span>
+                    <span class="legend-chip semaforo-amarillo">50% a 80%: Amarillo</span>
+                    <span class="legend-chip semaforo-rojo">Menos de 50%: Rojo</span>
+                </div>
+            </div>
+
+            <div class="eval360-list-title">
+                <i class="fa-solid fa-list-check" style="color: var(--primary-red);"></i>
+                <span>Evaluaciones desarrolladas disponibles para el perfil</span>
+            </div>
+            <div id="eval360-lista-evaluaciones" class="eval360-list"></div>
+
+            <div id="eval360-detalle-contenedor"></div>
+
             <div class="eval-grid">
                 <div class="eval-box">
                     <h4><i class="fa-solid fa-graduation-cap"></i> Formación Básica</h4>
@@ -195,6 +447,142 @@
     </div>
 
     <script>
+        const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
+
+        const EVALUACIONES_POR_PERFIL = {
+            clan: {
+                rolNombre: 'Subjefe de Clan',
+                mode: 'clan6',
+                evaluaciones: [
+                    {
+                        id: 'eval-clan-2026-1',
+                        titulo: 'Evaluación 360° - Periodo Scout 2026 (Rama Rovers / Clan)',
+                        fecha: '15/06/2026',
+                        estado: 'Completada',
+                        promedioGeneral: 65.00,
+                        filas: [
+                            { no: 1, competencia: 'Trabajo en equipo', jefe: 4.00, par: 3.50, promedio: 3.75, cumplimiento: 75.00 },
+                            { no: 2, competencia: 'Relaciones inter personales', jefe: 4.20, par: 3.80, promedio: 4.00, cumplimiento: 80.00 },
+                            { no: 3, competencia: 'Planeamiento estratégico', jefe: 3.00, par: 2.50, promedio: 2.75, cumplimiento: 55.00 },
+                            { no: 4, competencia: 'Conciencia Organizacional', jefe: 4.50, par: 4.00, promedio: 4.25, cumplimiento: 85.00 },
+                            { no: 5, competencia: 'Compromiso', jefe: 4.10, par: 3.90, promedio: 4.00, cumplimiento: 80.00 },
+                            { no: 6, competencia: 'Aprendizaje y desarrollo personal', jefe: 3.20, par: 2.80, promedio: 3.00, cumplimiento: 60.00 },
+                            { no: 7, competencia: 'Adaptabilidad de Cambio', jefe: 2.20, par: 2.00, promedio: 2.10, cumplimiento: 42.00 },
+                            { no: 8, competencia: 'Habilidades y conocimiento scout', jefe: 4.30, par: 4.20, promedio: 4.25, cumplimiento: 85.00 },
+                            { no: 9, competencia: 'Asesoría personal', jefe: 2.80, par: 2.70, promedio: 2.75, cumplimiento: 55.00 },
+                            { no: 10, competencia: 'Administración de actividades', jefe: 3.40, par: 3.10, promedio: 3.25, cumplimiento: 65.00 },
+                            { no: 11, competencia: 'Desarrollo comunitario', jefe: 2.00, par: 1.80, promedio: 1.90, cumplimiento: 38.00 },
+                            { no: 12, competencia: 'Administración del proyecto educativo', jefe: 2.00, par: 2.00, promedio: 2.00, cumplimiento: 40.00 }
+                        ]
+                    },
+                    {
+                        id: 'eval-clan-2025-2',
+                        titulo: 'Valoración Inicial por Competencias - Subjefe de Clan',
+                        fecha: '18/11/2025',
+                        estado: 'Completada',
+                        promedioGeneral: 65.00,
+                        filas: [
+                            { no: 1, competencia: 'Trabajo en equipo', jefe: 3.80, par: 3.70, promedio: 3.75, cumplimiento: 75.00 },
+                            { no: 2, competencia: 'Relaciones inter personales', jefe: 4.00, par: 4.00, promedio: 4.00, cumplimiento: 80.00 },
+                            { no: 3, competencia: 'Planeamiento estratégico', jefe: 2.90, par: 2.60, promedio: 2.75, cumplimiento: 55.00 },
+                            { no: 4, competencia: 'Conciencia Organizacional', jefe: 4.30, par: 4.20, promedio: 4.25, cumplimiento: 85.00 },
+                            { no: 5, competencia: 'Compromiso', jefe: 4.00, par: 4.00, promedio: 4.00, cumplimiento: 80.00 },
+                            { no: 6, competencia: 'Aprendizaje y desarrollo personal', jefe: 3.10, par: 2.90, promedio: 3.00, cumplimiento: 60.00 },
+                            { no: 7, competencia: 'Adaptabilidad de Cambio', jefe: 2.20, par: 2.00, promedio: 2.10, cumplimiento: 42.00 },
+                            { no: 8, competencia: 'Habilidades y conocimiento scout', jefe: 4.40, par: 4.10, promedio: 4.25, cumplimiento: 85.00 },
+                            { no: 9, competencia: 'Asesoría personal', jefe: 2.80, par: 2.70, promedio: 2.75, cumplimiento: 55.00 },
+                            { no: 10, competencia: 'Administración de actividades', jefe: 3.30, par: 3.20, promedio: 3.25, cumplimiento: 65.00 },
+                            { no: 11, competencia: 'Desarrollo comunitario', jefe: 1.90, par: 1.90, promedio: 1.90, cumplimiento: 38.00 },
+                            { no: 12, competencia: 'Administración del proyecto educativo', jefe: 2.10, par: 1.90, promedio: 2.00, cumplimiento: 40.00 }
+                        ]
+                    }
+                ]
+            },
+            nacion: {
+                rolNombre: 'Director de Adultos',
+                mode: 'director8',
+                evaluaciones: [
+                    {
+                        id: 'eval-nacion-2026-1',
+                        titulo: 'Evaluación 360° - Dirección Nacional de Adultos en el Movimiento',
+                        fecha: '22/07/2026',
+                        estado: 'Completada',
+                        promedioGeneral: 87.00,
+                        filas: [
+                            { no: 1, competencia: 'Trabajo en equipo', auto: 4.40, jefe: 4.80, par: 4.30, sub: 4.20, promedio: 4.43, cumplimiento: 88.60 },
+                            { no: 2, competencia: 'Relaciones inter personales', auto: 4.50, jefe: 4.70, par: 4.40, sub: 4.30, promedio: 4.48, cumplimiento: 89.60 },
+                            { no: 3, competencia: 'Planeamiento estratégico', auto: 4.40, jefe: 4.60, par: 4.20, sub: 4.10, promedio: 4.33, cumplimiento: 86.60 },
+                            { no: 4, competencia: 'Conciencia Organizacional', auto: 4.60, jefe: 4.90, par: 4.50, sub: 4.40, promedio: 4.60, cumplimiento: 92.00 },
+                            { no: 5, competencia: 'Compromiso', auto: 4.50, jefe: 4.80, par: 4.40, sub: 4.30, promedio: 4.50, cumplimiento: 90.00 },
+                            { no: 6, competencia: 'Aprendizaje y desarrollo personal', auto: 4.30, jefe: 4.50, par: 4.10, sub: 4.00, promedio: 4.23, cumplimiento: 84.60 },
+                            { no: 7, competencia: 'Adaptabilidad de Cambio', auto: 4.40, jefe: 4.60, par: 4.20, sub: 4.20, promedio: 4.35, cumplimiento: 87.00 },
+                            { no: 8, competencia: 'Asesoría personal', auto: 4.20, jefe: 4.40, par: 4.00, sub: 3.90, promedio: 4.13, cumplimiento: 82.60 },
+                            { no: 9, competencia: 'Garante del debido proceso', auto: 4.60, jefe: 4.80, par: 4.40, sub: 4.30, promedio: 4.53, cumplimiento: 90.60 },
+                            { no: 10, competencia: 'Generación de contenido', auto: 4.30, jefe: 4.50, par: 4.20, sub: 4.10, promedio: 4.28, cumplimiento: 85.60 },
+                            { no: 11, competencia: 'Administración y gestión estratégica', auto: 3.80, jefe: 4.00, par: 3.70, sub: 3.70, promedio: 3.80, cumplimiento: 76.00 },
+                            { no: 12, competencia: 'Gestión estratégica del Talento Humano', auto: 4.70, jefe: 4.90, par: 4.60, sub: 4.60, promedio: 4.70, cumplimiento: 94.00 }
+                        ]
+                    }
+                ]
+            },
+            formador: {
+                rolNombre: 'Formador Scout',
+                mode: 'clan6',
+                evaluaciones: [
+                    {
+                        id: 'eval-formador-2026-1',
+                        titulo: 'Evaluación 360° - Red Nacional de Formación',
+                        fecha: '10/08/2026',
+                        estado: 'Completada',
+                        promedioGeneral: 86.25,
+                        filas: [
+                            { no: 1, competencia: 'Trabajo en equipo', jefe: 4.50, par: 4.40, promedio: 4.45, cumplimiento: 89.00 },
+                            { no: 2, competencia: 'Relaciones inter personales', jefe: 4.40, par: 4.30, promedio: 4.35, cumplimiento: 87.00 },
+                            { no: 3, competencia: 'Planeamiento estratégico', jefe: 4.20, par: 4.10, promedio: 4.15, cumplimiento: 83.00 },
+                            { no: 4, competencia: 'Conciencia Organizacional', jefe: 4.60, par: 4.50, promedio: 4.55, cumplimiento: 91.00 },
+                            { no: 5, competencia: 'Compromiso', jefe: 4.50, par: 4.40, promedio: 4.45, cumplimiento: 89.00 },
+                            { no: 6, competencia: 'Aprendizaje y desarrollo personal', jefe: 4.30, par: 4.20, promedio: 4.25, cumplimiento: 85.00 },
+                            { no: 7, competencia: 'Adaptabilidad de Cambio', jefe: 4.10, par: 4.00, promedio: 4.05, cumplimiento: 81.00 },
+                            { no: 8, competencia: 'Habilidades y conocimiento scout', jefe: 4.70, par: 4.60, promedio: 4.65, cumplimiento: 93.00 }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        let currentRoleKey = 'clan';
+        let selectedEvalIdByRole = {
+            clan: 'eval-clan-2026-1',
+            nacion: 'eval-nacion-2026-1',
+            formador: 'eval-formador-2026-1'
+        };
+
+        function getSemaforoClass(pct) {
+            const val = Number(pct) || 0;
+            if (val >= 80) return 'semaforo-verde';
+            if (val >= 50) return 'semaforo-amarillo';
+            return 'semaforo-rojo';
+        }
+
+        function getSemaforoLabel(pct) {
+            const val = Number(pct) || 0;
+            if (val >= 80) return 'Óptimo (≥80%)';
+            if (val >= 50) return 'En desarrollo (50%-80%)';
+            return 'Crítico (<50%)';
+        }
+
+        function formatNum(num, decimals) {
+            return Number(num).toFixed(decimals);
+        }
+
+        function escapeHtml(text) {
+            return String(text ?? '')
+                .replace(/&/g, '&')
+                .replace(/</g, '<')
+                .replace(/>/g, '>')
+                .replace(/"/g, '"');
+        }
+
         function switchSubTab(tabId, element) {
             document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
             if (element) element.classList.add('active');
@@ -203,6 +591,169 @@
             const target = document.getElementById('desempeno-' + tabId);
             if (target) target.classList.add('active');
         }
+
+        function renderEvaluaciones360() {
+            const perfilConfig = EVALUACIONES_POR_PERFIL[currentRoleKey] || EVALUACIONES_POR_PERFIL.clan;
+            const rolLabel = document.getElementById('eval360-rol-label');
+            if (rolLabel) rolLabel.textContent = perfilConfig.rolNombre;
+
+            const listaEl = document.getElementById('eval360-lista-evaluaciones');
+            const detalleEl = document.getElementById('eval360-detalle-contenedor');
+            if (!listaEl || !detalleEl) return;
+
+            const evaluaciones = perfilConfig.evaluaciones || [];
+            if (!evaluaciones.length) {
+                listaEl.innerHTML = '<p>No hay evaluaciones 360° registradas para este perfil.</p>';
+                detalleEl.innerHTML = '';
+                return;
+            }
+
+            let selectedId = selectedEvalIdByRole[currentRoleKey];
+            if (!evaluaciones.some(ev => ev.id === selectedId)) {
+                selectedId = evaluaciones[0].id;
+                selectedEvalIdByRole[currentRoleKey] = selectedId;
+            }
+
+            listaEl.innerHTML = evaluaciones.map(ev => {
+                const isSelected = ev.id === selectedId;
+                const semClass = getSemaforoClass(ev.promedioGeneral);
+                return `
+                    <button type="button" class="eval360-item-btn ${isSelected ? 'active' : ''}" onclick="seleccionarEvaluacion360('${escapeHtml(ev.id)}')">
+                        <div class="eval360-item-top">
+                            <span><i class="fa-solid fa-file-lines" style="color: var(--primary-red); margin-right: 6px;"></i>${escapeHtml(ev.titulo)}</span>
+                            <span class="pct-pill ${semClass}">${formatNum(ev.promedioGeneral, 2)}%</span>
+                        </div>
+                        <div class="eval360-item-meta">
+                            <span><i class="fa-regular fa-calendar"></i> Fecha: ${escapeHtml(ev.fecha)} · ${escapeHtml(ev.estado)}</span>
+                            <span style="font-weight: 700; color: var(--primary-red);">Abrir evaluación <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+
+            const activa = evaluaciones.find(ev => ev.id === selectedId) || evaluaciones[0];
+            const semGeneral = getSemaforoClass(activa.promedioGeneral);
+            const semTexto = getSemaforoLabel(activa.promedioGeneral);
+
+            const headersHtml = perfilConfig.mode === 'director8'
+                ? `
+                    <tr>
+                        <th>No</th>
+                        <th>Competencia</th>
+                        <th>Autoevaluación</th>
+                        <th>Jefe</th>
+                        <th>Par</th>
+                        <th>Subordinado</th>
+                        <th>Promedio</th>
+                        <th>% Cumplimiento</th>
+                    </tr>
+                `
+                : `
+                    <tr>
+                        <th>No</th>
+                        <th>Competencia</th>
+                        <th>Jefe</th>
+                        <th>Par</th>
+                        <th>Promedio</th>
+                        <th>% Cumplimiento</th>
+                    </tr>
+                `;
+
+            const rowsHtml = activa.filas.map(f => {
+                const rowSem = getSemaforoClass(f.cumplimiento);
+                if (perfilConfig.mode === 'director8') {
+                    return `
+                        <tr>
+                            <td>${f.no}</td>
+                            <td class="col-competencia">${escapeHtml(f.competencia)}</td>
+                            <td>${formatNum(f.auto, 2)}</td>
+                            <td>${formatNum(f.jefe, 2)}</td>
+                            <td>${formatNum(f.par, 2)}</td>
+                            <td>${formatNum(f.sub, 2)}</td>
+                            <td><strong>${formatNum(f.promedio, 2)}</strong></td>
+                            <td><span class="pct-pill ${rowSem}">${formatNum(f.cumplimiento, 2)}%</span></td>
+                        </tr>
+                    `;
+                }
+                return `
+                    <tr>
+                        <td>${f.no}</td>
+                        <td class="col-competencia">${escapeHtml(f.competencia)}</td>
+                        <td>${formatNum(f.jefe, 2)}</td>
+                        <td>${formatNum(f.par, 2)}</td>
+                        <td><strong>${formatNum(f.promedio, 2)}</strong></td>
+                        <td><span class="pct-pill ${rowSem}">${formatNum(f.cumplimiento, 2)}%</span></td>
+                    </tr>
+                `;
+            }).join('');
+
+            detalleEl.innerHTML = `
+                <div class="eval360-detail-card">
+                    <div class="eval360-detail-header">
+                        <div>
+                            <h4>${escapeHtml(activa.titulo)}</h4>
+                            <div class="eval360-detail-sub">
+                                Cargo evaluado: <strong>${escapeHtml(perfilConfig.rolNombre)}</strong> · Fecha: <strong>${escapeHtml(activa.fecha)}</strong> · Competencias evaluadas: <strong>${activa.filas.length}</strong>
+                            </div>
+                        </div>
+                        <div class="eval360-avg-box ${semGeneral}">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <span>Promedio General: ${formatNum(activa.promedioGeneral, 2)}% (${semTexto})</span>
+                        </div>
+                    </div>
+
+                    <div class="eval360-table-wrap">
+                        <table class="eval360-table">
+                            <thead>${headersHtml}</thead>
+                            <tbody>${rowsHtml}</tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function seleccionarEvaluacion360(evalId) {
+            selectedEvalIdByRole[currentRoleKey] = evalId;
+            renderEvaluaciones360();
+        }
+
+        function aplicarPerfilActivo(roleKey) {
+            const normalizado = (roleKey === 'nacion' || roleKey === 'formador') ? roleKey : 'clan';
+            currentRoleKey = normalizado;
+            renderEvaluaciones360();
+        }
+
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'CIMA_ROLE_CHANGE') {
+                aplicarPerfilActivo(event.data.roleKey);
+            }
+        });
+
+        window.addEventListener('storage', function(event) {
+            if (event.key === CIMA_ROLE_STORAGE_KEY && event.newValue) {
+                try {
+                    const parsed = JSON.parse(event.newValue);
+                    if (parsed && (parsed.key || parsed.roleKey)) {
+                        aplicarPerfilActivo(parsed.key || parsed.roleKey);
+                    }
+                } catch (e) {}
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+            let rolInicial = 'clan';
+            try {
+                const guardado = JSON.parse(localStorage.getItem(CIMA_ROLE_STORAGE_KEY) || '{}');
+                if (guardado && guardado.key) rolInicial = guardado.key;
+                else if (guardado && guardado.roleKey) rolInicial = guardado.roleKey;
+            } catch (e) {}
+
+            aplicarPerfilActivo(rolInicial);
+
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ type: 'CIMA_REQUEST_STATE' }, '*');
+            }
+        });
     </script>
 </body>
 </html>
