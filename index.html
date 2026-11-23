@@ -265,26 +265,6 @@
             display: block;
         }
 
-        .placeholder-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .placeholder-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-
-        .placeholder-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
@@ -307,12 +287,12 @@
             <ul class="nav-menu">
                 <li><a class="nav-item active" data-section="perfil" data-file="perfil.html" onclick="navigateSection('perfil', 'perfil.html', this)"><i class="fa-solid fa-user"></i> Perfil</a></li>
                 <li><a class="nav-item" data-section="atraccion" data-file="atraccion.html" onclick="navigateSection('atraccion', 'atraccion.html', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
-                <li><a class="nav-item" data-section="desempeno" data-file="" onclick="navigateSection('desempeno', '', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
-                <li><a class="nav-item" data-section="formacion" data-file="" onclick="navigateSection('formacion', '', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
+                <li><a class="nav-item" data-section="desempeno" data-file="desempeno.html" onclick="navigateSection('desempeno', 'desempeno.html', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
+                <li><a class="nav-item" data-section="formacion" data-file="formacion.html" onclick="navigateSection('formacion', 'formacion.html', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
                 <li id="nav-formador-btn"><a class="nav-item" data-section="modulo-formador" data-file="formador.html" onclick="navigateSection('modulo-formador', 'formador.html', this)"><i class="fa-solid fa-chalkboard-user"></i> Formador</a></li>
-                <li><a class="nav-item" data-section="decisiones" data-file="" onclick="navigateSection('decisiones', '', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
-                <li><a class="nav-item" data-section="bienestar" data-file="" onclick="navigateSection('bienestar', '', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
-                <li><a class="nav-item" data-section="reconocimiento" data-file="" onclick="navigateSection('reconocimiento', '', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
+                <li><a class="nav-item" data-section="decisiones" data-file="decisiones.html" onclick="navigateSection('decisiones', 'decisiones.html', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
+                <li><a class="nav-item" data-section="bienestar" data-file="bienestar.html" onclick="navigateSection('bienestar', 'bienestar.html', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
+                <li><a class="nav-item" data-section="reconocimiento" data-file="reconocimiento.html" onclick="navigateSection('reconocimiento', 'reconocimiento.html', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
             </ul>
         </div>
 
@@ -344,23 +324,51 @@
 
         <div class="section-stage">
             <iframe id="seccion-frame" src="perfil.html" title="Vista de sección C.I.M.A."></iframe>
-            <div id="seccion-pendiente" class="placeholder-card" style="display:none;">
-                <h3 id="pendiente-titulo">Sección en preparación</h3>
-                <p id="pendiente-desc">Esta sección se cargará en su propio archivo HTML independiente conectado a index.html.</p>
-            </div>
         </div>
     </main>
 
     <script>
-        const titles = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y descarga de Hoja de Vida Scout (C.I.M.A.)' },
-            'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
-            'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, asesoría, competencias y Plan Personal de Desarrollo (PPD)' },
-            'formacion': { title: 'Formación General', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
-            'modulo-formador': { title: 'Red Nacional de Formación', subtitle: 'Gestión de formadores, ayudantes y directores de formación scout' },
-            'decisiones': { title: 'Decisiones para el Futuro', subtitle: 'Historial de cargos, cierre, sucesión y entrevista de salida institucional' },
-            'bienestar': { title: 'Bienestar y Motivación', subtitle: 'Clima organizacional, tarjetas de felicitación y círculos de bienestar' },
-            'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
+        const SECTION_ROUTES = {
+            'perfil': {
+                file: 'perfil.html',
+                title: 'Perfil del Dirigente',
+                subtitle: 'Balanced Scorecard (BSC) y descarga de Hoja de Vida Scout (C.I.M.A.)'
+            },
+            'atraccion': {
+                file: 'atraccion.html',
+                title: 'Atracción y Vinculación',
+                subtitle: 'Gestión de talento humano, requisiciones y normativa institucional'
+            },
+            'desempeno': {
+                file: 'desempeno.html',
+                title: 'Gestión del Desempeño',
+                subtitle: 'Ruta de evaluación, asesoría, competencias y Plan Personal de Desarrollo (PPD)'
+            },
+            'formacion': {
+                file: 'formacion.html',
+                title: 'Formación General',
+                subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales'
+            },
+            'modulo-formador': {
+                file: 'formador.html',
+                title: 'Red Nacional de Formación',
+                subtitle: 'Gestión de formadores, ayudantes y directores de formación scout'
+            },
+            'decisiones': {
+                file: 'decisiones.html',
+                title: 'Decisiones para el Futuro',
+                subtitle: 'Historial de cargos, cierre, sucesión y entrevista de salida institucional'
+            },
+            'bienestar': {
+                file: 'bienestar.html',
+                title: 'Bienestar y Motivación',
+                subtitle: 'Clima organizacional, tarjetas de felicitación y círculos de bienestar'
+            },
+            'reconocimiento': {
+                file: 'reconocimiento.html',
+                title: 'Reconocimiento y Estímulos',
+                subtitle: 'Condecoraciones y galardones institucionales'
+            }
         };
 
         const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
@@ -380,7 +388,7 @@
 
         function broadcastRoleState() {
             const frame = document.getElementById('seccion-frame');
-            if (frame && frame.style.display !== 'none' && frame.contentWindow) {
+            if (frame && frame.contentWindow) {
                 frame.contentWindow.postMessage({
                     type: 'CIMA_ROLE_CHANGE',
                     roleKey: currentRole.key,
@@ -392,31 +400,29 @@
         }
 
         function navigateSection(sectionId, fileName, element) {
+            const route = SECTION_ROUTES[sectionId] || SECTION_ROUTES['perfil'];
+            const targetFile = fileName || route.file;
             currentSection = sectionId;
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            if (element) element.classList.add('active');
 
-            const meta = titles[sectionId] || titles['perfil'];
-            document.getElementById('section-title').innerText = meta.title;
-            document.getElementById('section-subtitle').innerText = meta.subtitle;
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            } else {
+                const matched = document.querySelector(`.nav-item[data-section="${sectionId}"]`);
+                if (matched) matched.classList.add('active');
+            }
+
+            document.getElementById('section-title').innerText = route.title;
+            document.getElementById('section-subtitle').innerText = route.subtitle;
 
             const frame = document.getElementById('seccion-frame');
-            const pendiente = document.getElementById('seccion-pendiente');
-
-            if (fileName) {
-                pendiente.style.display = 'none';
-                frame.style.display = 'block';
-                const currentSrc = frame.getAttribute('src') || '';
-                if (currentSrc.split('?')[0] !== fileName) {
-                    frame.src = fileName;
+            if (frame) {
+                const currentSrc = (frame.getAttribute('src') || '').split('?')[0];
+                if (currentSrc !== targetFile) {
+                    frame.src = targetFile;
                 } else {
                     broadcastRoleState();
                 }
-            } else {
-                frame.style.display = 'none';
-                pendiente.style.display = 'block';
-                document.getElementById('pendiente-titulo').innerText = meta.title;
-                document.getElementById('pendiente-desc').innerText = `${meta.subtitle} — Archivo HTML independiente pendiente por integrar.`;
             }
         }
 
