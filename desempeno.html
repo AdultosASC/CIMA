@@ -364,6 +364,306 @@
             font-size: 0.88rem;
             margin-bottom: 0;
         }
+
+        /* Estilos Plan de Desarrollo Personal (PPD) */
+        .ppd-avance-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin: 14px 0 20px;
+        }
+
+        .ppd-avance-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .ppd-avance-pct {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .ppd-progress-track {
+            width: 100%;
+            height: 11px;
+            background-color: #E6E2D8;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .ppd-progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-red);
+            transition: width 0.25s ease;
+        }
+
+        .ppd-builder-box {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .ppd-builder-title {
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ppd-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .ppd-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .ppd-field label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .ppd-field input,
+        .ppd-field select,
+        .ppd-field textarea {
+            width: 100%;
+            padding: 9px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.86rem;
+        }
+
+        .ppd-field input:focus,
+        .ppd-field select:focus,
+        .ppd-field textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
+        }
+
+        .ppd-comp-picker {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+
+        .ppd-comp-picker select {
+            flex: 1;
+            padding: 9px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.86rem;
+        }
+
+        .ppd-btn-plus {
+            background-color: var(--primary-red);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 0 15px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .ppd-btn-plus:hover {
+            background-color: var(--primary-red-dark);
+        }
+
+        .ppd-btn-primary {
+            background-color: var(--primary-red);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 9px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: background-color 0.2s;
+        }
+
+        .ppd-btn-primary:hover {
+            background-color: var(--primary-red-dark);
+        }
+
+        .ppd-btn-secondary {
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 7px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .ppd-btn-secondary:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+        }
+
+        .ppd-selected-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .ppd-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border: 1px solid transparent;
+        }
+
+        .ppd-chip button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 700;
+            line-height: 1;
+            padding: 0 2px;
+        }
+
+        .ppd-estrategia-card {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        .ppd-estrategia-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ppd-estrategia-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 4px;
+        }
+
+        .ppd-estrategia-obj {
+            font-size: 0.86rem;
+            color: var(--text-main);
+            margin-bottom: 0;
+        }
+
+        .ppd-act-box {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 12px;
+        }
+
+        .ppd-act-item {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-top: 10px;
+        }
+
+        .ppd-act-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .ppd-act-check-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .ppd-act-check-label input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--primary-red);
+            cursor: pointer;
+        }
+
+        .ppd-act-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .ppd-evidencia-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-top: 6px;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -452,13 +752,68 @@
     <div id="desempeno-ppd" class="subcontent-panel">
         <div class="card">
             <h3><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</h3>
-            <p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo.</p>
+            <p>Crea estrategias a partir de los resultados de tu Evaluación 360°, agrega competencias y funciones, registra actividades, evidencias y fechas de cumplimiento, y monitorea el avance total del PPD.</p>
+
+            <div class="eval360-role-pill" style="margin-bottom: 10px;">
+                <i class="fa-solid fa-user-tag"></i>
+                <span>Perfil activo: <strong id="ppd-rol-texto">Subjefe de Clan</strong></span>
+            </div>
+
+            <!-- Porcentaje total de avance del PPD -->
+            <div class="ppd-avance-card">
+                <div class="ppd-avance-top">
+                    <div>
+                        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Porcentaje Total de Avance del PPD</div>
+                        <div id="ppd-avance-detalle" style="font-size: 0.85rem; color: var(--text-main); font-weight: 500; margin-top: 2px;">0 de 0 actividades cumplidas</div>
+                    </div>
+                    <div id="ppd-avance-porcentaje" class="ppd-avance-pct">0.00%</div>
+                </div>
+                <div class="ppd-progress-track">
+                    <div id="ppd-avance-barra" class="ppd-progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Formulario para crear nueva estrategia -->
+            <form id="ppdEstrategiaForm" class="ppd-builder-box" onsubmit="crearEstrategiaPPD(event)">
+                <div class="ppd-builder-title"><i class="fa-solid fa-plus-circle"></i> Nueva Estrategia de Desarrollo</div>
+
+                <div class="ppd-grid-2">
+                    <div class="ppd-field">
+                        <label for="ppdEstrategiaNombre">Nombre de la estrategia</label>
+                        <input type="text" id="ppdEstrategiaNombre" placeholder="Ej. Fortalecimiento de planeación y acompañamiento" required>
+                    </div>
+                    <div class="ppd-field">
+                        <label for="ppdEstrategiaObjetivo">Objetivo de la estrategia</label>
+                        <input type="text" id="ppdEstrategiaObjetivo" placeholder="Ej. Mejorar el cumplimiento en competencias con menor puntaje" required>
+                    </div>
+                </div>
+
+                <div class="ppd-field" style="margin-bottom: 14px;">
+                    <label for="ppdCompetenciaSelect">Competencias y funciones a trabajar (Resultados Evaluación 360°)</label>
+                    <div class="ppd-comp-picker">
+                        <select id="ppdCompetenciaSelect" aria-label="Seleccionar competencia o función de Evaluación 360°"></select>
+                        <button type="button" class="ppd-btn-plus" onclick="agregarCompetenciaBorrador()" title="Agregar competencia o función">
+                            <i class="fa-solid fa-plus"></i> Agregar
+                        </button>
+                    </div>
+                    <div id="ppdBorradorCompetencias" class="ppd-selected-chips"></div>
+                </div>
+
+                <button type="submit" class="ppd-btn-primary">
+                    <i class="fa-solid fa-folder-plus"></i> Crear Estrategia en el PPD
+                </button>
+            </form>
+
+            <!-- Listado de estrategias creadas -->
+            <div id="ppd-estrategias-lista"></div>
         </div>
     </div>
 
     <script>
         const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
+        const PPD_STORAGE_PREFIX = 'cima_ppd_estrategias_v1_';
         let currentRoleKey = 'clan';
+        let borradorCompetencias = [];
 
         /* Datos de valoración inicial 360° por perfil (escala 0.00 a 5.00; % Cumplimiento = (Promedio / 5) * 100) */
         const EVALUACIONES_360_DATA = {
@@ -573,8 +928,6 @@
 
         function renderEvaluacion360PorPerfil(roleKey) {
             const normalizedKey = EVALUACIONES_360_DATA[roleKey] ? roleKey : 'clan';
-            currentRoleKey = normalizedKey;
-
             const cfg = EVALUACIONES_360_DATA[normalizedKey];
             const rolTextoEl = document.getElementById('eval360-rol-texto');
             if (rolTextoEl) rolTextoEl.textContent = cfg.roleLabel;
@@ -676,9 +1029,367 @@
             }
         }
 
+        /* --- PLAN DE DESARROLLO PERSONAL (PPD) --- */
+        function getEstrategiasPPD(roleKey = currentRoleKey) {
+            try {
+                const raw = localStorage.getItem(PPD_STORAGE_PREFIX + roleKey);
+                const parsed = raw ? JSON.parse(raw) : [];
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function setEstrategiasPPD(list, roleKey = currentRoleKey) {
+            try {
+                localStorage.setItem(PPD_STORAGE_PREFIX + roleKey, JSON.stringify(list));
+            } catch (e) {}
+        }
+
+        function poblarSelectCompetencias360(roleKey) {
+            const selectEl = document.getElementById('ppdCompetenciaSelect');
+            if (!selectEl) return;
+
+            const cfg = EVALUACIONES_360_DATA[roleKey] || EVALUACIONES_360_DATA.clan;
+            selectEl.innerHTML = cfg.items.map(item => {
+                const pct = Number(item.cumplimiento || 0).toFixed(2);
+                return `<option value="${escapeHtml(item.competencia)}">${item.no}. ${escapeHtml(item.competencia)} — Resultado: ${pct}%</option>`;
+            }).join('');
+        }
+
+        function renderBorradorCompetencias() {
+            const cont = document.getElementById('ppdBorradorCompetencias');
+            if (!cont) return;
+
+            if (!borradorCompetencias.length) {
+                cont.innerHTML = '<span style="font-size: 0.78rem; color: var(--text-muted);">Selecciona una competencia o función del menú desplegable y haz clic en <strong>+ Agregar</strong>.</span>';
+                return;
+            }
+
+            cont.innerHTML = borradorCompetencias.map((comp, idx) => {
+                const cls = getColorClassByPercentage(comp.cumplimiento);
+                return `
+                    <span class="ppd-chip ${cls}">
+                        <span>${escapeHtml(comp.nombre)} (${Number(comp.cumplimiento).toFixed(2)}%)</span>
+                        <button type="button" onclick="quitarCompetenciaBorrador(${idx})" title="Quitar">×</button>
+                    </span>
+                `;
+            }).join('');
+        }
+
+        function agregarCompetenciaBorrador() {
+            const selectEl = document.getElementById('ppdCompetenciaSelect');
+            if (!selectEl || !selectEl.value) return;
+
+            const nombre = selectEl.value;
+            const cfg = EVALUACIONES_360_DATA[currentRoleKey] || EVALUACIONES_360_DATA.clan;
+            const found = cfg.items.find(i => i.competencia === nombre);
+            const cumplimiento = found ? Number(found.cumplimiento || 0) : 0;
+
+            if (borradorCompetencias.some(c => c.nombre === nombre)) return;
+
+            borradorCompetencias.push({ nombre, cumplimiento });
+            renderBorradorCompetencias();
+        }
+
+        function quitarCompetenciaBorrador(index) {
+            borradorCompetencias.splice(index, 1);
+            renderBorradorCompetencias();
+        }
+
+        function crearEstrategiaPPD(event) {
+            event.preventDefault();
+            const nombreInput = document.getElementById('ppdEstrategiaNombre');
+            const objInput = document.getElementById('ppdEstrategiaObjetivo');
+            if (!nombreInput || !objInput) return;
+
+            const nombre = nombreInput.value.trim();
+            const objetivo = objInput.value.trim();
+            if (!nombre || !objetivo) return;
+
+            if (!borradorCompetencias.length) {
+                agregarCompetenciaBorrador();
+            }
+
+            const lista = getEstrategiasPPD(currentRoleKey);
+            lista.unshift({
+                id: 'est_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                nombre,
+                objetivo,
+                competencias: [...borradorCompetencias],
+                nuevaActividadTexto: '',
+                actividades: []
+            });
+
+            setEstrategiasPPD(lista, currentRoleKey);
+            borradorCompetencias = [];
+            nombreInput.value = '';
+            objInput.value = '';
+            renderBorradorCompetencias();
+            renderPPD();
+        }
+
+        function eliminarEstrategiaPPD(estrategiaId) {
+            const lista = getEstrategiasPPD(currentRoleKey).filter(e => e.id !== estrategiaId);
+            setEstrategiasPPD(lista, currentRoleKey);
+            renderPPD();
+        }
+
+        function actualizarBorradorActividadTexto(estrategiaId, valor) {
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+            est.nuevaActividadTexto = valor;
+            setEstrategiasPPD(lista, currentRoleKey);
+        }
+
+        function agregarActividadPPD(estrategiaId) {
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+
+            const inputEl = document.getElementById('ppd-nueva-act-' + estrategiaId);
+            const desc = (inputEl ? inputEl.value : (est.nuevaActividadTexto || '')).trim();
+            if (!desc) return;
+
+            est.actividades = Array.isArray(est.actividades) ? est.actividades : [];
+            est.actividades.push({
+                id: 'act_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                descripcion: desc,
+                cumplida: false,
+                fechaCumplimiento: '',
+                evidenciaTexto: '',
+                evidenciaArchivo: ''
+            });
+            est.nuevaActividadTexto = '';
+
+            setEstrategiasPPD(lista, currentRoleKey);
+            renderPPD();
+        }
+
+        function toggleActividadCumplidaPPD(estrategiaId, actividadId, checked) {
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+            const act = (est.actividades || []).find(a => a.id === actividadId);
+            if (!act) return;
+
+            act.cumplida = Boolean(checked);
+            if (act.cumplida && !act.fechaCumplimiento) {
+                act.fechaCumplimiento = new Date().toISOString().slice(0, 10);
+            }
+            setEstrategiasPPD(lista, currentRoleKey);
+            renderPPD();
+        }
+
+        function actualizarFechaCumplimientoPPD(estrategiaId, actividadId, fecha) {
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+            const act = (est.actividades || []).find(a => a.id === actividadId);
+            if (!act) return;
+
+            act.fechaCumplimiento = fecha;
+            if (fecha && !act.cumplida) {
+                act.cumplida = true;
+            }
+            setEstrategiasPPD(lista, currentRoleKey);
+            renderPPD();
+        }
+
+        function actualizarEvidenciaTextoPPD(estrategiaId, actividadId, texto) {
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+            const act = (est.actividades || []).find(a => a.id === actividadId);
+            if (!act) return;
+
+            act.evidenciaTexto = texto;
+            setEstrategiasPPD(lista, currentRoleKey);
+        }
+
+        function cargarEvidenciaArchivoPPD(estrategiaId, actividadId, event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+            const act = (est.actividades || []).find(a => a.id === actividadId);
+            if (!act) return;
+
+            act.evidenciaArchivo = file.name;
+            setEstrategiasPPD(lista, currentRoleKey);
+            renderPPD();
+        }
+
+        function eliminarActividadPPD(estrategiaId, actividadId) {
+            const lista = getEstrategiasPPD(currentRoleKey);
+            const est = lista.find(e => e.id === estrategiaId);
+            if (!est) return;
+
+            est.actividades = (est.actividades || []).filter(a => a.id !== actividadId);
+            setEstrategiasPPD(lista, currentRoleKey);
+            renderPPD();
+        }
+
+        function actualizarAvanceTotalPPD(estrategias) {
+            let totalActividades = 0;
+            let cumplidas = 0;
+
+            estrategias.forEach(est => {
+                (est.actividades || []).forEach(act => {
+                    totalActividades += 1;
+                    if (act.cumplida) cumplidas += 1;
+                });
+            });
+
+            const pct = totalActividades > 0 ? (cumplidas / totalActividades) * 100 : 0;
+
+            const pctEl = document.getElementById('ppd-avance-porcentaje');
+            const detEl = document.getElementById('ppd-avance-detalle');
+            const barEl = document.getElementById('ppd-avance-barra');
+
+            if (pctEl) pctEl.textContent = `${pct.toFixed(2)}%`;
+            if (detEl) detEl.textContent = `${cumplidas} de ${totalActividades} actividades cumplidas en ${estrategias.length} estrategia(s)`;
+            if (barEl) barEl.style.width = `${pct}%`;
+        }
+
+        function renderPPD() {
+            const cfg = EVALUACIONES_360_DATA[currentRoleKey] || EVALUACIONES_360_DATA.clan;
+            const rolTextoEl = document.getElementById('ppd-rol-texto');
+            if (rolTextoEl) rolTextoEl.textContent = cfg.roleLabel;
+
+            const estrategias = getEstrategiasPPD(currentRoleKey);
+            actualizarAvanceTotalPPD(estrategias);
+
+            const cont = document.getElementById('ppd-estrategias-lista');
+            if (!cont) return;
+
+            if (!estrategias.length) {
+                cont.innerHTML = '<div class="eval-history-card"><div class="eval-history-title">Sin estrategias registradas aún</div><p style="margin-bottom:0; font-size:0.84rem;">Crea tu primera estrategia arriba seleccionando las competencias y funciones de la Evaluación 360°.</p></div>';
+                return;
+            }
+
+            cont.innerHTML = estrategias.map(est => {
+                const compsHtml = (est.competencias || []).length
+                    ? (est.competencias || []).map(c => {
+                        const cls = getColorClassByPercentage(c.cumplimiento);
+                        return `<span class="ppd-chip ${cls}">${escapeHtml(c.nombre)} · ${Number(c.cumplimiento).toFixed(2)}%</span>`;
+                    }).join('')
+                    : '<span style="font-size: 0.8rem; color: var(--text-muted);">Sin competencias asociadas</span>';
+
+                const acts = est.actividades || [];
+                const actsHtml = acts.length
+                    ? acts.map(act => {
+                        const evidenciaResumen = [act.evidenciaArchivo, act.evidenciaTexto].filter(Boolean).join(' · ');
+                        return `
+                            <div class="ppd-act-item">
+                                <div class="ppd-act-top">
+                                    <label class="ppd-act-check-label">
+                                        <input
+                                            type="checkbox"
+                                            ${act.cumplida ? 'checked' : ''}
+                                            onchange="toggleActividadCumplidaPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}', this.checked)"
+                                        >
+                                        <span>${escapeHtml(act.descripcion)}</span>
+                                    </label>
+                                    <button type="button" class="ppd-btn-secondary" onclick="eliminarActividadPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}')">
+                                        <i class="fa-solid fa-trash"></i> Quitar
+                                    </button>
+                                </div>
+
+                                <div class="ppd-act-controls">
+                                    <div class="ppd-field">
+                                        <label for="ppd-fecha-${escapeHtml(act.id)}"><i class="fa-regular fa-calendar-check"></i> ¿Cuándo se cumplió la actividad?</label>
+                                        <input
+                                            id="ppd-fecha-${escapeHtml(act.id)}"
+                                            type="date"
+                                            value="${escapeHtml(act.fechaCumplimiento || '')}"
+                                            onchange="actualizarFechaCumplimientoPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}', this.value)"
+                                        >
+                                    </div>
+
+                                    <div class="ppd-field">
+                                        <label for="ppd-ev-file-${escapeHtml(act.id)}"><i class="fa-solid fa-paperclip"></i> Cargar evidencia (archivo)</label>
+                                        <input
+                                            id="ppd-ev-file-${escapeHtml(act.id)}"
+                                            type="file"
+                                            onchange="cargarEvidenciaArchivoPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}', event)"
+                                        >
+                                    </div>
+
+                                    <div class="ppd-field">
+                                        <label for="ppd-ev-txt-${escapeHtml(act.id)}"><i class="fa-solid fa-file-lines"></i> Soporte o enlace de evidencia</label>
+                                        <input
+                                            id="ppd-ev-txt-${escapeHtml(act.id)}"
+                                            type="text"
+                                            placeholder="Descripción o enlace de la evidencia..."
+                                            value="${escapeHtml(act.evidenciaTexto || '')}"
+                                            oninput="actualizarEvidenciaTextoPPD('${escapeHtml(est.id)}', '${escapeHtml(act.id)}', this.value)"
+                                        >
+                                    </div>
+                                </div>
+
+                                ${evidenciaResumen ? `<div class="ppd-evidencia-badge"><i class="fa-solid fa-check-circle"></i> Evidencia cargada: ${escapeHtml(evidenciaResumen)}</div>` : ''}
+                            </div>
+                        `;
+                    }).join('')
+                    : '<p style="margin-top: 8px; margin-bottom: 0; font-size: 0.82rem; color: var(--text-muted);">Aún no hay actividades agregadas a esta estrategia.</p>';
+
+                return `
+                    <div class="ppd-estrategia-card">
+                        <div class="ppd-estrategia-header">
+                            <div>
+                                <div class="ppd-estrategia-title"><i class="fa-solid fa-chess-knight"></i> ${escapeHtml(est.nombre)}</div>
+                                <p class="ppd-estrategia-obj"><strong>Objetivo:</strong> ${escapeHtml(est.objetivo)}</p>
+                            </div>
+                            <button type="button" class="ppd-btn-secondary" onclick="eliminarEstrategiaPPD('${escapeHtml(est.id)}')">
+                                <i class="fa-solid fa-trash"></i> Eliminar estrategia
+                            </button>
+                        </div>
+
+                        <div>
+                            <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;">Competencias y funciones vinculadas</div>
+                            <div class="ppd-selected-chips" style="margin-top: 0;">${compsHtml}</div>
+                        </div>
+
+                        <div class="ppd-act-box">
+                            <div style="font-size: 0.86rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
+                                <i class="fa-solid fa-list-check" style="color: var(--primary-red);"></i> Actividades a desarrollar
+                            </div>
+                            <div class="ppd-comp-picker">
+                                <input
+                                    id="ppd-nueva-act-${escapeHtml(est.id)}"
+                                    type="text"
+                                    placeholder="Escribe una actividad a desarrollar..."
+                                    value="${escapeHtml(est.nuevaActividadTexto || '')}"
+                                    oninput="actualizarBorradorActividadTexto('${escapeHtml(est.id)}', this.value)"
+                                >
+                                <button type="button" class="ppd-btn-plus" onclick="agregarActividadPPD('${escapeHtml(est.id)}')">
+                                    <i class="fa-solid fa-plus"></i> Agregar actividad
+                                </button>
+                            </div>
+                            ${actsHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function aplicarPerfilDesempeno(roleKey) {
+            const normalizedKey = EVALUACIONES_360_DATA[roleKey] ? roleKey : 'clan';
+            currentRoleKey = normalizedKey;
+            borradorCompetencias = [];
+            renderEvaluacion360PorPerfil(normalizedKey);
+            poblarSelectCompetencias360(normalizedKey);
+            renderBorradorCompetencias();
+            renderPPD();
+        }
+
         window.addEventListener('message', function(event) {
             if (event.data && event.data.type === 'CIMA_ROLE_CHANGE') {
-                renderEvaluacion360PorPerfil(event.data.roleKey);
+                aplicarPerfilDesempeno(event.data.roleKey);
             }
         });
 
@@ -687,7 +1398,7 @@
                 try {
                     const parsed = JSON.parse(event.newValue);
                     if (parsed && (parsed.key || parsed.roleKey)) {
-                        renderEvaluacion360PorPerfil(parsed.key || parsed.roleKey);
+                        aplicarPerfilDesempeno(parsed.key || parsed.roleKey);
                     }
                 } catch (e) {}
             }
@@ -701,7 +1412,7 @@
                 else if (saved && saved.roleKey) initialRole = saved.roleKey;
             } catch (e) {}
 
-            renderEvaluacion360PorPerfil(initialRole);
+            aplicarPerfilDesempeno(initialRole);
 
             if (window.parent && window.parent !== window) {
                 window.parent.postMessage({ type: 'CIMA_REQUEST_STATE' }, '*');
