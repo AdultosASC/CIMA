@@ -9,8 +9,10 @@
     <style>
         :root {
             --primary-red: #8B0000;
+            --primary-red-dark: #600000;
             --primary-red-light: #FDF2F2;
             --bg-cream: #FDFBF7;
+            --card-bg: #FFFFFF;
             --text-main: #2C2C2C;
             --text-muted: #666666;
             --border-color: #E6E2D8;
@@ -70,6 +72,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--primary-red);
+            letter-spacing: 0.5px;
         }
 
         .brand-info p {
@@ -103,6 +106,7 @@
         .nav-item i {
             font-size: 1.1rem;
             color: var(--text-muted);
+            transition: color 0.2s;
         }
 
         .nav-item:hover {
@@ -110,10 +114,15 @@
             color: var(--primary-red);
         }
 
+        .nav-item:hover i {
+            color: var(--primary-red);
+        }
+
         .nav-item.active {
             background-color: var(--primary-red);
             color: white;
             font-weight: 600;
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
         }
 
         .nav-item.active i {
@@ -168,6 +177,12 @@
             cursor: pointer;
             padding: 6px;
             border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .role-switch-btn:hover {
+            background-color: rgba(139, 0, 0, 0.08);
+            color: var(--primary-red);
         }
 
         .role-dropdown-menu {
@@ -186,6 +201,7 @@
 
         .role-dropdown-menu.show {
             display: block;
+            animation: fadeIn 0.2s ease-in-out;
         }
 
         .role-option {
@@ -193,13 +209,15 @@
             font-size: 0.8rem;
             cursor: pointer;
             border-bottom: 1px solid #F5F3EC;
+            transition: background 0.2s;
         }
 
         .role-option:last-child {
             border-bottom: none;
         }
 
-        .role-option:hover, .role-option.active-role {
+        .role-option:hover,
+        .role-option.active-role {
             background-color: var(--primary-red-light);
             color: var(--primary-red);
             font-weight: 600;
@@ -207,36 +225,36 @@
 
         main {
             flex-grow: 1;
+            background-color: var(--bg-cream);
+            padding: 32px 40px 24px;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            height: 100%;
             overflow: hidden;
-            padding: 28px 36px 20px;
         }
 
         .header-welcome {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             flex-shrink: 0;
         }
 
         .header-welcome h2 {
-            font-size: 1.65rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--text-main);
             text-transform: uppercase;
         }
 
         .header-welcome p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
             margin-top: 4px;
         }
 
-        .frame-wrapper {
+        .section-stage {
             flex-grow: 1;
             min-height: 0;
-            border-radius: 12px;
-            overflow: hidden;
+            position: relative;
         }
 
         #seccion-frame {
@@ -244,10 +262,38 @@
             height: 100%;
             border: none;
             background: transparent;
+            display: block;
+        }
+
+        .placeholder-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .placeholder-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .placeholder-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+
+    <!-- MENÚ LATERAL IZQUIERDO -->
     <aside>
         <div>
             <div class="brand-container">
@@ -259,28 +305,29 @@
             </div>
 
             <ul class="nav-menu">
-                <li><a class="nav-item active" data-section="perfil" data-file="perfil.html" onclick="loadSection('perfil', 'perfil.html', this)"><i class="fa-solid fa-user"></i> Perfil</a></li>
-                <li><a class="nav-item" data-section="atraccion" data-file="atraccion.html" onclick="loadSection('atraccion', 'atraccion.html', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
-                <li><a class="nav-item" data-section="desempeno" data-file="desempeno.html" onclick="loadSection('desempeno', 'desempeno.html', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
-                <li><a class="nav-item" data-section="formacion" data-file="formacion.html" onclick="loadSection('formacion', 'formacion.html', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
-                <li id="nav-formador-btn"><a class="nav-item" data-section="modulo-formador" data-file="formador.html" onclick="loadSection('modulo-formador', 'formador.html', this)"><i class="fa-solid fa-chalkboard-user"></i> Formador</a></li>
-                <li><a class="nav-item" data-section="decisiones" data-file="decisiones.html" onclick="loadSection('decisiones', 'decisiones.html', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
-                <li><a class="nav-item" data-section="bienestar" data-file="bienestar.html" onclick="loadSection('bienestar', 'bienestar.html', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
-                <li><a class="nav-item" data-section="reconocimiento" data-file="reconocimiento.html" onclick="loadSection('reconocimiento', 'reconocimiento.html', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
+                <li><a class="nav-item active" data-section="perfil" data-file="perfil.html" onclick="navigateSection('perfil', 'perfil.html', this)"><i class="fa-solid fa-user"></i> Perfil</a></li>
+                <li><a class="nav-item" data-section="atraccion" data-file="atraccion.html" onclick="navigateSection('atraccion', 'atraccion.html', this)"><i class="fa-solid fa-user-plus"></i> Atracción</a></li>
+                <li><a class="nav-item" data-section="desempeno" data-file="" onclick="navigateSection('desempeno', '', this)"><i class="fa-solid fa-chart-line"></i> Desempeño</a></li>
+                <li><a class="nav-item" data-section="formacion" data-file="" onclick="navigateSection('formacion', '', this)"><i class="fa-solid fa-graduation-cap"></i> Formación</a></li>
+                <li id="nav-formador-btn"><a class="nav-item" data-section="modulo-formador" data-file="" onclick="navigateSection('modulo-formador', '', this)"><i class="fa-solid fa-chalkboard-user"></i> Formador</a></li>
+                <li><a class="nav-item" data-section="decisiones" data-file="" onclick="navigateSection('decisiones', '', this)"><i class="fa-solid fa-scale-balanced"></i> Decisiones</a></li>
+                <li><a class="nav-item" data-section="bienestar" data-file="" onclick="navigateSection('bienestar', '', this)"><i class="fa-solid fa-hands-holding-child"></i> Bienestar</a></li>
+                <li><a class="nav-item" data-section="reconocimiento" data-file="" onclick="navigateSection('reconocimiento', '', this)"><i class="fa-solid fa-award"></i> Reconocimiento</a></li>
             </ul>
         </div>
 
+        <!-- FOOTER LATERAL CON SELECTOR DE CARGOS -->
         <div class="sidebar-footer">
             <div class="role-dropdown-menu" id="role-menu">
-                <div class="role-option active-role" onclick="selectRole('clan', 'Subjefe de Clan', this)">Subjefe de Clan <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Grupo</span></div>
-                <div class="role-option" onclick="selectRole('nacion', 'Director de Adultos', this)">Director de Adultos <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Nación</span></div>
-                <div class="role-option" onclick="selectRole('formador', 'Formador Scout', this)">Formador Scout <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Red Nal. Formación</span></div>
+                <div class="role-option active-role" onclick="selectRole('clan', 'Subjefe de Clan', 'Nivel Grupo', this)">Subjefe de Clan <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Grupo</span></div>
+                <div class="role-option" onclick="selectRole('nacion', 'Director de Adultos', 'Nivel Nación', this)">Director de Adultos <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Nivel Nación</span></div>
+                <div class="role-option" onclick="selectRole('formador', 'Formador Scout', 'Red Nal. Formación', this)">Formador Scout <span style="font-size:0.7rem; color:var(--text-muted); display:block;">Red Nal. Formación</span></div>
             </div>
 
             <div class="user-mini">
-                <div class="user-avatar">MQ</div>
+                <div class="user-avatar" id="sidebar-avatar">MQ</div>
                 <div class="user-details">
-                    <h4>MAURICIO QUIROGA</h4>
+                    <h4 id="sidebar-name">MAURICIO QUIROGA</h4>
                     <p id="sidebar-role">Subjefe de Clan</p>
                 </div>
             </div>
@@ -288,20 +335,25 @@
         </div>
     </aside>
 
+    <!-- PANEL DE VISUALIZACIÓN DERECHO -->
     <main>
         <div class="header-welcome">
             <h2 id="section-title">Perfil del Dirigente</h2>
-            <p id="section-subtitle">Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)</p>
+            <p id="section-subtitle">Balanced Scorecard (BSC) y descarga de Hoja de Vida Scout (C.I.M.A.)</p>
         </div>
 
-        <div class="frame-wrapper">
-            <iframe id="seccion-frame" src="perfil.html" title="Contenido de sección"></iframe>
+        <div class="section-stage">
+            <iframe id="seccion-frame" src="perfil.html" title="Vista de sección C.I.M.A."></iframe>
+            <div id="seccion-pendiente" class="placeholder-card" style="display:none;">
+                <h3 id="pendiente-titulo">Sección en preparación</h3>
+                <p id="pendiente-desc">Esta sección se cargará en su propio archivo HTML independiente conectado a index.html.</p>
+            </div>
         </div>
     </main>
 
     <script>
-        const sectionMeta = {
-            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y resumen de gestión por cargo (C.I.M.A.)' },
+        const titles = {
+            'perfil': { title: 'Perfil del Dirigente', subtitle: 'Balanced Scorecard (BSC) y descarga de Hoja de Vida Scout (C.I.M.A.)' },
             'atraccion': { title: 'Atracción y Vinculación', subtitle: 'Gestión de talento humano, requisiciones y normativa institucional' },
             'desempeno': { title: 'Gestión del Desempeño', subtitle: 'Ruta de evaluación, asesoría, competencias y Plan Personal de Desarrollo (PPD)' },
             'formacion': { title: 'Formación General', subtitle: 'Historial de formaciones, certificados de oferta formativa y cursos virtuales' },
@@ -311,62 +363,107 @@
             'reconocimiento': { title: 'Reconocimiento y Estímulos', subtitle: 'Condecoraciones y galardones institucionales' }
         };
 
-        let currentRole = { key: 'clan', name: 'Subjefe de Clan' };
-        let currentSectionId = 'perfil';
+        const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
 
-        function sendStateToFrame() {
+        let currentRole = {
+            key: 'clan',
+            name: 'Subjefe de Clan',
+            level: 'Nivel Grupo'
+        };
+        let currentSection = 'perfil';
+
+        function persistRoleState() {
+            try {
+                localStorage.setItem(CIMA_ROLE_STORAGE_KEY, JSON.stringify(currentRole));
+            } catch (e) {}
+        }
+
+        function broadcastRoleState() {
             const frame = document.getElementById('seccion-frame');
-            if (frame && frame.contentWindow) {
+            if (frame && frame.style.display !== 'none' && frame.contentWindow) {
                 frame.contentWindow.postMessage({
-                    type: 'CIMA_STATE',
+                    type: 'CIMA_ROLE_CHANGE',
                     roleKey: currentRole.key,
                     roleName: currentRole.name,
-                    sectionId: currentSectionId
+                    roleLevel: currentRole.level,
+                    section: currentSection
                 }, '*');
             }
         }
 
-        function loadSection(sectionId, fileName, element) {
-            currentSectionId = sectionId;
+        function navigateSection(sectionId, fileName, element) {
+            currentSection = sectionId;
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             if (element) element.classList.add('active');
 
-            const meta = sectionMeta[sectionId] || sectionMeta['perfil'];
+            const meta = titles[sectionId] || titles['perfil'];
             document.getElementById('section-title').innerText = meta.title;
             document.getElementById('section-subtitle').innerText = meta.subtitle;
 
             const frame = document.getElementById('seccion-frame');
-            frame.src = fileName;
+            const pendiente = document.getElementById('seccion-pendiente');
+
+            if (fileName) {
+                pendiente.style.display = 'none';
+                frame.style.display = 'block';
+                const currentSrc = frame.getAttribute('src') || '';
+                if (currentSrc.split('?')[0] !== fileName) {
+                    frame.src = fileName;
+                } else {
+                    broadcastRoleState();
+                }
+            } else {
+                frame.style.display = 'none';
+                pendiente.style.display = 'block';
+                document.getElementById('pendiente-titulo').innerText = meta.title;
+                document.getElementById('pendiente-desc').innerText = `${meta.subtitle} — Archivo HTML independiente pendiente por integrar.`;
+            }
         }
 
         function toggleRoleMenu() {
-            document.getElementById('role-menu').classList.toggle('show');
+            const menu = document.getElementById('role-menu');
+            menu.classList.toggle('show');
         }
 
-        function selectRole(roleKey, roleDisplayName, el) {
-            currentRole = { key: roleKey, name: roleDisplayName };
+        function selectRole(roleKey, roleDisplayName, roleLevelText, clickedEl) {
+            currentRole = {
+                key: roleKey,
+                name: roleDisplayName,
+                level: roleLevelText || ''
+            };
+            persistRoleState();
+
             document.getElementById('role-menu').classList.remove('show');
             document.getElementById('sidebar-role').innerText = roleDisplayName;
 
-            document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('active-role'));
-            if (el) el.classList.add('active-role');
+            const options = document.querySelectorAll('.role-option');
+            options.forEach(opt => opt.classList.remove('active-role'));
+            if (clickedEl) {
+                clickedEl.classList.add('active-role');
+            }
 
             const formadorNavBtn = document.getElementById('nav-formador-btn');
             if (roleKey === 'formador') {
                 formadorNavBtn.style.display = 'block';
             } else {
                 formadorNavBtn.style.display = 'none';
-                if (currentSectionId === 'modulo-formador') {
-                    const firstNav = document.querySelector('.nav-item');
-                    loadSection('perfil', 'perfil.html', firstNav);
+                if (currentSection === 'modulo-formador') {
+                    const perfilNav = document.querySelector('.nav-item[data-section="perfil"]');
+                    navigateSection('perfil', 'perfil.html', perfilNav);
                     return;
                 }
             }
 
-            sendStateToFrame();
+            broadcastRoleState();
         }
 
-        document.getElementById('seccion-frame').addEventListener('load', sendStateToFrame);
+        document.getElementById('seccion-frame').addEventListener('load', broadcastRoleState);
+
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'CIMA_REQUEST_STATE') {
+                broadcastRoleState();
+            }
+        });
 
         window.addEventListener('click', function(event) {
             if (!event.target.matches('.role-switch-btn') && !event.target.closest('.role-dropdown-menu')) {
@@ -376,6 +473,8 @@
                 }
             }
         });
+
+        persistRoleState();
     </script>
 </body>
 </html>
