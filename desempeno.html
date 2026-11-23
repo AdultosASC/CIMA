@@ -177,7 +177,7 @@
 
         .eval-history-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 12px;
             margin: 14px 0 18px;
         }
@@ -284,7 +284,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 0.84rem;
-            min-width: 640px;
+            min-width: 720px;
         }
 
         .eval-360-table thead th {
@@ -400,7 +400,7 @@
     <div id="desempeno-evaluacion" class="subcontent-panel">
         <div class="card">
             <h3><i class="fa-solid fa-clipboard-check"></i> Evaluación 360° · Evaluaciones Desarrolladas</h3>
-            <p>Consulta la lista de evaluaciones desarrolladas según tu perfil activo y revisa el cumplimiento de competencias y funciones.</p>
+            <p>Consulta la valoración inicial desarrollada según tu perfil activo y revisa el cumplimiento de competencias y funciones.</p>
 
             <div class="eval360-topbar">
                 <div class="eval360-role-pill">
@@ -460,36 +460,31 @@
         const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
         let currentRoleKey = 'clan';
 
-        /* Datos de evaluaciones 360° por perfil (escala 0.00 a 5.00; % Cumplimiento = (Promedio / 5) * 100) */
+        /* Datos de valoración inicial 360° por perfil (escala 0.00 a 5.00; % Cumplimiento = (Promedio / 5) * 100) */
         const EVALUACIONES_360_DATA = {
             clan: {
                 roleLabel: 'Subjefe de Clan',
                 mode: 'clan',
                 evaluaciones: [
                     {
-                        titulo: 'Evaluación 360° · Ciclo Formación Básica (Periodo I)',
+                        titulo: 'Valoración Inicial 360° · Formación Básica',
                         estado: 'Desarrollada · Promedio 65.00%',
-                        detalle: 'Incluye valoración de Jefe Inmediato y Par sobre competencias y funciones de Subjefe de Clan.'
-                    },
-                    {
-                        titulo: 'Seguimiento de Competencias y Funciones de Rama',
-                        estado: 'Consolidada en Formación Básica',
-                        detalle: 'Medición de conductas observables en acompañamiento de jóvenes y gestión de Clan.'
+                        detalle: 'Valoración inicial de competencias y funciones con Autoevaluación, Jefe Inmediato y Par.'
                     }
                 ],
                 items: [
-                    { no: 1, competencia: 'Trabajo en equipo', jefe: 4.50, par: 4.00, promedio: 4.25, cumplimiento: 85.00 },
-                    { no: 2, competencia: 'Relaciones inter personales', jefe: 4.00, par: 3.50, promedio: 3.75, cumplimiento: 75.00 },
-                    { no: 3, competencia: 'Planeamiento estratégico', jefe: 2.50, par: 2.00, promedio: 2.25, cumplimiento: 45.00 },
-                    { no: 4, competencia: 'Conciencia Organizacional', jefe: 4.25, par: 4.25, promedio: 4.25, cumplimiento: 85.00 },
-                    { no: 5, competencia: 'Compromiso', jefe: 3.50, par: 3.00, promedio: 3.25, cumplimiento: 65.00 },
-                    { no: 6, competencia: 'Aprendizaje y desarrollo personal', jefe: 4.50, par: 4.00, promedio: 4.25, cumplimiento: 85.00 },
-                    { no: 7, competencia: 'Adaptabilidad de Cambio', jefe: 2.00, par: 2.00, promedio: 2.00, cumplimiento: 40.00 },
-                    { no: 8, competencia: 'Habilidades y conocimiento scout', jefe: 3.50, par: 3.00, promedio: 3.25, cumplimiento: 65.00 },
-                    { no: 9, competencia: 'Asesoría personal', jefe: 2.25, par: 1.75, promedio: 2.00, cumplimiento: 40.00 },
-                    { no: 10, competencia: 'Administración de actividades', jefe: 4.00, par: 4.00, promedio: 4.00, cumplimiento: 80.00 },
-                    { no: 11, competencia: 'Desarrollo comunitario', jefe: 3.00, par: 2.50, promedio: 2.75, cumplimiento: 55.00 },
-                    { no: 12, competencia: 'Administración del proyecto educativo', jefe: 4.50, par: 4.00, promedio: 4.25, cumplimiento: 85.00 }
+                    { no: 1, competencia: 'Trabajo en equipo', auto: 4.50, jefe: 4.50, par: 3.75, promedio: 4.25, cumplimiento: 85.00 },
+                    { no: 2, competencia: 'Relaciones inter personales', auto: 4.00, jefe: 4.00, par: 3.25, promedio: 3.75, cumplimiento: 75.00 },
+                    { no: 3, competencia: 'Planeamiento estratégico', auto: 2.50, jefe: 2.25, par: 2.00, promedio: 2.25, cumplimiento: 45.00 },
+                    { no: 4, competencia: 'Conciencia Organizacional', auto: 4.25, jefe: 4.25, par: 4.25, promedio: 4.25, cumplimiento: 85.00 },
+                    { no: 5, competencia: 'Compromiso', auto: 3.50, jefe: 3.25, par: 3.00, promedio: 3.25, cumplimiento: 65.00 },
+                    { no: 6, competencia: 'Aprendizaje y desarrollo personal', auto: 4.50, jefe: 4.25, par: 4.00, promedio: 4.25, cumplimiento: 85.00 },
+                    { no: 7, competencia: 'Adaptabilidad de Cambio', auto: 2.25, jefe: 2.00, par: 1.75, promedio: 2.00, cumplimiento: 40.00 },
+                    { no: 8, competencia: 'Habilidades y conocimiento scout', auto: 3.50, jefe: 3.25, par: 3.00, promedio: 3.25, cumplimiento: 65.00 },
+                    { no: 9, competencia: 'Asesoría personal', auto: 2.25, jefe: 2.00, par: 1.75, promedio: 2.00, cumplimiento: 40.00 },
+                    { no: 10, competencia: 'Administración de actividades', auto: 4.00, jefe: 4.00, par: 4.00, promedio: 4.00, cumplimiento: 80.00 },
+                    { no: 11, competencia: 'Desarrollo comunitario', auto: 3.00, jefe: 2.75, par: 2.50, promedio: 2.75, cumplimiento: 55.00 },
+                    { no: 12, competencia: 'Administración del proyecto educativo', auto: 4.50, jefe: 4.25, par: 4.00, promedio: 4.25, cumplimiento: 85.00 }
                 ]
             },
             nacion: {
@@ -497,14 +492,9 @@
                 mode: 'director',
                 evaluaciones: [
                     {
-                        titulo: 'Evaluación 360° · Dirección Nacional de Adultos (Formación Básica)',
+                        titulo: 'Valoración Inicial 360° · Formación Básica',
                         estado: 'Desarrollada · Promedio 87.00%',
-                        detalle: 'Incluye Autoevaluación, Jefe, Par y Subordinado sobre competencias y funciones directivas.'
-                    },
-                    {
-                        titulo: 'Revisión Integral de Gestión y Liderazgo Institucional',
-                        estado: 'Consolidada en Formación Básica',
-                        detalle: 'Evaluación de planeación estratégica, acompañamiento regional y talento humano.'
+                        detalle: 'Valoración inicial de competencias y funciones con Autoevaluación, Jefe, Par y Subordinado.'
                     }
                 ],
                 items: [
@@ -527,9 +517,9 @@
                 mode: 'director',
                 evaluaciones: [
                     {
-                        titulo: 'Evaluación 360° · Red Nacional de Formación (Formación Básica)',
+                        titulo: 'Valoración Inicial 360° · Formación Básica',
                         estado: 'Desarrollada · Promedio 87.00%',
-                        detalle: 'Evaluación 360° de facilitación, acompañamiento y competencias formativas.'
+                        detalle: 'Valoración inicial de competencias y funciones con Autoevaluación, Jefe, Par y Subordinado.'
                     }
                 ],
                 items: [
@@ -620,6 +610,7 @@
                         <tr>
                             <td class="td-center">${row.no}</td>
                             <td class="td-comp">${escapeHtml(row.competencia)}</td>
+                            <td class="td-center">${Number(row.auto).toFixed(2)}</td>
                             <td class="td-center">${Number(row.jefe).toFixed(2)}</td>
                             <td class="td-center">${Number(row.par).toFixed(2)}</td>
                             <td class="td-center">${Number(row.promedio).toFixed(2)}</td>
@@ -635,6 +626,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Competencia</th>
+                                    <th>Autoevaluación</th>
                                     <th>Jefe</th>
                                     <th>Par</th>
                                     <th>Promedio</th>
