@@ -1,25 +1,292 @@
-<div id="perfil-cargo-wrapper" data-role="clan">
-    <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Dirigente - C.I.M.A.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #8B0000;
+            --primary-red-dark: #600000;
+            --primary-red-light: #FDF2F2;
+            --bg-cream: #FDFBF7;
+            --card-bg: #FFFFFF;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --border-color: #E6E2D8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            padding: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .card h3 {
+            font-size: 1.08rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .card h3 i {
+            color: var(--primary-red);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .profile-top-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .profile-name-clean {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
+        }
+
+        .profile-right-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .profile-actions-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(139, 0, 0, 0.14);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary-red);
+            color: white;
+        }
+
+        .observaciones-panel {
+            display: none;
+            width: 340px;
+            max-width: 100%;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 12px 14px;
+            text-align: left;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .observaciones-panel.open {
+            display: block;
+        }
+
+        .observaciones-panel h4 {
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 4px;
+        }
+
+        .observaciones-panel p {
+            font-size: 0.82rem;
+            color: var(--text-main);
+            margin-bottom: 0;
+        }
+
+        .bsc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .bsc-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .bsc-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .bsc-card i {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+        }
+
+        .bsc-card h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .bsc-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .bsc-subtext {
+            font-size: 0.78rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .cargo-options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        .cargo-option-box {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .cargo-option-box h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 5px;
+        }
+
+        .cargo-option-box p {
+            font-size: 0.83rem;
+            margin-bottom: 0;
+        }
+
+        .status-feedback {
+            font-size: 0.83rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card profile-top-card">
         <div>
             <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
             <p id="v-cargo-subtitulo" style="margin-bottom: 0;">Dirigente activo - Subjefe de Clan (Nivel Grupo)</p>
         </div>
 
-        <div id="acciones-por-cargo" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button type="button" class="btn-action" onclick="descargarHVScout()">
-                <i class="fa-solid fa-download"></i> Descargar HV Scout
+        <div class="profile-right-stack">
+            <div class="profile-actions-row">
+                <button type="button" class="btn-action" onclick="descargarHVScout()">
+                    <i class="fa-solid fa-download"></i> Descargar HV Scout
+                </button>
+                <button type="button" class="btn-action" id="btn-opcion-subjefe" onclick="verOpcionesCargo('clan')">
+                    <i class="fa-solid fa-users"></i> Opciones Subjefe de Clan
+                </button>
+                <button type="button" class="btn-action" id="btn-opcion-director" style="display: none;" onclick="verOpcionesCargo('nacion')">
+                    <i class="fa-solid fa-sliders"></i> Opciones Director de Adultos
+                </button>
+            </div>
+
+            <button type="button" class="btn-action" onclick="toggleObservacionesCHN()">
+                <i class="fa-solid fa-clipboard-list"></i> Observaciones Hoja de Vida CHN
             </button>
 
-            <!-- Opción visible solo cuando el cargo es Director de Adultos -->
-            <button type="button" class="btn-action" id="btn-opcion-director" style="display: none;" onclick="abrirGestionNacional()">
-                <i class="fa-solid fa-sliders"></i> Gestión Nacional de Adultos
-            </button>
-
-            <!-- Opción visible solo cuando el cargo es Subjefe de Clan -->
-            <button type="button" class="btn-action" id="btn-opcion-subjefe" onclick="abrirSeguimientoRama()">
-                <i class="fa-solid fa-users"></i> Seguimiento de Rama
-            </button>
+            <div id="observaciones-chn-panel" class="observaciones-panel">
+                <h4>Observaciones Hoja de Vida CHN</h4>
+                <p>Sin observaciones por conducta registradas en el expediente.</p>
+            </div>
         </div>
+    </div>
+
+    <div class="card">
+        <h3><i class="fa-solid fa-user-gear"></i> Opciones según Cargo Activo (<span id="cargo-activo-etiqueta">Subjefe de Clan</span>)</h3>
+        <p id="cargo-opciones-intro">Opciones habilitadas para el perfil de Subjefe de Clan a nivel de Grupo.</p>
+
+        <div id="opciones-subjefe-clan" class="cargo-options-grid">
+            <div class="cargo-option-box">
+                <h4>Seguimiento de Rama Clan</h4>
+                <p>Consulta de avances, actividades de sección y acompañamiento a jóvenes y equipo de rama.</p>
+            </div>
+            <div class="cargo-option-box">
+                <h4>Plan Personal de Desarrollo (PPD)</h4>
+                <p>Revisión de metas formativas y competencias asociadas al rol de Subjefe de Clan.</p>
+            </div>
+        </div>
+
+        <div id="opciones-director-adultos" class="cargo-options-grid" style="display: none;">
+            <div class="cargo-option-box">
+                <h4>Gestión Nacional de Adultos</h4>
+                <p>Supervisión de lineamientos nacionales, políticas de adultos y articulación regional.</p>
+            </div>
+            <div class="cargo-option-box">
+                <h4>Requisiciones y Convocatorias</h4>
+                <p>Seguimiento a solicitudes de vacantes y perfiles estratégicos a nivel nacional.</p>
+            </div>
+        </div>
+
+        <div id="perfil-feedback" class="status-feedback" aria-live="polite"></div>
     </div>
 
     <div class="card">
@@ -27,95 +294,143 @@
         <p id="bsc-descripcion-cargo">Indicadores clave asociados al cargo activo.</p>
         <div class="bsc-grid" id="bsc-content"></div>
     </div>
-</div>
 
-<script>
-    const BSC_POR_CARGO = {
-        clan: {
-            tituloCargo: 'Subjefe de Clan',
-            subtituloPerfil: 'Dirigente activo - Subjefe de Clan (Nivel Grupo)',
-            descripcion: 'Indicadores de gestión de rama, formación y desarrollo personal.',
-            cards: [
-                { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '5 Módulos', subtext: 'Rama Rovers y Básica' },
-                { icon: 'fa-award', title: 'Nivel Formación', value: 'Ins. de Madera', subtext: 'Acreditado / Vigente' },
-                { icon: 'fa-clock-rotate-left', title: 'Horas de Servicio', value: '95 hrs', subtext: 'Actividades de Grupo' },
-                { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '94%', subtext: 'Plan Personal de Desarrollo' }
-            ]
-        },
-        nacion: {
-            tituloCargo: 'Director de Adultos',
-            subtituloPerfil: 'Dirigente activo - Director de Adultos (Nivel Nación)',
-            descripcion: 'Indicadores estratégicos, liderazgo nacional y seguimiento del plan de adultos.',
-            cards: [
-                { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '12 Cursos', subtext: 'Gestión y Liderazgo Avanzado' },
-                { icon: 'fa-award', title: 'Nivel Formación', value: 'Gestor Nacional', subtext: '4 Maderos (GN)' },
-                { icon: 'fa-clock-rotate-left', title: 'Horas Gestión', value: '350 hrs', subtext: 'Equipo Nacional' },
-                { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '98%', subtext: 'Plan Personal de Desarrollo' }
-            ]
-        }
-    };
+    <script>
+        const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
 
-    function aplicarOpcionesPorCargo(roleKey) {
-        const cargoNormalizado = (roleKey === 'nacion') ? 'nacion' : 'clan';
-        const config = BSC_POR_CARGO[cargoNormalizado];
+        const BSC_POR_CARGO = {
+            clan: {
+                tituloCargo: 'Subjefe de Clan',
+                subtituloPerfil: 'Dirigente activo - Subjefe de Clan (Nivel Grupo)',
+                introOpciones: 'Opciones habilitadas para el perfil de Subjefe de Clan a nivel de Grupo.',
+                descripcion: 'Indicadores de gestión de rama, formación y desarrollo personal.',
+                cards: [
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '5 Módulos', subtext: 'Rama Rovers y Básica' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Ins. de Madera', subtext: 'Acreditado / Vigente' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas de Servicio', value: '95 hrs', subtext: 'Actividades de Grupo' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '94%', subtext: 'Plan Personal de Desarrollo' }
+                ]
+            },
+            nacion: {
+                tituloCargo: 'Director de Adultos',
+                subtituloPerfil: 'Dirigente activo - Director de Adultos (Nivel Nación)',
+                introOpciones: 'Opciones habilitadas para el perfil de Director de Adultos a nivel Nacional.',
+                descripcion: 'Indicadores estratégicos, liderazgo nacional y seguimiento del plan de adultos.',
+                cards: [
+                    { icon: 'fa-graduation-cap', title: 'Cursos Realizados', value: '12 Cursos', subtext: 'Gestión y Liderazgo Avanzado' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Gestor Nacional', subtext: '4 Maderos (GN)' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas Gestión', value: '350 hrs', subtext: 'Equipo Nacional' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '98%', subtext: 'Plan Personal de Desarrollo' }
+                ]
+            },
+            formador: {
+                tituloCargo: 'Formador Scout',
+                subtituloPerfil: 'Dirigente activo - Formador Scout (Red Nacional de Formación)',
+                introOpciones: 'Opciones habilitadas para el perfil de Formador Scout en la Red Nacional de Formación.',
+                descripcion: 'Indicadores de facilitación pedagógica, acreditación y formación de adultos.',
+                cards: [
+                    { icon: 'fa-chalkboard-user', title: 'Cursos Facilitados', value: '8 Cursos', subtext: 'Formación Básica e IM' },
+                    { icon: 'fa-award', title: 'Nivel Formación', value: 'Formador (FS)', subtext: 'Red Nacional de Formación' },
+                    { icon: 'fa-clock-rotate-left', title: 'Horas Docencia', value: '180 hrs', subtext: 'Acompañamiento Formativo' },
+                    { icon: 'fa-clipboard-check', title: 'Cumplimiento PPD', value: '96%', subtext: 'Plan Personal de Desarrollo' }
+                ]
+            }
+        };
 
-        const wrapper = document.getElementById('perfil-cargo-wrapper');
-        if (wrapper) wrapper.setAttribute('data-role', cargoNormalizado);
-
-        document.getElementById('v-cargo-subtitulo').innerText = config.subtituloPerfil;
-        document.getElementById('bsc-title-cargo').innerText = config.tituloCargo;
-        document.getElementById('bsc-descripcion-cargo').innerText = config.descripcion;
-
-        // Mostrar u ocultar opciones específicas según el cargo
-        const btnDirector = document.getElementById('btn-opcion-director');
-        const btnSubjefe = document.getElementById('btn-opcion-subjefe');
-
-        if (cargoNormalizado === 'nacion') {
-            if (btnDirector) btnDirector.style.display = 'inline-flex';
-            if (btnSubjefe) btnSubjefe.style.display = 'none';
-        } else {
-            if (btnDirector) btnDirector.style.display = 'none';
-            if (btnSubjefe) btnSubjefe.style.display = 'inline-flex';
+        function normalizarRol(roleKey) {
+            if (roleKey === 'nacion') return 'nacion';
+            if (roleKey === 'formador') return 'formador';
+            return 'clan';
         }
 
-        const container = document.getElementById('bsc-content');
-        if (container) {
-            container.innerHTML = config.cards.map(card => `
-                <div class="bsc-card">
-                    <i class="fa-solid ${card.icon}"></i>
-                    <h4>${card.title}</h4>
-                    <div class="bsc-value">${card.value}</div>
-                    <div class="bsc-subtext">${card.subtext}</div>
-                </div>
-            `).join('');
+        function aplicarCargoEnPerfil(roleKey) {
+            const rol = normalizarRol(roleKey);
+            const config = BSC_POR_CARGO[rol];
+
+            document.getElementById('v-cargo-subtitulo').innerText = config.subtituloPerfil;
+            document.getElementById('cargo-activo-etiqueta').innerText = config.tituloCargo;
+            document.getElementById('cargo-opciones-intro').innerText = config.introOpciones;
+            document.getElementById('bsc-title-cargo').innerText = config.tituloCargo;
+            document.getElementById('bsc-descripcion-cargo').innerText = config.descripcion;
+
+            const btnSubjefe = document.getElementById('btn-opcion-subjefe');
+            const btnDirector = document.getElementById('btn-opcion-director');
+            const boxSubjefe = document.getElementById('opciones-subjefe-clan');
+            const boxDirector = document.getElementById('opciones-director-adultos');
+
+            if (rol === 'nacion') {
+                if (btnDirector) btnDirector.style.display = 'inline-flex';
+                if (btnSubjefe) btnSubjefe.style.display = 'none';
+                if (boxDirector) boxDirector.style.display = 'grid';
+                if (boxSubjefe) boxSubjefe.style.display = 'none';
+            } else if (rol === 'clan') {
+                if (btnDirector) btnDirector.style.display = 'none';
+                if (btnSubjefe) btnSubjefe.style.display = 'inline-flex';
+                if (boxDirector) boxDirector.style.display = 'none';
+                if (boxSubjefe) boxSubjefe.style.display = 'grid';
+            } else {
+                if (btnDirector) btnDirector.style.display = 'none';
+                if (btnSubjefe) btnSubjefe.style.display = 'none';
+                if (boxDirector) boxDirector.style.display = 'none';
+                if (boxSubjefe) boxSubjefe.style.display = 'none';
+            }
+
+            const container = document.getElementById('bsc-content');
+            if (container) {
+                container.innerHTML = config.cards.map(card => `
+                    <div class="bsc-card">
+                        <i class="fa-solid ${card.icon}"></i>
+                        <h4>${card.title}</h4>
+                        <div class="bsc-value">${card.value}</div>
+                        <div class="bsc-subtext">${card.subtext}</div>
+                    </div>
+                `).join('');
+            }
         }
-    }
 
-    function descargarHVScout() {
-        alert('Descargando Hoja de Vida Scout completa desde Talento360°...');
-    }
-
-    function abrirGestionNacional() {
-        alert('Abriendo opciones exclusivas del perfil Director de Adultos.');
-    }
-
-    function abrirSeguimientoRama() {
-        alert('Abriendo opciones exclusivas del perfil Subjefe de Clan.');
-    }
-
-    window.addEventListener('message', function(event) {
-        if (event.data && event.data.type === 'CIMA_ROLE_CHANGE') {
-            aplicarOpcionesPorCargo(event.data.roleKey);
+        function toggleObservacionesCHN() {
+            const panel = document.getElementById('observaciones-chn-panel');
+            if (panel) {
+                panel.classList.toggle('open');
+            }
         }
-    });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        let rolInicial = 'clan';
-        try {
-            const guardado = JSON.parse(localStorage.getItem('cima_active_role_state') || '{}');
-            if (guardado && guardado.roleKey) rolInicial = guardado.roleKey;
-            else if (guardado && guardado.key) rolInicial = guardado.key;
-        } catch (e) {}
-        aplicarOpcionesPorCargo(rolInicial);
-    });
-</script>
+        function descargarHVScout() {
+            const fb = document.getElementById('perfil-feedback');
+            if (fb) {
+                fb.textContent = 'Hoja de Vida Scout (C.I.M.A.) preparada para descarga.';
+                setTimeout(() => { fb.textContent = ''; }, 3000);
+            }
+        }
+
+        function verOpcionesCargo(tipo) {
+            const fb = document.getElementById('perfil-feedback');
+            if (!fb) return;
+            fb.textContent = (tipo === 'nacion')
+                ? 'Mostrando opciones correspondientes al cargo Director de Adultos.'
+                : 'Mostrando opciones correspondientes al cargo Subjefe de Clan.';
+            setTimeout(() => { fb.textContent = ''; }, 3000);
+        }
+
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'CIMA_ROLE_CHANGE') {
+                aplicarCargoEnPerfil(event.data.roleKey);
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+            let rolInicial = 'clan';
+            try {
+                const guardado = JSON.parse(localStorage.getItem(CIMA_ROLE_STORAGE_KEY) || '{}');
+                if (guardado && guardado.key) rolInicial = guardado.key;
+                else if (guardado && guardado.roleKey) rolInicial = guardado.roleKey;
+            } catch (e) {}
+            aplicarCargoEnPerfil(rolInicial);
+
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ type: 'CIMA_REQUEST_STATE' }, '*');
+            }
+        });
+    </script>
+</body>
+</html>
