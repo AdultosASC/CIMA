@@ -341,6 +341,80 @@
             margin-bottom: 16px;
         }
 
+        /* Estilos compactos de Manual de Cargos */
+        .manual-portal-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            font-size: 0.84rem;
+        }
+
+        .manual-portal-link {
+            color: var(--primary-red);
+            font-weight: 700;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        .manual-cargo-compact {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.83rem;
+        }
+
+        .manual-cargo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .manual-cargo-title {
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: var(--primary-red);
+        }
+
+        .manual-cargo-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .manual-cargo-cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .manual-cargo-subtitle {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .manual-cargo-list {
+            padding-left: 16px;
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
         /* Estilos exclusivos de Proceso de Ingreso (Aprobación Jefe Inmediato) */
         .ingreso-group-card {
             background-color: #FAFAFA;
@@ -1336,7 +1410,18 @@
                     </div>
                 </div>
             </div>
-            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación.</p></div></div>
+            <div id="atraccion-manual" class="subcontent-panel">
+                <div class="card" style="padding: 18px;">
+                    <h3 style="margin-bottom: 10px; padding-bottom: 8px;"><i class="fa-solid fa-address-book"></i> Manual de Cargos</h3>
+                    <div class="manual-portal-bar">
+                        <span>Todos los cargos se pueden encontrar en el Manual de Cargos:</span>
+                        <a href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio" target="_blank" rel="noopener noreferrer" class="manual-portal-link">
+                            https://sites.google.com/scout.org.co/manual-de-cargos/inicio <i class="fa-solid fa-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div id="manual-cargo-dinamico"></div>
+                </div>
+            </div>
             <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral.</p></div></div>
             <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal.</p></div></div>
         </div>
@@ -1613,6 +1698,54 @@
             }
         };
 
+        const manualCargosData = {
+            'clan': {
+                cargo: 'Subjefe de Clan',
+                descripcion: 'Como miembro del equipo de rama colabora en el funcionamiento, aplicación y ejecución del Programa de Jóvenes en la misma.',
+                nombramiento: 'Jefe de grupo',
+                respondeA: 'Consejo Scout de Grupo · Jefe de grupo',
+                leResponden: 'Subjefe de Rama',
+                requisitos: [
+                    'Ser mayor de 18 años.',
+                    'Poseer nivel de formación profesional, tecnológica o técnica.',
+                    'Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.',
+                    'No formar parte del Consejo Scout de Grupo.',
+                    'No haber sido expulsado de la Asociación, ni tener medida de aseguramiento vigente, ni aparecer en el registro nacional de agresores sexuales.'
+                ],
+                funciones: [
+                    'Garantizar el cumplimiento de políticas, reglamentos, normas y procedimientos de la OSN en la Rama.',
+                    'Colaborar en organización, diseño, preparación, ejecución y evaluación de actividades.',
+                    'Participar activa y regularmente en reuniones de la Rama y del Grupo.',
+                    'Fomentar y apoyar la gestión de los adultos de su Equipo de Rama.',
+                    'Colaborar en el seguimiento y evaluación de la progresión personal de los jóvenes.'
+                ]
+            },
+            'nacion': {
+                cargo: 'Director Nacional de Adultos en el Movimiento',
+                descripcion: 'Tiene a su cargo el desarrollo, promoción y aplicación de la Política Nacional de Adultos en el movimiento y su modelo de gestión.',
+                nombramiento: 'Jefe Scout Nacional, previo aval del Consejo Scout Nacional',
+                respondeA: 'Jefe Scout Nacional',
+                leResponden: 'Miembros del equipo Nacional de Adultos en el Movimiento · Comisionados Regionales de Adultos en el Movimiento',
+                requisitos: [
+                    'Ser mayor de 18 años.',
+                    'Poseer nivel de formación profesional o tecnológica.',
+                    'Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.',
+                    'No formar parte del Consejo Scout Nacional.',
+                    'Experiencia mínima de dos (2) años como dirigente, consejero o en su vida profesional.',
+                    'No haber sido expulsado, ni tener medida de aseguramiento vigente, ni aparecer en el registro nacional de agresores sexuales.'
+                ],
+                funciones: [
+                    'Conocer y hacer cumplir los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.',
+                    'Participar en la elaboración y ejecución del plan operativo Nacional en Adultos en el Movimiento.',
+                    'Desarrollar, promover e impulsar la Política Nacional de Adultos en el Movimiento y su modelo de aplicación.',
+                    'Impulsar el marco conceptual, pedagógico, estructural y administrativo del sistema de gestión de adultos.',
+                    'Orientar y acompañar la atracción, vinculación y desarrollo de competencias de los adultos adscritos a su Dirección.',
+                    'Desarrollar e impulsar documentos, manuales y procesos de formación y perfeccionamiento continuo.',
+                    'Articular políticas, estrategias, eventos y actividades con la Dirección de Desarrollo Institucional.'
+                ]
+            }
+        };
+
         const ACTAS_STORAGE_KEY = 'cima_encuentros_asesoria_actas';
 
         function escapeHtml(text) {
@@ -1621,6 +1754,44 @@
                 .replace(/</g, '<')
                 .replace(/>/g, '>')
                 .replace(/"/g, '"');
+        }
+
+        function renderManualCargoPorPerfil(roleKey) {
+            const container = document.getElementById('manual-cargo-dinamico');
+            if (!container) return;
+
+            const info = manualCargosData[roleKey];
+            if (!info) {
+                container.innerHTML = `<p style="margin-bottom:0; font-size:0.82rem; color:var(--text-muted);">Consulta todos los cargos en el enlace superior. El detalle de cargo en esta vista aplica para los perfiles de <strong>Subjefe de Clan</strong> y <strong>Director de Adultos</strong>.</p>`;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="manual-cargo-compact">
+                    <div class="manual-cargo-header">
+                        <span class="manual-cargo-title">${escapeHtml(info.cargo)}</span>
+                        <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted);">Nombramiento: ${escapeHtml(info.nombramiento)}</span>
+                    </div>
+                    <p style="margin-bottom:6px; font-size:0.82rem; color:var(--text-main);">${escapeHtml(info.descripcion)}</p>
+                    <div class="manual-cargo-meta">
+                        <strong>Responde a:</strong> ${escapeHtml(info.respondeA)}  ·  <strong>Le responden:</strong> ${escapeHtml(info.leResponden)}
+                    </div>
+                    <div class="manual-cargo-cols">
+                        <div>
+                            <div class="manual-cargo-subtitle">Requisitos objetivos</div>
+                            <ul class="manual-cargo-list">
+                                ${info.requisitos.map(req => `<li>${escapeHtml(req)}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="manual-cargo-subtitle">Funciones principales</div>
+                            <ul class="manual-cargo-list">
+                                ${info.funciones.map(fn => `<li>${escapeHtml(fn)}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         function actualizarEstadoIngreso() {
@@ -1810,9 +1981,12 @@
 
             const options = document.querySelectorAll('.role-option');
             options.forEach(opt => opt.classList.remove('active-role'));
-            event.currentTarget.classList.add('active-role');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active-role');
+            }
 
             updateRequisicionVisibility(roleKey);
+            renderManualCargoPorPerfil(roleKey);
 
             document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
             const data = bscData[roleKey];
@@ -1852,6 +2026,7 @@
             document.getElementById('sidebar-role').innerText = roleDisplayName;
             document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
             updateRequisicionVisibility(roleKey);
+            renderManualCargoPorPerfil(roleKey);
             const data = bscData[roleKey];
             const container = document.getElementById('bsc-content');
             container.innerHTML = '';
