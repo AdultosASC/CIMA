@@ -110,6 +110,155 @@
             line-height: 1.5;
         }
 
+        /* Estilos Ruta de Evaluación Visual */
+        .ruta-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 14px 0 18px;
+        }
+
+        .ruta-stepper-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .ruta-stage-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary-red);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .ruta-stage-card.is-pending {
+            border-top-color: #9CA3AF;
+            background-color: #F9FAFB;
+        }
+
+        .ruta-stage-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .ruta-step-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            border: 1px solid #E5B8B8;
+        }
+
+        .ruta-step-badge.pending {
+            background-color: #F3F4F6;
+            color: #4B5563;
+            border-color: #D1D5DB;
+        }
+
+        .ruta-stage-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+
+        .ruta-stage-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .ruta-metric-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .ruta-metric-num {
+            font-size: 1.55rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+
+        .ruta-metric-num.neutral-pending {
+            background-color: #E5E7EB;
+            color: #374151;
+        }
+
+        .ruta-metric-sub {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        .ruta-bar-track {
+            width: 100%;
+            height: 10px;
+            background-color: #E5E7EB;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .ruta-bar-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 999px;
+            transition: width 0.25s ease;
+        }
+
+        .ruta-bar-fill.fill-verde {
+            background-color: #16A34A;
+        }
+
+        .ruta-bar-fill.fill-amarillo {
+            background-color: #EAB308;
+        }
+
+        .ruta-bar-fill.fill-rojo {
+            background-color: #DC2626;
+        }
+
+        .ruta-bar-fill.fill-rojo-vino {
+            background-color: var(--primary-red);
+        }
+
+        .ruta-bar-fill.fill-pending {
+            background-color: #9CA3AF;
+        }
+
+        .ruta-stage-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding-top: 10px;
+            border-top: 1px dashed #DDD8CC;
+        }
+
         /* Estilos Evaluación 360° */
         .eval360-topbar {
             display: flex;
@@ -694,8 +843,109 @@
 
     <div id="desempeno-ruta" class="subcontent-panel active">
         <div class="card">
-            <h3><i class="fa-solid fa-route"></i> Ruta de Evaluación</h3>
-            <p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño.</p>
+            <h3><i class="fa-solid fa-route"></i> Ruta de Evaluación · Resumen Visual del Ciclo</h3>
+            <p>Visualiza de manera resumida tus resultados generales de <strong>Formación Básica</strong>, el avance actual de tu <strong>Plan de Desarrollo Personal (PPD)</strong> y el estado <strong>Por desarrollar</strong> del <strong>Perfeccionamiento Continuo</strong>.</p>
+
+            <div class="ruta-header-row">
+                <div class="eval360-role-pill">
+                    <i class="fa-solid fa-user-tag"></i>
+                    <span>Perfil activo: <strong id="ruta-rol-texto">Subjefe de Clan</strong></span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-pill pct-verde"><i class="fa-solid fa-circle"></i> ≥ 80%</span>
+                    <span class="legend-pill pct-amarillo"><i class="fa-solid fa-circle"></i> 50% – 79.99%</span>
+                    <span class="legend-pill pct-rojo"><i class="fa-solid fa-circle"></i> < 50%</span>
+                </div>
+            </div>
+
+            <div class="ruta-stepper-grid">
+                <!-- Etapa 1: Formación Básica (Evaluación 360°) -->
+                <div class="ruta-stage-card">
+                    <div>
+                        <div class="ruta-stage-top">
+                            <span class="ruta-step-badge"><i class="fa-solid fa-graduation-cap"></i> Paso 1 · Formación Básica</span>
+                            <i class="fa-solid fa-clipboard-check" style="color: var(--primary-red); font-size: 1.1rem;"></i>
+                        </div>
+                        <div class="ruta-stage-title">Evaluación 360° General</div>
+                        <p class="ruta-stage-desc">Resultado promedio de competencias y funciones en Formación Básica.</p>
+                    </div>
+
+                    <div>
+                        <div class="ruta-metric-row">
+                            <span id="ruta-360-pct" class="ruta-metric-num pct-amarillo">65.00%</span>
+                            <span id="ruta-360-detalle" class="ruta-metric-sub">12 competencias evaluadas</span>
+                        </div>
+                        <div class="ruta-bar-track">
+                            <div id="ruta-360-barra" class="ruta-bar-fill fill-amarillo" style="width: 65%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="ruta-stage-footer">
+                        <span style="font-size: 0.76rem; font-weight: 600; color: var(--text-muted);">Etapa activa</span>
+                        <button type="button" class="ppd-btn-secondary" onclick="irAEvaluacion360Basica()">
+                            Ver detalle 360° <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Etapa 2: Avance del PPD -->
+                <div class="ruta-stage-card">
+                    <div>
+                        <div class="ruta-stage-top">
+                            <span class="ruta-step-badge"><i class="fa-solid fa-book-open"></i> Paso 2 · Seguimiento PPD</span>
+                            <i class="fa-solid fa-list-check" style="color: var(--primary-red); font-size: 1.1rem;"></i>
+                        </div>
+                        <div class="ruta-stage-title">Avance Plan de Desarrollo</div>
+                        <p class="ruta-stage-desc">Cumplimiento de actividades y evidencias registradas en tus estrategias PPD.</p>
+                    </div>
+
+                    <div>
+                        <div class="ruta-metric-row">
+                            <span id="ruta-ppd-pct" class="ruta-metric-num" style="background-color: var(--primary-red-light); color: var(--primary-red); border: 1px solid #E5B8B8;">33.33%</span>
+                            <span id="ruta-ppd-detalle" class="ruta-metric-sub">1 de 3 actividades</span>
+                        </div>
+                        <div class="ruta-bar-track">
+                            <div id="ruta-ppd-barra" class="ruta-bar-fill fill-rojo-vino" style="width: 33.33%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="ruta-stage-footer">
+                        <span id="ruta-ppd-estrategias-count" style="font-size: 0.76rem; font-weight: 600; color: var(--text-muted);">1 estrategia activa</span>
+                        <button type="button" class="ppd-btn-secondary" onclick="irAPPDDeseRuta()">
+                            Ir al PPD <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Etapa 3: Perfeccionamiento Continuo (Por desarrollar) -->
+                <div class="ruta-stage-card is-pending">
+                    <div>
+                        <div class="ruta-stage-top">
+                            <span class="ruta-step-badge pending"><i class="fa-solid fa-hourglass-half"></i> Paso 3 · Por desarrollar</span>
+                            <i class="fa-solid fa-arrows-rotate" style="color: #6B7280; font-size: 1.1rem;"></i>
+                        </div>
+                        <div class="ruta-stage-title">Perfeccionamiento Continuo</div>
+                        <p class="ruta-stage-desc">Aún no hay avance; se habilita al cumplir previamente la Formación Básica.</p>
+                    </div>
+
+                    <div>
+                        <div class="ruta-metric-row">
+                            <span class="ruta-metric-num neutral-pending">0.00%</span>
+                            <span class="ruta-metric-sub">Sin avance registrado</span>
+                        </div>
+                        <div class="ruta-bar-track">
+                            <div class="ruta-bar-fill fill-pending" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="ruta-stage-footer">
+                        <span style="font-size: 0.76rem; font-weight: 600; color: #4B5563;">Pendiente por desarrollar</span>
+                        <button type="button" class="ppd-btn-secondary" onclick="irAPerfeccionamientoContinuo()">
+                            Ver estado <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -832,7 +1082,7 @@
         let borradorCompetencias = [];
         let editingEstrategiaId = null;
         let editingEstrategiaDraft = null;
-        let editingActividadKey = null; // `${estrategiaId}::${actividadId}`
+        let editingActividadKey = null;
 
         /* Datos de valoración inicial 360° por perfil (escala 0.00 a 5.00; % Cumplimiento = (Promedio / 5) * 100) */
         const EVALUACIONES_360_DATA = {
@@ -981,22 +1231,106 @@
             return 'pct-rojo';
         }
 
+        function getFillClassByPercentage(pct) {
+            if (pct >= 80) return 'fill-verde';
+            if (pct >= 50) return 'fill-amarillo';
+            return 'fill-rojo';
+        }
+
         function switchSubTab(tabId, element) {
             document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
-            if (element) element.classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            } else {
+                const matchedBtn = Array.from(document.querySelectorAll('.subnav-btn')).find(b => {
+                    const attr = b.getAttribute('onclick') || '';
+                    return attr.includes(`'${tabId}'`);
+                });
+                if (matchedBtn) matchedBtn.classList.add('active');
+            }
 
             document.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
             const target = document.getElementById('desempeno-' + tabId);
             if (target) target.classList.add('active');
+
+            if (tabId === 'ruta') {
+                actualizarRutaEvaluacionResumen();
+            }
         }
 
         function switchEval360SubTab(subKey, btnEl) {
             document.querySelectorAll('.eval360-subbtn').forEach(b => b.classList.remove('active'));
-            if (btnEl) btnEl.classList.add('active');
+            if (btnEl) {
+                btnEl.classList.add('active');
+            } else {
+                const targetBtn = document.getElementById('btn-eval360-' + subKey);
+                if (targetBtn) targetBtn.classList.add('active');
+            }
 
             document.querySelectorAll('.eval360-panel').forEach(p => p.classList.remove('active'));
             const target = document.getElementById('eval360-panel-' + subKey);
             if (target) target.classList.add('active');
+        }
+
+        function irAEvaluacion360Basica() {
+            switchSubTab('evaluacion');
+            switchEval360SubTab('basica');
+        }
+
+        function irAPPDDeseRuta() {
+            switchSubTab('ppd');
+        }
+
+        function irAPerfeccionamientoContinuo() {
+            switchSubTab('evaluacion');
+            switchEval360SubTab('perfeccionamiento');
+        }
+
+        function actualizarRutaEvaluacionResumen() {
+            const cfg = EVALUACIONES_360_DATA[currentRoleKey] || EVALUACIONES_360_DATA.clan;
+            const rolEl = document.getElementById('ruta-rol-texto');
+            if (rolEl) rolEl.textContent = cfg.roleLabel;
+
+            const items = cfg.items || [];
+            const sumaPct = items.reduce((acc, row) => acc + Number(row.cumplimiento || 0), 0);
+            const avg360 = items.length ? (sumaPct / items.length) : 0;
+
+            const pct360El = document.getElementById('ruta-360-pct');
+            const det360El = document.getElementById('ruta-360-detalle');
+            const bar360El = document.getElementById('ruta-360-barra');
+
+            if (pct360El) {
+                pct360El.textContent = `${avg360.toFixed(2)}%`;
+                pct360El.className = `ruta-metric-num ${getColorClassByPercentage(avg360)}`;
+            }
+            if (det360El) {
+                det360El.textContent = `${items.length} competencias evaluadas`;
+            }
+            if (bar360El) {
+                bar360El.style.width = `${Math.max(0, Math.min(100, avg360))}%`;
+                bar360El.className = `ruta-bar-fill ${getFillClassByPercentage(avg360)}`;
+            }
+
+            const estrategias = getEstrategiasPPD(currentRoleKey);
+            let totalActividades = 0;
+            let cumplidas = 0;
+            estrategias.forEach(est => {
+                (est.actividades || []).forEach(act => {
+                    totalActividades += 1;
+                    if (act.cumplida) cumplidas += 1;
+                });
+            });
+            const pctPpd = totalActividades > 0 ? (cumplidas / totalActividades) * 100 : 0;
+
+            const pctPpdEl = document.getElementById('ruta-ppd-pct');
+            const detPpdEl = document.getElementById('ruta-ppd-detalle');
+            const barPpdEl = document.getElementById('ruta-ppd-barra');
+            const estCountEl = document.getElementById('ruta-ppd-estrategias-count');
+
+            if (pctPpdEl) pctPpdEl.textContent = `${pctPpd.toFixed(2)}%`;
+            if (detPpdEl) detPpdEl.textContent = `${cumplidas} de ${totalActividades} actividades`;
+            if (barPpdEl) barPpdEl.style.width = `${Math.max(0, Math.min(100, pctPpd))}%`;
+            if (estCountEl) estCountEl.textContent = `${estrategias.length} estrategia(s) en PPD`;
         }
 
         function renderEvaluacion360PorPerfil(roleKey) {
@@ -1434,6 +1768,8 @@
             if (pctEl) pctEl.textContent = `${pct.toFixed(2)}%`;
             if (detEl) detEl.textContent = `${cumplidas} de ${totalActividades} actividades cumplidas en ${estrategias.length} estrategia(s)`;
             if (barEl) barEl.style.width = `${pct}%`;
+
+            actualizarRutaEvaluacionResumen();
         }
 
         function renderPPD() {
@@ -1651,6 +1987,7 @@
             poblarSelectCompetencias360(normalizedKey);
             renderBorradorCompetencias();
             renderPPD();
+            actualizarRutaEvaluacionResumen();
         }
 
         window.addEventListener('message', function(event) {
