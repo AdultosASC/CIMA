@@ -1,1 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienestar y Motivación - C.I.M.A.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #8B0000;
+            --primary-red-dark: #600000;
+            --primary-red-light: #FDF2F2;
+            --bg-cream: #FDFBF7;
+            --card-bg: #FFFFFF;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --border-color: #E6E2D8;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            padding: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subnav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 14px;
+        }
+
+        .subnav-btn {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .subnav-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .subnav-btn.active {
+            background-color: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+
+        .subcontent-panel {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .subcontent-panel.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 1.08rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .card h3 i {
+            color: var(--primary-red);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .form-box {
+            background: #FAFAFA;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-top: 15px;
+        }
+
+        .form-box label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-box select,
+        .form-box textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            background: white;
+            font-size: 0.88rem;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary-red);
+            color: white;
+        }
+
+        .circles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .circle-card {
+            background: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .circle-card i {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+        }
+
+        .circle-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .circle-card p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="subnav-tabs">
+        <button class="subnav-btn active" onclick="switchSubTab('clima', this)"><i class="fa-solid fa-heart-pulse"></i> Clima y Motivación</button>
+        <button class="subnav-btn" onclick="switchSubTab('tarjetas', this)"><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación</button>
+        <button class="subnav-btn" onclick="switchSubTab('circulos', this)"><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar</button>
+    </div>
+
+    <div id="bienestar-clima" class="subcontent-panel active">
+        <div class="card">
+            <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
+            <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo.</p>
+        </div>
+    </div>
+
+    <div id="bienestar-tarjetas" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación y Mensajes Positivos</h3>
+            <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación.</p>
+            <div class="form-box">
+                <label for="destinatario-tarjeta">Seleccionar Dirigente Destinatario</label>
+                <select id="destinatario-tarjeta">
+                    <option>Mauricio Quiroga Posada (Subjefe de Clan)</option>
+                    <option>Equipo de Dirigentes de Grupo</option>
+                    <option>Comisión Regional de Adultos</option>
+                </select>
+                <label for="mensaje-tarjeta">Mensaje Positivo / Felicitación</label>
+                <textarea id="mensaje-tarjeta" rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout!"></textarea>
+                <button type="button" class="btn-action" onclick="enviarTarjeta()"><i class="fa-solid fa-paper-plane"></i> Enviar Tarjeta</button>
+                <span id="estado-tarjeta" style="font-size: 0.83rem; font-weight: 600; color: var(--primary-red); margin-left: 10px;"></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="bienestar-circulos" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar y Apoyo</h3>
+            <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad.</p>
+            
+            <div class="circles-grid">
+                <div class="circle-card">
+                    <i class="fa-solid fa-campground"></i>
+                    <h4>Convivencia Íntima</h4>
+                    <p>Espacios de integración del equipo de sección y fogatas de reflexión.</p>
+                </div>
+                <div class="circle-card">
+                    <i class="fa-solid fa-hands-holding-child"></i>
+                    <h4>Apoyo Personal</h4>
+                    <p>Acompañamiento cercano y escucha activa ante situaciones particulares.</p>
+                </div>
+                <div class="circle-card">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    <h4>Café y Conversación</h4>
+                    <p>Encuentros periódicos de camaradería y distensión para dirigentes.</p>
+                </div>
+                <div class="circle-card">
+                    <i class="fa-solid fa-people-group"></i>
+                    <h4>Comunidad Scout</h4>
+                    <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchSubTab(tabId, element) {
+            document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            document.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
+            const target = document.getElementById('bienestar-' + tabId);
+            if (target) target.classList.add('active');
+        }
+
+        function enviarTarjeta() {
+            const msg = document.getElementById('mensaje-tarjeta').value.trim();
+            const estado = document.getElementById('estado-tarjeta');
+            if (!msg) {
+                estado.textContent = 'Escribe un mensaje antes de enviar la tarjeta.';
+                return;
+            }
+            document.getElementById('mensaje-tarjeta').value = '';
+            estado.textContent = '¡Tarjeta de felicitación enviada con éxito!';
+            setTimeout(() => { estado.textContent = ''; }, 3500);
+        }
+    </script>
+</body>
+</html>
