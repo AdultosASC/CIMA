@@ -1,1 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión del Desempeño - C.I.M.A.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #8B0000;
+            --primary-red-dark: #600000;
+            --primary-red-light: #FDF2F2;
+            --bg-cream: #FDFBF7;
+            --card-bg: #FFFFFF;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --border-color: #E6E2D8;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            padding: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subnav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 14px;
+        }
+
+        .subnav-btn {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .subnav-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .subnav-btn.active {
+            background-color: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+
+        .subcontent-panel {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .subcontent-panel.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 1.08rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .card h3 i {
+            color: var(--primary-red);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .eval-grid {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+        }
+
+        .eval-box {
+            background: #FAFAFA;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .eval-box h4 {
+            color: var(--primary-red);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .eval-box p {
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="subnav-tabs">
+        <button class="subnav-btn active" onclick="switchSubTab('ruta', this)"><i class="fa-solid fa-route"></i> Ruta de Evaluación</button>
+        <button class="subnav-btn" onclick="switchSubTab('asesor', this)"><i class="fa-solid fa-user-tie"></i> Asesor Personal</button>
+        <button class="subnav-btn" onclick="switchSubTab('jefe', this)"><i class="fa-solid fa-user-shield"></i> Revisión del Jefe Inmediato</button>
+        <button class="subnav-btn" onclick="switchSubTab('evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación 360°</button>
+        <button class="subnav-btn" onclick="switchSubTab('ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
+    </div>
+
+    <div id="desempeno-ruta" class="subcontent-panel active">
+        <div class="card">
+            <h3><i class="fa-solid fa-route"></i> Ruta de Evaluación</h3>
+            <p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño.</p>
+        </div>
+    </div>
+
+    <div id="desempeno-asesor" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-user-tie"></i> Asesor Personal</h3>
+            <p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD.</p>
+        </div>
+    </div>
+
+    <div id="desempeno-jefe" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-user-shield"></i> Revisión del Jefe Inmediato</h3>
+            <p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo.</p>
+        </div>
+    </div>
+
+    <div id="desempeno-evaluacion" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-clipboard-check"></i> Evaluación 360° y Componentes de Crecimiento</h3>
+            <p>Herramientas transversales de medición de conductas observables.</p>
+            <div class="eval-grid">
+                <div class="eval-box">
+                    <h4><i class="fa-solid fa-graduation-cap"></i> Formación Básica</h4>
+                    <p>Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo.</p>
+                </div>
+                <div class="eval-box">
+                    <h4><i class="fa-solid fa-arrows-rotate"></i> Perfeccionamiento Continuo</h4>
+                    <p>Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="desempeno-ppd" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</h3>
+            <p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo.</p>
+        </div>
+    </div>
+
+    <script>
+        function switchSubTab(tabId, element) {
+            document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            document.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
+            const target = document.getElementById('desempeno-' + tabId);
+            if (target) target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
