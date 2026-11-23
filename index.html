@@ -587,6 +587,178 @@
             display: none;
         }
 
+        /* Estilos exclusivos de Inducción (Checklist verificable cima_2.pdf) */
+        .ind-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .ind-progress-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+        }
+
+        .ind-progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .ind-progress-track {
+            width: 100%;
+            height: 10px;
+            background-color: #EAE4D9;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .ind-progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-red);
+            transition: width 0.25s ease;
+        }
+
+        .ind-step-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .ind-step-card.verificado {
+            background-color: #F4FBF6;
+            border-color: #A7D7B8;
+            border-left-color: #15803D;
+        }
+
+        .ind-step-main {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .ind-step-checkbox {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: var(--primary-red);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .ind-step-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .ind-step-desc {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.48;
+            white-space: pre-line;
+            margin-bottom: 8px !important;
+        }
+
+        .ind-step-links {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .ind-step-link {
+            font-size: 0.8rem;
+            color: var(--primary-red);
+            font-weight: 600;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        .ind-step-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.76rem;
+        }
+
+        .ind-ref-tag {
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .ind-status-badge {
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .ind-status-badge.ok {
+            background-color: #DCFCE7;
+            color: #166534;
+        }
+
+        .ind-verified-date {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .ind-evidencia-row {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ind-evidencia-row label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .ind-evidencia-input {
+            flex: 1;
+            min-width: 220px;
+            padding: 7px 10px;
+            border-radius: 7px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.82rem;
+        }
+
+        .ind-evidencia-input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
         /* Estilos exclusivos de Proceso de Ingreso (Aprobación Jefe Inmediato) */
         .ingreso-group-card {
             background-color: #FAFAFA;
@@ -1747,7 +1919,33 @@
                     </div>
                 </div>
             </div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal.</p></div></div>
+            <div id="atraccion-induccion" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-person-chalkboard"></i> Checklist · Fase de Inducción Adultos Voluntarios Nuevos</h3>
+                    <p style="margin-bottom: 12px;">Scouts de Colombia — Verifica el cumplimiento de cada paso, actividad y soporte del proceso de inducción[cite: 8].</p>
+
+                    <div class="ind-top-bar">
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">
+                            Verificación guardada automáticamente en este navegador
+                        </span>
+                        <button type="button" class="btn-action" onclick="reiniciarChecklistInduccion()">
+                            <i class="fa-solid fa-rotate-left"></i> Reiniciar verificación
+                        </button>
+                    </div>
+
+                    <div class="ind-progress-card">
+                        <div class="ind-progress-header">
+                            <span id="ind-resumen-texto">Cumplimiento verificado: 0 de 9 pasos (0%)</span>
+                            <span id="ind-estado-global" class="ind-status-badge">Pendiente</span>
+                        </div>
+                        <div class="ind-progress-track">
+                            <div id="ind-barra-progreso" class="ind-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div id="ind-checklist-lista"></div>
+                </div>
+            </div>
         </div>
 
         <!-- SECCIÓN: DESEMPEÑO -->
@@ -2021,6 +2219,210 @@
                 ]
             }
         };
+
+        const INDUCCION_STORAGE_KEY = 'cima_atraccion_induccion_checklist_v1';
+
+        const INDUCCION_CHECKLIST_ITEMS = [
+            {
+                id: 'paso-1-talento-360',
+                paso: 'Registrar la hoja de vida en la plataforma Talento 360',
+                actividad: 'Ingresar a la plataforma Talento 360 para diligenciar la hoja de vida en todos sus campos, incluir fotografía.',
+                referencia: 'TCNScout',
+                enlaces: []
+            },
+            {
+                id: 'paso-2-compromiso-mutuo',
+                paso: 'Estar al día con los documentos relacionados al compromiso mutuo, los cuales se nombran a continuación:',
+                actividad: '- Diligenciar Compromiso acuerdo mutuo-servicio voluntario\nRegistrar el compromiso de Ingreso del adulto (solicitud de registro e inscripción) acuerdo mutuo',
+                referencia: 'Compromiso mutuo',
+                enlaces: []
+            },
+            {
+                id: 'paso-3-inscripcion-siscout',
+                paso: 'Inscripción en la plataforma SISCOUT',
+                actividad: 'Registro completo en la plataforma habilitada por la Asociación Scouts de Colombia',
+                referencia: 'Siscout',
+                enlaces: []
+            },
+            {
+                id: 'paso-4-manual-cargos',
+                paso: 'Leer el manual de cargos,',
+                actividad: '- Tener un nombramiento oficial por parte de su jefe inmediato, ver documento de nombramiento. Ver documento # 7,8,10\nLeer y entender el manual de cargos, perfiles y funciones por competencias esperadas para el cargo a desarrollar. Ver documento # 4\nperfiles y funciones por competencias.',
+                referencia: 'Documentos # 7, 8, 10 y # 4',
+                enlaces: [
+                    'https://drive.google.com/drive/folders/1mWyQci5zHhiURd7IAIPKkx 187MAobDR'
+                ]
+            },
+            {
+                id: 'paso-5-curso-induccion-general',
+                paso: 'Realizar el curso de inducción general',
+                actividad: 'Hacer el curso de inducción general que se encuentra en la Plataforma Universidad Scout; descargar el certificado y entregarlo al jefe inmediato',
+                referencia: 'UniversidadScout - Colombia',
+                enlaces: []
+            },
+            {
+                id: 'paso-6-cursos-sfh',
+                paso: 'Realizar los cursos SFH (a salvo del peligro)',
+                actividad: 'Hacer los 4 cursos habilitados de A salvo del peligro que se encuentran a continuación, descargar los certificados y entrégalos al jefe inmediato.\nSfH 2b: WOSM Safe from Harm Procedures  Scout Learning Zone\nSfH 3: Estar seguro en línea  Zona de Aprendizaje Scout',
+                referencia: 'A salvo del peligro (SFH)',
+                enlaces: [
+                    'https://learn.scout.org/resource/sfh-1-safe-harm-essential-learnings',
+                    'https://elearning.easy.generator.com/28721976-31f9-45ea-bf7e-d46d7bf1c88d/#/login'
+                ]
+            },
+            {
+                id: 'paso-7-asesor-personal',
+                paso: 'Escoger un asesor Personal',
+                actividad: 'Solicitar que todos los adultos que están ingresando tengan un asesor personal para apoyar el desarrollo de sus competencias junto con el formato de aval de aceptación de asesoría firmado (enviar al jefe inmediato). Ver el documento # 26',
+                referencia: 'Documento # 26',
+                enlaces: [
+                    'https://drive.google.com/drive/folders/1mWyQci5zHhiURd7|APKkx 187MAobDR'
+                ]
+            },
+            {
+                id: 'paso-8-valoracion-inicial',
+                paso: 'Realizar la valoración inicial por competencias',
+                actividad: 'Agendar al asesor personal para la primera reunión de acercamiento para revisar la Valoración inicial de las competencias e iniciar el Plan Personal de Desarrollo.\nCrear la valoración (Evaluación #1) en la plataforma Talento 360, motivar el diligenciamiento de la misma por parte del equipo y hacer seguimiento a los resultados.',
+                referencia: 'Talento 360 · Plan Personal de Desarrollo',
+                enlaces: []
+            },
+            {
+                id: 'paso-9-seguimiento-acompanamiento',
+                paso: 'Seguimiento y acompañamiento del adulto durante el periodo de inducción.',
+                actividad: 'Se recomienda acompañar al adulto nuevo durante los 3 primeros meses, en donde el jefe inmediato hará seguimiento a las acciones puntuales, aclara inquietudes y al finalizar este periodo realizará una retroalimentación de acuerdo con el desempeño y las recomendaciones del asesor personal.',
+                referencia: 'HRMScouts · Primeros 3 meses',
+                enlaces: []
+            }
+        ];
+
+        function cargarVerificacionInduccion() {
+            try {
+                const raw = localStorage.getItem(INDUCCION_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : {};
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function guardarVerificacionInduccion(estado) {
+            try {
+                localStorage.setItem(INDUCCION_STORAGE_KEY, JSON.stringify(estado));
+            } catch (e) {
+                // Ignorar si localStorage no está disponible
+            }
+        }
+
+        let estadoInduccion = cargarVerificacionInduccion();
+
+        function actualizarResumenInduccion() {
+            const total = INDUCCION_CHECKLIST_ITEMS.length;
+            const cumplidos = INDUCCION_CHECKLIST_ITEMS.filter(
+                item => Boolean(estadoInduccion[item.id] && estadoInduccion[item.id].cumplido)
+            ).length;
+            const pct = total > 0 ? Math.round((cumplidos / total) * 100) : 0;
+
+            const textoEl = document.getElementById('ind-resumen-texto');
+            const barraEl = document.getElementById('ind-barra-progreso');
+            const badgeEl = document.getElementById('ind-estado-global');
+
+            if (textoEl) {
+                textoEl.textContent = `Cumplimiento verificado: ${cumplidos} de ${total} pasos (${pct}%)`;
+            }
+            if (barraEl) {
+                barraEl.style.width = `${pct}%`;
+            }
+            if (badgeEl) {
+                if (total > 0 && cumplidos === total) {
+                    badgeEl.textContent = 'Inducción verificada al 100%';
+                    badgeEl.className = 'ind-status-badge ok';
+                } else {
+                    badgeEl.textContent = 'En verificación';
+                    badgeEl.className = 'ind-status-badge';
+                }
+            }
+        }
+
+        function togglePasoInduccion(id, checked) {
+            const prev = estadoInduccion[id] || {};
+            estadoInduccion[id] = {
+                ...prev,
+                cumplido: Boolean(checked),
+                fecha: checked ? new Date().toLocaleString('es-CO') : ''
+            };
+            guardarVerificacionInduccion(estadoInduccion);
+            renderChecklistInduccion();
+        }
+
+        function guardarEvidenciaInduccion(id, valor) {
+            const prev = estadoInduccion[id] || {};
+            estadoInduccion[id] = {
+                ...prev,
+                evidencia: valor
+            };
+            guardarVerificacionInduccion(estadoInduccion);
+        }
+
+        function reiniciarChecklistInduccion() {
+            estadoInduccion = {};
+            guardarVerificacionInduccion(estadoInduccion);
+            renderChecklistInduccion();
+        }
+
+        function renderChecklistInduccion() {
+            const container = document.getElementById('ind-checklist-lista');
+            if (!container) return;
+
+            container.innerHTML = INDUCCION_CHECKLIST_ITEMS.map((item, idx) => {
+                const reg = estadoInduccion[item.id] || {};
+                const cumplido = Boolean(reg.cumplido);
+                const evidencia = reg.evidencia || '';
+                const fecha = reg.fecha || '';
+
+                const linksHtml = (item.enlaces || []).map(url => {
+                    const hrefClean = url.trim().replace(/\s+/g, '');
+                    return `<a class="ind-step-link" href="${escapeHtml(hrefClean)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`;
+                }).join('');
+
+                return `
+                    <div class="ind-step-card ${cumplido ? 'verificado' : ''}">
+                        <div class="ind-step-main">
+                            <input
+                                type="checkbox"
+                                class="ind-step-checkbox"
+                                aria-label="Verificar paso: ${escapeHtml(item.paso)}"
+                                ${cumplido ? 'checked' : ''}
+                                onchange="togglePasoInduccion('${escapeHtml(item.id)}', this.checked)"
+                            >
+                            <div style="flex: 1;">
+                                <div class="ind-step-title">${idx + 1}. ${escapeHtml(item.paso)}</div>
+                                <p class="ind-step-desc">${escapeHtml(item.actividad)}</p>
+                                ${linksHtml ? `<div class="ind-step-links">${linksHtml}</div>` : ''}
+                                <div class="ind-step-meta">
+                                    <span class="ind-ref-tag">${escapeHtml(item.referencia)}</span>
+                                    <span class="ind-status-badge ${cumplido ? 'ok' : ''}">
+                                        ${cumplido ? 'Cumplimiento verificado' : 'Pendiente por verificar'}
+                                    </span>
+                                    ${fecha ? `<span class="ind-verified-date"><i class="fa-regular fa-clock"></i> Verificado: ${escapeHtml(fecha)}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ind-evidencia-row">
+                            <label for="ind-ev-${escapeHtml(item.id)}">Soporte / Verificación:</label>
+                            <input
+                                id="ind-ev-${escapeHtml(item.id)}"
+                                type="text"
+                                class="ind-evidencia-input"
+                                placeholder="Registra certificado, acta, enlace o validación del jefe inmediato..."
+                                value="${escapeHtml(evidencia)}"
+                                oninput="guardarEvidenciaInduccion('${escapeHtml(item.id)}', this.value)"
+                            >
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            actualizarResumenInduccion();
+        }
 
         const manualCargosData = {
             'clan': {
@@ -2592,6 +2994,7 @@
             renderActasAsesoria();
             actualizarEstadoIngreso();
             inicializarFirmaCanvas();
+            renderChecklistInduccion();
         };
 
         function selectRoleInit(roleKey, roleDisplayName) {
