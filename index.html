@@ -1,536 +1,275 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Módulo de Certificación · Dirección Nacional de Adultos en el Movimiento (DNAM)</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<style>
-:root{--purple:#4d006e;--blue:#003087;--red:#c40f2f;--yellow:#ffcd00;--lilac:#efe4f5;--ink:#222;--muted:#687082;--line:#e8e2ec;--bg:#f7f4fa;--ok:#219653;--warn:#f2c94c;--bad:#eb5757;--radius:18px;--shadow:0 10px 30px rgba(77,0,110,.12)}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:14px;padding:.78rem 1rem;font-weight:800}.btn{background:var(--purple);color:white;box-shadow:var(--shadow)}.btn.secondary{background:white;color:var(--purple);border:1px solid var(--line);box-shadow:none}.btn.ghost{background:transparent;color:var(--purple);border:1px solid transparent}.btn.warn{background:#fff5cf;color:#6d5200}.btn.danger{background:#fee;color:#a40020}.btn.small{font-size:.82rem;padding:.45rem .65rem;border-radius:10px}.btn:disabled{opacity:.45;cursor:not-allowed}
-.screen{min-height:100vh}.welcome{display:grid;place-items:center;padding:32px 18px;position:relative;overflow:hidden}
-.welcome-card{position:relative;width:min(980px,100%);background:white;border-radius:34px;box-shadow:var(--shadow);padding:36px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
-.brand-plate{background:var(--purple);border-radius:28px;padding:26px;display:grid;place-items:center;color:white;font-weight:900;font-size:1.4rem;text-align:center;box-shadow:inset 0 0 20px rgba(0,0,0,0.2)}
-.welcome h1{color:var(--purple);font-size:clamp(26px,4vw,40px);line-height:1.02;margin:0 0 12px}.welcome p{font-size:1.02rem;color:#4c4c56;line-height:1.55}
-.app{display:none;min-height:100vh}.topbar{height:76px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:20}
-.top-brand{display:flex;align-items:center;gap:10px;color:var(--purple);font-weight:900;line-height:1.05}.top-unit{font-weight:800;color:#333}
-.layout{display:grid;grid-template-columns:260px 1fr;gap:0}.sidebar{background:#fff;border-right:1px solid var(--line);min-height:calc(100vh - 76px);padding:18px 12px;position:sticky;top:76px;align-self:start}
-.side-btn{width:100%;text-align:left;background:transparent;color:#2b2330;border-radius:14px;display:flex;gap:10px;align-items:center;margin:4px 0;font-weight:800;padding:12px}.side-btn:hover,.side-btn.active{background:var(--lilac);color:var(--purple)}
-.content{padding:24px;max-width:1420px}.card{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:16px}
-.title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.title-row h2{margin:0;color:var(--purple)}
-.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}.field label{font-size:.86rem;font-weight:900;color:#3b3440}
-.field input, .field select{border:1px solid #ddd1e5;border-radius:13px;padding:.75rem;background:#fff;width:100%}
-.table-container{width:100%;overflow-x:auto;margin-top:16px}
-table{width:100%;border-collapse:collapse;text-align:left}
-th,td{padding:12px;border-bottom:1px solid var(--line);font-size:0.9rem}
-th{background:var(--lilac);color:var(--purple);font-weight:800}
-.step-box{margin-top:16px;padding:16px;background:var(--lilac);border-radius:14px}
-.badge{background:var(--lilac);color:var(--purple);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-weight:800}
+<!-- SECCIÓN DE ATRACCIÓN · BOTÓN MANUAL DE CARGOS -->
+<section id="seccion-atraccion" class="bg-white border border-[#e8e2ec] rounded-[22px] p-6 shadow-[0_10px_30px_rgba(77,0,110,.08)]">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#e8e2ec] pb-4 mb-5">
+    <div>
+      <span class="inline-block bg-[#efe4f5] text-[#4d006e] text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full mb-1">
+        Atracción
+      </span>
+      <h2 class="text-lg font-black text-[#4d006e] m-0">Manual de Cargos y Perfiles</h2>
+      <p class="text-xs text-[#687082] mt-1">
+        Consulta los cargos del Manual de Cargos de Scouts de Colombia y revisa el perfil de Subjefe de Clan.
+      </p>
+    </div>
 
-/* Estilos compactos para sección Atracción / Manual de cargos */
-.atraccion-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:#fbf9fd;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
-.atraccion-copy{font-size:.86rem;color:#3b3440;margin:0}
-.atraccion-link{color:var(--blue);font-weight:800;text-decoration:underline}
-.atraccion-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.cargo-panel{border:1px solid #ddd1e5;background:#fcfaff;border-radius:14px;padding:14px 16px;margin-bottom:16px}
-.cargo-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
-.cargo-header h3{margin:0;color:var(--purple);font-size:1rem}
-.cargo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;font-size:.84rem;margin:10px 0}
-.cargo-box{background:white;border:1px solid var(--line);border-radius:10px;padding:10px}
-.cargo-list{margin:6px 0 0 18px;padding:0;font-size:.83rem;color:#333}
-.cargo-list li{margin-bottom:4px}
+    <div class="flex flex-wrap items-center gap-2.5">
+      <button
+        type="button"
+        onclick="abrirManualCargos('subjefe-de-clan')"
+        class="bg-[#4d006e] hover:bg-[#3a0053] text-white font-extrabold text-xs px-4 py-3 rounded-[14px] shadow-sm transition">
+        Manual de cargos · Subjefe de Clan
+      </button>
+      <a
+        href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-[#efe4f5] hover:bg-[#e2cef0] text-[#4d006e] font-extrabold text-xs px-4 py-3 rounded-[14px] transition">
+        Abrir sitio oficial ↗
+      </a>
+    </div>
+  </div>
 
-@media(max-width:900px){.welcome-card{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.sidebar{position:static;min-height:0}}
-</style>
-</head>
-<body>
-
-<!-- Pantalla de Bienvenida / Acceso Institucional -->
-<div id="welcome" class="screen welcome">
-  <div class="welcome-card">
-    <div class="brand-plate">
+  <!-- Ficha destacada: Subjefe de Clan -->
+  <div id="ficha-subjefe-clan" class="bg-[#fbf9fd] border border-[#e8e2ec] rounded-[18px] p-5">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
       <div>
-        <span style="font-size:2rem; color:var(--yellow); display:block; margin-bottom:8px;">⚜</span>
-        DNAM<br><span style="font-size:0.85rem; font-weight:700; color:#ddd;">Dirección Nacional de Adultos en el Movimiento</span>
+        <span class="text-[11px] font-black uppercase tracking-wider text-[#003087]">Cargo destacado · Clan Rover</span>
+        <h3 class="text-base font-black text-[#222] m-0">Subjefe de Clan</h3>
+      </div>
+      <a
+        id="enlace-directo-subjefe"
+        href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 bg-[#003087] hover:bg-[#00205b] text-white text-xs font-extrabold px-3.5 py-2 rounded-[12px] transition w-fit">
+        <span>Ver cargo en Manual de cargos</span>
+        <span>↗</span>
+      </a>
+    </div>
+
+    <p class="text-xs text-[#687082] leading-relaxed mb-4">
+      Apoya la conducción y el acompañamiento educativo del Clan Rover junto con la Jefatura de Clan, fortaleciendo el trabajo en equipo, la vivencia del Método Scout y el proceso de autogestión de los jóvenes Rovers.
+    </p>
+
+    <!-- Selector rápido de cargos enlazados -->
+    <div class="pt-3 border-t border-[#e8e2ec]">
+      <div class="text-[11px] font-black uppercase tracking-wider text-[#3b3440] mb-2">
+        Enlaces a cargos del Manual de Cargos
+      </div>
+      <div id="lista-enlaces-cargos" class="flex flex-wrap gap-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL INTERACTIVO: MANUAL DE CARGOS -->
+<div id="modal-manual-cargos" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+  <div class="bg-white border border-[#e8e2ec] rounded-[24px] max-w-2xl w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between border-b border-[#e8e2ec] pb-3 mb-4">
+      <div>
+        <span class="text-[11px] font-black uppercase tracking-wider text-[#4d006e]">Atracción · Manual de cargos</span>
+        <h3 id="modal-cargo-titulo" class="text-lg font-black text-[#222] m-0">Subjefe de Clan</h3>
+      </div>
+      <button
+        type="button"
+        onclick="cerrarManualCargos()"
+        class="w-8 h-8 rounded-full bg-[#f7f4fa] hover:bg-[#efe4f5] text-[#4d006e] font-black text-xs">
+        ✕
+      </button>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-[11px] font-black uppercase tracking-wider text-[#3b3440] mb-1">
+        Seleccionar cargo
+      </label>
+      <select
+        id="selector-cargo-modal"
+        onchange="cambiarCargoModal(this.value)"
+        class="w-full p-2.5 rounded-[12px] border border-[#ddd1e5] text-xs font-bold text-[#222] bg-[#fff]">
+      </select>
+    </div>
+
+    <div id="modal-cargo-detalle" class="bg-[#fbf9fd] border border-[#e8e2ec] rounded-[16px] p-4 mb-4 space-y-2">
+      <!-- Contenido dinámico -->
+    </div>
+
+    <!-- Permite enlazar la URL exacta de cada cargo si la tienes en el Google Site -->
+    <div class="bg-[#f7f4fa] border border-[#e8e2ec] rounded-[16px] p-4 mb-5">
+      <label for="input-url-cargo" class="block text-[11px] font-black uppercase tracking-wider text-[#4d006e] mb-1">
+        Enlace específico para este cargo (opcional)
+      </label>
+      <div class="flex flex-col sm:flex-row gap-2">
+        <input
+          type="url"
+          id="input-url-cargo"
+          placeholder="https://sites.google.com/scout.org.co/manual-de-cargos/..."
+          class="flex-1 p-2.5 rounded-[12px] border border-[#ddd1e5] text-xs bg-white"
+        />
+        <button
+          type="button"
+          onclick="guardarUrlCargo()"
+          class="bg-[#4d006e] hover:bg-[#3a0053] text-white text-xs font-extrabold px-4 py-2.5 rounded-[12px] transition">
+          Guardar enlace
+        </button>
       </div>
     </div>
-    <div>
-      <h1>Portal de Certificación</h1>
-      
-      <!-- Inicio de sesión institucional -->
-      <div id="boxLogin" class="field">
-        <label style="color:var(--purple); font-size:1rem; margin-bottom:4px;">Acceso con Correo Institucional</label>
-        <p style="font-size:0.88rem; color:var(--muted); margin-top:0; margin-bottom:12px;">Ingrese su correo institucional de Scouts de Colombia (terminado en <b>@scout.org.co</b>) para acceder a su perfil y gestión.</p>
-        <div style="display:flex; flex-direction:column; gap:10px;">
-          <input type="email" id="inputEmail" placeholder="usuario@scout.org.co" style="padding:10px; border-radius:10px; border:1px solid #ddd1e5;" />
-          <div style="display:flex; gap:10px;">
-            <button class="btn" style="flex:1;" onclick="handleLogin()">Ingresar al Sistema</button>
-            <button class="btn secondary" style="flex:1;" onclick="showRegisterForm()">Crear Usuario</button>
-          </div>
-        </div>
-      </div>
 
-      <!-- Formulario de Creación de Usuario con los datos de Perfil de Formador -->
-      <div id="boxRegister" class="field" style="display:none;">
-        <label style="color:var(--purple); font-size:1.05rem; margin-bottom:4px;">Crear Usuario (Perfil de Formador)</label>
-        <p style="font-size:0.85rem; color:var(--muted); margin-top:0; margin-bottom:10px;">Complete los datos de su perfil. El acceso quedará activo una vez sea autorizado por el administrador.</p>
-        <div style="display:flex; flex-direction:column; gap:8px; max-height:280px; overflow-y:auto; padding-right:4px;">
-          <input type="text" id="regNombre" placeholder="Nombre completo" />
-          <input type="email" id="regEmail" placeholder="Correo institucional (@scout.org.co)" />
-          <input type="password" id="regPass" placeholder="Contraseña" />
-          <input type="text" id="regDoc" placeholder="Documento de identidad" />
-          <input type="date" id="regNac" />
-          <input type="text" id="regTel" placeholder="Teléfono" />
-          <input type="text" id="regDir" placeholder="Dirección" />
-          <select id="regRegion">
-            <option value="Región Bogotá">Región Bogotá</option>
-            <option value="Región Antioquia">Región Antioquia</option>
-            <option value="Región Valle">Región Valle</option>
-            <option value="Región Cundinamarca">Región Cundinamarca</option>
-          </select>
-        </div>
-        <div style="display:flex; gap:10px; margin-top:10px;">
-          <button class="btn" style="flex:1;" onclick="handleRegister()">Registrarme</button>
-          <button class="btn secondary" style="flex:1;" onclick="showLoginForm()">Volver</button>
-        </div>
-      </div>
-
+    <div class="flex items-center justify-between gap-3">
+      <button
+        type="button"
+        onclick="cerrarManualCargos()"
+        class="px-4 py-2.5 rounded-[12px] border border-[#ddd1e5] text-xs font-extrabold text-[#3b3440] hover:bg-[#f7f4fa]">
+        Cerrar
+      </button>
+      <a
+        id="modal-btn-ir-cargo"
+        href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-[#003087] hover:bg-[#00205b] text-white text-xs font-extrabold px-4 py-2.5 rounded-[12px] transition">
+        Ir al enlace del cargo ↗
+      </a>
     </div>
   </div>
 </div>
 
-<!-- Aplicación Principal -->
-<div id="app" class="app">
- <header class="topbar">
-   <div class="top-brand">
-     <span style="color:var(--purple); font-size:1.4rem;">⚜</span>
-     <span>DNAM · Certificación</span>
-   </div>
-   <div id="topUserEmail" class="top-unit">Usuario Institucional</div>
-   <div class="top-actions" style="display:flex; gap:10px;">
-     <button class="btn danger small" onclick="location.reload()">Cerrar Sesión</button>
-   </div>
- </header>
- <div class="layout">
-   <aside class="sidebar" id="sidebar">
-     <button class="side-btn active" onclick="switchTab('formador', this)">👤 Perfil Formador</button>
-     <button id="navAdminBtn" class="side-btn" style="display:none;" onclick="switchTab('admin', this)">⚙️ Panel Administrador DNAM</button>
-     <button class="side-btn" onclick="switchTab('sesiones', this)">📊 Control Asistencia Sesiones</button>
-   </aside>
-   <main class="content" id="content">
-     
-     <!-- Vista 1: Perfil Formador -->
-     <div id="viewFormador" class="card">
-       <div class="title-row">
-         <h2>Información General del Formador</h2>
-         <span id="formadorBadgeClass" class="badge">Clasificación: FS</span>
-       </div>
-
-       <!-- SECCIÓN ATRACCIÓN · MANUAL DE CARGOS (COMPACTA) -->
-       <div class="atraccion-strip">
-         <p class="atraccion-copy">
-           <strong>Atracción · Manual de cargos:</strong> Todos los cargos se pueden encontrar en
-           <a class="atraccion-link" href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio" target="_blank" rel="noopener noreferrer">Manual de cargos (sitio oficial) ↗</a>.
-         </p>
-         <div class="atraccion-actions">
-           <button type="button" class="btn small secondary" onclick="toggleCargoPerfil('subjefe')">Perfil Subjefe de Clan</button>
-           <button type="button" class="btn small secondary" onclick="toggleCargoPerfil('director')">Perfil Director de Adultos</button>
-         </div>
-       </div>
-
-       <!-- Contenedor dinámico: muestra SOLO el perfil seleccionado -->
-       <div id="panelCargoSeleccionado" class="cargo-panel" style="display:none;"></div>
-
-       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:20px;">
-         <div class="field"><label>Documento de Identidad</label><input type="text" id="pfDoc" /></div>
-         <div class="field"><label>Fecha de Nacimiento</label><input type="date" id="pfNac" /></div>
-         <div class="field"><label>Teléfono</label><input type="text" id="pfTel" /></div>
-         <div class="field" style="grid-column: span 2;"><label>Dirección</label><input type="text" id="pfDir" /></div>
-         <div class="field"><label>Región Scout</label>
-           <select id="pfReg">
-             <option value="Región Bogotá">Región Bogotá</option>
-             <option value="Región Antioquia">Región Antioquia</option>
-             <option value="Región Valle">Región Valle</option>
-             <option value="Región Cundinamarca">Región Cundinamarca</option>
-           </select>
-         </div>
-       </div>
-
-       <div class="title-row" style="margin-top:24px;">
-         <h3>Historial de Formación y Certificados</h3>
-         <span class="badge warn">Gestión de Archivos</span>
-       </div>
-       <p class="muted" style="margin-top:0;">Cargue sus certificados y constancias para llevar el registro visual de su evolución como formador.</p>
-       
-       <div class="step-box" style="margin-bottom:16px;">
-         <div style="display:grid; grid-template-columns: 1fr 1fr auto; gap:10px; align-items:end;">
-           <div class="field" style="margin:0;"><label>Nombre del Curso / Taller</label><input type="text" id="newCourseName" placeholder="Ej. Curso Avanzado de Dirigentes" /></div>
-           <div class="field" style="margin:0;"><label>Archivo de Certificado (.pdf, .jpg)</label><input type="file" id="newCourseFile" style="background:white; padding:6px;" /></div>
-           <button class="btn" onclick="addCourseRecord()">Agregar al Historial</button>
-         </div>
-       </div>
-
-       <div class="table-container">
-         <table>
-           <thead>
-             <tr><th>Curso / Actividad Realizada</th><th>Fecha de Registro</th><th>Soporte / Certificado</th><th>Estado</th></tr>
-           </thead>
-           <tbody id="historialTableBody">
-             <tr><td>Inducción Institucional DNAM</td><td>2022-03-10</td><td><span style="color:var(--blue); font-weight:700;">certificado_induc.pdf</span></td><td><span class="badge" style="background:#e7f6ed; color:#219653;">Aprobado</span></td></tr>
-             <tr><td>Curso Preliminar para Formadores</td><td>2023-05-18</td><td><span style="color:var(--blue); font-weight:700;">preliminar_dnam.pdf</span></td><td><span class="badge" style="background:#e7f6ed; color:#219653;">Aprobado</span></td></tr>
-           </tbody>
-         </table>
-       </div>
-     </div>
-
-     <!-- Vista 2: Panel Administrador DNAM -->
-     <div id="viewAdmin" class="card" style="display:none;">
-       <div class="title-row">
-         <h2>Panel de Administración y Clasificación DNAM</h2>
-         <span class="badge" style="background:#e3ecfc; color:var(--blue);">Exclusivo: adultos@scout.org.co</span>
-       </div>
-       <p class="muted">Gestión de perfiles, aprobaciones de nuevos registros y asignación de nivel (AFS, FS, DFS).</p>
-       
-       <div style="display:flex; gap:12px; margin:16px 0; align-items:center;">
-         <label style="font-weight:900; font-size:0.85rem;">Filtrar Clasificación:</label>
-         <select id="filterClass" onchange="filterAdminTable()" style="max-width:200px; padding:8px; border-radius:10px; border:1px solid #ddd1e5;">
-           <option value="TODOS">Todos</option>
-           <option value="AFS">AFS (Asistente)</option>
-           <option value="FS">FS (Formador)</option>
-           <option value="DFS">DFS (Director)</option>
-           <option value="PENDIENTE">Pendientes de Autorización</option>
-         </select>
-       </div>
-
-       <div class="table-container">
-         <table id="adminTable">
-           <thead>
-             <tr><th>Nombre Completo</th><th>Correo / Documento</th><th>Región</th><th>Nivel / Clasificación</th><th>Estado</th><th>Acciones</th></tr>
-           </thead>
-           <tbody id="adminTableBody">
-             <!-- Se llena dinámicamente -->
-           </tbody>
-         </table>
-       </div>
-     </div>
-
-     <!-- Vista 3: Módulo de Asistencia por Sesiones (SheetJS) -->
-     <div id="viewSesiones" class="card" style="display:none;">
-       <div class="title-row">
-         <h2>Control de Asistencia por Sesiones y Certificación</h2>
-         <span class="badge warn">Herramienta Excel</span>
-       </div>
-       <p class="muted">Procese archivos de asistencia frente a las inscripciones oficiales de la DNAM.</p>
-       
-       <div class="step-box">
-         <div class="field">
-           <label>1. Cargar Archivo Base de Inscripción (.xlsx)</label>
-           <input type="file" id="fileEnrollment" accept=".xlsx, .xls" style="background:white; padding:8px;" />
-         </div>
-         <div class="field" style="margin-top:12px;">
-           <label>2. Archivos de Asistencia de Sesiones</label>
-           <input type="file" id="fileSessions" multiple accept=".xlsx, .xls" style="background:white; padding:8px;" />
-         </div>
-         <button class="btn" style="margin-top:12px;" onclick="alert('Módulo de procesamiento de sesiones listo para cruzar datos.')">Procesar Cruce de Asistencia</button>
-       </div>
-     </div>
-
-   </main>
- </div>
-</div>
-
 <script>
-// Base de datos simulada en memoria
-let appUsers = [
-  { email: "carlos.rodriguez@scout.org.co", pass: "1234", nombre: "Carlos Andrés Rodríguez", doc: "1020304050", nac: "1985-06-15", tel: "3101234567", dir: "Calle 50 # 10-20", region: "Región Bogotá", clasificacion: "FS", activo: true },
-  { email: "adultos@scout.org.co", pass: "admin123", nombre: "Administrador DNAM", doc: "1000000000", nac: "1980-01-01", tel: "3000000000", dir: "Sede Nacional", region: "Región Bogotá", clasificacion: "DFS", activo: true }
-];
+  const URL_BASE_MANUAL = "https://sites.google.com/scout.org.co/manual-de-cargos/inicio";
 
-let currentUser = null;
-let cargoAbiertoActual = null;
-
-// Perfiles cargados desde los documentos de referencia (solo se muestra el perfil abierto)
-const PERFILES_CARGOS = {
-  subjefe: {
-    titulo: "Subjefe de Clan",
-    descripcion: "Como miembro del equipo de rama colabora en el funcionamiento, aplicación y ejecución del Programa de Jóvenes en la misma.",
-    nombramiento: "Jefe de grupo",
-    respondeA: "Consejo Scout de Grupo · Jefe de grupo",
-    leResponden: "Subjefe de Rama",
-    requisitos: [
-      "Ser mayor de 18 años.",
-      "Poseer nivel de formación profesional, tecnológica o técnica.",
-      "Conocer las características del entorno social y cultural en que actúan los jóvenes y adultos de la Asociación.",
-      "Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.",
-      "No formar parte del Consejo Scout de Grupo.",
-      "No haber sido expulsado de la Asociación, ni tener medida de aseguramiento vigente, ni aparecer en el registro nacional de agresores sexuales."
-    ],
-    funciones: [
-      "Función 1: Garantizar el cumplimiento de las políticas, reglamentos, normas y procedimientos vigentes de la OSN relacionados con el funcionamiento de la Rama.",
-      "Función 2: Colaborar en organización, diseño, preparación, ejecución y evaluación de las actividades.",
-      "Función 3: Participar activa y regularmente en las reuniones de la Rama, del Grupo y en otras en que le corresponda.",
-      "Función 4: Fomenta y apoya la gestión de los adultos de su Equipo de Rama.",
-      "Función 5: Colaborar en el seguimiento y evaluación de la progresión personal de los jóvenes."
-    ],
-    competencias: "Esenciales: Adaptabilidad al Cambio (3), Aprendizaje y desarrollo personal (3), Compromiso (3), Conciencia Organizacional (2), Planeamiento Estratégico (2), Relaciones Interpersonales (3), Trabajo en Equipo (4). Específicas: Administración del proyecto educativo, Desarrollo comunitario, Administración de actividades, Asesoría personal, Habilidades y conocimientos scout."
-  },
-  director: {
-    titulo: "Director Nacional de Adultos en el Movimiento",
-    descripcion: "Tiene a su cargo el desarrollo, promoción y aplicación de la Política Nacional de Adultos en el movimiento y su modelo de gestión.",
-    nombramiento: "Jefe Scout Nacional, previo aval del Consejo Scout Nacional",
-    respondeA: "Jefe Scout Nacional",
-    leResponden: "Miembros del equipo Nacional de Adultos en el Movimiento · Comisionados Regionales de Adultos en el Movimiento",
-    requisitos: [
-      "Ser mayor de 18 años.",
-      "Poseer nivel de formación profesional o tecnológica.",
-      "Conocer las características del entorno social y cultural en que actúan los jóvenes y adultos de la Asociación.",
-      "Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.",
-      "No formar parte del Consejo Scout Nacional.",
-      "Poseer experiencia de dos (2) años como mínimo, en el ejercicio exitoso de cargos como dirigente o consejero en los niveles de Grupo, Región, Nación o en su vida profesional.",
-      "No haber sido expulsado de la Asociación, ni tener medida de aseguramiento vigente, ni aparecer en el registro nacional de agresores sexuales.",
-      "Contar con las competencias esenciales para desempeñar el cargo o demostrar interés para desarrollarlas."
-    ],
-    funciones: [
-      "Función 1: Conocer y hacer cumplir los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.",
-      "Función 2: Participar de la elaboración y ejecución del plan operativo Nacional en lo Relacionado a Adultos en el Movimiento.",
-      "Función 3: Desarrollar, promover e impulsar la Política Nacional de Adultos en el Movimiento y su modelo de aplicación.",
-      "Función 4: Desarrollar, promover e impulsar el marco conceptual, pedagógico, estructural y administrativo del sistema de gestión de adultos.",
-      "Función 5: Orientar y acompañar la atracción, vinculación, y desarrollo de competencias de los adultos adscritos a su Dirección.",
-      "Función 6: Desarrolla, promueve e impulsa, documentos, manuales y procesos de formación y perfeccionamiento continuo...",
-      "Función 7: Desarrolla, promueve e impulsa en coordinación con la Dirección de Desarrollo institucional las políticas, estrategias, eventos y actividades."
-    ],
-    competencias: "Esenciales (Grado 3-4): Adaptabilidad al Cambio, Aprendizaje y desarrollo personal, Compromiso, Conciencia Organizacional, Planeamiento Estratégico, Relaciones Interpersonales, Trabajo en Equipo. Específicas: Gestión Estratégica del Talento Humano, Administración y gestión estratégica, Generación de contenido, Garante del debido proceso, Asesoría personal."
-  }
-};
-
-function toggleCargoPerfil(key) {
-  const panel = document.getElementById('panelCargoSeleccionado');
-  if (cargoAbiertoActual === key) {
-    cargoAbiertoActual = null;
-    panel.style.display = 'none';
-    panel.innerHTML = '';
-    return;
-  }
-
-  const cargo = PERFILES_CARGOS[key];
-  if (!cargo) return;
-  cargoAbiertoActual = key;
-
-  panel.innerHTML = `
-    <div class="cargo-header">
-      <div>
-        <span class="badge">Manual de cargos</span>
-        <h3>${cargo.titulo}</h3>
-      </div>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <a class="atraccion-link" style="font-size:.82rem;" href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio" target="_blank" rel="noopener noreferrer">Ver en Manual de cargos ↗</a>
-        <button type="button" class="btn small secondary" onclick="toggleCargoPerfil('${key}')">Ocultar</button>
-      </div>
-    </div>
-    <p style="margin:0 0 8px 0; font-size:.86rem; color:#222;"><strong>Descripción General:</strong> ${cargo.descripcion}</p>
-    <div class="cargo-grid">
-      <div class="cargo-box"><strong>Nombramiento:</strong><br>${cargo.nombramiento}</div>
-      <div class="cargo-box"><strong>Responde a:</strong><br>${cargo.respondeA}</div>
-      <div class="cargo-box"><strong>Le responden:</strong><br>${cargo.leResponden}</div>
-    </div>
-    <div class="cargo-grid">
-      <div class="cargo-box">
-        <strong>Requisitos objetivos:</strong>
-        <ul class="cargo-list">${cargo.requisitos.map(r => `<li>${r}</li>`).join('')}</ul>
-      </div>
-      <div class="cargo-box">
-        <strong>Funciones:</strong>
-        <ul class="cargo-list">${cargo.funciones.map(f => `<li>${f}</li>`).join('')}</ul>
-      </div>
-    </div>
-    <div class="cargo-box" style="font-size:.83rem;"><strong>Competencias:</strong> ${cargo.competencias}</div>
-  `;
-  panel.style.display = 'block';
-}
-
-function showRegisterForm() {
-  document.getElementById('boxLogin').style.display = 'none';
-  document.getElementById('boxRegister').style.display = 'block';
-}
-
-function showLoginForm() {
-  document.getElementById('boxRegister').style.display = 'none';
-  document.getElementById('boxLogin').style.display = 'block';
-}
-
-function handleRegister() {
-  const nombre = document.getElementById('regNombre').value.trim();
-  const email = document.getElementById('regEmail').value.trim().toLowerCase();
-  const pass = document.getElementById('regPass').value.trim();
-  const doc = document.getElementById('regDoc').value.trim();
-  const nac = document.getElementById('regNac').value;
-  const tel = document.getElementById('regTel').value.trim();
-  const dir = document.getElementById('regDir').value.trim();
-  const region = document.getElementById('regRegion').value;
-
-  if(!nombre || !email || !pass || !doc) {
-    alert("Por favor complete los campos obligatorios del registro.");
-    return;
-  }
-  if(!email.endsWith("@scout.org.co")) {
-    alert("El correo debe ser institucional y terminar en @scout.org.co");
-    return;
-  }
-
-  if(appUsers.some(u => u.email === email)) {
-    alert("Ya existe un usuario registrado con este correo.");
-    return;
-  }
-
-  appUsers.push({
-    email, pass, nombre, doc, nac, tel, dir, region,
-    clasificacion: "AFS",
-    activo: false
-  });
-
-  alert("Registro enviado exitosamente. Su perfil quedará activo una vez sea autorizado por el administrador.");
-  showLoginForm();
-}
-
-function handleLogin() {
-  const email = document.getElementById('inputEmail').value.trim().toLowerCase();
-  if (!email.endsWith("@scout.org.co")) {
-    alert("Debe ingresar obligatoriamente con una cuenta institucional terminada en @scout.org.co");
-    return;
-  }
-
-  const found = appUsers.find(u => u.email === email);
-  if (!found) {
-    alert("No existe una cuenta registrada con este correo. Por favor haga clic en 'Crear Usuario'.");
-    return;
-  }
-
-  if (!found.activo) {
-    alert("Su cuenta se encuentra pendiente de autorización por parte del administrador.");
-    return;
-  }
-
-  currentUser = found;
-  document.getElementById('topUserEmail').textContent = currentUser.email;
-
-  document.getElementById('pfDoc').value = currentUser.doc;
-  document.getElementById('pfNac').value = currentUser.nac;
-  document.getElementById('pfTel').value = currentUser.tel;
-  document.getElementById('pfDir').value = currentUser.dir;
-  document.getElementById('pfReg').value = currentUser.region;
-  document.getElementById('formadorBadgeClass').textContent = `Clasificación: ${currentUser.clasificacion}`;
-
-  if (currentUser.email === "adultos@scout.org.co") {
-    document.getElementById('navAdminBtn').style.display = 'flex';
-    renderAdminTable();
-  } else {
-    document.getElementById('navAdminBtn').style.display = 'none';
-  }
-
-  document.getElementById('welcome').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-}
-
-function switchTab(tabName, btnElement) {
-  document.querySelectorAll('.sidebar .side-btn').forEach(b => b.classList.remove('active'));
-  if(btnElement) btnElement.classList.add('active');
-
-  document.getElementById('viewFormador').style.display = 'none';
-  document.getElementById('viewAdmin').style.display = 'none';
-  document.getElementById('viewSesiones').style.display = 'none';
-
-  if(tabName === 'formador') document.getElementById('viewFormador').style.display = 'block';
-  if(tabName === 'admin') document.getElementById('viewAdmin').style.display = 'block';
-  if(tabName === 'sesiones') document.getElementById('viewSesiones').style.display = 'block';
-}
-
-function renderAdminTable() {
-  const tbody = document.getElementById('adminTableBody');
-  tbody.innerHTML = '';
-
-  appUsers.forEach(u => {
-    const tr = document.createElement('tr');
-    let estadoBadge = u.activo ? '<span class="badge" style="background:#e7f6ed; color:#219653;">Activo</span>' : '<span class="badge" style="background:#fff5cf; color:#715a00;">Pendiente</span>';
-    
-    let actionsHTML = `<button class="btn small" onclick="alert('Expediente de ${u.nombre}')">Ver Informe</button>`;
-    if (!u.activo) {
-      actionsHTML += ` <button class="btn small" style="background:#219653; color:white; margin-left:4px;" onclick="approveUser('${u.email}')">Autorizar</button>`;
+  const CARGOS_MANUAL = [
+    {
+      id: "subjefe-de-clan",
+      nombre: "Subjefe de Clan",
+      nivel: "Grupo Scout · Rama Rover",
+      destacado: true,
+      resumen: "Cargo enfocado en acompañar al Clan Rover y respaldar la Jefatura de Clan en la implementación del Programa de Jóvenes, la orientación personal y el desarrollo de proyectos.",
+      url: URL_BASE_MANUAL
+    },
+    {
+      id: "jefe-de-clan",
+      nombre: "Jefe de Clan",
+      nivel: "Grupo Scout · Rama Rover",
+      destacado: false,
+      resumen: "Responsable de orientar la vida del Clan Rover y acompañar el proceso educativo de los jóvenes Rovers en articulación con el Equipo de Grupo.",
+      url: URL_BASE_MANUAL
+    },
+    {
+      id: "jefe-y-subjefe-de-tropa",
+      nombre: "Jefe / Subjefe de Tropa",
+      nivel: "Grupo Scout · Rama Scout",
+      destacado: false,
+      resumen: "Acompañamiento educativo a jóvenes de la Unidad Scout y trabajo en equipo de scouters para el desarrollo del programa.",
+      url: URL_BASE_MANUAL
+    },
+    {
+      id: "jefe-y-subjefe-de-manada",
+      nombre: "Jefe / Subjefe de Manada",
+      nivel: "Grupo Scout · Rama Lobatos / Manada",
+      destacado: false,
+      resumen: "Acompañamiento a niños y niñas de la Manada mediante el marco simbólico y el juego educativo.",
+      url: URL_BASE_MANUAL
+    },
+    {
+      id: "jefe-de-grupo",
+      nombre: "Jefe de Grupo",
+      nivel: "Grupo Scout",
+      destacado: false,
+      resumen: "Lidera y coordina el equipo de dirigentes y el funcionamiento integral del Grupo Scout.",
+      url: URL_BASE_MANUAL
     }
+  ];
 
-    tr.innerHTML = `
-      <td>${u.nombre}</td>
-      <td>${u.email}<br><small>${u.doc || 'Sin doc'}</small></td>
-      <td>${u.region || 'Sin región'}</td>
-      <td>
-        <select onchange="changeUserClass('${u.email}', this.value)" style="padding:4px; border-radius:8px; border:1px solid #ddd1e5; font-size:0.8rem;">
-          <option value="AFS" ${u.clasificacion === 'AFS' ? 'selected' : ''}>AFS</option>
-          <option value="FS" ${u.clasificacion === 'FS' ? 'selected' : ''}>FS</option>
-          <option value="DFS" ${u.clasificacion === 'DFS' ? 'selected' : ''}>DFS</option>
-        </select>
-      </td>
-      <td>${estadoBadge}</td>
-      <td>${actionsHTML}</td>
+  let enlacesPersonalizados = JSON.parse(localStorage.getItem("manual_cargos_urls")) || {};
+  let cargoActivoModalId = "subjefe-de-clan";
+
+  function obtenerUrlCargo(cargo) {
+    return enlacesPersonalizados[cargo.id] || cargo.url || URL_BASE_MANUAL;
+  }
+
+  function renderizarEnlacesCargos() {
+    const cont = document.getElementById("lista-enlaces-cargos");
+    if (!cont) return;
+
+    cont.innerHTML = CARGOS_MANUAL.map(cargo => {
+      const url = obtenerUrlCargo(cargo);
+      const esSubjefe = cargo.id === "subjefe-de-clan";
+      return `
+        <a
+          href="${url}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] text-xs font-bold border transition ${
+            esSubjefe
+              ? "bg-[#efe4f5] border-[#4d006e] text-[#4d006e]"
+              : "bg-white border-[#ddd1e5] text-[#3b3440] hover:border-[#4d006e] hover:text-[#4d006e]"
+          }"
+        >
+          <span>${cargo.nombre}</span>
+          <span>↗</span>
+        </a>
+      `;
+    }).join("");
+
+    const subjefe = CARGOS_MANUAL.find(c => c.id === "subjefe-de-clan");
+    const linkSubjefe = document.getElementById("enlace-directo-subjefe");
+    if (subjefe && linkSubjefe) {
+      linkSubjefe.href = obtenerUrlCargo(subjefe);
+    }
+  }
+
+  function abrirManualCargos(cargoId = "subjefe-de-clan") {
+    cargoActivoModalId = cargoId;
+    const modal = document.getElementById("modal-manual-cargos");
+    const select = document.getElementById("selector-cargo-modal");
+
+    select.innerHTML = CARGOS_MANUAL.map(c =>
+      `<option value="${c.id}" ${c.id === cargoId ? "selected" : ""}>${c.nombre} (${c.nivel})</option>`
+    ).join("");
+
+    cambiarCargoModal(cargoId);
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  }
+
+  function cerrarManualCargos() {
+    const modal = document.getElementById("modal-manual-cargos");
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+
+  function cambiarCargoModal(cargoId) {
+    cargoActivoModalId = cargoId;
+    const cargo = CARGOS_MANUAL.find(c => c.id === cargoId) || CARGOS_MANUAL[0];
+    const urlActual = obtenerUrlCargo(cargo);
+
+    document.getElementById("modal-cargo-titulo").textContent = cargo.nombre;
+    document.getElementById("modal-cargo-detalle").innerHTML = `
+      <div class="text-[11px] font-black uppercase tracking-wider text-[#003087]">${cargo.nivel}</div>
+      <p class="text-xs text-[#222] leading-relaxed m-0">${cargo.resumen}</p>
+      <div class="text-[11px] text-[#687082] pt-1">
+        Destino actual: <span class="font-semibold text-[#4d006e] break-all">${urlActual}</span>
+      </div>
     `;
-    tbody.appendChild(tr);
-  });
-}
-
-function approveUser(email) {
-  const u = appUsers.find(item => item.email === email);
-  if(u) {
-    u.activo = true;
-    alert(`Usuario ${u.nombre} autorizado exitosamente.`);
-    renderAdminTable();
+    document.getElementById("input-url-cargo").value = enlacesPersonalizados[cargo.id] || "";
+    document.getElementById("modal-btn-ir-cargo").href = urlActual;
   }
-}
 
-function changeUserClass(email, newClass) {
-  const u = appUsers.find(item => item.email === email);
-  if(u) {
-    u.clasificacion = newClass;
-    alert(`Nivel actualizado a ${newClass} para ${u.nombre}`);
-  }
-}
-
-function filterAdminTable() {
-  const val = document.getElementById('filterClass').value;
-  const rows = document.querySelectorAll('#adminTableBody tr');
-  rows.forEach(r => {
-    if (val === 'TODOS') {
-      r.style.display = '';
-    } else if (val === 'PENDIENTE') {
-      const isPend = r.innerHTML.includes('Pendiente');
-      r.style.display = isPend ? '' : 'none';
-    } else {
-      const selectEl = r.querySelector('select');
-      if (selectEl && selectEl.value === val) {
-        r.style.display = '';
-      } else {
-        r.style.display = 'none';
-      }
+  function guardarUrlCargo() {
+    const input = document.getElementById("input-url-cargo").value.trim();
+    if (input && !input.startsWith("https://") && !input.startsWith("http://")) {
+      alert("Ingresa una URL válida que comience por https:// o http://");
+      return;
     }
-  });
-}
 
-function addCourseRecord() {
-  const name = document.getElementById('newCourseName').value.trim();
-  const fileInput = document.getElementById('newCourseFile');
-  if(!name) {
-    alert("Por favor ingrese el nombre del curso.");
-    return;
+    if (input) {
+      enlacesPersonalizados[cargoActivoModalId] = input;
+    } else {
+      delete enlacesPersonalizados[cargoActivoModalId];
+    }
+
+    localStorage.setItem("manual_cargos_urls", JSON.stringify(enlacesPersonalizados));
+    renderizarEnlacesCargos();
+    cambiarCargoModal(cargoActivoModalId);
+    alert("Enlace actualizado para el cargo seleccionado.");
   }
-  const fileName = fileInput.files[0] ? fileInput.files[0].name : "constancia_curso.pdf";
-  const tbody = document.getElementById('historialTableBody');
-  
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td>${name}</td><td>${new Date().toISOString().slice(0,10)}</td><td><span style="color:var(--blue); font-weight:700;">${fileName}</span></td><td><span class="badge" style="background:#e7f6ed; color:#219653;">Completado</span></td>`;
-  tbody.appendChild(tr);
-  
-  document.getElementById('newCourseName').value = '';
-  fileInput.value = '';
-  alert("Curso registrado con éxito en su historial de formación.");
-}
-</script>
 
-</body>
-</html>
+  renderizarEnlacesCargos();
+</script>
