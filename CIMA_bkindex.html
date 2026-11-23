@@ -341,6 +341,762 @@
             margin-bottom: 16px;
         }
 
+        /* Estilos compactos de Manual de Cargos */
+        .manual-portal-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            font-size: 0.84rem;
+        }
+
+        .manual-portal-link {
+            color: var(--primary-red);
+            font-weight: 700;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        .manual-cargo-compact {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.83rem;
+        }
+
+        .manual-cargo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .manual-cargo-title {
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: var(--primary-red);
+        }
+
+        .manual-cargo-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .manual-cargo-cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .manual-cargo-subtitle {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .manual-cargo-list {
+            padding-left: 16px;
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        /* Estilos exclusivos de Acuerdo Mutuo */
+        .acuerdo-dos-cuadros {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .acuerdo-tabla-box {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #FFFFFF;
+        }
+
+        .acuerdo-tabla-header {
+            background-color: var(--primary-red);
+            color: #FFFFFF;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            padding: 10px 14px;
+            text-transform: uppercase;
+        }
+
+        .acuerdo-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.83rem;
+        }
+
+        .acuerdo-tabla tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .acuerdo-tabla tr:last-child {
+            border-bottom: none;
+        }
+
+        .acuerdo-tabla td:first-child {
+            width: 42%;
+            padding: 8px 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            background-color: #FAFAFA;
+            border-right: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .acuerdo-tabla td:last-child {
+            padding: 8px 12px;
+            color: var(--text-muted);
+            vertical-align: top;
+        }
+
+        .acuerdo-doc-box {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-size: 0.86rem;
+            line-height: 1.55;
+            color: var(--text-main);
+        }
+
+        .acuerdo-doc-titulo {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        .acuerdo-seccion-titulo {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-top: 14px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .acuerdo-cargo-destacado {
+            display: inline-block;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid #E5B8B8;
+        }
+
+        .acuerdo-lista {
+            padding-left: 20px;
+            margin: 6px 0 10px;
+        }
+
+        .acuerdo-lista li {
+            margin-bottom: 4px;
+        }
+
+        .acuerdo-cierre-box {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .acuerdo-radio-group {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            margin: 10px 0 16px;
+            flex-wrap: wrap;
+        }
+
+        .acuerdo-radio-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .acuerdo-radio-label input[type="radio"] {
+            accent-color: var(--primary-red);
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+        }
+
+        .firma-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .firma-panel {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .firma-canvas {
+            width: 100%;
+            height: 130px;
+            border: 1px dashed var(--border-color);
+            border-radius: 6px;
+            background-color: #FDFBF7;
+            cursor: crosshair;
+            display: block;
+            margin-top: 8px;
+            touch-action: none;
+        }
+
+        .firma-preview-img {
+            max-height: 90px;
+            max-width: 100%;
+            margin-top: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 4px;
+            background: #FFFFFF;
+            display: none;
+        }
+
+        /* Estilos exclusivos de Inducción (Checklist verificable cima_2.pdf) */
+        .ind-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .ind-progress-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+        }
+
+        .ind-progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .ind-progress-track {
+            width: 100%;
+            height: 10px;
+            background-color: #EAE4D9;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .ind-progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-red);
+            transition: width 0.25s ease;
+        }
+
+        .ind-step-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .ind-step-card.verificado {
+            background-color: #F4FBF6;
+            border-color: #A7D7B8;
+            border-left-color: #15803D;
+        }
+
+        .ind-step-main {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .ind-step-checkbox {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: var(--primary-red);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .ind-step-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .ind-step-desc {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.48;
+            white-space: pre-line;
+            margin-bottom: 8px !important;
+        }
+
+        .ind-step-links {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .ind-step-link {
+            font-size: 0.8rem;
+            color: var(--primary-red);
+            font-weight: 600;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        .ind-step-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.76rem;
+        }
+
+        .ind-ref-tag {
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .ind-status-badge {
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .ind-status-badge.ok {
+            background-color: #DCFCE7;
+            color: #166534;
+        }
+
+        .ind-verified-date {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .ind-evidencia-row {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ind-evidencia-row label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .ind-evidencia-input {
+            flex: 1;
+            min-width: 220px;
+            padding: 7px 10px;
+            border-radius: 7px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.82rem;
+        }
+
+        .ind-evidencia-input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        /* Estilos exclusivos de Proceso de Ingreso (Aprobación Jefe Inmediato) */
+        .ingreso-group-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin-top: 12px;
+        }
+
+        .ingreso-group-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ingreso-sublist {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 14px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .ingreso-check-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+
+        .ingreso-check-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-main);
+            flex: 1;
+        }
+
+        .ingreso-check-left input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--primary-red);
+            cursor: pointer;
+        }
+
+        .ingreso-estado-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background-color: #F3F1EC;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .ingreso-estado-tag.aprobado {
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+        }
+
+        .ingreso-footer-bar {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .ingreso-resumen-msg {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        /* Estilos exclusivos de Diccionario de Competencias */
+        .comp-switch-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .comp-option-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FAFAFA;
+            color: var(--text-main);
+            font-size: 0.86rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .comp-option-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+        }
+
+        .comp-option-btn.active {
+            background-color: var(--primary-red);
+            color: #FFFFFF;
+            border-color: var(--primary-red);
+        }
+
+        .comp-detail-panel {
+            display: none;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 18px;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .comp-detail-panel.active {
+            display: block;
+        }
+
+        .comp-label-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary-red);
+            letter-spacing: 0.4px;
+            margin-bottom: 4px;
+        }
+
+        .comp-example-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .comp-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .comp-list li {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.86rem;
+            color: var(--text-main);
+            line-height: 1.45;
+        }
+
+        .comp-grade-badge {
+            display: inline-block;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-weight: 700;
+            font-size: 0.78rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-right: 6px;
+        }
+
+        /* Estilos exclusivos de Vacantes y Requisiciones */
+        .vacantes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .vacante-item {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .vacante-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+
+        .vacante-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .vacante-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .vacante-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            text-decoration: none;
+            padding: 7px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            transition: all 0.2s;
+        }
+
+        .vacante-link:hover {
+            border-color: var(--primary-red);
+            background-color: var(--primary-red-light);
+        }
+
+        .postulacion-status-box {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            background-color: var(--primary-red-light);
+            border: 1px solid #E5B8B8;
+            border-left: 4px solid var(--primary-red);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .postulacion-status-box.visible {
+            display: block;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        /* Estilos exclusivos de Requisición de Vacantes (Perfil Director de Adultos) */
+        .requisicion-box {
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .requisicion-box.visible {
+            display: block;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .requisicion-form-card {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 12px;
+        }
+
+        .requisicion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .requisicion-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .requisicion-field label {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .requisicion-field select,
+        .requisicion-field input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.88rem;
+        }
+
+        .requisicion-field select:focus,
+        .requisicion-field input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
+        }
+
+        .requisicion-list {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .requisicion-item {
+            background-color: var(--primary-red-light);
+            border: 1px solid #E5B8B8;
+            border-left: 4px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.86rem;
+            color: var(--text-main);
+        }
+
         .checklist-container {
             display: flex;
             flex-direction: column;
@@ -399,6 +1155,221 @@
         .btn-action:hover {
             background-color: var(--primary-red);
             color: white;
+        }
+
+        /* Estilos exclusivos del bloque desplegable CHN en Perfil */
+        .profile-right-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            max-width: 420px;
+            margin-left: auto;
+        }
+
+        .chn-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #FAFAFA;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chn-toggle-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
+        }
+
+        .chn-toggle-btn .chn-chevron {
+            transition: transform 0.2s ease;
+            font-size: 0.78rem;
+        }
+
+        .chn-toggle-btn[aria-expanded="true"] .chn-chevron {
+            transform: rotate(180deg);
+        }
+
+        .chn-collapse-content {
+            display: none;
+            width: 100%;
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 12px 14px;
+            text-align: left;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .chn-collapse-content.open {
+            display: block;
+        }
+
+        .chn-collapse-header {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .chn-collapse-body {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin-bottom: 0 !important;
+        }
+
+        /* Estilos del Acta de Encuentros de Asesoría */
+        .acta-box {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 12px;
+        }
+
+        .acta-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+
+        .acta-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .acta-field label {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .acta-field input,
+        .acta-field textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            font-size: 0.88rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .acta-field input:focus,
+        .acta-field textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
+        }
+
+        .acta-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .acta-feedback {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .acta-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .acta-item {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .acta-item-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .acta-date-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--primary-red-light);
+            color: var(--primary-red);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .acta-item-cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .acta-label-sm {
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .acta-text-sm {
+            font-size: 0.86rem;
+            color: var(--text-main);
+            line-height: 1.45;
+            white-space: pre-line;
+            margin-bottom: 0 !important;
+        }
+
+        .acta-delete-btn {
+            background: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .acta-delete-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            background-color: var(--primary-red-light);
         }
 
         /* Estilos de Círculos de Bienestar y Tarjetas */
@@ -538,14 +1509,30 @@
 
         <!-- SECCIÓN: PERFIL (CON OPCIÓN DE DESCARGAR HV SCOUT) -->
         <div id="perfil" class="content-section active">
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div class="card" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
                 <div>
                     <div class="profile-name-clean" id="v-nombre">MAURICIO QUIROGA POSADA</div>
-                    <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia[cite: 8]</p>
+                    <p style="margin-bottom: 0;">Dirigente activo - Asociación Scouts de Colombia</p>
                 </div>
-                <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
-                    <i class="fa-solid fa-download"></i> Descargar HV Scout
-                </button>
+                <div class="profile-right-column">
+                    <button class="btn-action" onclick="alert('Descargando Hoja de Vida Scout completa desde Talento360°...')">
+                        <i class="fa-solid fa-download"></i> Descargar HV Scout
+                    </button>
+                    <button type="button" id="chn-toggle-btn" class="chn-toggle-btn" onclick="toggleChnPanel()" aria-expanded="false" aria-controls="chn-collapse-panel">
+                        <i class="fa-solid fa-shield-halved" style="color: var(--primary-red);"></i>
+                        <span>Anotaciones Hoja de Vida (CHN)</span>
+                        <i class="fa-solid fa-chevron-down chn-chevron"></i>
+                    </button>
+                    <div id="chn-collapse-panel" class="chn-collapse-content">
+                        <div class="chn-collapse-header">
+                            <span>CHN · Hoja de Vida</span>
+                            <span>Sin anotaciones</span>
+                        </div>
+                        <p id="chn-notes-text" class="chn-collapse-body">
+                            No se registran anotaciones vigentes en la Hoja de Vida CHN.
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <div class="card">
@@ -565,12 +1552,400 @@
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'acuerdo', this)"><i class="fa-solid fa-handshake"></i> Acuerdo Mutuo</button>
                 <button class="subnav-btn" onclick="switchSubTab('atraccion', 'induccion', this)"><i class="fa-solid fa-person-chalkboard"></i> Inducción</button>
             </div>
-            <div id="atraccion-vacantes" class="subcontent-panel active"><div class="card"><h3>Vacantes y Requisiciones</h3><p>Gestión de convocatorias, requisición de talento humano y selección objetiva a través de Talento360°[cite: 8, 30].</p></div></div>
-            <div id="atraccion-ingreso" class="subcontent-panel"><div class="card"><h3>Proceso de Ingreso</h3><p>Solicitud de registro, inscripción, aceptación de acción voluntaria y autorización de uso de datos personales[cite: 8, 22].</p></div></div>
-            <div id="atraccion-competencias" class="subcontent-panel"><div class="card"><h3>Diccionario de Competencias</h3><p>Competencias esenciales y específicas para la evaluación del desempeño y perfil idóneo del adulto[cite: 9, 25].</p></div></div>
-            <div id="atraccion-manual" class="subcontent-panel"><div class="card"><h3>Manual de Cargos</h3><p>Perfiles y funciones por competencias estructurados por niveles: Grupo, Región y Nación[cite: 8, 21].</p></div></div>
-            <div id="atraccion-acuerdo" class="subcontent-panel"><div class="card"><h3>Acuerdo Mutuo</h3><p>Compromiso voluntario y recíproco entre el adulto y la organización, con apoyo técnico y moral[cite: 8, 24].</p></div></div>
-            <div id="atraccion-induccion" class="subcontent-panel"><div class="card"><h3>Inducción</h3><p>Orientación inicial al voluntariado, módulo virtual certificado y acompañamiento del asesor personal[cite: 8, 24].</p></div></div>
+            <div id="atraccion-vacantes" class="subcontent-panel active">
+                <div class="card">
+                    <h3><i class="fa-solid fa-briefcase"></i> Vacantes y Requisiciones Disponibles</h3>
+                    <p>Consulta las convocatorias abiertas a las que puedes postularte y revisa los detalles de cada cargo.</p>
+
+                    <div class="vacantes-grid">
+                        <div class="vacante-item">
+                            <div>
+                                <span class="vacante-badge">Nivel Nacional</span>
+                                <div class="vacante-title">Director Nacional de Adultos en el Movimiento</div>
+                                <p style="margin-bottom: 0; font-size: 0.84rem;">Liderazgo y gestión estratégica de la Política Nacional de Adultos en el Movimiento a nivel nacional.</p>
+                            </div>
+                            <div class="vacante-actions">
+                                <a class="vacante-link" href="#convocatoria-director-nacional-adultos" onclick="alert('Abriendo convocatoria: Director Nacional de Adultos en el Movimiento (Nivel Nacional)'); return false;">
+                                    <i class="fa-solid fa-up-right-from-square"></i> Ver convocatoria
+                                </a>
+                                <button type="button" class="btn-action" onclick="postularVacante('Director Nacional de Adultos en el Movimiento')">
+                                    <i class="fa-solid fa-check"></i> Aceptar postularse
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="vacante-item">
+                            <div>
+                                <span class="vacante-badge">Nivel Regional</span>
+                                <div class="vacante-title">Miembro del Equipo Regional de Comunicaciones</div>
+                                <p style="margin-bottom: 0; font-size: 0.84rem;">Apoyo a la estrategia de comunicación institucional, difusión y contenidos regionales.</p>
+                            </div>
+                            <div class="vacante-actions">
+                                <a class="vacante-link" href="#convocatoria-equipo-regional-comunicaciones" onclick="alert('Abriendo convocatoria: Miembro del Equipo Regional de Comunicaciones'); return false;">
+                                    <i class="fa-solid fa-up-right-from-square"></i> Ver convocatoria
+                                </a>
+                                <button type="button" class="btn-action" onclick="postularVacante('Miembro del Equipo Regional de Comunicaciones')">
+                                    <i class="fa-solid fa-check"></i> Aceptar postularse
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mensaje-postulacion" class="postulacion-status-box" role="status" aria-live="polite"></div>
+
+                    <!-- Requisición de Vacantes (visible solo en perfil Director de Adultos) -->
+                    <div id="requisicion-vacantes-box" class="requisicion-box">
+                        <h3><i class="fa-solid fa-file-circle-plus"></i> Requisición de Vacantes</h3>
+                        <p>Solicita la apertura de una convocatoria seleccionando el cargo del listado e indicando la fecha en que se requiere.</p>
+
+                        <form id="requisicionVacanteForm" class="requisicion-form-card" onsubmit="solicitarRequisicion(event)">
+                            <div class="requisicion-grid">
+                                <div class="requisicion-field">
+                                    <label for="reqCargoSelect">Listado de Cargos</label>
+                                    <select id="reqCargoSelect" required>
+                                        <option value="">Selecciona un cargo...</option>
+                                        <option value="Director Nacional de Adultos en el Movimiento">Director Nacional de Adultos en el Movimiento</option>
+                                        <option value="Miembro del Equipo Regional de Comunicaciones">Miembro del Equipo Regional de Comunicaciones</option>
+                                        <option value="Comisionado Regional de Adultos en el Movimiento">Comisionado Regional de Adultos en el Movimiento</option>
+                                        <option value="Coordinador Nacional de Formación">Coordinador Nacional de Formación</option>
+                                        <option value="Asesor de Grupo Scout">Asesor de Grupo Scout</option>
+                                    </select>
+                                </div>
+                                <div class="requisicion-field">
+                                    <label for="reqFechaInput">Fecha en que se requiere el cargo</label>
+                                    <input type="date" id="reqFechaInput" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-action">
+                                <i class="fa-solid fa-paper-plane"></i> Solicitar apertura de convocatoria
+                            </button>
+                        </form>
+
+                        <div id="lista-requisiciones" class="requisicion-list" aria-live="polite"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="atraccion-ingreso" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-file-signature"></i> Proceso de Ingreso · Revisión y Aprobación del Jefe Inmediato</h3>
+                    <p>Revisa y aprueba los requisitos obligatorios del proceso de ingreso.</p>
+
+                    <div class="ingreso-group-card">
+                        <div class="ingreso-group-title">
+                            <i class="fa-solid fa-shield-check"></i> Verificación de antecedentes
+                        </div>
+                        <div class="ingreso-sublist">
+                            <div class="ingreso-check-row">
+                                <label class="ingreso-check-left">
+                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Antecedentes Judiciales (Policía)" onchange="actualizarEstadoIngreso()">
+                                    <span>Antecedentes Judiciales (Policía)</span>
+                                </label>
+                                <span class="ingreso-estado-tag">Pendiente</span>
+                            </div>
+                            <div class="ingreso-check-row">
+                                <label class="ingreso-check-left">
+                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Antecedentes fiscales (Contraloría)" onchange="actualizarEstadoIngreso()">
+                                    <span>Antecedentes fiscales (Contraloría)</span>
+                                </label>
+                                <span class="ingreso-estado-tag">Pendiente</span>
+                            </div>
+                            <div class="ingreso-check-row">
+                                <label class="ingreso-check-left">
+                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Antecedentes disciplinarios (Procuraduría)" onchange="actualizarEstadoIngreso()">
+                                    <span>Antecedentes disciplinarios (Procuraduría)</span>
+                                </label>
+                                <span class="ingreso-estado-tag">Pendiente</span>
+                            </div>
+                            <div class="ingreso-check-row">
+                                <label class="ingreso-check-left">
+                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Inhabilidades por delitos sexuales (Policía)" onchange="actualizarEstadoIngreso()">
+                                    <span>Inhabilidades por delitos sexuales (Policía)</span>
+                                </label>
+                                <span class="ingreso-estado-tag">Pendiente</span>
+                            </div>
+                            <div class="ingreso-check-row">
+                                <label class="ingreso-check-left">
+                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Medidas Correctivas (Policía)" onchange="actualizarEstadoIngreso()">
+                                    <span>Medidas Correctivas (Policía)</span>
+                                </label>
+                                <span class="ingreso-estado-tag">Pendiente</span>
+                            </div>
+                            <div class="ingreso-check-row">
+                                <label class="ingreso-check-left">
+                                    <input type="checkbox" class="ingreso-aprob-check" data-label="Antecedentes scout (CHN)" onchange="actualizarEstadoIngreso()">
+                                    <span>Antecedentes scout (CHN)</span>
+                                </label>
+                                <span class="ingreso-estado-tag">Pendiente</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ingreso-group-card">
+                        <div class="ingreso-check-row" style="border: none; background: transparent; padding: 0;">
+                            <label class="ingreso-check-left" style="font-weight: 700;">
+                                <input type="checkbox" class="ingreso-aprob-check" data-label="Entrevista jefe inmediato" onchange="actualizarEstadoIngreso()">
+                                <span><i class="fa-solid fa-user-tie" style="color: var(--primary-red); margin-right: 6px;"></i> Entrevista jefe inmediato</span>
+                            </label>
+                            <span class="ingreso-estado-tag">Pendiente</span>
+                        </div>
+                    </div>
+
+                    <div class="ingreso-group-card">
+                        <div class="ingreso-check-row" style="border: none; background: transparent; padding: 0;">
+                            <label class="ingreso-check-left" style="font-weight: 700;">
+                                <input type="checkbox" class="ingreso-aprob-check" data-label="Curso A Salvo del Peligro" onchange="actualizarEstadoIngreso()">
+                                <span><i class="fa-solid fa-certificate" style="color: var(--primary-red); margin-right: 6px;"></i> Curso A Salvo del Peligro</span>
+                            </label>
+                            <span class="ingreso-estado-tag">Pendiente</span>
+                        </div>
+                    </div>
+
+                    <div class="ingreso-footer-bar">
+                        <button type="button" class="btn-action" onclick="guardarAprobacionIngreso()">
+                            <i class="fa-solid fa-check-double"></i> Aprobar revisión de ingreso
+                        </button>
+                        <div id="ingreso-resumen-aprobacion" class="ingreso-resumen-msg" aria-live="polite"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="atraccion-competencias" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-book-bookmark"></i> Diccionario de Competencias</h3>
+                    <p>Selecciona una categoría para consultar los ejemplos de competencias, grados de dominio y conductas.</p>
+
+                    <div class="comp-switch-row" role="tablist" aria-label="Categorías del Diccionario de Competencias">
+                        <button type="button" id="btn-comp-esenciales" class="comp-option-btn active" onclick="switchCompetenciaOption('esenciales', this)">
+                            <i class="fa-solid fa-layer-group"></i> Competencias Esenciales
+                        </button>
+                        <button type="button" id="btn-comp-especificas" class="comp-option-btn" onclick="switchCompetenciaOption('especificas', this)">
+                            <i class="fa-solid fa-list-check"></i> Competencias Específicas
+                        </button>
+                    </div>
+
+                    <div id="comp-panel-esenciales" class="comp-detail-panel active">
+                        <div class="comp-label-title">Competencias Esenciales · Ejemplo</div>
+                        <div class="comp-example-name">Adaptabilidad al cambio</div>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: var(--text-main);">Descripción:</strong> Capacidad para modificar puntos de vista, prácticas y actitudes en respuesta a cambios en contextos, condiciones y situaciones.
+                        </p>
+                        <div class="comp-label-title">Grados de dominio (1 a 4)</div>
+                        <ul class="comp-list">
+                            <li><span class="comp-grade-badge">1</span> Identifica los elementos cambiantes y los acepta como parte del proceso.</li>
+                            <li><span class="comp-grade-badge">2</span> Reconoce y comprende el cambio como oportunidad de mejora.</li>
+                            <li><span class="comp-grade-badge">3</span> Analiza e implementa el cambio.</li>
+                            <li><span class="comp-grade-badge">4</span> Evalúa y proyecta el cambio.</li>
+                        </ul>
+                    </div>
+
+                    <div id="comp-panel-especificas" class="comp-detail-panel">
+                        <div class="comp-label-title">Competencias Específicas · Ejemplo</div>
+                        <div class="comp-example-name">Administración de Actividades</div>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: var(--text-main);">Descripción:</strong> Es la capacidad de planear, coordinar ejecutar y evaluar actividades educativas, buscando alcanzar el objetivo para la cual fue planteada, donde todos los participantes puedan expresar sus ideas y ser escuchados.
+                        </p>
+                        <div class="comp-label-title">Conductas</div>
+                        <ul class="comp-list">
+                            <li><span class="comp-grade-badge">1</span> Utiliza la malla de objetivos educativos para el diseño de actividades.</li>
+                            <li><span class="comp-grade-badge">2</span> Entrega la progresión personal basándose en la malla de objetivos educativos.</li>
+                            <li><span class="comp-grade-badge">3</span> Aplica correctamente las fases y etapas de progresión personal según la política.</li>
+                            <li><span class="comp-grade-badge">4</span> Realiza seguimiento y mantiene el registro actualizado de progresión personal de forma física o digital.</li>
+                            <li><span class="comp-grade-badge">5</span> Promueve las políticas de participación juvenil e inclusión y los programas mundiales de la organización.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="atraccion-manual" class="subcontent-panel">
+                <div class="card" style="padding: 18px;">
+                    <h3 style="margin-bottom: 10px; padding-bottom: 8px;"><i class="fa-solid fa-address-book"></i> Manual de Cargos</h3>
+                    <div class="manual-portal-bar">
+                        <span>Todos los cargos se pueden encontrar en el Manual de Cargos:</span>
+                        <a href="https://sites.google.com/scout.org.co/manual-de-cargos/inicio" target="_blank" rel="noopener noreferrer" class="manual-portal-link">
+                            https://sites.google.com/scout.org.co/manual-de-cargos/inicio <i class="fa-solid fa-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div id="manual-cargo-dinamico"></div>
+                </div>
+            </div>
+            <div id="atraccion-acuerdo" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-handshake"></i> Compromiso de Acuerdo Mutuo</h3>
+                    <p style="margin-bottom: 14px;">Revisa los datos de las partes, el texto del acuerdo con el cargo correspondiente al perfil activo y registra tu aceptación y firma.</p>
+
+                    <!-- Dos cuadros lado a lado -->
+                    <div class="acuerdo-dos-cuadros">
+                        <div class="acuerdo-tabla-box">
+                            <div class="acuerdo-tabla-header">DATOS PERSONALES DEL ADULTO VOLUNTARIO</div>
+                            <table class="acuerdo-tabla">
+                                <tr><td>Nombre Completo:</td><td>Mauricio Quiroga Posada</td></tr>
+                                <tr><td>Tipo de Identificación:</td><td>Cédula de Ciudadanía (CC)</td></tr>
+                                <tr><td>N° de Identificación:</td><td>1.017.245.890</td></tr>
+                                <tr><td>Dirección Residencia:</td><td>Calle 45 Sur # 38-19, Envigado, Antioquia</td></tr>
+                                <tr><td>N° Celular:</td><td>314 682 9041</td></tr>
+                                <tr><td>Correo Electrónico:</td><td>mauricio.quiroga@scout.org.co</td></tr>
+                            </table>
+                        </div>
+
+                        <div class="acuerdo-tabla-box">
+                            <div class="acuerdo-tabla-header">REPRESENTANTES DEL ESTAMENTO</div>
+                            <table class="acuerdo-tabla" id="acuerdo-estamento-tabla">
+                                <tr><td>Grupo Scout:</td><td id="est-grupo">Grupo Scout 14 · Caminantes del Valle</td></tr>
+                                <tr><td>Regional Scout:</td><td id="est-regional">Región Antioquia</td></tr>
+                                <tr><td>Nación Scout:</td><td id="est-nacion">Asociación Scouts de Colombia</td></tr>
+                                <tr><td>Representante Legal:</td><td id="est-rep">Douglas Madrigal Benitez</td></tr>
+                                <tr><td>NIT:</td><td id="est-nit">860.010.892-1</td></tr>
+                                <tr><td>Dirección:</td><td id="est-dir">Carrera 43A # 19-40, Medellín, Antioquia</td></tr>
+                                <tr><td>N° Celular:</td><td id="est-cel">310 549 8820</td></tr>
+                                <tr><td>Correo Electrónico:</td><td id="est-correo">douglas.madrigal@scout.org.co</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Texto completo del documento Word -->
+                    <div class="acuerdo-doc-box">
+                        <div class="acuerdo-doc-titulo">DIRECCIÓN NACIONAL DE ADULTOS EN EL MOVIMIENTO · COMPROMISO DE ACUERDO MUTUO</div>
+
+                        <div class="acuerdo-seccion-titulo">OBJETO DEL ACUERDO</div>
+                        <p style="margin-bottom: 10px; color: var(--text-main);">Entre las partes enunciadas previamente se realiza el presente acuerdo de voluntades, donde el ADULTO EN EL MOVIMIENTO se compromete ante el ESTAMENTO a desempeñar las funciones asignadas al cargo de acuerdo con el perfil establecido en el manual de cargos, perfiles y funciones por competencias de la Asociación Scouts de Colombia.</p>
+
+                        <div class="acuerdo-seccion-titulo">CARGO A DESEMPEÑAR</div>
+                        <p style="margin-bottom: 10px; color: var(--text-main);">
+                            De acuerdo con el Manual de cargos, funciones y perfiles por competencias de la ASOCIACIÓN SCOUTS DE COLOMBIA, el ADULTO EN EL MOVIMIENTO, desempeñará para el periodo scout el cargo de <span id="acuerdo-cargo-dinamico" class="acuerdo-cargo-destacado">Subjefe de Clan</span>.
+                        </p>
+
+                        <div class="acuerdo-seccion-titulo">COMPROMISOS DEL ADULTO EN EL MOVIMIENTO</div>
+                        <ul class="acuerdo-lista">
+                            <li>Asumir el cargo designado teniendo en cuenta que la ASOCIACIÓN SCOUTS DE COLOMBIA hace parte de la sociedad civil organizada, con énfasis en la educación en valores y la protección y garantía de los derechos de los niños, las niñas, adolescentes y los jóvenes.</li>
+                            <li>Cumplir con lo establecido en la Constitución Política de Colombia y en el Código de la Infancia y la Adolescencia.</li>
+                            <li>Adherir a su vida los principios y valores establecidos en la Ley y la Promesa del Movimiento Scout.</li>
+                            <li>Ser un ejemplo de los valores del Movimiento Scout como principal herramienta educativa dentro y fuera de la Organización Scout.</li>
+                            <li>Cualificarse y actualizarse constantemente dentro y fuera de la Organización Scout con el fin de alcanzar el nivel esperado de las competencias necesarias para cumplir las funciones inherentes al ejercicio del cargo designado.</li>
+                            <li>Cumplir con lo establecido en el objeto social, el Estatuto, los Reglamentos, las Políticas, Manuales y demás documentos vigentes de la ASOCIACIÓN SCOUTS DE COLOMBIA y la constitución de la Organización Mundial del Movimiento Scout (OMMS), así como los lineamientos y directrices que se establezcan desde las distintas instancias de la OMMS.</li>
+                            <li>Emplear los conductos regulares y los canales de mediación institucionales para la resolución de las dudas y las controversias que se presenten durante el ejercicio de las funciones asumidas de acuerdo con el cargo asignado, en el marco del principio Constitucional del debido proceso.</li>
+                            <li>Desarrollar adecuadas prácticas de convivencia social durante las diversas actividades en las que participe dentro y fuera del Movimiento Scout, siendo reconocido como un adulto ejemplar en coherencia con los principios y valores institucionales.</li>
+                            <li>Recibir una inducción general mediante un módulo virtual certificado, para conocer la institución a la que pertenece y apoyarse en su asesor personal para complementar dicha etapa.</li>
+                            <li>Realizar los módulo virtuales certificados denominados Safe From Harm (A salvo del peligro) y en lo posible participar de todas las iniciativas que realice el grupo, la región y la nación en relación a la garantía de los derechos y generación de entornos seguros de los niños, las niñas, los adolescentes y los jóvenes.</li>
+                            <li>Conocer, aceptar y adherirse a los compromisos establecidos en la Política Nacional de A Salvo del Peligro “Haré todo cuanto de mí dependa: Política Nacional de Entornos Seguros” y en el Código de Honor, Disciplinario y de Conducta de la Asociación Scouts de Colombia, asumiendo la responsabilidad de contribuir a la construcción y mantenimiento de entornos seguros, actuar de conformidad con los principios y normas de conducta establecidos por la Asociación, reportar oportunamente cualquier situación de riesgo de la que tenga conocimiento y ejercer la corresponsabilidad en el autocuidado y la protección de toda la membresía de la Asociación Scouts de Colombia.</li>
+                            <li>Recibir una inducción específica y las herramientas necesarias para ejercer el cargo asumido.</li>
+                            <li>Propender por la mayor participación posible de las personas a su cargo en los eventos organizados, o en los que sea partícipe la ASOCIACIÓN SCOUTS DE COLOMBIA, evitando para ello cualquier oposición de tipo personal.</li>
+                            <li>Participar activamente en la etapa de valoración inicial de competencias y con base en sus resultados generar el Plan Personal de Desarrollo y ejecutarlo a cabalidad.</li>
+                            <li>Participar activamente en la evaluación 360° por competencias, que permita verificar el desempeño en el cargo asumido y tomar las decisiones que resulten pertinentes para el futuro.</li>
+                        </ul>
+
+                        <div class="acuerdo-seccion-titulo">COMPROMISOS DEL ESTAMENTO</div>
+                        <ul class="acuerdo-lista">
+                            <li>Resolver por todos los mecanismos posibles las inquietudes que el ADULTO EN EL MOVIMIENTO genere en desarrollo de sus funciones o se presenten durante la ejecución del presente acuerdo.</li>
+                            <li>Proporcionar las estrategias y los recursos necesarios que contribuyan al desarrollo de las funciones asignadas.</li>
+                            <li>Permitir, con el cumplimiento de los requisitos mínimos, el desarrollo de las actividades derivadas de sus funciones.</li>
+                            <li>Entregar con la firma de este acuerdo y a manera de anexos, los estatutos, los reglamentos, las políticas, los manuales, planes y demás documentos que hagan parte integrante de las funciones que el ADULTO EN EL MOVIMIENTO desempeñará y que sean útiles para el cabal cumplimiento de sus obligaciones.</li>
+                            <li>Manejar la relación entre las partes firmantes con el decoro propio de una relación subordinada en la que debe primar el respeto por los derechos de las personas y el debido proceso en la toma de decisiones que puedan afectarles.</li>
+                            <li>Informar al ADULTO EN EL MOVIMIENTO de manera oportuna y por los canales oficiales de la ASOCIACIÓN SCOUTS DE COLOMBIA de las actividades, eventos y demás acciones que propendan por su participación y la participación de las personas a su cargo.</li>
+                            <li>Dar pronto aviso a las autoridades de la ocurrencia de hechos que puedan poner en riesgo la integridad de los bienes jurídicos de los asociados sean estos mayores o menores de edad, los bienes materiales de la organización o de los bienes inmateriales de la misma.</li>
+                        </ul>
+
+                        <div class="acuerdo-seccion-titulo">TÉRMINO DE DURACIÓN DEL ACUERDO</div>
+                        <p style="margin-bottom: 10px; color: var(--text-main);">Las partes definen como término para la duración de este acuerdo de voluntades, un tiempo máximo de dos (2) años contados a partir de la fecha de nombramiento del ADULTO EN EL MOVIMIENTO, término que puede ser prorrogado por las partes de común acuerdo, como resultado de las respectivas evaluaciones del desempeño por competencias en el cargo, periodo durante el cual EL ADULTO mantendrá vigente su inscripción a la ASOCIACIÓN SCOUTS DE COLOMBIA.</p>
+
+                        <div class="acuerdo-seccion-titulo">TERMINACIÓN ANTICIPADA</div>
+                        <p style="margin-bottom: 6px; color: var(--text-main);">El presente acuerdo podrá darse por terminado con la ocurrencia de cualquiera de los siguientes eventos:</p>
+                        <ul class="acuerdo-lista">
+                            <li>Por mutuo acuerdo entre las partes.</li>
+                            <li>Por expiración del término de duración inicial o de cualquiera de sus prórrogas.</li>
+                        </ul>
+                        <p style="margin-bottom: 6px; color: var(--text-main);">Adicionalmente cualquiera de las partes podrá dar por terminado el acuerdo unilateralmente en alguno de los siguientes eventos:</p>
+                        <ul class="acuerdo-lista">
+                            <li>Incumplimiento reiterado de los compromisos contenidos en este acuerdo muerte del ADULTO EN EL MOVIMIENTO</li>
+                            <li>Liquidación o disolución de la ASOCIACIÓN SCOUTS DE COLOMBIA</li>
+                            <li>Terminación o cierre del grupo, la rama o el estamento</li>
+                            <li>Terminación del proyecto, programa o actividad para la que se haya adoptado este acuerdo</li>
+                            <li>Pérdida de calidad de miembro de la ASOCIACIÓN SCOUTS DE COLOMBIA por cualquiera de las causas legalmente establecidas</li>
+                            <li>Por sanción de la Corte de Honor Nacional Scout que genere la suspensión temporal o definitiva del ADULTO DEL MOVIMIENTO o su expulsión.</li>
+                            <li>Por violación a los derechos de propiedad intelectual y de uso de marca o a la confidencialidad.</li>
+                        </ul>
+                        <p style="margin-bottom: 10px; color: var(--text-main);"><strong>PARÁGRAFO:</strong> EL ADULTO EN EL MOVIMIENTO acuerda y acepta ser evaluado semestralmente de acuerdo a los modelos de evaluación autorizados por la organización, en caso de que la evaluación de desempeño de su cargo no arroje los resultados esperados, el adulto conjuntamente con su asesor personal diseñará un Plan Personal de Desarrollo con miras a la mejoría de dicho desempeño, si vencido el plazo para la ejecución del plan personal de desarrollo, que será de seis (6) meses, y realizada una nueva evaluación los resultados permanecen sin mejoría, el estamento podrá dar por terminado el presente acuerdo, según lo establecido en la Política Nacional de Adultos en el Movimiento de la ASOCIACIÓN SCOUTS DE COLOMBIA sobre la etapa de decisiones para el futuro.</p>
+
+                        <div class="acuerdo-seccion-titulo">RELACIÓN ENTRE LAS PARTES</div>
+                        <p style="margin-bottom: 8px; color: var(--text-main);">Este acuerdo entre las partes firmantes genera el compromiso para el ADULTO EN EL MOVIMIENTO de realizar una acción voluntaria descrita en el presente acuerdo en forma articulada, obrando bajo la filosofía y políticas de la organización.</p>
+                        <p style="margin-bottom: 8px; color: var(--text-main);">EL ADULTO EN EL MOVIMIENTO, acepta que la ASOCIACIÓN SCOUTS DE COLOMBIA es una entidad reconocida por el derecho colombiano como organización de tendencia cuya finalidad no es generar relaciones laborales ni generar lucro alguno, y que sus fines misionales se dirigen a la realización y cumplimiento de valores aspiracionales descritos en la MISIÓN DEL MOVIMIENTO SCOUT.</p>
+                        <p style="margin-bottom: 8px; color: var(--text-main);">EL ADULTO EN EL MOVIMIENTO se compromete a afiliarse en la ASOCIACIÓN SCOUTS DE COLOMBIA para las vigencias anuales que cubran el período del presente acuerdo.</p>
+                        <p style="margin-bottom: 8px; color: var(--text-main);">EL ADULTO EN EL MOVIMIENTO declara que guardará confidencialidad de los planes, programas, proyectos, actividades y acciones que lo requieran a juicio de la ASOCIACIÓN SCOUTS DE COLOMBIA.</p>
+                        <p style="margin-bottom: 8px; color: var(--text-main);"><strong>PROPIEDAD INTELECTUAL:</strong> Toda creación, invención, proyecto, o desarrollo que en cumplimiento de sus funciones como voluntario de la ASOCIACIÓN SCOUTS DE COLOMBIA el ADULTO EN EL MOVIMIENTO, genere y aplique en sus tareas o delegaciones serán de propiedad exclusiva de la ASOCIACIÓN SCOUTS DE COLOMBIA el ADULTO EN EL MOVIMIENTO, esto sin perjuicio del reconocimiento de la propiedad intelectual moral de su creador, y el reconocimiento de honorarios si a ello hubiere lugar.</p>
+                        <p style="margin-bottom: 10px; color: var(--text-main);"><strong>USO DE MARCA:</strong> El adulto declara que hará uso de las marcas registradas de la ASOCIACIÓN SCOUTS DE COLOMBIA en forma exclusiva dentro del ejercicio de su cargo y funciones y sin un personal ánimo de lucro.</p>
+
+                        <div class="acuerdo-seccion-titulo">DOCUMENTOS ANEXOS</div>
+                        <p style="margin-bottom: 6px; color: var(--text-main);">Forman parte integrante de este acuerdo los siguientes documentos que deberán ser entregados al ADULTO EN EL MOVIMIENTO en cualquier tipo de formato.</p>
+                        <ul class="acuerdo-lista" style="margin-bottom: 0;">
+                            <li>Estatuto de la ASOCIACIÓN SCOUTS DE COLOMBIA.</li>
+                            <li>Reglamentos de la ASOCIACIÓN SCOUTS DE COLOMBIA.</li>
+                            <li>Políticas de la ASOCIACIÓN SCOUTS DE COLOMBIA y documentos Complementarios.</li>
+                            <li>Manual de cargos y funciones por competencias.</li>
+                            <li>Todo documento vigente de la ASOCIACIÓN SCOUTS DE COLOMBIA que impacte o incide en su función o rol.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Aceptación, Firma y Descarga -->
+                    <div class="acuerdo-cierre-box">
+                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);">¿Acepta este acuerdo?</div>
+                        <div class="acuerdo-radio-group">
+                            <label class="acuerdo-radio-label">
+                                <input type="radio" name="aceptaAcuerdo" value="Sí" onchange="actualizarEstadoAcuerdo()"> Sí
+                            </label>
+                            <label class="acuerdo-radio-label">
+                                <input type="radio" name="aceptaAcuerdo" value="No" onchange="actualizarEstadoAcuerdo()"> No
+                            </label>
+                        </div>
+
+                        <div class="firma-grid">
+                            <div class="firma-panel">
+                                <div style="font-size: 0.84rem; font-weight: 700; color: var(--text-main);">Cargar firma (imagen)</div>
+                                <input type="file" id="acuerdoFirmaArchivo" accept="image/*" onchange="cargarFirmaImagen(event)" style="margin-top: 8px; font-size: 0.8rem; width: 100%;">
+                                <img id="acuerdoFirmaPreview" class="firma-preview-img" alt="Vista previa de firma cargada">
+                            </div>
+
+                            <div class="firma-panel">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 0.84rem; font-weight: 700; color: var(--text-main);">Firmar en pantalla</span>
+                                    <button type="button" class="acta-delete-btn" onclick="limpiarFirmaCanvas()">Limpiar</button>
+                                </div>
+                                <canvas id="acuerdoFirmaCanvas" class="firma-canvas" width="420" height="130"></canvas>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                            <button type="button" class="btn-action" onclick="descargarAcuerdoDiligenciado()">
+                                <i class="fa-solid fa-download"></i> Descargar acuerdo diligenciado
+                            </button>
+                            <span id="acuerdo-estado-msg" style="font-size: 0.84rem; font-weight: 600; color: var(--primary-red);"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="atraccion-induccion" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-person-chalkboard"></i> Checklist · Fase de Inducción Adultos Voluntarios Nuevos</h3>
+                    <p style="margin-bottom: 12px;">Scouts de Colombia — Verifica el cumplimiento de cada paso, actividad y soporte del proceso de inducción[cite: 8].</p>
+
+                    <div class="ind-top-bar">
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">
+                            Verificación guardada automáticamente en este navegador
+                        </span>
+                        <button type="button" class="btn-action" onclick="reiniciarChecklistInduccion()">
+                            <i class="fa-solid fa-rotate-left"></i> Reiniciar verificación
+                        </button>
+                    </div>
+
+                    <div class="ind-progress-card">
+                        <div class="ind-progress-header">
+                            <span id="ind-resumen-texto">Cumplimiento verificado: 0 de 9 pasos (0%)</span>
+                            <span id="ind-estado-global" class="ind-status-badge">Pendiente</span>
+                        </div>
+                        <div class="ind-progress-track">
+                            <div id="ind-barra-progreso" class="ind-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div id="ind-checklist-lista"></div>
+                </div>
+            </div>
         </div>
 
         <!-- SECCIÓN: DESEMPEÑO -->
@@ -581,27 +1956,78 @@
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'jefe', this)"><i class="fa-solid fa-user-shield"></i> Revisión del Jefe Inmediato</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'evaluacion', this)"><i class="fa-solid fa-clipboard-check"></i> Evaluación 360°</button>
                 <button class="subnav-btn" onclick="switchSubTab('desempeno', 'ppd', this)"><i class="fa-solid fa-book-open"></i> Plan de Desarrollo Personal (PPD)</button>
+                <button class="subnav-btn" onclick="switchSubTab('desempeno', 'encuentros-asesoria', this)"><i class="fa-solid fa-file-signature"></i> Encuentros de Asesoría</button>
             </div>
-            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño[cite: 8, 12, 19].</p></div></div>
-            <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD[cite: 10].</p></div></div>
-            <div id="desempeno-jefe" class="subcontent-panel"><div class="card"><h3>Revisión del Jefe Inmediato</h3><p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo[cite: 10].</p></div></div>
+            <div id="desempeno-ruta" class="subcontent-panel active"><div class="card"><h3>Ruta de Evaluación</h3><p>Momentos clave del ciclo de vida del adulto: acompañamiento, seguimiento continuo y evaluación de desempeño.</p></div></div>
+            <div id="desempeno-asesor" class="subcontent-panel"><div class="card"><h3>Asesor Personal</h3><p>Entrenador, guía y acompañamiento personalizado en el desarrollo de competencias y seguimiento del PPD.</p></div></div>
+            <div id="desempeno-jefe" class="subcontent-panel"><div class="card"><h3>Revisión del Jefe Inmediato</h3><p>Supervisión, evaluación y retroalimentación directa sobre el cumplimiento de objetivos y metas del cargo.</p></div></div>
             <div id="desempeno-evaluacion" class="subcontent-panel">
                 <div class="card">
                     <h3>Evaluación 360° y Componentes de Crecimiento</h3>
-                    <p>Herramientas transversales de medición de conductas observables[cite: 10, 12].</p>
+                    <p>Herramientas transversales de medición de conductas observables.</p>
                     <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                         <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
                             <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-graduation-cap"></i> Formación Básica</h4>
-                            <p style="font-size: 0.85rem; margin-bottom: 0;">Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo[cite: 9, 10].</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Módulos iniciales indispensables centrados en lo que el Movimiento Scout necesita ofrecer para el dominio fundamental del cargo.</p>
                         </div>
                         <div style="background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
                             <h4 style="color: var(--primary-red); margin-bottom: 8px;"><i class="fa-solid fa-arrows-rotate"></i> Perfeccionamiento Continuo</h4>
-                            <p style="font-size: 0.85rem; margin-bottom: 0;">Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades[cite: 9, 10].</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Actividades formativas posteriores a la formación básica orientadas a complementar y mantener vigentes los conocimientos y habilidades.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo[cite: 8, 12].</p></div></div>
+            <div id="desempeno-ppd" class="subcontent-panel"><div class="card"><h3>Plan de Desarrollo Personal (PPD)</h3><p>Estrategias y establecimiento de metas para el cierre de brechas y perfeccionamiento continuo.</p></div></div>
+            <div id="desempeno-encuentros-asesoria" class="subcontent-panel">
+                <div class="card">
+                    <h3><i class="fa-solid fa-file-signature"></i> Acta de Encuentros de Asesoría</h3>
+                    <p>Diligencia el acta de cada encuentro de asesoría registrando la fecha, descripción, compromisos y seguimiento a los compromisos.</p>
+
+                    <div class="acta-box">
+                        <form id="actaAsesoriaForm" onsubmit="saveActaAsesoria(event)">
+                            <div class="acta-grid-2">
+                                <div class="acta-field">
+                                    <label for="actaFecha"><i class="fa-regular fa-calendar"></i> Fecha del Encuentro</label>
+                                    <input type="date" id="actaFecha" required>
+                                </div>
+                                <div class="acta-field">
+                                    <label for="actaAsesor"><i class="fa-solid fa-user-tie"></i> Asesor / Acompañante (Opcional)</label>
+                                    <input type="text" id="actaAsesor" placeholder="Nombre del asesor o dirigente">
+                                </div>
+                            </div>
+
+                            <div class="acta-field">
+                                <label for="actaDescripcion"><i class="fa-solid fa-align-left"></i> Descripción del Encuentro</label>
+                                <textarea id="actaDescripcion" rows="3" placeholder="Resume los temas abordados, avances y observaciones del encuentro..." required></textarea>
+                            </div>
+
+                            <div class="acta-grid-2">
+                                <div class="acta-field">
+                                    <label for="actaCompromisos"><i class="fa-solid fa-list-check"></i> Compromisos</label>
+                                    <textarea id="actaCompromisos" rows="3" placeholder="Detalla los compromisos acordados para el siguiente periodo..." required></textarea>
+                                </div>
+                                <div class="acta-field">
+                                    <label for="actaSeguimiento"><i class="fa-solid fa-rotate"></i> Seguimiento a los Compromisos</label>
+                                    <textarea id="actaSeguimiento" rows="3" placeholder="Registra el estado, avance o verificación de compromisos previos..." required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="acta-actions">
+                                <button type="submit" class="btn-action">
+                                    <i class="fa-solid fa-floppy-disk"></i> Registrar Acta de Encuentro
+                                </button>
+                                <span id="actaStatusMsg" class="acta-feedback"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fa-solid fa-folder-open"></i> Actas Diligenciadas</h3>
+                    <p>Consulta y administra el registro de encuentros de asesoría realizados.</p>
+                    <div id="actaRecordsContainer" class="acta-list"></div>
+                </div>
+            </div>
         </div>
 
         <!-- SECCIÓN: FORMACIÓN -->
@@ -611,9 +2037,9 @@
                 <button class="subnav-btn" onclick="switchSubTab('formacion', 'certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
                 <button class="subnav-btn" onclick="switchSubTab('formacion', 'cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
             </div>
-            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados[cite: 8, 19].</p></div></div>
-            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM)[cite: 8, 12].</p></div></div>
-            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro)[cite: 8, 24].</p></div></div>
+            <div id="formacion-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Formaciones</h3><p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados.</p></div></div>
+            <div id="formacion-certificados" class="subcontent-panel"><div class="card"><h3>Certificados de Oferta Formativa</h3><p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM).</p></div></div>
+            <div id="formacion-cursos" class="subcontent-panel"><div class="card"><h3>Cursos Virtuales</h3><p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro).</p></div></div>
         </div>
 
         <!-- SECCIÓN FORMADOR (DISPONIBLE SÓLO CUANDO SE SELECCIONA FORMADOR SCOUT) -->
@@ -675,10 +2101,10 @@
                 <button class="subnav-btn" onclick="switchSubTab('decisiones', 'sucesion', this)"><i class="fa-solid fa-sitemap"></i> Plan de Sucesión</button>
                 <button class="subnav-btn" onclick="switchSubTab('decisiones', 'entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
             </div>
-            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia[cite: 8].</p></div></div>
-            <div id="decisiones-cierre" class="subcontent-panel"><div class="card"><h3>Cierre del Cargo</h3><p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento[cite: 10, 11].</p></div></div>
-            <div id="decisiones-sucesion" class="subcontent-panel"><div class="card"><h3>Plan de Sucesión</h3><p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional[cite: 11, 18].</p></div></div>
-            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional[cite: 8, 12, 16].</p></div></div>
+            <div id="decisiones-historial" class="subcontent-panel active"><div class="card"><h3>Historial de Cargos</h3><p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia.</p></div></div>
+            <div id="decisiones-cierre" class="subcontent-panel"><div class="card"><h3>Cierre del Cargo</h3><p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento.</p></div></div>
+            <div id="decisiones-sucesion" class="subcontent-panel"><div class="card"><h3>Plan de Sucesión</h3><p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional.</p></div></div>
+            <div id="decisiones-entrevista" class="subcontent-panel"><div class="card"><h3>Entrevista de Salida y Decisiones</h3><p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional.</p></div></div>
         </div>
 
         <!-- SECCIÓN: BIENESTAR (ACTUALIZADA CON TARJETAS DE FELICITACIÓN Y CÍRCULOS DE BIENESTAR) -->
@@ -692,14 +2118,14 @@
             <div id="bienestar-clima" class="subcontent-panel active">
                 <div class="card">
                     <h3><i class="fa-solid fa-heart-pulse"></i> Clima Organizacional y Motivación</h3>
-                    <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo[cite: 8, 18, 22].</p>
+                    <p>Estrategias de motivación, apoyo técnico/moral, herramientas de diagnóstico del clima y fortalecimiento de equipos de trabajo.</p>
                 </div>
             </div>
 
             <div id="bienestar-tarjetas" class="subcontent-panel">
                 <div class="card">
                     <h3><i class="fa-solid fa-envelope-open-text"></i> Tarjetas de Felicitación y Mensajes Positivos</h3>
-                    <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación[cite: 9, 16].</p>
+                    <p>Envía un mensaje de agradecimiento, reconocimiento o felicitación a tus compañeros dirigentes por su esfuerzo y dedicación.</p>
                     <div style="background: #FAFAFA; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 15px;">
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Seleccionar Dirigente Destinatario</label>
                         <select style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px; background: white;">
@@ -708,7 +2134,7 @@
                             <option>Comisión Regional de Adultos</option>
                         </select>
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Mensaje Positivo / Felicitación</label>
-                        <textarea rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout![cite: 16]" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;"></textarea>
+                        <textarea rows="3" placeholder="¡Déjale un mensaje positivo de la reunión de hoy o por su labor scout!" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;"></textarea>
                         <button class="btn-action" onclick="alert('¡Tarjeta de felicitación enviada con éxito!')"><i class="fa-solid fa-paper-plane"></i> Enviar Tarjeta</button>
                     </div>
                 </div>
@@ -717,28 +2143,28 @@
             <div id="bienestar-circulos" class="subcontent-panel">
                 <div class="card">
                     <h3><i class="fa-solid fa-users-viewfinder"></i> Círculos de Bienestar y Apoyo</h3>
-                    <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad[cite: 9].</p>
+                    <p>Espacios de integración, convivencia íntima (equipos de sección), apoyo en problemas personales y comunidad.</p>
                     
                     <div class="circles-grid">
                         <div class="circle-card">
                             <i class="fa-solid fa-campground"></i>
                             <h4>Convivencia Íntima</h4>
-                            <p>Espacios de integración del equipo de sección y fogatas de reflexión[cite: 9].</p>
+                            <p>Espacios de integración del equipo de sección y fogatas de reflexión.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-hands-holding-child"></i>
                             <h4>Apoyo Personal</h4>
-                            <p>Acompañamiento cercano y escucha activa ante situaciones particulares[cite: 9].</p>
+                            <p>Acompañamiento cercano y escucha activa ante situaciones particulares.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-mug-hot"></i>
                             <h4>Café y Conversación</h4>
-                            <p>Encuentros periódicos de camaradería y distensión para dirigentes[cite: 9].</p>
+                            <p>Encuentros periódicos de camaradería y distensión para dirigentes.</p>
                         </div>
                         <div class="circle-card">
                             <i class="fa-solid fa-people-group"></i>
                             <h4>Comunidad Scout</h4>
-                            <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia[cite: 9].</p>
+                            <p>Redes de apoyo mutuo y fortalecimiento del sentido de pertenencia.</p>
                         </div>
                     </div>
                 </div>
@@ -749,7 +2175,7 @@
         <div id="reconocimiento" class="content-section">
             <div class="card">
                 <h3><i class="fa-solid fa-award"></i> Condecoraciones e Insignias de Actualización</h3>
-                <p>Gestión de estímulos, galardones, distinciones institucionales y condecoraciones del adulto scout[cite: 8, 21].</p>
+                <p>Gestión de estímulos, galardones, distinciones institucionales y condecoraciones del adulto scout.</p>
             </div>
         </div>
     </main>
@@ -794,6 +2220,728 @@
             }
         };
 
+        const INDUCCION_STORAGE_KEY = 'cima_atraccion_induccion_checklist_v1';
+
+        const INDUCCION_CHECKLIST_ITEMS = [
+            {
+                id: 'paso-1-talento-360',
+                paso: 'Registrar la hoja de vida en la plataforma Talento 360',
+                actividad: 'Ingresar a la plataforma Talento 360 para diligenciar la hoja de vida en todos sus campos, incluir fotografía.',
+                referencia: 'TCNScout',
+                enlaces: []
+            },
+            {
+                id: 'paso-2-compromiso-mutuo',
+                paso: 'Estar al día con los documentos relacionados al compromiso mutuo, los cuales se nombran a continuación:',
+                actividad: '- Diligenciar Compromiso acuerdo mutuo-servicio voluntario\nRegistrar el compromiso de Ingreso del adulto (solicitud de registro e inscripción) acuerdo mutuo',
+                referencia: 'Compromiso mutuo',
+                enlaces: []
+            },
+            {
+                id: 'paso-3-inscripcion-siscout',
+                paso: 'Inscripción en la plataforma SISCOUT',
+                actividad: 'Registro completo en la plataforma habilitada por la Asociación Scouts de Colombia',
+                referencia: 'Siscout',
+                enlaces: []
+            },
+            {
+                id: 'paso-4-manual-cargos',
+                paso: 'Leer el manual de cargos,',
+                actividad: '- Tener un nombramiento oficial por parte de su jefe inmediato, ver documento de nombramiento. Ver documento # 7,8,10\nLeer y entender el manual de cargos, perfiles y funciones por competencias esperadas para el cargo a desarrollar. Ver documento # 4\nperfiles y funciones por competencias.',
+                referencia: 'Documentos # 7, 8, 10 y # 4',
+                enlaces: [
+                    'https://drive.google.com/drive/folders/1mWyQci5zHhiURd7IAIPKkx 187MAobDR'
+                ]
+            },
+            {
+                id: 'paso-5-curso-induccion-general',
+                paso: 'Realizar el curso de inducción general',
+                actividad: 'Hacer el curso de inducción general que se encuentra en la Plataforma Universidad Scout; descargar el certificado y entregarlo al jefe inmediato',
+                referencia: 'UniversidadScout - Colombia',
+                enlaces: []
+            },
+            {
+                id: 'paso-6-cursos-sfh',
+                paso: 'Realizar los cursos SFH (a salvo del peligro)',
+                actividad: 'Hacer los 4 cursos habilitados de A salvo del peligro que se encuentran a continuación, descargar los certificados y entrégalos al jefe inmediato.\nSfH 2b: WOSM Safe from Harm Procedures  Scout Learning Zone\nSfH 3: Estar seguro en línea  Zona de Aprendizaje Scout',
+                referencia: 'A salvo del peligro (SFH)',
+                enlaces: [
+                    'https://learn.scout.org/resource/sfh-1-safe-harm-essential-learnings',
+                    'https://elearning.easy.generator.com/28721976-31f9-45ea-bf7e-d46d7bf1c88d/#/login'
+                ]
+            },
+            {
+                id: 'paso-7-asesor-personal',
+                paso: 'Escoger un asesor Personal',
+                actividad: 'Solicitar que todos los adultos que están ingresando tengan un asesor personal para apoyar el desarrollo de sus competencias junto con el formato de aval de aceptación de asesoría firmado (enviar al jefe inmediato). Ver el documento # 26',
+                referencia: 'Documento # 26',
+                enlaces: [
+                    'https://drive.google.com/drive/folders/1mWyQci5zHhiURd7|APKkx 187MAobDR'
+                ]
+            },
+            {
+                id: 'paso-8-valoracion-inicial',
+                paso: 'Realizar la valoración inicial por competencias',
+                actividad: 'Agendar al asesor personal para la primera reunión de acercamiento para revisar la Valoración inicial de las competencias e iniciar el Plan Personal de Desarrollo.\nCrear la valoración (Evaluación #1) en la plataforma Talento 360, motivar el diligenciamiento de la misma por parte del equipo y hacer seguimiento a los resultados.',
+                referencia: 'Talento 360 · Plan Personal de Desarrollo',
+                enlaces: []
+            },
+            {
+                id: 'paso-9-seguimiento-acompanamiento',
+                paso: 'Seguimiento y acompañamiento del adulto durante el periodo de inducción.',
+                actividad: 'Se recomienda acompañar al adulto nuevo durante los 3 primeros meses, en donde el jefe inmediato hará seguimiento a las acciones puntuales, aclara inquietudes y al finalizar este periodo realizará una retroalimentación de acuerdo con el desempeño y las recomendaciones del asesor personal.',
+                referencia: 'HRMScouts · Primeros 3 meses',
+                enlaces: []
+            }
+        ];
+
+        function cargarVerificacionInduccion() {
+            try {
+                const raw = localStorage.getItem(INDUCCION_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : {};
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function guardarVerificacionInduccion(estado) {
+            try {
+                localStorage.setItem(INDUCCION_STORAGE_KEY, JSON.stringify(estado));
+            } catch (e) {
+                // Ignorar si localStorage no está disponible
+            }
+        }
+
+        let estadoInduccion = cargarVerificacionInduccion();
+
+        function actualizarResumenInduccion() {
+            const total = INDUCCION_CHECKLIST_ITEMS.length;
+            const cumplidos = INDUCCION_CHECKLIST_ITEMS.filter(
+                item => Boolean(estadoInduccion[item.id] && estadoInduccion[item.id].cumplido)
+            ).length;
+            const pct = total > 0 ? Math.round((cumplidos / total) * 100) : 0;
+
+            const textoEl = document.getElementById('ind-resumen-texto');
+            const barraEl = document.getElementById('ind-barra-progreso');
+            const badgeEl = document.getElementById('ind-estado-global');
+
+            if (textoEl) {
+                textoEl.textContent = `Cumplimiento verificado: ${cumplidos} de ${total} pasos (${pct}%)`;
+            }
+            if (barraEl) {
+                barraEl.style.width = `${pct}%`;
+            }
+            if (badgeEl) {
+                if (total > 0 && cumplidos === total) {
+                    badgeEl.textContent = 'Inducción verificada al 100%';
+                    badgeEl.className = 'ind-status-badge ok';
+                } else {
+                    badgeEl.textContent = 'En verificación';
+                    badgeEl.className = 'ind-status-badge';
+                }
+            }
+        }
+
+        function togglePasoInduccion(id, checked) {
+            const prev = estadoInduccion[id] || {};
+            estadoInduccion[id] = {
+                ...prev,
+                cumplido: Boolean(checked),
+                fecha: checked ? new Date().toLocaleString('es-CO') : ''
+            };
+            guardarVerificacionInduccion(estadoInduccion);
+            renderChecklistInduccion();
+        }
+
+        function guardarEvidenciaInduccion(id, valor) {
+            const prev = estadoInduccion[id] || {};
+            estadoInduccion[id] = {
+                ...prev,
+                evidencia: valor
+            };
+            guardarVerificacionInduccion(estadoInduccion);
+        }
+
+        function reiniciarChecklistInduccion() {
+            estadoInduccion = {};
+            guardarVerificacionInduccion(estadoInduccion);
+            renderChecklistInduccion();
+        }
+
+        function renderChecklistInduccion() {
+            const container = document.getElementById('ind-checklist-lista');
+            if (!container) return;
+
+            container.innerHTML = INDUCCION_CHECKLIST_ITEMS.map((item, idx) => {
+                const reg = estadoInduccion[item.id] || {};
+                const cumplido = Boolean(reg.cumplido);
+                const evidencia = reg.evidencia || '';
+                const fecha = reg.fecha || '';
+
+                const linksHtml = (item.enlaces || []).map(url => {
+                    const hrefClean = url.trim().replace(/\s+/g, '');
+                    return `<a class="ind-step-link" href="${escapeHtml(hrefClean)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`;
+                }).join('');
+
+                return `
+                    <div class="ind-step-card ${cumplido ? 'verificado' : ''}">
+                        <div class="ind-step-main">
+                            <input
+                                type="checkbox"
+                                class="ind-step-checkbox"
+                                aria-label="Verificar paso: ${escapeHtml(item.paso)}"
+                                ${cumplido ? 'checked' : ''}
+                                onchange="togglePasoInduccion('${escapeHtml(item.id)}', this.checked)"
+                            >
+                            <div style="flex: 1;">
+                                <div class="ind-step-title">${idx + 1}. ${escapeHtml(item.paso)}</div>
+                                <p class="ind-step-desc">${escapeHtml(item.actividad)}</p>
+                                ${linksHtml ? `<div class="ind-step-links">${linksHtml}</div>` : ''}
+                                <div class="ind-step-meta">
+                                    <span class="ind-ref-tag">${escapeHtml(item.referencia)}</span>
+                                    <span class="ind-status-badge ${cumplido ? 'ok' : ''}">
+                                        ${cumplido ? 'Cumplimiento verificado' : 'Pendiente por verificar'}
+                                    </span>
+                                    ${fecha ? `<span class="ind-verified-date"><i class="fa-regular fa-clock"></i> Verificado: ${escapeHtml(fecha)}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ind-evidencia-row">
+                            <label for="ind-ev-${escapeHtml(item.id)}">Soporte / Verificación:</label>
+                            <input
+                                id="ind-ev-${escapeHtml(item.id)}"
+                                type="text"
+                                class="ind-evidencia-input"
+                                placeholder="Registra certificado, acta, enlace o validación del jefe inmediato..."
+                                value="${escapeHtml(evidencia)}"
+                                oninput="guardarEvidenciaInduccion('${escapeHtml(item.id)}', this.value)"
+                            >
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            actualizarResumenInduccion();
+        }
+
+        const manualCargosData = {
+            'clan': {
+                cargo: 'Subjefe de Clan',
+                descripcion: 'Como miembro del equipo de rama colabora en el funcionamiento, aplicación y ejecución del Programa de Jóvenes en la misma.',
+                nombramiento: 'Jefe de grupo',
+                respondeA: 'Consejo Scout de Grupo · Jefe de grupo',
+                leResponden: 'Subjefe de Rama',
+                requisitos: [
+                    'Ser mayor de 18 años.',
+                    'Poseer nivel de formación profesional, tecnológica o técnica.',
+                    'Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.',
+                    'No formar parte del Consejo Scout de Grupo.',
+                    'No haber sido expulsado de la Asociación, ni tener medida de aseguramiento vigente, ni aparecer en el registro nacional de agresores sexuales.'
+                ],
+                funciones: [
+                    'Garantizar el cumplimiento de políticas, reglamentos, normas y procedimientos de la OSN en la Rama.',
+                    'Colaborar en organización, diseño, preparación, ejecución y evaluación de actividades.',
+                    'Participar activa y regularmente en reuniones de la Rama y del Grupo.',
+                    'Fomentar y apoyar la gestión de los adultos de su Equipo de Rama.',
+                    'Colaborar en el seguimiento y evaluación de la progresión personal de los jóvenes.'
+                ]
+            },
+            'nacion': {
+                cargo: 'Director Nacional de Adultos en el Movimiento',
+                descripcion: 'Tiene a su cargo el desarrollo, promoción y aplicación de la Política Nacional de Adultos en el movimiento y su modelo de gestión.',
+                nombramiento: 'Jefe Scout Nacional, previo aval del Consejo Scout Nacional',
+                respondeA: 'Jefe Scout Nacional',
+                leResponden: 'Miembros del equipo Nacional de Adultos en el Movimiento · Comisionados Regionales de Adultos en el Movimiento',
+                requisitos: [
+                    'Ser mayor de 18 años.',
+                    'Poseer nivel de formación profesional o tecnológica.',
+                    'Conocer los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.',
+                    'No formar parte del Consejo Scout Nacional.',
+                    'Experiencia mínima de dos (2) años como dirigente, consejero o en su vida profesional.',
+                    'No haber sido expulsado, ni tener medida de aseguramiento vigente, ni aparecer en el registro nacional de agresores sexuales.'
+                ],
+                funciones: [
+                    'Conocer y hacer cumplir los Estatutos, Políticas y Reglamentos de la Asociación Scouts de Colombia.',
+                    'Participar en la elaboración y ejecución del plan operativo Nacional en Adultos en el Movimiento.',
+                    'Desarrollar, promover e impulsar la Política Nacional de Adultos en el Movimiento y su modelo de aplicación.',
+                    'Impulsar el marco conceptual, pedagógico, estructural y administrativo del sistema de gestión de adultos.',
+                    'Orientar y acompañar la atracción, vinculación y desarrollo de competencias de los adultos adscritos a su Dirección.',
+                    'Desarrollar e impulsar documentos, manuales y procesos de formación y perfeccionamiento continuo.',
+                    'Articular políticas, estrategias, eventos y actividades con la Dirección de Desarrollo Institucional.'
+                ]
+            }
+        };
+
+        const acuerdoPerfilConfig = {
+            'clan': {
+                cargoAcuerdo: 'Subjefe de Clan',
+                grupo: 'Grupo Scout 14 · Caminantes del Valle',
+                regional: 'Región Antioquia',
+                nacion: 'Asociación Scouts de Colombia',
+                representante: 'Douglas Madrigal Benitez',
+                nit: '860.010.892-1',
+                direccion: 'Carrera 43A # 19-40, Medellín, Antioquia',
+                celular: '310 549 8820',
+                correo: 'douglas.madrigal@scout.org.co'
+            },
+            'nacion': {
+                cargoAcuerdo: 'Director Nacional de Adultos en el Movimiento',
+                grupo: 'Nivel Nacional · Jefatura Scout Nacional',
+                regional: 'Todas las Regiones Scout',
+                nacion: 'Asociación Scouts de Colombia',
+                representante: 'Juan Pablo Gutierrez Alzate',
+                nit: '860.010.892-1',
+                direccion: 'Carrera 13A # 34-72, Bogotá D.C.',
+                celular: '315 802 4190',
+                correo: 'juanpablo.gutierrez@scout.org.co'
+            },
+            'formador': {
+                cargoAcuerdo: 'Formador Scout',
+                grupo: 'Red Nacional de Formación',
+                regional: 'Región Antioquia',
+                nacion: 'Asociación Scouts de Colombia',
+                representante: 'Juan Pablo Gutierrez Alzate',
+                nit: '860.010.892-1',
+                direccion: 'Carrera 13A # 34-72, Bogotá D.C.',
+                celular: '315 802 4190',
+                correo: 'juanpablo.gutierrez@scout.org.co'
+            }
+        };
+
+        let acuerdoFirmaCargadaDataUrl = '';
+        let acuerdoCanvasDibujado = false;
+
+        function actualizarAcuerdoPorPerfil(roleKey) {
+            const cfg = acuerdoPerfilConfig[roleKey] || acuerdoPerfilConfig['clan'];
+
+            const cargoSpan = document.getElementById('acuerdo-cargo-dinamico');
+            if (cargoSpan) cargoSpan.textContent = cfg.cargoAcuerdo;
+
+            const setTxt = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = val;
+            };
+
+            setTxt('est-grupo', cfg.grupo);
+            setTxt('est-regional', cfg.regional);
+            setTxt('est-nacion', cfg.nacion);
+            setTxt('est-rep', cfg.representante);
+            setTxt('est-nit', cfg.nit);
+            setTxt('est-dir', cfg.direccion);
+            setTxt('est-cel', cfg.celular);
+            setTxt('est-correo', cfg.correo);
+        }
+
+        function obtenerSeleccionAceptacion() {
+            const checked = document.querySelector('input[name="aceptaAcuerdo"]:checked');
+            return checked ? checked.value : '';
+        }
+
+        function actualizarEstadoAcuerdo() {
+            const val = obtenerSeleccionAceptacion();
+            const msg = document.getElementById('acuerdo-estado-msg');
+            if (msg && val) {
+                msg.textContent = `Selección de aceptación registrada: ${val}.`;
+            }
+        }
+
+        function cargarFirmaImagen(event) {
+            const file = event.target.files && event.target.files[0];
+            const preview = document.getElementById('acuerdoFirmaPreview');
+            if (!file || !preview) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                acuerdoFirmaCargadaDataUrl = e.target.result;
+                preview.src = acuerdoFirmaCargadaDataUrl;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function inicializarFirmaCanvas() {
+            const canvas = document.getElementById('acuerdoFirmaCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#2C2C2C';
+            ctx.lineWidth = 2.2;
+            ctx.lineCap = 'round';
+
+            let dibujando = false;
+
+            const getPos = (evt) => {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+                const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
+                return {
+                    x: ((clientX - rect.left) / rect.width) * canvas.width,
+                    y: ((clientY - rect.top) / rect.height) * canvas.height
+                };
+            };
+
+            const startDraw = (evt) => {
+                evt.preventDefault();
+                dibujando = true;
+                acuerdoCanvasDibujado = true;
+                const pos = getPos(evt);
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+            };
+
+            const moveDraw = (evt) => {
+                if (!dibujando) return;
+                evt.preventDefault();
+                const pos = getPos(evt);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            };
+
+            const endDraw = () => {
+                dibujando = false;
+            };
+
+            canvas.addEventListener('mousedown', startDraw);
+            canvas.addEventListener('mousemove', moveDraw);
+            window.addEventListener('mouseup', endDraw);
+
+            canvas.addEventListener('touchstart', startDraw, { passive: false });
+            canvas.addEventListener('touchmove', moveDraw, { passive: false });
+            window.addEventListener('touchend', endDraw);
+        }
+
+        function limpiarFirmaCanvas() {
+            const canvas = document.getElementById('acuerdoFirmaCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            acuerdoCanvasDibujado = false;
+        }
+
+        function obtenerFirmaFinalDataUrl() {
+            if (acuerdoFirmaCargadaDataUrl) {
+                return acuerdoFirmaCargadaDataUrl;
+            }
+            const canvas = document.getElementById('acuerdoFirmaCanvas');
+            if (canvas && acuerdoCanvasDibujado) {
+                return canvas.toDataURL('image/png');
+            }
+            return '';
+        }
+
+        function descargarAcuerdoDiligenciado() {
+            const acepta = obtenerSeleccionAceptacion();
+            const msg = document.getElementById('acuerdo-estado-msg');
+            if (!acepta) {
+                if (msg) msg.textContent = 'Por favor selecciona Sí o No en "¿Acepta este acuerdo?" antes de descargar.';
+                return;
+            }
+
+            const firmaDataUrl = obtenerFirmaFinalDataUrl();
+            const roleActual = document.getElementById('sidebar-role').innerText || 'Subjefe de Clan';
+            const cfg = Object.values(acuerdoPerfilConfig).find(item => item.cargoAcuerdo === roleActual) || acuerdoPerfilConfig['clan'];
+            const docBodyHtml = document.querySelector('#atraccion-acuerdo .acuerdo-doc-box').innerHTML;
+
+            const firmaHtml = firmaDataUrl
+                ? `<img src="${firmaDataUrl}" alt="Firma del Adulto Voluntario" style="max-height:110px; max-width:260px; border:1px solid #ccc; padding:6px; background:#fff;">`
+                : '<em>Sin firma registrada</em>';
+
+            const htmlCompleto = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Acuerdo Mutuo Diligenciado - ${escapeHtml(cfg.cargoAcuerdo)}</title>
+<style>
+  body { font-family: Arial, sans-serif; color: #222; padding: 28px; line-height: 1.5; font-size: 13px; }
+  .grid-2 { display: flex; gap: 16px; margin-bottom: 18px; }
+  .box-tbl { flex: 1; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; }
+  .box-hdr { background: #8B0000; color: #fff; font-weight: bold; padding: 8px 12px; font-size: 11px; }
+  table { width: 100%; border-collapse: collapse; }
+  td { border-bottom: 1px solid #e2e2e2; padding: 6px 10px; font-size: 12px; }
+  td:first-child { font-weight: bold; width: 42%; background: #f8f8f8; }
+  .doc-box { border: 1px solid #ddd; border-radius: 6px; padding: 18px; margin-bottom: 18px; }
+  .acuerdo-doc-titulo { font-weight: bold; font-size: 15px; color: #8B0000; text-align: center; margin-bottom: 12px; }
+  .acuerdo-seccion-titulo { font-weight: bold; color: #8B0000; margin-top: 12px; margin-bottom: 4px; }
+  .acuerdo-cargo-destacado { font-weight: bold; color: #8B0000; text-decoration: underline; }
+  .cierre-box { border: 1px solid #8B0000; border-radius: 6px; padding: 14px; background: #fdfbf7; }
+</style>
+</head>
+<body>
+  <div class="grid-2">
+    <div class="box-tbl">
+      <div class="box-hdr">DATOS PERSONALES DEL ADULTO VOLUNTARIO</div>
+      <table>
+        <tr><td>Nombre Completo:</td><td>Mauricio Quiroga Posada</td></tr>
+        <tr><td>Tipo de Identificación:</td><td>Cédula de Ciudadanía (CC)</td></tr>
+        <tr><td>N° de Identificación:</td><td>1.017.245.890</td></tr>
+        <tr><td>Dirección Residencia:</td><td>Calle 45 Sur # 38-19, Envigado, Antioquia</td></tr>
+        <tr><td>N° Celular:</td><td>314 682 9041</td></tr>
+        <tr><td>Correo Electrónico:</td><td>mauricio.quiroga@scout.org.co</td></tr>
+      </table>
+    </div>
+    <div class="box-tbl">
+      <div class="box-hdr">REPRESENTANTES DEL ESTAMENTO</div>
+      <table>
+        <tr><td>Grupo Scout:</td><td>${escapeHtml(cfg.grupo)}</td></tr>
+        <tr><td>Regional Scout:</td><td>${escapeHtml(cfg.regional)}</td></tr>
+        <tr><td>Nación Scout:</td><td>${escapeHtml(cfg.nacion)}</td></tr>
+        <tr><td>Representante Legal:</td><td>${escapeHtml(cfg.representante)}</td></tr>
+        <tr><td>NIT:</td><td>${escapeHtml(cfg.nit)}</td></tr>
+        <tr><td>Dirección:</td><td>${escapeHtml(cfg.direccion)}</td></tr>
+        <tr><td>N° Celular:</td><td>${escapeHtml(cfg.celular)}</td></tr>
+        <tr><td>Correo Electrónico:</td><td>${escapeHtml(cfg.correo)}</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="doc-box">${docBodyHtml}</div>
+
+  <div class="cierre-box">
+    <p><strong>¿Acepta este acuerdo?:</strong> ${escapeHtml(acepta)}</p>
+    <p><strong>Firma:</strong></p>
+    <div>${firmaHtml}</div>
+  </div>
+</body>
+</html>`;
+
+            const blob = new Blob([htmlCompleto], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `Acuerdo_Mutuo_${cfg.cargoAcuerdo.replace(/\s+/g, '_')}.html`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            if (msg) {
+                msg.textContent = `Acuerdo descargado (Acepta: ${acepta}).`;
+            }
+        }
+
+        const ACTAS_STORAGE_KEY = 'cima_encuentros_asesoria_actas';
+
+        function escapeHtml(text) {
+            return String(text ?? '')
+                .replace(/&/g, '&')
+                .replace(/</g, '<')
+                .replace(/>/g, '>')
+                .replace(/"/g, '"');
+        }
+
+        function renderManualCargoPorPerfil(roleKey) {
+            const container = document.getElementById('manual-cargo-dinamico');
+            if (!container) return;
+
+            const info = manualCargosData[roleKey];
+            if (!info) {
+                container.innerHTML = `<p style="margin-bottom:0; font-size:0.82rem; color:var(--text-muted);">Consulta todos los cargos en el enlace superior. El detalle de cargo en esta vista aplica para los perfiles de <strong>Subjefe de Clan</strong> y <strong>Director de Adultos</strong>.</p>`;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="manual-cargo-compact">
+                    <div class="manual-cargo-header">
+                        <span class="manual-cargo-title">${escapeHtml(info.cargo)}</span>
+                        <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted);">Nombramiento: ${escapeHtml(info.nombramiento)}</span>
+                    </div>
+                    <p style="margin-bottom:6px; font-size:0.82rem; color:var(--text-main);">${escapeHtml(info.descripcion)}</p>
+                    <div class="manual-cargo-meta">
+                        <strong>Responde a:</strong> ${escapeHtml(info.respondeA)}  ·  <strong>Le responden:</strong> ${escapeHtml(info.leResponden)}
+                    </div>
+                    <div class="manual-cargo-cols">
+                        <div>
+                            <div class="manual-cargo-subtitle">Requisitos objetivos</div>
+                            <ul class="manual-cargo-list">
+                                ${info.requisitos.map(req => `<li>${escapeHtml(req)}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="manual-cargo-subtitle">Funciones principales</div>
+                            <ul class="manual-cargo-list">
+                                ${info.funciones.map(fn => `<li>${escapeHtml(fn)}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function actualizarEstadoIngreso() {
+            const panel = document.getElementById('atraccion-ingreso');
+            if (!panel) return;
+            const rows = panel.querySelectorAll('.ingreso-check-row');
+            rows.forEach(row => {
+                const cb = row.querySelector('.ingreso-aprob-check');
+                const tag = row.querySelector('.ingreso-estado-tag');
+                if (!cb || !tag) return;
+                if (cb.checked) {
+                    tag.textContent = 'Aprobado';
+                    tag.classList.add('aprobado');
+                } else {
+                    tag.textContent = 'Pendiente';
+                    tag.classList.remove('aprobado');
+                }
+            });
+        }
+
+        function guardarAprobacionIngreso() {
+            const panel = document.getElementById('atraccion-ingreso');
+            const resumen = document.getElementById('ingreso-resumen-aprobacion');
+            if (!panel || !resumen) return;
+
+            const checks = Array.from(panel.querySelectorAll('.ingreso-aprob-check'));
+            const aprobados = checks.filter(c => c.checked).map(c => c.dataset.label);
+
+            if (!aprobados.length) {
+                resumen.innerHTML = 'No hay ítems aprobados aún por el jefe inmediato.';
+                return;
+            }
+
+            resumen.innerHTML = `<i class="fa-solid fa-circle-check"></i> Aprobados (${aprobados.length}/${checks.length}): ${escapeHtml(aprobados.join(', '))}.`;
+        }
+
+        function switchCompetenciaOption(optionKey, btnEl) {
+            const panel = document.getElementById('atraccion-competencias');
+            if (!panel) return;
+            panel.querySelectorAll('.comp-option-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+
+            panel.querySelectorAll('.comp-detail-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('comp-panel-' + optionKey);
+            if (targetPanel) targetPanel.classList.add('active');
+        }
+
+        function postularVacante(cargo) {
+            const box = document.getElementById('mensaje-postulacion');
+            if (!box) return;
+            box.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--primary-red); margin-right: 6px;"></i> Postulado correctamente al cargo: <strong>${escapeHtml(cargo)}</strong>.`;
+            box.classList.add('visible');
+        }
+
+        function updateRequisicionVisibility(roleKey) {
+            const reqBox = document.getElementById('requisicion-vacantes-box');
+            if (!reqBox) return;
+            if (roleKey === 'nacion') {
+                reqBox.classList.add('visible');
+            } else {
+                reqBox.classList.remove('visible');
+            }
+        }
+
+        function solicitarRequisicion(event) {
+            event.preventDefault();
+            const cargoSelect = document.getElementById('reqCargoSelect');
+            const fechaInput = document.getElementById('reqFechaInput');
+            const lista = document.getElementById('lista-requisiciones');
+            if (!cargoSelect || !fechaInput || !lista) return;
+
+            const cargo = cargoSelect.value;
+            const fechaRequerida = fechaInput.value;
+            if (!cargo || !fechaRequerida) return;
+
+            const item = document.createElement('div');
+            item.className = 'requisicion-item';
+            item.innerHTML = `<i class="fa-solid fa-bullhorn" style="color: var(--primary-red); margin-right: 6px;"></i> Requisición solicitada para abrir convocatoria del cargo: <strong>${escapeHtml(cargo)}</strong> · Fecha requerida: <strong>${escapeHtml(fechaRequerida)}</strong>.`;
+            lista.prepend(item);
+
+            document.getElementById('requisicionVacanteForm').reset();
+        }
+
+        function getActasAsesoria() {
+            try {
+                const raw = localStorage.getItem(ACTAS_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function setActasAsesoria(list) {
+            localStorage.setItem(ACTAS_STORAGE_KEY, JSON.stringify(list));
+        }
+
+        function renderActasAsesoria() {
+            const container = document.getElementById('actaRecordsContainer');
+            if (!container) return;
+            const actas = getActasAsesoria();
+
+            if (!actas.length) {
+                container.innerHTML = '<p style="margin-bottom:0; font-size:0.86rem; color:var(--text-muted);">Aún no hay actas de encuentros de asesoría registradas.</p>';
+                return;
+            }
+
+            container.innerHTML = actas.map(item => `
+                <div class="acta-item">
+                    <div class="acta-item-top">
+                        <span class="acta-date-pill"><i class="fa-regular fa-calendar-check"></i> ${escapeHtml(item.fecha)}</span>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">${escapeHtml(item.asesor || 'Encuentro de Asesoría')}</span>
+                            <button type="button" class="acta-delete-btn" onclick="deleteActaAsesoria('${escapeHtml(item.id)}')">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:8px;">
+                        <span class="acta-label-sm">Descripción</span>
+                        <p class="acta-text-sm">${escapeHtml(item.descripcion)}</p>
+                    </div>
+                    <div class="acta-item-cols">
+                        <div>
+                            <span class="acta-label-sm">Compromisos</span>
+                            <p class="acta-text-sm">${escapeHtml(item.compromisos)}</p>
+                        </div>
+                        <div>
+                            <span class="acta-label-sm">Seguimiento a los Compromisos</span>
+                            <p class="acta-text-sm">${escapeHtml(item.seguimiento)}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveActaAsesoria(event) {
+            event.preventDefault();
+            const fecha = document.getElementById('actaFecha').value;
+            const asesor = document.getElementById('actaAsesor').value.trim();
+            const descripcion = document.getElementById('actaDescripcion').value.trim();
+            const compromisos = document.getElementById('actaCompromisos').value.trim();
+            const seguimiento = document.getElementById('actaSeguimiento').value.trim();
+
+            if (!fecha || !descripcion || !compromisos || !seguimiento) return;
+
+            const list = getActasAsesoria();
+            list.unshift({
+                id: String(Date.now()),
+                fecha,
+                asesor,
+                descripcion,
+                compromisos,
+                seguimiento
+            });
+            setActasAsesoria(list);
+
+            document.getElementById('actaAsesoriaForm').reset();
+            const msg = document.getElementById('actaStatusMsg');
+            msg.textContent = 'Acta guardada correctamente.';
+            setTimeout(() => { msg.textContent = ''; }, 3000);
+
+            renderActasAsesoria();
+        }
+
+        function deleteActaAsesoria(id) {
+            const list = getActasAsesoria().filter(item => item.id !== id);
+            setActasAsesoria(list);
+            renderActasAsesoria();
+        }
+
+        function toggleChnPanel() {
+            const panel = document.getElementById('chn-collapse-panel');
+            const btn = document.getElementById('chn-toggle-btn');
+            if (!panel || !btn) return;
+            const isOpen = panel.classList.toggle('open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+
         function toggleRoleMenu() {
             const menu = document.getElementById('role-menu');
             menu.classList.toggle('show');
@@ -805,7 +2953,13 @@
 
             const options = document.querySelectorAll('.role-option');
             options.forEach(opt => opt.classList.remove('active-role'));
-            event.currentTarget.classList.add('active-role');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active-role');
+            }
+
+            updateRequisicionVisibility(roleKey);
+            renderManualCargoPorPerfil(roleKey);
+            actualizarAcuerdoPorPerfil(roleKey);
 
             document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
             const data = bscData[roleKey];
@@ -837,11 +2991,18 @@
 
         window.onload = function() {
             selectRoleInit('clan', 'Subjefe de Clan');
+            renderActasAsesoria();
+            actualizarEstadoIngreso();
+            inicializarFirmaCanvas();
+            renderChecklistInduccion();
         };
 
         function selectRoleInit(roleKey, roleDisplayName) {
             document.getElementById('sidebar-role').innerText = roleDisplayName;
             document.getElementById('bsc-title-cargo').innerText = roleDisplayName;
+            updateRequisicionVisibility(roleKey);
+            renderManualCargoPorPerfil(roleKey);
+            actualizarAcuerdoPorPerfil(roleKey);
             const data = bscData[roleKey];
             const container = document.getElementById('bsc-content');
             container.innerHTML = '';
