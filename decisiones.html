@@ -1,1 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decisiones para el Futuro - C.I.M.A.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #8B0000;
+            --primary-red-dark: #600000;
+            --primary-red-light: #FDF2F2;
+            --bg-cream: #FDFBF7;
+            --card-bg: #FFFFFF;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --border-color: #E6E2D8;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            padding: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subnav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 14px;
+        }
+
+        .subnav-btn {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .subnav-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .subnav-btn.active {
+            background-color: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+
+        .subcontent-panel {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .subcontent-panel.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 1.08rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .card h3 i {
+            color: var(--primary-red);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="subnav-tabs">
+        <button class="subnav-btn active" onclick="switchSubTab('historial', this)"><i class="fa-solid fa-timeline"></i> Historial de Cargos</button>
+        <button class="subnav-btn" onclick="switchSubTab('cierre', this)"><i class="fa-solid fa-door-closed"></i> Cierre del Cargo</button>
+        <button class="subnav-btn" onclick="switchSubTab('sucesion', this)"><i class="fa-solid fa-sitemap"></i> Plan de Sucesión</button>
+        <button class="subnav-btn" onclick="switchSubTab('entrevista', this)"><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</button>
+    </div>
+
+    <div id="decisiones-historial" class="subcontent-panel active">
+        <div class="card">
+            <h3><i class="fa-solid fa-timeline"></i> Historial de Cargos</h3>
+            <p>Trayectoria y roles desempeñados en la Asociación Scouts de Colombia.</p>
+        </div>
+    </div>
+
+    <div id="decisiones-cierre" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-door-closed"></i> Cierre del Cargo</h3>
+            <p>Evaluación final del ciclo de vida del adulto, entrega de informes, evidencias de gestión y balance de cumplimiento.</p>
+        </div>
+    </div>
+
+    <div id="decisiones-sucesion" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-sitemap"></i> Plan de Sucesión</h3>
+            <p>Estrategias de aprendizaje individual y grupal, preparación y transferencia de funciones para asegurar la continuidad institucional.</p>
+        </div>
+    </div>
+
+    <div id="decisiones-entrevista" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-comments"></i> Entrevista de Salida y Decisiones</h3>
+            <p>Proceso de cierre de ciclo, renovación, reubicación o retiro del cargo institucional.</p>
+        </div>
+    </div>
+
+    <script>
+        function switchSubTab(tabId, element) {
+            document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            document.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
+            const target = document.getElementById('decisiones-' + tabId);
+            if (target) target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
