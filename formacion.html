@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formación General - C.I.M.A.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #8B0000;
+            --primary-red-dark: #600000;
+            --primary-red-light: #FDF2F2;
+            --bg-cream: #FDFBF7;
+            --card-bg: #FFFFFF;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --border-color: #E6E2D8;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            padding: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subnav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 14px;
+        }
+
+        .subnav-btn {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .subnav-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .subnav-btn.active {
+            background-color: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+
+        .subcontent-panel {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .subcontent-panel.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 1.08rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .card h3 i {
+            color: var(--primary-red);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="subnav-tabs">
+        <button class="subnav-btn active" onclick="switchSubTab('historial', this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial de Formaciones</button>
+        <button class="subnav-btn" onclick="switchSubTab('certificados', this)"><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</button>
+        <button class="subnav-btn" onclick="switchSubTab('cursos', this)"><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</button>
+    </div>
+
+    <div id="formacion-historial" class="subcontent-panel active">
+        <div class="card">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Historial de Formaciones</h3>
+            <p>Registro de módulos de formación básica y perfeccionamiento continuo aprobados.</p>
+        </div>
+    </div>
+
+    <div id="formacion-certificados" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-award"></i> Certificados de Oferta Formativa</h3>
+            <p>Diplomas de cursos y acreditación oficial de Insignia de Madera (IM).</p>
+        </div>
+    </div>
+
+    <div id="formacion-cursos" class="subcontent-panel">
+        <div class="card">
+            <h3><i class="fa-solid fa-laptop-code"></i> Cursos Virtuales</h3>
+            <p>Campus virtual C.I.M.A. y módulos especializados como Safe From Harm (A salvo del peligro).</p>
+        </div>
+    </div>
+
+    <script>
+        function switchSubTab(tabId, element) {
+            document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            document.querySelectorAll('.subcontent-panel').forEach(panel => panel.classList.remove('active'));
+            const target = document.getElementById('formacion-' + tabId);
+            if (target) target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
