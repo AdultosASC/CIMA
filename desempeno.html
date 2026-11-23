@@ -372,7 +372,7 @@
             border-left: 5px solid var(--primary-red);
             border-radius: 10px;
             padding: 16px 18px;
-            margin: 14px 0 20px;
+            margin: 14px 0 18px;
         }
 
         .ppd-avance-top {
@@ -773,6 +773,9 @@
                 </div>
             </div>
 
+            <!-- Listado de estrategias creadas (incluye estrategia precargada debajo de la barra de avance) -->
+            <div id="ppd-estrategias-lista"></div>
+
             <!-- Formulario para crear nueva estrategia -->
             <form id="ppdEstrategiaForm" class="ppd-builder-box" onsubmit="crearEstrategiaPPD(event)">
                 <div class="ppd-builder-title"><i class="fa-solid fa-plus-circle"></i> Nueva Estrategia de Desarrollo</div>
@@ -803,15 +806,12 @@
                     <i class="fa-solid fa-folder-plus"></i> Crear Estrategia en el PPD
                 </button>
             </form>
-
-            <!-- Listado de estrategias creadas -->
-            <div id="ppd-estrategias-lista"></div>
         </div>
     </div>
 
     <script>
         const CIMA_ROLE_STORAGE_KEY = 'cima_active_role_state';
-        const PPD_STORAGE_PREFIX = 'cima_ppd_estrategias_v1_';
+        const PPD_STORAGE_PREFIX = 'cima_ppd_estrategias_v2_';
         let currentRoleKey = 'clan';
         let borradorCompetencias = [];
 
@@ -893,6 +893,60 @@
                 ]
             }
         };
+
+        function getDefaultEstrategiasPorPerfil(roleKey) {
+            if (roleKey === 'clan') {
+                const clanItems = EVALUACIONES_360_DATA.clan.items || [];
+                const planeamiento = clanItems.find(i => i.competencia === 'Planeamiento estratégico');
+                const adaptabilidad = clanItems.find(i => i.competencia === 'Adaptabilidad de Cambio');
+
+                return [
+                    {
+                        id: 'est_seed_clan_nueva_pnpJ',
+                        nombre: 'Nueva PNPJ',
+                        objetivo: 'Implementa la nueva PNPJ en el Clan del grupo empleando las herramientas adecuadas.',
+                        competencias: [
+                            {
+                                nombre: 'Planeamiento estratégico',
+                                cumplimiento: planeamiento ? Number(planeamiento.cumplimiento) : 45.00
+                            },
+                            {
+                                nombre: 'Adaptabilidad de Cambio',
+                                cumplimiento: adaptabilidad ? Number(adaptabilidad.cumplimiento) : 40.00
+                            }
+                        ],
+                        nuevaActividadTexto: '',
+                        actividades: [
+                            {
+                                id: 'act_seed_1',
+                                descripcion: 'Actividad 1: Participación curso especializado de Clan',
+                                cumplida: true,
+                                fechaCumplimiento: '2026-08-15',
+                                evidenciaTexto: 'Certificado de participación en curso especializado de Clan',
+                                evidenciaArchivo: ''
+                            },
+                            {
+                                id: 'act_seed_2',
+                                descripcion: 'Actividad 2: Reunión con Asesor personal',
+                                cumplida: false,
+                                fechaCumplimiento: '',
+                                evidenciaTexto: '',
+                                evidenciaArchivo: ''
+                            },
+                            {
+                                id: 'act_seed_3',
+                                descripcion: 'Actividad 3: diseño de cronograma de implementación',
+                                cumplida: false,
+                                fechaCumplimiento: '',
+                                evidenciaTexto: '',
+                                evidenciaArchivo: ''
+                            }
+                        ]
+                    }
+                ];
+            }
+            return [];
+        }
 
         function escapeHtml(text) {
             return String(text ?? '')
@@ -1033,11 +1087,14 @@
         function getEstrategiasPPD(roleKey = currentRoleKey) {
             try {
                 const raw = localStorage.getItem(PPD_STORAGE_PREFIX + roleKey);
-                const parsed = raw ? JSON.parse(raw) : [];
-                return Array.isArray(parsed) ? parsed : [];
-            } catch (e) {
-                return [];
-            }
+                if (raw !== null) {
+                    const parsed = JSON.parse(raw);
+                    return Array.isArray(parsed) ? parsed : [];
+                }
+            } catch (e) {}
+            const defaults = getDefaultEstrategiasPorPerfil(roleKey);
+            setEstrategiasPPD(defaults, roleKey);
+            return defaults;
         }
 
         function setEstrategiasPPD(list, roleKey = currentRoleKey) {
@@ -1112,7 +1169,7 @@
             }
 
             const lista = getEstrategiasPPD(currentRoleKey);
-            lista.unshift({
+            lista.push({
                 id: 'est_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
                 nombre,
                 objetivo,
@@ -1267,7 +1324,7 @@
             if (!cont) return;
 
             if (!estrategias.length) {
-                cont.innerHTML = '<div class="eval-history-card"><div class="eval-history-title">Sin estrategias registradas aún</div><p style="margin-bottom:0; font-size:0.84rem;">Crea tu primera estrategia arriba seleccionando las competencias y funciones de la Evaluación 360°.</p></div>';
+                cont.innerHTML = '<div class="eval-history-card"><div class="eval-history-title">Sin estrategias registradas aún</div><p style="margin-bottom:0; font-size:0.84rem;">Crea tu primera estrategia seleccionando las competencias y funciones de la Evaluación 360°.</p></div>';
                 return;
             }
 
@@ -1280,6 +1337,9 @@
                     : '<span style="font-size: 0.8rem; color: var(--text-muted);">Sin competencias asociadas</span>';
 
                 const acts = est.actividades || [];
+                const estCumplidas = acts.filter(a => a.cumplida).length;
+                const estPct = acts.length ? ((estCumplidas / acts.length) * 100).toFixed(0) : 0;
+
                 const actsHtml = acts.length
                     ? acts.map(act => {
                         const evidenciaResumen = [act.evidenciaArchivo, act.evidenciaTexto].filter(Boolean).join(' · ');
@@ -1341,7 +1401,7 @@
                     <div class="ppd-estrategia-card">
                         <div class="ppd-estrategia-header">
                             <div>
-                                <div class="ppd-estrategia-title"><i class="fa-solid fa-chess-knight"></i> ${escapeHtml(est.nombre)}</div>
+                                <div class="ppd-estrategia-title"><i class="fa-solid fa-chess-knight"></i> ${escapeHtml(est.nombre)} <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-left: 6px;">(${estCumplidas}/${acts.length} · ${estPct}%)</span></div>
                                 <p class="ppd-estrategia-obj"><strong>Objetivo:</strong> ${escapeHtml(est.objetivo)}</p>
                             </div>
                             <button type="button" class="ppd-btn-secondary" onclick="eliminarEstrategiaPPD('${escapeHtml(est.id)}')">
